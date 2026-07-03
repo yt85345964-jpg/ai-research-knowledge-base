@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>DeepSeek</h1>
+            <div class="sub">product · AI 产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>DeepSeek</h1>
+<h2>一句话定位</h2>
+<p>DeepSeek（深度求索）是一家专注 AGI 的中国科技公司，推出 DeepSeek-R1（推理模型）和 DeepSeek-V3（通用模型）等开源大模型，以高性价比和免费商用策略获得广泛关注。</p>
+<h2>核心产品</h2>
+<h3>DeepSeek-R1（推理模型）</h3>
+<ul>
+<li>- 开源的推理模型，性能对齐 OpenAI o1 正式版</li>
+<li>- 在后训练阶段大规模使用强化学习，极少量标注数据即可提升推理能力</li>
+<li>- 擅长：数学推导、代码生成、复杂问题拆解</li>
+<li>- 免费商用</li>
+</ul>
+<h3>DeepSeek-V3（通用模型）</h3>
+<ul>
+<li>- 适用于大多数任务的通用大模型</li>
+<li>- 擅长：文本生成、创意写作、多轮对话、开放性问答</li>
+</ul>
+<h2>推理模型 vs 通用模型的提示策略</h2>
+<p>这是 DeepSeek 系列带来的重要认知区分：</p>
+<table>
+<tr>
+<td>维度</td>
+<td>推理模型（R1）</td>
+<td>通用模型（V3等）</td>
+</tr>
+<tr>
+<td>提示语策略</td>
+<td>简洁指令，信任其内化推理</td>
+<td>结构化引导，显式拆解步骤</td>
+</tr>
+<tr>
+<td>误区</td>
+<td>角色扮演、过度拆解会干扰逻辑</td>
+<td>直接提复杂推理问题可能跳过关键步骤</td>
+</tr>
+<tr>
+<td>原则</td>
+<td>"要什么直接说"</td>
+<td>"缺什么补什么"</td>
+</tr>
+</table>
+<p>详见 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a></p>
+<h2>能力图谱</h2>
+<ul>
+<li>- 文本生成（创作、摘要、翻译、结构化输出）</li>
+<li>- 语义理解与分析（情感分析、意图识别、实体提取）</li>
+<li>- 代码生成与调试（Python、JavaScript 等多语言）</li>
+<li>- 数据可视化（SVG、Mermaid、React 图表）</li>
+<li>- 联网搜索与深度思考模式</li>
+<li>- 文件上传与 OCR</li>
+</ul>
+<h2>团队评估</h2>
+<blockquote>DeepSeek 的推理模型对 AI 研究知识库的一个直接启示：当我们使用推理模型（如 deepseek-v4-pro）生成内容时，提示策略应该更简洁直接，不需要像对待通用模型那样拆解步骤和角色扮演。这对 AGENTS.md 中"摄入"和"编译"的提示设计有直接影响。</blockquote>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 推理模型 vs 通用模型提示策略差异</li>
+<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 同为 AI 产品平台，定位不同（用户端 Agent vs 底层模型）</li>
+<li>- <a href="AI-API网关.html">AI API网关</a> — 企业接入 DeepSeek 等模型的中转方式</li>
+</ul>
+<p>---</p>
+<p><em>创建: 2026-07-02 | 更新: 2026-07-02</em></p></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="AI-API网关.html" class="link-btn">AI API网关</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
+            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">product</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-medium">medium</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-02</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><span class="tag">AI产品</span> <span class="tag">大模型</span> <span class="tag">推理模型</span> <span class="tag">开源</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (2)</h3>
+            <div><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (2)</h3>
+            <div><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+</div>
+</body>
+</html>

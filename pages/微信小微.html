@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微信小微 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>微信小微</h1>
+            <div class="sub">product · AI 产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>微信小微</h1>
+<blockquote>微信原生 AI 助手，2026 年 6 月 20 日开启灰度测试。14.32 亿月活用户的超级 App 首次内置 Agent。</blockquote>
+<p>---</p>
+<h2>是什么</h2>
+<p>「小微」是微信官方推出的原生 AI Agent，以绿色眼睛图标出现在微信主界面左上角。用户通过语音或文字直接操控微信功能、调用小程序服务、分析聊天内容、甚至一句话生成小程序。</p>
+<p>采用自研 WeLM + DeepSeek 混合模型架构，由微信事业群技术架构负责人周颢带队。计划 2026 Q3 正式开放。</p>
+<p>---</p>
+<h2>为什么重要</h2>
+<ol>
+<li>**用户基数**：14.32 亿月活。朋友圈渗透率 >75%，支付 >80%。一年内触达 5-8 亿用户极有可能——直接成为全球第二大 AI 助手。</li>
+<li>**入口优势**：用户无需下载、无需跳转、无需学习。AI 嵌入了通讯、阅读、支付这些每日必经路径。</li>
+<li>**生态闭环**：400 万+ 小程序 + 微信支付 AI 专属卡 = 从意图到支付的全链路闭环。里昂证券判断竞争对手复制需 10 年以上。</li>
+<li>**社交数据激活**：14 亿用户关系链 + 内容沉淀首次被 AI 系统化调用。</li>
+</ol>
+<p>---</p>
+<h2>四层能力</h2>
+<pre><code>
+第 4 层  生成小工具          「帮我做一个跑步打卡器」→ 小程序雏形
+第 3 层  内容理解            总结群聊、分析朋友圈、解读 PDF
+第 2 层  生态调用            点外卖、打车、订酒店（唤起小程序）
+第 1 层  基础执行            发消息、拨电话、设置提醒
+</code></pre>
+<h3>第 1 层：基础执行</h3>
+<p>语音/文字直接操控微信原生功能。发消息、拨电话、设置日程——所说即所得。转账/红包需手动输入密码二次确认。</p>
+<h3>第 2 层：生态调用</h3>
+<p>识别意图 → 自动唤起对应小程序 → 全流程服务。已接入：美团、京东、滴滴、携程、得物等。配合「AI 专属卡」实现支付闭环。</p>
+<h3>第 3 层：内容理解</h3>
+<ul>
+<li>- **群聊总结**：进入具体聊天框后，小微可整理对话主线、分类讨论主题</li>
+<li>- **朋友圈分析**：扫描好友内容趣味，充当「社交雷达」</li>
+<li>- **文件解读**：上传 PDF 生成结构化摘要 + 分步推理</li>
+<li>- **隐私边界**：主界面无法随意读取聊天记录</li>
+</ul>
+<h3>第 4 层：生成小工具（Vibe Coding）</h3>
+<p>用日常语言描述需求 → 数秒生成小程序雏形 → 多轮对话迭代。当前仅限创建者本人使用。对闪光、秒哒等 AI 应用生成平台构成降维打击。</p>
+<p>---</p>
+<h2>技术架构</h2>
+<table>
+<tr>
+<td>组件</td>
+<td>说明</td>
+</tr>
+<tr>
+<td>**主模型**</td>
+<td>WeLM（微信自研，MoE 架构，中文+微信场景深度优化）</td>
+</tr>
+<tr>
+<td>**辅助模型**</td>
+<td>DeepSeek（复杂推理、数学计算兜底）</td>
+</tr>
+<tr>
+<td>**调度策略**</td>
+<td>生态内指令 → WeLM；深度推理 → DeepSeek</td>
+</tr>
+<tr>
+<td>**开发者接入**</td>
+<td>A2A 架构（Agent-to-Agent），小程序沉淀 Skill</td>
+</tr>
+<tr>
+<td>**支付**</td>
+<td>AI 专属卡（主账隔离、余额自主、笔笔确认）</td>
+</tr>
+</table>
+<p>---</p>
+<h2>产品哲学</h2>
+<blockquote>「辅助但不代劳」</blockquote>
+<ul>
+<li>- **语音优先**：默认语音输入+输出，心理成本极低</li>
+<li>- **单会话设计**：降低门槛，和微信聊天无差别</li>
+<li>- **不代发朋友圈、不代点赞**：保护社交真实性</li>
+<li>- **隐私隔离**：防止 AI 越权访问聊天数据</li>
+</ul>
+<p>核心矛盾：AI 能力扩张 vs 社交真实性保卫——这是微信「永远在进行的博弈」。</p>
+<p>---</p>
+<h2>竞争视角</h2>
+<table>
+<tr>
+<td>维度</td>
+<td>判断</td>
+</tr>
+<tr>
+<td>C 端对手</td>
+<td>不是豆包/千问，而是操作系统 AI（Siri、Gemini、手机厂商 AI）</td>
+</tr>
+<tr>
+<td>同级竞品</td>
+<td>支付宝「阿宝」（6 月 16 日内测），国民级 App AI 入口争夺</td>
+</tr>
+<tr>
+<td>用户规模</td>
+<td>一年内有望 5-8 亿，成为全球第二大 AI 助手</td>
+</tr>
+<tr>
+<td>资本市场</td>
+<td>消息传出后腾讯股价单日涨 10.46%（~4148 亿港元）</td>
+</tr>
+</table>
+<p>---</p>
+<h2>挑战</h2>
+<ol>
+<li>**成本**：14 亿用户高频调用，Token 消耗天文数字。2026 Q1 AI 新品已拖累经营盈利 ~88 亿元</li>
+<li>**隐私**：大规模使用后数据安全机制能否经受考验</li>
+<li>**商业化**：C 端订阅付费困难，需走广告+佣金+订阅组合</li>
+<li>**社交边界**：AI 代劳与真实社交的博弈将是长期课题</li>
+<li>**能力边界**：当前小工具无法调用 AI 能力、小程序复杂适配仍需人工</li>
+</ol>
+<p>---</p>
+<h2>与其他页面的关系</h2>
+<ul>
+<li>- **<a href="Codex.html">Codex</a>**：同为 Agent，但路线相反——Codex 是终端通用 Agent，小微是超级 App 内嵌生态 Agent</li>
+<li>- **<a href="InfiniteTalk.html">InfiniteTalk</a>**：AI 产品品类扩张趋势的最新案例</li>
+<li>- **<a href="AI原生组织.html">AI原生组织</a>**：国民级应用的 Agent 化将重塑组织工作方式</li>
+<li>- **<a href="WorkBuddy.html">WorkBuddy</a>**：桌面 Agent vs 超级 App Agent，两条 Agent 化路径</li>
+<li>- **<a href="AI使用哲学.html">AI使用哲学</a>**：小微的产品哲学（辅助不代劳）与此前讨论的「AI 是增强而非替代」高度一致</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Codex.html" class="link-btn">Codex</a><a href="InfiniteTalk.html" class="link-btn">InfiniteTalk</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
+            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">product</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-high">high</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-03</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-03</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><span class="tag">AI Agent</span> <span class="tag">微信</span> <span class="tag">超级入口</span> <span class="tag">腾讯</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rtk - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>rtk</h1>
+            <div class="sub">product · AI 产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>rtk</h1>
+<blockquote>高性能 CLI 代理，在命令输出到达 LLM 之前过滤压缩，降低 60-90% Token 消耗。</blockquote>
+<p>---</p>
+<h2>是什么</h2>
+<p>rtk 是一个<strong>单文件 Rust 二进制程序</strong>，零外部依赖。它作为 CLI 代理运行在 Shell 和 AI Agent 之间：拦截常见开发命令的输出，在传给 LLM 之前进行智能过滤、分组、截断和去重，将 Token 消耗降低 60-90%，额外开销 <10ms。</p>
+<p><strong>68.1k Stars</strong>（2026-07），支持 100+ 命令，兼容 Claude Code、Copilot、Cursor、Codex 等 14 种 AI 编程工具。</p>
+<p>---</p>
+<h2>核心价值</h2>
+<p>给 AI 编程 Agent 的上下文窗口"瘦身"。Agent 执行 `git status`、`cargo test` 等命令时，大部分输出是 LLM 不需要的噪音。rtk 在中间层过滤掉冗余，让 Agent 用更少 Token 获得同样有效的信息。</p>
+<p>一个 30 分钟 Claude Code 会话中，原始命令输出约 118,000 Token，经过 rtk 后降至约 23,900 Token（节省 <strong>80%</strong>）。</p>
+<p>---</p>
+<h2>工作原理</h2>
+<pre><code>
+Agent --命令--&gt; Shell --原始输出--&gt; LLM     ← 传统模式（大量 Token）
+Agent --命令--&gt; rtk --过滤--&gt; LLM            ← rtk 模式（压缩输出）
+</code></pre>
+<p>四种策略：</p>
+<ul>
+<li>- **智能过滤**：去除注释、空白、样板代码</li>
+<li>- **分组聚合**：按目录聚合文件、按类型聚合错误</li>
+<li>- **截断**：保留关键上下文、裁掉冗余行</li>
+<li>- **去重**：重复日志行折叠为计数</li>
+</ul>
+<p>---</p>
+<h2>关键特性</h2>
+<h3>自动重写钩子（Auto-Rewrite Hook）</h3>
+<p>rtk 的杀手级功能。安装钩子后，所有 Bash 命令自动被重写为 rtk 等价命令：</p>
+<pre><code>
+git status        # → rtk git status（自动）
+cargo test        # → rtk cargo test（自动）
+ls -la            # → rtk ls（自动）
+</code></pre>
+<p><strong>结果</strong>：100% rtk 采用率，Agent 和用户无需手动调用 rtk。</p>
+<blockquote>⚠️ 注意：钩子仅对 Bash 工具调用生效。Claude Code 的 Read、Grep、Glob 等内置工具不经过钩子，需要显式使用 `rtk read`、`rtk grep` 等命令或直接用 Shell 命令替代。</blockquote>
+<h3>覆盖范围</h3>
+<table>
+<tr>
+<td>类别</td>
+<td>代表命令</td>
+<td>典型节省</td>
+</tr>
+<tr>
+<td>文件操作</td>
+<td>`ls`、`read`、`find`、`grep`</td>
+<td>70-80%</td>
+</tr>
+<tr>
+<td>Git</td>
+<td>`status`、`diff`、`log`、`push`</td>
+<td>75-92%</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>`pytest`、`cargo test`、`go test`、`jest`</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>构建检查</td>
+<td>`cargo build`、`eslint`、`tsc`</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>容器</td>
+<td>`docker ps/logs`、`kubectl`</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>包管理</td>
+<td>`pnpm list`、`pip list`、`bundle install`</td>
+<td>60-80%</td>
+</tr>
+</table>
+<h3>分析能力</h3>
+<pre><code>
+rtk gain             # Token 节省统计
+rtk gain --graph     # 30 天趋势图
+rtk discover         # 发现遗漏的优化机会
+rtk session          # 会话级 rtk 采用率
+</code></pre>
+<p>---</p>
+<h2>与其他工具的关系</h2>
+<ul>
+<li>- **<a href="Codex.html">Codex</a>**：终端级 AI Agent，rtk 是其 Token 优化层，两者可叠加使用</li>
+<li>- **<a href="WorkBuddy.html">WorkBuddy</a>**：桌面 Agent 平台，同样面临上下文窗口效率问题，rtk 的思路可参考</li>
+<li>- **Claude Code / Cursor / Copilot**：rtk 作为中间层透明介入，不需要修改这些工具本身</li>
+</ul>
+<p>---</p>
+<h2>局限性</h2>
+<ol>
+<li>**Windows 原生支持有限**：钩子依赖 Unix Shell，Windows 上自动重写不可用，只能退化为 CLAUDE.md 注入模式（AI 收到指令但命令不自动改写）。建议用 WSL。</li>
+<li>**不覆盖所有命令**：只支持预定义的命令集，自定义脚本需要自行配置</li>
+<li>**可能过滤掉有用信息**：偶尔会过于激进，导致 LLM 缺少关键上下文。可配置 `tee` 模式在失败时保存完整原始输出</li>
+</ol></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Codex.html" class="link-btn">Codex</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
+            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">product</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-high">high</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-03</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-03</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><span class="tag">Token优化</span> <span class="tag">CLI工具</span> <span class="tag">AI编程</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+</div>
+</body>
+</html>

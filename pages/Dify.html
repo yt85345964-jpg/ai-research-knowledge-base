@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dify - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>Dify</h1>
+            <div class="sub">product · AI 产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>Dify</h1>
+<h2>一句话定位</h2>
+<p>Dify 是一个 LLMOps 平台，帮助开发者通过低代码方式持续定义和改进 AI 应用。名称源自 "define" + "modify"。</p>
+<h2>核心能力</h2>
+<h3>Agent 四大支柱</h3>
+<table>
+<tr>
+<td>能力</td>
+<td>说明</td>
+</tr>
+<tr>
+<td>自主规划</td>
+<td>根据目标自动拆解任务步骤</td>
+</tr>
+<tr>
+<td>工具调用</td>
+<td>无缝集成搜索、计算器、数据库等外部 API</td>
+</tr>
+<tr>
+<td>上下文记忆</td>
+<td>短期对话 + 长期知识存储</td>
+</tr>
+<tr>
+<td>人机协同</td>
+<td>关键决策时主动请求人类介入</td>
+</tr>
+</table>
+<h3>部署选项</h3>
+<table>
+<tr>
+<td>方案</td>
+<td>适用场景</td>
+</tr>
+<tr>
+<td>Cloud（SaaS）</td>
+<td>个人开发者、中小企业</td>
+</tr>
+<tr>
+<td>社区版</td>
+<td>有安全需求的团队</td>
+</tr>
+<tr>
+<td>企业版</td>
+<td>大型企业定制化部署</td>
+</tr>
+</table>
+<h3>模型兼容性</h3>
+<p>支持 OpenAI GPT 系列、Anthropic Claude 系列及国内主流大模型，通过统一的模型供应商 API 配置接入。</p>
+<h2>提示词设计：三段式框架</h2>
+<p>Dify 教程推荐简洁的三段式 Prompt 结构，与 WorkBuddy 的八层结构形成对比：</p>
+<pre><code>
+角色定位 → 工作流程 → 输出限制
+</code></pre>
+<p>详见 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> 中两种框架的对比。</p>
+<h2>与 WorkBuddy 的路线对比</h2>
+<table>
+<tr>
+<td>维度</td>
+<td>Dify</td>
+<td>WorkBuddy</td>
+</tr>
+<tr>
+<td>定位</td>
+<td>LLMOps 开发者平台</td>
+<td>桌面 AI Agent 消费者平台</td>
+</tr>
+<tr>
+<td>目标用户</td>
+<td>开发者、技术团队</td>
+<td>终端用户</td>
+</tr>
+<tr>
+<td>Agent 创建</td>
+<td>低代码自定义构建</td>
+<td>预设专家，选择即用</td>
+</tr>
+<tr>
+<td>提示词</td>
+<td>用户自行编写 Prompt</td>
+<td>内置固化，用户无需关心</td>
+</tr>
+<tr>
+<td>生态</td>
+<td>开放 API 嵌入任何系统</td>
+<td>独立桌面应用</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>SaaS / 私有化</td>
+<td>本地安装</td>
+</tr>
+</table>
+<blockquote>综合判断：Dify 和 WorkBuddy 代表 Agent 产品化的两条路线，前者面向"会做 AI 应用的人"，后者面向"需要 AI 帮助的人"。两者共同验证了 Agent 能力需要封装和结构化的共识。</blockquote>
+<h2>知识库整合能力</h2>
+<p>Dify 的知识库功能与本项目的 IMA → Wiki 管道有相似之处：上传文档 → 自动索引 → 智能检索。区别在于 Dify 是驱动 Agent 回答的 RAG 引擎，而本知识库是面向人类阅读的编译型知识体系。</p>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 三段式 vs 八层结构的对比</li>
+<li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — Dify 未来发展中的多 Agent 协同</li>
+<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 两种 Agent 产品路线的对比</li>
+<li>- <a href="ima-知识库.html">ima 知识库</a> — 同为知识管理工具</li>
+</ul>
+<p>---</p>
+<p><em>创建: 2026-07-02 | 更新: 2026-07-02</em></p></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
+            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">product</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-medium">medium</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-02</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><span class="tag">AI产品</span> <span class="tag">LLMOps</span> <span class="tag">Agent平台</span> <span class="tag">低代码</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (2)</h3>
+            <div><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (2)</h3>
+            <div><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+</div>
+</body>
+</html>
