@@ -24,7 +24,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 .content p { font-size:0.88rem; margin-bottom:0.6rem; }
 .content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
 .content li { margin-bottom:0.25rem; }
-.content blockquote { border-left:3px solid #D4537E; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content blockquote { border-left:3px solid #993C1D; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
 .content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
 .content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
 .content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
@@ -66,13 +66,15 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>AI原生组织</h1>
-            <div class="sub">concept · AI 应用 · 活跃</div>
+            <div class="sub">AI组织 · 活跃</div>
         </div>
         <div class="content"><h1>AI原生组织</h1>
-<blockquote>**一句话定义**：AI 原生组织不是"把 AI 当 Copilot 用"的旧模式，而是把 AI 作为整个组织运转的**建设层**——数据集中、工具注册、技能自进化，让组织每天都在变聪明。另一个等价定义：**AI 进来之后，组织里的等待有没有变少。**</blockquote>
-<h2>视角一：技术架构（YC 模型）</h2>
-<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI 应用/2026-07-03_YC内部AI实操</span>（YC 合伙人 Pete Koomen 访谈）</blockquote>
-<h2>核心范式：Copilot vs. AI-Native</h2>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：把 AI 作为整个组织运转的**建设层**（而非"把 AI 当 Copilot 用"的旧模式）——数据集中、工具注册、技能自进化，让组织每天都在变聪明；等价定义：**AI 进来之后，组织里的等待有没有变少**。</blockquote>
+<h2>组织范式</h2>
+<p>（概述该 AI 组织范式的核心主张 —— 如何通过架构与岗位把 AI 嵌入组织运转）</p>
+<p>AI 原生组织不是"买工具"而是"让等待消失"。其本质是用三层基础设施 + 角色重构 + 多 Agent 协调，把 AI 嵌进组织的运行规则，影响任务分配、信息使用、责任定义与协作方式。</p>
+<h3>Copilot vs. AI-Native 核心范式</h3>
 <table>
 <tr>
 <td>维度</td>
@@ -105,25 +107,25 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>默认公开、全员可见</td>
 </tr>
 </table>
-<blockquote>单一来源观点：<span class="dangling" title="页面尚未创建">素材笔记/AI 应用/2026-07-03_YC内部AI实操</span> 基于 YC 合伙人 Pete Koomen 的访谈。</blockquote>
+<blockquote>单一来源观点：<span class="dangling" title="页面尚未创建">素材笔记/AI组织/YC内部AI实操</span> 基于 YC 合伙人 Pete Koomen 的访谈。</blockquote>
 <blockquote>综合判断：AI-Native 模式与 <a href="AI使用哲学.html">AI使用哲学</a> 的"Builder 心态"高度同构——Builder 驱动工具而非被工具驱动，AI-Native 把控制权交给用户而非锁定在开发者手中。</blockquote>
-<h2>三层基础设施</h2>
-<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI 应用/2026-07-03_YC内部AI实操</span></blockquote>
-<h3>Layer 1：数据集中（Context Layer）</h3>
+<h3>YC 三层基础设施</h3>
+<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI组织/YC内部AI实操</span></blockquote>
+<p><strong>Layer 1：数据集中（Context Layer）</strong></p>
 <ul>
 <li>- 把所有重要上下文放到一个地方——公司数据、CRM、财务、会议记录</li>
 <li>- YC 的做法：所有自研软件跑在同一个 Postgres 数据库上</li>
 <li>- 效果：**杰文斯悖论**——降低查询成本后，提问数量和复杂度反而爆炸性增长</li>
 </ul>
-<blockquote>综合判断：这与本团队知识库的设计哲学一致——<span class="dangling" title="页面尚未创建">LLM Wiki</span> 的核心就是"一次摄入，多次使用"，把知识集中到一个可检索的地方。详见 <a href="ima-知识库.html">ima 知识库</a></blockquote>
-<h3>Layer 2：工具注册表（Tool Registry）</h3>
+<blockquote>综合判断：这与本团队知识库的设计哲学一致——<a href="LLM-Wiki.html">LLM Wiki</a> 的核心就是"一次摄入，多次使用"，把知识集中到一个可检索的地方。详见 <a href="ima-知识库.html">ima 知识库</a></blockquote>
+<p><strong>Layer 2：工具注册表（Tool Registry）</strong></p>
 <ul>
 <li>- 把团队重复做的事变成 Agent 可调用的工具，放到共享池</li>
 <li>- YC 从 20 个工具 → 350+，各团队持续添加</li>
 <li>- 工具注册表 = 让 Agent 从"能聊天"变成"能干活"的关键分水岭</li>
 </ul>
 <blockquote>综合判断：工具注册表的本质是内部 <a href="AI-API网关.html">AI API网关</a>——统一管理和调度 AI 的业务能力调用。与 <a href="WorkBuddy.html">WorkBuddy</a> 的专家系统同构：专家 = 技能 + 工具的组合封装。</blockquote>
-<h3>Layer 3：技能自进化（Skill System + Dream Cycle）</h3>
+<p><strong>Layer 3：技能自进化（Skill System + Dream Cycle）</strong></p>
 <ul>
 <li>- 技能 = 对工具的更高层封装，可复用的能力单元</li>
 <li>- **Dream Cycle**：每晚自动读取当天所有对话，找改进点，次日技能自动优化</li>
@@ -136,7 +138,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>Agent 读 artifacts 自动改进 → **超越任何单个人的能力**</li>
 </ol>
 <blockquote>综合判断：技能自进化与 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> 的"专家行为模式固化"构成闭环——先探索发现有效模式（Builder 心态），再固化成技能（提示词设计），再通过 Dream Cycle 持续优化。探索 → 固化 → 优化的飞轮。</blockquote>
-<h2>路径不可逆：顺序为什么不能反</h2>
+<h3>路径不可逆</h3>
 <pre><code>
 数据集中 ──→ 工具注册表 ──→ 技能自进化
   (地基)       (骨架)        (飞轮)
@@ -147,27 +149,21 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 没有沉淀对话 → 自我改进没有原材料</li>
 </ul>
 <blockquote>综合判断：这条路径对个人同样适用——笔记集中 → 重复操作模板化 → 让 AI 越来越懂你怎么做事。即 <a href="AI使用哲学.html">AI使用哲学</a> 的"从用户变训练师"。</blockquote>
-<h2>两个文化前提</h2>
+<h3>两个文化前提</h3>
 <blockquote>单一来源观点：Garry Tan 认为这是"千倍超级智能组织必须具备的两个特质"。</blockquote>
 <ol>
 <li>**平等主义（Egalitarian）**：AI 能力向每个人开放，不只是领导层</li>
 <li>**默认信任（Trust by Default）**：信息不按权限层级锁定，上下文广泛开放</li>
 </ol>
 <blockquote>综合判断：这两个前提与大多数企业的 command-and-control 文化根本矛盾。创业公司更容易实现，因为小团队、目标一致、高度信任。大型组织需要结构性改造才能达到。</blockquote>
-<h2>"无马马车"隐喻</h2>
+<h3>"无马马车"隐喻</h3>
 <p>早期汽车在外形上模仿马车（只是把马换成发动机），而没有根据新技术的特性重新设计。今天大量 AI 产品也是"在确定性软件里嵌一小块 AI"（如 Gmail AI 写邮件），真正的 prompt context 和工作逻辑被锁死在后台。</p>
 <p>正确方向：<strong>Agent 包裹确定性工具</strong>——把控制权从开发者转移给用户。</p>
 <blockquote>综合判断：<a href="WorkBuddy.html">WorkBuddy</a> 的专家系统设计正在走这条路——用户可以通过自定义专家来修改和扩展 Agent 能力，而不是被锁定在预设的框里。</blockquote>
-<h2>窗口期</h2>
-<p>现在花 $10-100K/年做的事，两年后可能只要几百块。但差距不在成本，在于<strong>你有没有提前把数据、工具、判断力沉淀成一套会自我进化的系统</strong>。</p>
-<p>类比：1990年代给员工买电脑——贵、不稳定，但先买的公司获得了对手无法比拟的优势。</p>
-<h2>视角二：组织变革方法论（冬奇模型）</h2>
-<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI 理念/2026-07-03_AI原生组织不是买工具而是让等待消失</span>（掘金 @冬奇Lab，2026-06-28）</blockquote>
-<p>如果说 YC 模型回答的是"<strong>技术上怎么搭建</strong>"，冬奇模型回答的是"<strong>组织上怎么变革</strong>"。两者互补：技术架构是骨架，变革方法论是血肉。</p>
-<h3>核心定义</h3>
+<h3>冬奇四阶段演进（组织变革方法论）</h3>
+<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI理念/AI原生组织不是买工具而是让等待消失</span>（掘金 @冬奇Lab，2026-06-28）</blockquote>
 <blockquote>**真正的 AI 原生不是看你用了多少模型，而是 AI 进来之后，组织里的等待有没有变少。**</blockquote>
 <p>引用 YC 合伙人 Diana：<strong>AI 不应该只是公司使用的工具，而应该成为公司运行的操作系统。</strong> 但"操作系统"不是指搭 AI 中台，而是 <strong>AI 进入组织的运行规则</strong>——影响任务分配、信息使用、责任定义和协作方式。</p>
-<h3>四阶段演进</h3>
 <table>
 <tr>
 <td>阶段</td>
@@ -201,33 +197,47 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </tr>
 </table>
 <blockquote>综合判断：阶段 3 是转折点。大多数企业卡在阶段 1-2 就以为完成了 AI 转型。YC 的三层架构（数据→工具→技能）本质上是帮助企业跨越阶段 3-4 的技术基础设施。</blockquote>
-<h3>双角色模型</h3>
+<h3>Paperclip Co-Org 模型（多 Agent 协调）</h3>
+<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI组织/Paperclip_AI_Agent_公司编排平台</span>（2026-07-13）</blockquote>
+<p>如果说 YC 模型回答"数据/工具/技能"三层基础设施，冬奇模型回答"组织怎么变轻"，<strong>Paperclip 模型回答的是"当 Agent 数量从几个到几十个时怎么管"</strong>——把 Agent 当员工管理。</p>
+<p><strong>三个时代的演进</strong></p>
 <table>
 <tr>
-<td>角色</td>
-<td>定义</td>
-<td>核心能力</td>
+<td>阶段</td>
+<td>定位</td>
+<td>典型代表</td>
 </tr>
 <tr>
-<td>**AI Builder**</td>
-<td>能把业务问题拆解成 AI 工作流的任何人（不限技术岗）</td>
-<td>问题拆解 → AI 执行 → 标准设定 → 持续优化</td>
+<td>Copilot（2023-2024）</td>
+<td>AI 辅助完成具体任务</td>
+<td>GitHub Copilot、ChatGPT</td>
 </tr>
 <tr>
-<td>**Human Decider**</td>
-<td>做判断的人</td>
-<td>战略对齐、风险判断、长期价值评估</td>
+<td>Co-Worker（2025）</td>
+<td>AI 是同事，与人协作</td>
+<td>Claude Code、Codex</td>
+</tr>
+<tr>
+<td>**Co-Org（2026-）**</td>
+<td>AI 是组织成员，需管理</td>
+<td>**Paperclip**（开源 72K Star）</td>
 </tr>
 </table>
-<blockquote>AI Builder 推进到"可判断"，Human Decider 决定"往哪做"。这与 <a href="AI使用哲学.html">AI使用哲学</a> 的 Builder 心态完全同构——Builder 不只是用工具的人，而是能驱动工具进化的人。</blockquote>
-<h3>五步实施路径</h3>
-<pre><code>
-1. 组建变革推进组（CEO直接授权）→ 2. 培养"先问AI"习惯（激励非强制）
-→ 3. 沉淀可复用Skill → 4. 让旧流程退出主链路 → 5. IT系统固化
-</code></pre>
-<p>关键原则：<strong>顺序不能反</strong>。先改习惯 → 再沉淀方法 → 再判断哪些值得系统化 → 最后 IT 固化。一上来就搞 AI 中台是最常见的错误。</p>
-<blockquote>这与 YC 的"路径不可逆"（数据集中 → 工具注册表 → 技能自进化）高度一致——都强调**先有业务实践，后有系统固化**。</blockquote>
-<h2>两个视角的对照</h2>
+<p><strong>Paperclip 的"心跳 + 预算 + 审计"三件套</strong></p>
+<ul>
+<li>- **心跳调度**：Agent 按计划醒来 → 检查工作 → 执行任务 → 休眠（解决 Agent 失忆问题）</li>
+<li>- **预算控制**：每个 Agent 有月度预算，到限额自动停止（防失控烧钱）</li>
+<li>- **审计日志**：每次对话可追溯、每个决策有解释（满足合规审查）</li>
+</ul>
+<p><strong>与 AI-Native 的关系</strong></p>
+<p>Paperclip 提供了 AI-Native 组织从理论到落地的<strong>具体管理工具</strong>：</p>
+<ul>
+<li>- 解决了"工具注册表"中的多 Agent 协调问题</li>
+<li>- 提供了"技能自进化"中的预算与审计基础设施</li>
+<li>- 让"AI 操作系统"的概念有了可部署的开源实现</li>
+</ul>
+<blockquote>综合判断：Paperclip 不是要替代 YC 模型的"数据集中+工具注册+技能进化"哲学，而是为它补上了"**多 Agent 协调层**"的最后一公里。详见 <a href="Paperclip.html">Paperclip</a>。</blockquote>
+<h3>两个视角对照</h3>
 <table>
 <tr>
 <td>维度</td>
@@ -265,6 +275,92 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>**先有实践，后固化系统**</td>
 </tr>
 </table>
+<h3>窗口期</h3>
+<p>现在花 $10-100K/年做的事，两年后可能只要几百块。但差距不在成本，在于<strong>你有没有提前把数据、工具、判断力沉淀成一套会自我进化的系统</strong>。</p>
+<p>类比：1990年代给员工买电脑——贵、不稳定，但先买的公司获得了对手无法比拟的优势。</p>
+<h2>角色与岗位</h2>
+<table>
+<tr>
+<td>角色</td>
+<td>职责</td>
+<td>能力要求</td>
+</tr>
+<tr>
+<td>**AI Builder**</td>
+<td>把业务问题拆解成 AI 工作流（不限技术岗）；推进到"可判断"</td>
+<td>问题拆解 → AI 执行 → 标准设定 → 持续优化</td>
+</tr>
+<tr>
+<td>**Human Decider**</td>
+<td>做最终判断，决定"往哪做"；把关质量与风险</td>
+<td>战略对齐、风险判断、长期价值评估</td>
+</tr>
+</table>
+<blockquote>AI Builder 推进到"可判断"，Human Decider 决定"往哪做"。这与 <a href="AI使用哲学.html">AI使用哲学</a> 的 Builder 心态完全同构——Builder 不只是用工具的人，而是能驱动工具进化的人。</blockquote>
+<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI理念/AI原生组织不是买工具而是让等待消失</span>（冬奇双角色模型）</blockquote>
+<h2>治理与汇报</h2>
+<ul>
+<li>- **指挥链**：冬奇五步实施路径的第 1 步是组建**变革推进组**，由 CEO 直接授权；先改习惯（激励非强制），再沉淀方法，最后 IT 系统固化。</li>
+<li>- **决策权归属**：Human Decider（人）掌握最终判断与战略方向；AI Builder 推进到"可判断"层面，AI 规模化执行。</li>
+<li>- **人机协作的审批 / 兜底机制**：Paperclip 提供"心跳 + 预算 + 审计"三件套——心跳调度解决 Agent 失忆、预算控制防失控烧钱、审计日志满足合规审查；每次对话可追溯、每个决策有解释。</li>
+<li>- **信息透明与权限**：AI-Native 默认公开、全员可见（vs. 传统按权限层级分配）；文化前提是**默认信任（Trust by Default）**与**平等主义（Egalitarian）**——AI 能力向每个人开放，不只是领导层。</li>
+<li>- **文化冲突**：这两个前提与大多数企业的 command-and-control 文化根本矛盾；创业公司因小团队、目标一致、高度信任更易实现，大型组织需结构性改造。</li>
+</ul>
+<blockquote>单一来源观点：Garry Tan 认为平等主义 + 默认信任是"千倍超级智能组织必须具备的两个特质"。</blockquote>
+<h2>与传统组织对比</h2>
+<table>
+<tr>
+<td>维度</td>
+<td>传统组织</td>
+<td>AI 组织范式</td>
+</tr>
+<tr>
+<td>决策</td>
+<td>人驱动</td>
+<td>人设目标、做判断，AI 规模化执行（Human Decider + AI Builder）</td>
+</tr>
+<tr>
+<td>岗位</td>
+<td>固定职能</td>
+<td>角色随任务动态组合（AI Builder / Human Decider）</td>
+</tr>
+<tr>
+<td>知识沉淀</td>
+<td>在人的头脑中</td>
+<td>在 Agent 可检索的 artifacts 中</td>
+</tr>
+<tr>
+<td>软件形态</td>
+<td>确定性软件包裹一小块 AI（"无马马车"）</td>
+<td>Agent 包裹确定性工具</td>
+</tr>
+<tr>
+<td>控制权</td>
+<td>开发者决定一切</td>
+<td>用户可自定义提示词和技能</td>
+</tr>
+<tr>
+<td>信息透明</td>
+<td>按权限层级分配</td>
+<td>默认公开、全员可见</td>
+</tr>
+</table>
+<h2>适用前提与落地建议</h2>
+<ul>
+<li>- **适用阶段**：冬奇四阶段 —— 1.个人提效 → 2.节点自动化 → 3.节点消失（转折点）→ 4.组织重构；对应三个时代：Copilot（2023-2024）→ Co-Worker（2025）→ Co-Org（2026-，Paperclip）。</li>
+<li>- **落地建议**：</li>
+<li>- 冬奇五步实施路径：①组建变革推进组（CEO直接授权）→ ②培养"先问AI"习惯（激励非强制）→ ③沉淀可复用 Skill → ④让旧流程退出主链路 → ⑤IT 系统固化。</li>
+<li>- YC 路径不可逆：数据集中 → 工具注册表 → 技能自进化（地基→骨架→飞轮）。</li>
+<li>- 关键原则：**顺序不能反**——先改习惯 → 再沉淀方法 → 再判断哪些值得系统化 → 最后 IT 固化。两视角共识：**先有实践，后固化系统**。</li>
+<li>- **常见误区**：</li>
+<li>- 一上来就搞 AI 中台（最常见的错误）。</li>
+<li>- 卡在阶段 1-2（个人提效 / 节点自动化）就以为完成了 AI 转型，没跨过阶段 3（节点消失）转折点。</li>
+<li>- "无马马车"式模仿——只在确定性软件里嵌一小块 AI，把控制权锁死在开发者而非用户手中。</li>
+</ul>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
 <h2>相关页面</h2>
 <ul>
 <li>- <a href="AI使用哲学.html">AI使用哲学</a> — Builder 心态 + 判断力规模化，与 AI-Native 的"从用户变训练师"同构；冬奇双角色模型的源头</li>
@@ -273,34 +369,36 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — Dream Cycle = 多 Agent 协作 + 自我改进循环</li>
 <li>- <a href="AI-API网关.html">AI API网关</a> — 工具注册表的本质是内部 API 网关</li>
 <li>- <a href="ima-知识库.html">ima 知识库</a> — 数据集中策略的同构案例</li>
-<li>- <span class="dangling" title="页面尚未创建">LLM Wiki</span> — 知识库设计哲学的同构案例</li>
-</ul>
-<p>---</p>
-<p><em>创建: 2026-07-03 | 更新: 2026-07-03 11:10（增量更新：补充冬奇组织变革方法论视角）</em></p></div>
+<li>- <a href="LLM-Wiki.html">LLM Wiki</a> — 知识库设计哲学的同构案例</li>
+<li>- <a href="Paperclip.html">Paperclip</a> — Co-Org 阶段的开源代表，提供多 Agent 协调层（心跳+预算+审计）</li>
+<li>- <a href="Pete-Koomen.html">Pete Koomen</a> — YC 内部 AI 原生改造「总架构师」，本页 YC 模型的主要来源人物（归入 AI人物 分类）</li>
+<li>- <a href="Garry-Tan.html">Garry Tan</a> — YC CEO，AI 原生转型对话主持人</li>
+<li>- <span class="dangling" title="页面尚未创建">素材笔记/AI理念/一个人亲手做企业AI服务的3个思考</span> — 个体视角的企业AI服务落地观察（内容待ASR补充）</li>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
-            <a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><span class="link-btn dangling">LLM Wiki</span><a href="ima-知识库.html" class="link-btn">ima 知识库</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a><span class="link-btn dangling">LLM Wiki</span>
+            <a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="LLM-Wiki.html" class="link-btn">LLM Wiki</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Paperclip.html" class="link-btn">Paperclip</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a><a href="LLM-Wiki.html" class="link-btn">LLM Wiki</a><a href="Paperclip.html" class="link-btn">Paperclip</a><a href="Pete-Koomen.html" class="link-btn">Pete Koomen</a><a href="Garry-Tan.html" class="link-btn">Garry Tan</a>
         </div>
     </div>
 
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#D4537E">AI 应用</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">concept</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#993C1D">AI组织</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">AI原生组织.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-high">high</span></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-03</span></div>
-            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-03</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-13</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI应用</span> <span class="tag">组织转型</span> <span class="tag">Agent</span> <span class="tag">DreamCycle</span></div>
+            <div><a href="tag-大模型.html" class="tag">大模型</a> <a href="tag-趋势研判.html" class="tag">趋势研判</a> <a href="tag-智能体.html" class="tag">智能体</a></div>
         </div>
 
         <div class="sidebar-card">
-            <h3>反向链接 (7)</h3>
-            <div><a href="InfiniteTalk.html" class="backlink-item">InfiniteTalk</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="2026-07-03_InfiniteTalk开源.html" class="backlink-item">2026-07-03_InfiniteTalk开源</a><a href="2026-07-03_微信Agent小微灰度上线.html" class="backlink-item">2026-07-03_微信Agent小微灰度上线</a></div>
+            <h3>反向链接 (14)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="InfiniteTalk.html" class="backlink-item">InfiniteTalk</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a><a href="InfiniteTalk开源.html" class="backlink-item">InfiniteTalk开源</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -309,12 +407,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         </div>
 
         <div class="sidebar-card">
-            <h3>被引用 (7)</h3>
-            <div><a href="InfiniteTalk.html" class="backlink-item">InfiniteTalk</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="2026-07-03_InfiniteTalk开源.html" class="backlink-item">2026-07-03_InfiniteTalk开源</a><a href="2026-07-03_微信Agent小微灰度上线.html" class="backlink-item">2026-07-03_微信Agent小微灰度上线</a></div>
+            <h3>被引用 (14)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="InfiniteTalk.html" class="backlink-item">InfiniteTalk</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a><a href="InfiniteTalk开源.html" class="backlink-item">InfiniteTalk开源</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>

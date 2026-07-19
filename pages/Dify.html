@@ -66,12 +66,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>Dify</h1>
-            <div class="sub">product · AI 产品 · 活跃</div>
+            <div class="sub">AI产品 · 活跃</div>
         </div>
         <div class="content"><h1>Dify</h1>
-<h2>一句话定位</h2>
-<p>Dify 是一个 LLMOps 平台，帮助开发者通过低代码方式持续定义和改进 AI 应用。名称源自 "define" + "modify"。</p>
-<h2>核心能力</h2>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：Dify 是一个 LLMOps 平台，帮助开发者通过低代码方式持续定义和改进 AI 应用。名称源自 "define" + "modify"。</blockquote>
+<h2>核心功能</h2>
 <h3>Agent 四大支柱</h3>
 <table>
 <tr>
@@ -116,13 +116,34 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </table>
 <h3>模型兼容性</h3>
 <p>支持 OpenAI GPT 系列、Anthropic Claude 系列及国内主流大模型，通过统一的模型供应商 API 配置接入。</p>
-<h2>提示词设计：三段式框架</h2>
+<h3>提示词设计：三段式框架</h3>
 <p>Dify 教程推荐简洁的三段式 Prompt 结构，与 WorkBuddy 的八层结构形成对比：</p>
 <pre><code>
 角色定位 → 工作流程 → 输出限制
 </code></pre>
 <p>详见 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> 中两种框架的对比。</p>
-<h2>与 WorkBuddy 的路线对比</h2>
+<h3>知识库整合能力</h3>
+<p>Dify 的知识库功能与本项目的 IMA → Wiki 管道有相似之处：上传文档 → 自动索引 → 智能检索。区别在于 Dify 是驱动 Agent 回答的 RAG 引擎，而本知识库是面向人类阅读的编译型知识体系。</p>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>开发者 / 技术团队低代码构建 AI 应用</td>
+<td>非技术用户需要开箱即用的 Agent</td>
+</tr>
+<tr>
+<td>需要 RAG 知识库驱动 Agent 回答</td>
+<td>面向人类阅读的编译型知识体系</td>
+</tr>
+<tr>
+<td>SaaS / 私有化灵活部署</td>
+<td>纯本地桌面端的个人使用</td>
+</tr>
+</table>
+<h2>竞品对比</h2>
 <table>
 <tr>
 <td>维度</td>
@@ -161,17 +182,19 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </tr>
 </table>
 <blockquote>综合判断：Dify 和 WorkBuddy 代表 Agent 产品化的两条路线，前者面向"会做 AI 应用的人"，后者面向"需要 AI 帮助的人"。两者共同验证了 Agent 能力需要封装和结构化的共识。</blockquote>
-<h2>知识库整合能力</h2>
-<p>Dify 的知识库功能与本项目的 IMA → Wiki 管道有相似之处：上传文档 → 自动索引 → 智能检索。区别在于 Dify 是驱动 Agent 回答的 RAG 引擎，而本知识库是面向人类阅读的编译型知识体系。</p>
+<h2>团队评估</h2>
+<blockquote>Dify 与 WorkBuddy 代表 Agent 产品化的两条路线，前者面向"会做 AI 应用的人"，后者面向"需要 AI 帮助的人"；两者共同验证了 Agent 能力需要封装和结构化的共识。Dify 的知识库 RAG 引擎与本项目 IMA → Wiki 管道相似但定位不同。</blockquote>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
 <h2>相关页面</h2>
 <ul>
 <li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 三段式 vs 八层结构的对比</li>
 <li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — Dify 未来发展中的多 Agent 协同</li>
 <li>- <a href="WorkBuddy.html">WorkBuddy</a> — 两种 Agent 产品路线的对比</li>
 <li>- <a href="ima-知识库.html">ima 知识库</a> — 同为知识管理工具</li>
-</ul>
-<p>---</p>
-<p><em>创建: 2026-07-02 | 更新: 2026-07-02</em></p></div>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
             <a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a>
         </div>
@@ -180,22 +203,22 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">product</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">Dify.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-medium">medium</span></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-中">中</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-02</span></div>
             <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI产品</span> <span class="tag">LLMOps</span> <span class="tag">Agent平台</span> <span class="tag">低代码</span></div>
+            <div><a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-工具评测.html" class="tag">工具评测</a></div>
         </div>
 
         <div class="sidebar-card">
-            <h3>反向链接 (2)</h3>
-            <div><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a></div>
+            <h3>反向链接 (5)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -204,12 +227,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         </div>
 
         <div class="sidebar-card">
-            <h3>被引用 (2)</h3>
-            <div><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a></div>
+            <h3>被引用 (5)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>

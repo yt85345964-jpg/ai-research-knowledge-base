@@ -66,12 +66,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>DeepSeek</h1>
-            <div class="sub">product · AI 产品 · 活跃</div>
+            <div class="sub">AI产品 · 活跃</div>
         </div>
         <div class="content"><h1>DeepSeek</h1>
-<h2>一句话定位</h2>
-<p>DeepSeek（深度求索）是一家专注 AGI 的中国科技公司，推出 DeepSeek-R1（推理模型）和 DeepSeek-V3（通用模型）等开源大模型，以高性价比和免费商用策略获得广泛关注。</p>
-<h2>核心产品</h2>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：DeepSeek（深度求索）是一家专注 AGI 的中国科技公司，推出 DeepSeek-R1（推理模型）和 DeepSeek-V3（通用模型）等开源大模型，以高性价比和免费商用策略获得广泛关注。</blockquote>
+<h2>核心功能</h2>
 <h3>DeepSeek-R1（推理模型）</h3>
 <ul>
 <li>- 开源的推理模型，性能对齐 OpenAI o1 正式版</li>
@@ -84,7 +84,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 适用于大多数任务的通用大模型</li>
 <li>- 擅长：文本生成、创意写作、多轮对话、开放性问答</li>
 </ul>
-<h2>推理模型 vs 通用模型的提示策略</h2>
+<h3>推理模型 vs 通用模型的提示策略</h3>
 <p>这是 DeepSeek 系列带来的重要认知区分：</p>
 <table>
 <tr>
@@ -109,7 +109,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </tr>
 </table>
 <p>详见 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a></p>
-<h2>能力图谱</h2>
+<h3>能力图谱</h3>
 <ul>
 <li>- 文本生成（创作、摘要、翻译、结构化输出）</li>
 <li>- 语义理解与分析（情感分析、意图识别、实体提取）</li>
@@ -118,16 +118,37 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 联网搜索与深度思考模式</li>
 <li>- 文件上传与 OCR</li>
 </ul>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>数学推导、代码生成、复杂问题拆解（R1）</td>
+<td>需结构化引导的开放性长文创作（用 V3 更合适）</td>
+</tr>
+<tr>
+<td>文本生成、创意写作、多轮对话（V3）</td>
+<td>对数据出境有严格合规要求的封闭场景</td>
+</tr>
+<tr>
+<td>高性价比 / 免费商用的中文推理需求</td>
+<td>需要厂商深度定制支持的企业私有部署</td>
+</tr>
+</table>
 <h2>团队评估</h2>
 <blockquote>DeepSeek 的推理模型对 AI 研究知识库的一个直接启示：当我们使用推理模型（如 deepseek-v4-pro）生成内容时，提示策略应该更简洁直接，不需要像对待通用模型那样拆解步骤和角色扮演。这对 AGENTS.md 中"摄入"和"编译"的提示设计有直接影响。</blockquote>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
 <h2>相关页面</h2>
 <ul>
 <li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 推理模型 vs 通用模型提示策略差异</li>
 <li>- <a href="WorkBuddy.html">WorkBuddy</a> — 同为 AI 产品平台，定位不同（用户端 Agent vs 底层模型）</li>
 <li>- <a href="AI-API网关.html">AI API网关</a> — 企业接入 DeepSeek 等模型的中转方式</li>
-</ul>
-<p>---</p>
-<p><em>创建: 2026-07-02 | 更新: 2026-07-02</em></p></div>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
             <a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="AI-API网关.html" class="link-btn">AI API网关</a>
         </div>
@@ -136,22 +157,22 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">product</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">DeepSeek.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-medium">medium</span></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-中">中</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-02</span></div>
             <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI产品</span> <span class="tag">大模型</span> <span class="tag">推理模型</span> <span class="tag">开源</span></div>
+            <div><a href="tag-大模型.html" class="tag">大模型</a> <a href="tag-工具评测.html" class="tag">工具评测</a></div>
         </div>
 
         <div class="sidebar-card">
             <h3>反向链接 (2)</h3>
-            <div><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a></div>
+            <div><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="DeepSeek从入门到精通.html" class="backlink-item">DeepSeek从入门到精通</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -161,11 +182,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 
         <div class="sidebar-card">
             <h3>被引用 (2)</h3>
-            <div><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a></div>
+            <div><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="DeepSeek从入门到精通.html" class="backlink-item">DeepSeek从入门到精通</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>

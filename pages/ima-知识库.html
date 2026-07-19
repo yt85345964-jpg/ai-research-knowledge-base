@@ -24,7 +24,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 .content p { font-size:0.88rem; margin-bottom:0.6rem; }
 .content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
 .content li { margin-bottom:0.25rem; }
-.content blockquote { border-left:3px solid #1D9E75; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
 .content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
 .content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
 .content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
@@ -66,11 +66,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>ima 知识库</h1>
-            <div class="sub">tool · 知识库 · 活跃</div>
+            <div class="sub">AI产品 · 活跃</div>
         </div>
         <div class="content"><h1>ima 知识库</h1>
-<h2>一句话定位</h2>
-<p>腾讯推出的 AI 知识库工具，支持个人知识库和共享知识库，可与微信生态深度整合，是本团队知识库的<strong>采集入口</strong>。</p>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：腾讯推出的 AI 知识库工具，支持个人知识库和共享知识库，可与微信生态深度整合，是本团队知识库的**采集入口**。</blockquote>
 <h2>核心功能</h2>
 <ul>
 <li>- **知识收藏**：上传 PDF、Word、图片等格式，浏览网页时随时收藏</li>
@@ -79,19 +79,38 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- **共享知识库**：创建共享知识库、成员管理、权限控制</li>
 <li>- **多端同步**：PC客户端 + 微信小程序</li>
 </ul>
-<h2>技术特点</h2>
+<h3>技术特点</h3>
 <ul>
 <li>- 搭载腾讯混元 + DeepSeek 大模型</li>
 <li>- 支持模糊搜索和语义检索</li>
 <li>- 微信生态原生整合（公众号文章一键存入）</li>
 </ul>
-<h2>在本团队的使用方式</h2>
+<h3>在本团队的使用方式</h3>
 <p>IMA 作为我们知识库系统的 <strong>Raw sources 采集入口</strong>：</p>
 <pre><code>
 微信群 → 转发到 IMA「杨添的知识库」
     → WorkBuddy 每天 9:00 同步
     → 编译到 E:\AI-团队知识库\知识库\
 </code></pre>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>微信生态内的资料采集与收藏</td>
+<td>需要本地优先 / 离线可控的知识管理</td>
+</tr>
+<tr>
+<td>团队共享知识库与权限管理</td>
+<td>对知识深度编译与结构化要求高的场景</td>
+</tr>
+<tr>
+<td>多端（PC + 微信小程序）同步</td>
+<td>不依赖微信生态的纯本地工作流</td>
+</tr>
+</table>
 <h2>竞品对比</h2>
 <table>
 <tr>
@@ -127,36 +146,40 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </table>
 <h2>团队评估</h2>
 <blockquote>作为采集入口很合适。微信生态原生、团队成员操作成本极低。但知识库的组织和深度编译能力不足，所以需要 WorkBuddy + Obsidian 做进一步的编译和结构化。</blockquote>
-<h2>相关实体</h2>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
 <ul>
 <li>- <a href="WorkBuddy.html">WorkBuddy</a> — 知识库的编译引擎</li>
-</ul>
-<p>---</p>
-<p><em>创建: 2026-07-01 | 更新: 2026-07-01</em></p></div>
+<li>- <a href="Obsidian+AI工作台.html">Obsidian+AI工作台</a> — 本地知识库工作台的另一种实现</li>
+<li>- <a href="Dify.html">Dify</a> — 同为知识管理工具</li>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
-            <a href="WorkBuddy.html" class="link-btn">WorkBuddy</a>
+            <a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Obsidian+AI工作台.html" class="link-btn">Obsidian+AI工作台</a><a href="Dify.html" class="link-btn">Dify</a>
         </div>
     </div>
 
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#1D9E75">知识库</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">tool</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">ima-知识库.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-01</span></div>
             <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-01</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI产品</span> <span class="tag">知识管理</span> <span class="tag">腾讯</span></div>
+            <div><a href="tag-向量检索.html" class="tag">向量检索</a> <a href="tag-工具评测.html" class="tag">工具评测</a> <a href="tag-知识库.html" class="tag">知识库</a></div>
         </div>
 
         <div class="sidebar-card">
-            <h3>反向链接 (3)</h3>
-            <div><a href="Dify.html" class="backlink-item">Dify</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a></div>
+            <h3>反向链接 (5)</h3>
+            <div><a href="Dify.html" class="backlink-item">Dify</a><a href="RAG（检索增强生成）.html" class="backlink-item">RAG（检索增强生成）</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -165,12 +188,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         </div>
 
         <div class="sidebar-card">
-            <h3>被引用 (3)</h3>
-            <div><a href="Dify.html" class="backlink-item">Dify</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a></div>
+            <h3>被引用 (5)</h3>
+            <div><a href="Dify.html" class="backlink-item">Dify</a><a href="RAG（检索增强生成）.html" class="backlink-item">RAG（检索增强生成）</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>

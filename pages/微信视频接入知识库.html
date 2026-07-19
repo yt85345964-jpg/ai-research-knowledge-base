@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微信视频接入知识库 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #639922; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>微信视频接入知识库</h1>
+            <div class="sub">AI技术 · 活跃</div>
+        </div>
+        <div class="content"><h1>微信视频接入知识库</h1>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：微信群 / 视频号里看到值得留存的视频，只需「在微信里点开看一眼」，视频即自动落盘到知识库、自动 ASR 转录、自动生成素材笔记，省去手动下载 + 上传。</blockquote>
+<h2>为什么重要</h2>
+<p>视频是高质量 AI 资讯的重要载体（技术拆解、产品发布、访谈复盘），但微信的视频散落在群聊 / 视频号，传统方式需手动下载再上传到知识库，链路长、易遗漏。本方法把"查看即捕获"做成端到端管道，让视频内容像文章一样自动进入知识库摄入流水线。</p>
+<h2>关键机制</h2>
+<h3>机制概述</h3>
+<p><strong>端到端管道</strong></p>
+<pre><code>
+你在微信群 / 视频号里【查看或播放】想留存的视频
+   │  WeChat 自动经本地代理(127.0.0.1:2023)拉取视频
+   ▼
+wx_video_download 拦截视频 URL，用 Gopeed 下载到（已配置）：
+    E:/AI-团队知识库/原始资料/待处理/&lt;视频&gt;.mp4
+   ▼
+watch_inbox.py 检测到新视频（写入稳定 + 可被读取，跳过 .part 临时文件）
+   ▼
+process_file.py --file 视频.mp4
+   ├─ asr_video.py：faster-whisper 音频转录（中文）
+   ├─ 生成素材笔记 → 知识库/素材笔记/待分类/&lt;标题&gt;.md
+   └─ 原始视频归档 → 原始资料/&lt;标题&gt;.mp4
+   ▼
+WorkBuddy 编译：素材笔记 → Wiki 页面（人工或自动化触发）
+</code></pre>
+<p><strong>两种接入方式对比</strong></p>
+<table>
+<tr>
+<td>方式</td>
+<td>覆盖来源</td>
+<td>是否需要转发</td>
+<td>合规</td>
+<td>推荐度</td>
+</tr>
+<tr>
+<td>**A. wx_video_download 代理捕获（本方案主推）**</td>
+<td>群视频 + 视频号 + 私聊</td>
+<td>不需要，点开看即可</td>
+<td>中（装本地代理+根证书，非微信官方）</td>
+<td>★★★ 覆盖群视频</td>
+</tr>
+<tr>
+<td>B. OpenClaw / 小龙虾 单聊转发</td>
+<td>仅单聊文件</td>
+<td>需要长按转发给 ClawBot</td>
+<td>高（微信官方 iLink）</td>
+<td>★★ 仅单聊</td>
+</tr>
+</table>
+<blockquote>关键事实：**微信官方 iLink / ClawBot 机器人不能进群监听，只能收单聊文件**，所以「机器人自动爬群视频」在官方框架下做不到。但 wx_video_download 走的是另一条路——**代理拦截微信自身的下载流量**，因此能抓到群视频和视频号，前提只是「你在微信里查看过它」。</blockquote>
+<p>#### 主方案：wx_video_download 按需捕获（端到端管道配置）</p>
+<p><strong>一次性配置（已为你改好）</strong></p>
+<p>编辑下载器配置 `D:\软件\微信视频下载\wx_video_download_v260614_windows_x86_64\config.yaml`：</p>
+<pre><code>
+download:
+  dir: "E:/AI-团队知识库/原始资料/待处理"   # 原值 "%UserDownloads%"，已改为直接落盘待处理
+</code></pre>
+<blockquote>已备份原配置为同目录 `config.yaml.bak`。改回 `%UserDownloads%` 即可恢复默认。</blockquote>
+<p><strong>日常使用（按需启动）</strong></p>
+<p>启动：在桌面为 `wx_capture.py start` 建一个快捷方式（目标填 `C:\Users\tian\.workbuddy\binaries\python\versions\3.13.12\python.exe "E:\AI-团队知识库\脚本\wx_capture.py" start`），双击即可——脚本自提权弹 UAC，点「是」开捕获窗口；想省去 UAC 弹窗可在快捷方式属性勾「以管理员运行」。</p>
+<p>捕获窗口打开后，去微信里查看/播放想留存的视频 —— 它们会自动出现在 `原始资料/待处理/`。</p>
+<p>捕获完毕，<strong>关闭方式：直接在那个启动窗口按 Ctrl+C</strong>。</p>
+<blockquote>⚠️ 关闭务必用窗口内的 **Ctrl+C**（脚本会先恢复系统代理、再杀掉下载器、干净退出，最稳妥）。不要对 AI 说「关闭代理」——WorkBuddy 对话触发弹不出可见窗口，无法让你 Ctrl+C（详见下方 WorkBuddy 触发限制）。仅当启动窗口异常退出、残留进程时，双击桌面「微信视频捕获-停止」快捷方式（`python wx_capture.py stop`）兜底。</blockquote>
+<p>查看状态（管理员 PowerShell）：`python 脚本/wx_capture.py status`</p>
+<p><strong>知识库侧：常驻 watch 脚本</strong></p>
+<p>脚本 `脚本/watch_inbox.py` 常驻运行，自动把待处理目录里的新视频送去处理。</p>
+<pre><code>
+# 常驻（推荐用 Windows 任务计划程序或常开终端）
+python 脚本/watch_inbox.py
+# 调试：只处理当前已有的视频后退出
+python 脚本/watch_inbox.py --once
+# 调 ASR 模型（默认 small，CPU int8；medium 更准但更慢）
+KB_ASR_MODEL=medium python 脚本/watch_inbox.py
+</code></pre>
+<p>防半文件保护：watch_inbox 要求文件「大小连续 5 秒不变」<strong>且</strong>「能被以读模式打开」（下载器仍独占写入时会跳过），避免 ffmpeg 读到不全的视频；`.part / .crdownload / .tmp / .download / .!qb` 等临时文件直接忽略。</p>
+<p>#### OpenClaw / 小龙虾 触发方案（计划，待你确认后执行）</p>
+<blockquote>推荐 UX：用聊天一句话「开始抓视频 / 停止抓视频」让小龙虾开/关捕获窗口。</blockquote>
+<p><strong>为什么这个方式更好（论证）</strong></p>
+<ul>
+<li>- **真正覆盖群视频**：小龙虾只负责"开/关捕获窗口"指令；视频由 wx_video_download 的代理在你**微信里查看**时抓取。</li>
+<li>- **比「转发给 ClawBot」方案更强**：旧方案受限于单聊、且常遇"视频号卡片只是链接"。触发方案完全不涉及"接收文件"，只跑一条命令。</li>
+<li>- **保留你要的"小龙虾感"**：仍用聊天驱动。</li>
+<li>- **合规**：触发是单聊指令，属 iLink 允许范围。</li>
+</ul>
+<p><strong>可行性前置条件（必须逐条满足）</strong></p>
+<ol>
+<li>**OpenClaw 拥有本地命令执行能力**：需 terminal / command 工具。</li>
+<li>**同机执行**：OpenClaw 执行环境须与本机微信同机。</li>
+<li>**Python 可用**：`python` 在 PATH，或指令写绝对路径。</li>
+<li>**管理员权限（关键）**：安装根证书需提权；`wx_capture.py start` 已内置 UAC 自提权。</li>
+</ol>
+<p><strong>给 OpenClaw 的 Agent 指令（可直接粘贴）</strong></p>
+<pre><code>
+当用户发来「开始抓视频 / 开启捕获 / 抓视频」等意图时：
+1. 仅当用户显式要求时才执行，不要主动触发。
+2. 运行命令：
+   python "E:/AI-团队知识库/脚本/wx_capture.py" start
+   （若 OpenClaw 环境里 python 不在 PATH，改用绝对路径
+    C:/Users/tian/.workbuddy/binaries/python/versions/3.13.12/python.exe）
+3. 只回复一句：「已开启微信视频捕获，去微信里查看想留存的视频；看完后请在那个启动窗口按 Ctrl+C 关闭（无需再对我说），代理会自动恢复。」
+4. 不要对视频做任何其他处理。
+
+关闭方式（无需对 AI 说话）：
+- 用户在启动窗口按 **Ctrl+C** 即可。
+- 不提供「关闭」对话指令；若启动窗口异常退出导致残留进程，再运行：
+  python "E:/AI-团队知识库/脚本/wx_capture.py" stop   （兜底清理）
+</code></pre>
+<p><strong>推荐配套</strong></p>
+<ul>
+<li>- `watch_inbox.py` 保持常驻（Windows 任务计划程序开机自启）。</li>
+<li>- 若不想常驻，就在 **Ctrl+C 关闭后**让助手跑一次 `watch_inbox.py --once`。</li>
+</ul>
+<p><strong>风险与边界</strong></p>
+<ul>
+<li>- **权限边界**：小龙虾获得本机命令执行权 = 等同于给了 AI shell 权限。仅单聊、仅你本人可发指令。</li>
+<li>- **忘记关**：代理与根证书持续生效。已用两道护栏消解：① 启动输出软提醒；② 默认 30 分钟看门狗前台超时自动恢复代理并退出（`start --watchdog 0` 可关）。</li>
+<li>- **自然语言歧义**：明确触发词，避免日常聊天误触发。</li>
+<li>- **证书/代理未恢复**：Ctrl+C / 看门狗超时自动恢复；若启动窗口异常崩溃残留进程，运行 `stop` 兜底。</li>
+</ul>
+<p><strong>执行前检查清单（待你确认执行时逐项核对）</strong></p>
+<ul>
+<li>- [ ] OpenClaw 已挂载 command/terminal 工具</li>
+<li>- [ ] OpenClaw 与本机微信同机执行</li>
+<li>- [ ] `python` 路径可达（或已改绝对路径）</li>
+<li>- [ ] OpenClaw 以管理员权限运行 或 `wx_capture.py start` 自提权时你在 UAC 弹窗点「是」</li>
+<li>- [ ] `watch_inbox.py` 常驻已配置（或接受 --once 冲刷）</li>
+</ul>
+<p><strong>远程控制可行性（计划，待你确认）</strong></p>
+<blockquote>结论：**「远程发指令开关」完全可行；但「人不在场时全自动抓到群视频」存在断点。**</blockquote>
+<ul>
+<li>- 哪部分可行（✅）：OpenClaw 本机常驻 + iLink 接入个人微信 → 外面用手机微信发「开始抓视频」，本机即时执行 `start`。前提：command 权限、同机、管理员、电脑开机不休眠、微信 PC 端登录。</li>
+<li>- 隐藏断点（⚠️）：`wx_video_download` 是**代理拦截**，依赖**本机微信真正加载/播放视频**时才发 HTTPS 请求被拦截。手机微信点开 → 流量走手机网络，不经本机代理 → 抓不到；iLink 进不了群监听 → 连"群里有新视频"都不知道。</li>
+<li>- 补全方案（让远程也能全自动）：</li>
+</ul>
+<table>
+<tr>
+<td>方案</td>
+<td>做法</td>
+<td>可行性</td>
+<td>代价</td>
+</tr>
+<tr>
+<td>**A. UI 自动化补点**（推荐补）</td>
+<td>小龙虾触发 `start` 后，再跑 pyautogui 脚本自动激活微信 PC 端 → 打开指定群 → 点播放</td>
+<td>可行（模拟鼠标，不逆向微信）</td>
+<td>需电脑不锁屏、微信前台；界面改版会脆</td>
+</tr>
+<tr>
+<td>**B. 视频号自动流**</td>
+<td>保持视频号 tab 打开，利用自动播放让流经内容被抓</td>
+<td>部分可行</td>
+<td>不可控、不针对群</td>
+</tr>
+<tr>
+<td>**C. 退一步半自动**</td>
+<td>远程只负责「开窗口预热」；真正抓取回电脑前看一眼</td>
+<td>100% 可行</td>
+<td>不是无人值守</td>
+</tr>
+</table>
+<blockquote>推荐组合：**2.3 指令 + 2.7.3-A 自动点开脚本**。注意 A 只能抓「事先指定群」里**已存在**的视频。</blockquote>
+<p><strong>远程场景额外检查清单</strong></p>
+<ul>
+<li>- [ ] 电脑「永不休眠」，微信 PC 端保持登录</li>
+<li>- [ ] OpenClaw 常驻（开机自启）</li>
+<li>- [ ] 若用方案 A：微信 PC 端登录态且不锁屏；自动点开脚本已配置目标群</li>
+<li>- [ ] 网络长期可用（电脑端）</li>
+</ul>
+<p><strong>「转发给龙虾 → 触发代理」设想澄清（计划）</strong></p>
+<blockquote>用户设想：转发视频给小龙虾 → 自动开代理 → 下载 → 关代理。探查后结论：**这条链技术上拼不通**，因为「转发」和「代理拦截」是两套互斥路径。</blockquote>
+<ul>
+<li>- 探查到的事实（来自 `wx_video_download --help`）：工具本意是启动后对网络请求代理，在视频号详情页注入下载按钮——触发点是**微信内 UI**；存在子命令 `download --url <URL> [--key <密钥>] [--filename <名>]`：理论上可不开代理精准下载，但视频号加密需 `--key`，直链+key 只能从微信内部获取。</li>
+<li>- 核心矛盾：</li>
+<li>- 情况 A｜转发的普通视频文件：iLink 单聊能收到 → OpenClaw 直接写盘，wx_video_download 多余。最干净。</li>
+<li>- 情况 B｜转发的视频号卡片：开代理后真正能下载的前提是本机微信重新加载该视频。无法精准只抓转发那条。</li>
+<li>- 结论：`download --url` 虽支持精准下载，但直链+key 来源（微信内部）缺一段桥。</li>
+<li>- 给用户的修正建议：</li>
+</ul>
+<table>
+<tr>
+<td>视频类型</td>
+<td>推荐方式</td>
+<td>是否用代理</td>
+</tr>
+<tr>
+<td>群直接发的视频文件</td>
+<td>**转发给小龙虾 → OpenClaw 直接收文件写盘** → watch_inbox 处理</td>
+<td>❌ 不用</td>
+</tr>
+<tr>
+<td>视频号卡片</td>
+<td>**在微信里打开看** → 代理拦截抓</td>
+<td>✅ 用，看完 Ctrl+C 关闭</td>
+</tr>
+</table>
+<p><strong>「对话开关 + 自动关代理 + 进展汇报」方案评估（计划）</strong></p>
+<blockquote>用户最终方案（2026-07-11）：对话「下载视频」→ 开代理；用户手动看视频；下载完自动关代理；小龙虾汇报；路径已在库内。</blockquote>
+<ul>
+<li>- 总体结论：**可行，且比 2.3 更闭环**——顺带解决「忘记 stop」风险。三项要件：① 对话 start ✅；② 用户手动看 ✅；③ 下载完自动 stop ⚠️ 需补 watcher；④ 汇报 ✅；⑤ 路径在库内 ✅。</li>
+<li>- 核心难点：如何判定「下载完成」——需自写 watcher（基于文件系统 watch 最稳，复用 watch_inbox 稳定判定）。状态机：IDLE → 待处理出现新 mp4 → DOWNLOADING → 稳定 → SILENT（静默 N=30s）→ 期满 stop。</li>
+<li>- 实现封装（计划，不执行）：新增 `wx_capture.py capture-session` 子命令（前台阻塞，下载完自动 stop 并返回）。</li>
+<li>- 仍需注意：捕获范围——代理开着会抓"你看过的所有微信视频"；前置闸门同 2.2；本机微信需加载。</li>
+<li>- 对比旧方案：</li>
+</ul>
+<table>
+<tr>
+<td>维度</td>
+<td>对话开 + Ctrl+C 关</td>
+<td>对话开 + 自动关</td>
+</tr>
+<tr>
+<td>启动代理</td>
+<td>对话触发</td>
+<td>对话触发</td>
+</tr>
+<tr>
+<td>关闭代理</td>
+<td>**窗口内 Ctrl+C**</td>
+<td>**下载完自动关**</td>
+</tr>
+<tr>
+<td>忘记关风险</td>
+<td>低（看门狗兜底）</td>
+<td>消除</td>
+</tr>
+<tr>
+<td>多视频灵活性</td>
+<td>**高**</td>
+<td>需静默期兜底</td>
+</tr>
+<tr>
+<td>代理残留风险</td>
+<td>**低**</td>
+<td>中</td>
+</tr>
+</table>
+<p><strong>变体：对话开、手动 Ctrl+C 关（用户 2026-07-13 最终决定）</strong></p>
+<blockquote>**启动仍用对话指令**（`start` 自动提权 + 前台守护）；**关闭不再用对话指令**，改为启动窗口直接按 **Ctrl+C**。</blockquote>
+<ul>
+<li>- 本质：`wx_capture.py start` 现在是**前台守护**——脚本前台运行、把下载器当子进程拉起并捕获 Ctrl+C，先恢复系统代理 → 再杀下载器 → 干净退出。</li>
+<li>- 优劣（相对自动关）：工程最简单、关闭最稳、不会残留代理；多视频最灵活。</li>
+<li>- 结论与建议：采用 2.10 作为当前落地形态；"忘记关"已被两道护栏消解（软提醒 + 30 分钟看门狗）；若日后想要"下完自动关"，再升级到 2.9。</li>
+<li>- 对话/AI 触发指令（可直接粘贴）：</li>
+<pre><code>
+【开】用户说「下载视频 / 抓视频 / 开启捕获」：
+  运行：C:/Users/tian/.workbuddy/binaries/python/versions/3.13.12/python.exe "E:/AI-团队知识库/脚本/wx_capture.py" start
+  回复：「已开启微信视频捕获，去微信里查看想留存的视频；
+        看完后请在那个启动窗口按 Ctrl+C 关闭（无需再对我说），代理会自动恢复。
+        （已自动挂 30 分钟看门狗，超时未关会自动停止代理）」
+【关】无需对话指令：用户在启动窗口按 Ctrl+C 即可。
+  仅在启动窗口异常崩溃、残留进程时运行兜底：
+  C:/Users/tian/.workbuddy/binaries/python/versions/3.13.12/python.exe "E:/AI-团队知识库/脚本/wx_capture.py" stop
+</code></pre>
+<blockquote>注意：本机 `python` 是 Windows Store 桩，指令里必须用上面绝对路径，否则 `start` 会静默失败。</blockquote>
+</ul>
+<p>#### 落地执行清单（OpenClaw 路径，待你确认后逐步执行）</p>
+<blockquote>原则：先自检前置闸门 → 装 OpenClaw → 装微信插件 → 写 Agent 指令 → 配常驻 → 端到端验证。</blockquote>
+<p><strong>前置闸门自检</strong></p>
+<table>
+<tr>
+<td>#</td>
+<td>检查项</td>
+<td>自检方法</td>
+<td>不满足后果</td>
+</tr>
+<tr>
+<td>G1</td>
+<td>Node.js ≥ 22</td>
+<td>`node --version`</td>
+<td>OpenClaw 装不上</td>
+</tr>
+<tr>
+<td>G2</td>
+<td>iOS 微信且含 ClawBot 插件</td>
+<td>微信「我→设置→插件」</td>
+<td>无 ClawBot 入口</td>
+</tr>
+<tr>
+<td>G3</td>
+<td>OpenClaw 有本地命令执行权</td>
+<td>onboard 工具策略选 `coding`</td>
+<td>小龙虾跑不了 python</td>
+</tr>
+<tr>
+<td>G4</td>
+<td>管理员权限运行 OpenClaw</td>
+<td>`start` 需改系统代理+装根证书</td>
+<td>卡在证书安装</td>
+</tr>
+</table>
+<p><strong>步骤一 · 安装 OpenClaw</strong></p>
+<pre><code>
+npm install -g openclaw@latest
+openclaw --version
+</code></pre>
+<p>国内慢先换源：`npm config set registry https://registry.npmmirror.com`</p>
+<p><strong>步骤二 · 初始化网关与 Agent</strong></p>
+<pre><code>
+openclaw onboard
+</code></pre>
+<ul>
+<li>- 模型：通义千问 / DeepSeek（有免费额度）</li>
+<li>- **工具策略务必选 `coding`**</li>
+<li>- 网关 daemon：安装为 Windows 计划任务（开机自启）</li>
+</ul>
+<p><strong>步骤三 · 安装微信 ClawBot 插件并扫码</strong></p>
+<pre><code>
+npx -y @tencent-weixin/openclaw-weixin-cli@latest install
+openclaw channels login --channel openclaw-weixin
+openclaw gateway restart
+</code></pre>
+<p>手机微信扫码 → 联系人出现「微信 ClawBot」→ 发「你好」测试。</p>
+<p><strong>步骤四 · 写入「开/关代理」Agent 指令</strong>：在 OpenClaw Agent system prompt 处粘贴（见 2.3 指令，路径指向 `wx_capture.py start/stop`）。</p>
+<p><strong>步骤五 · 常驻 watch_inbox</strong>：把 `脚本/watch_inbox.py` 配成 Windows 任务计划程序开机自启。</p>
+<p><strong>步骤六 · 端到端验证</strong></p>
+<ol>
+<li>微信给 ClawBot 发「下载视频」→ 应收到「已开启…」</li>
+<li>PC 微信打开视频号/群视频看几秒 → 文件落到 `原始资料/待处理/`</li>
+<li>启动窗口按 **Ctrl+C** → 系统代理被关闭</li>
+<li>观察 `watch_inbox` 是否自动生成素材笔记</li>
+</ol>
+<p>#### 替代方案：直接用 WorkBuddy 助理触发（无需 OpenClaw）</p>
+<blockquote>结论：可以，且比 OpenClaw 路径更简单——前提是你接受触发入口在 WorkBuddy 而非微信。</blockquote>
+<ul>
+<li>- 概念澄清：「小龙虾」= OpenClaw（开源 AI Agent 框架）；WorkBuddy = 当前这个 AI 助理（与 OpenClaw 是两个不同东西）。</li>
+<li>- WorkBuddy 直接做：理论可行，实测受沙箱限制。⚠️ **实测限制（2026-07-13 验证）**：WorkBuddy 的 Bash 工具运行在**受限/隔离沙箱**中，弹不出任何 GUI 子进程（UAC 提权窗、独立控制台窗口均被吞）。因此「对话触发 start → 弹窗口 → 你按 Ctrl+C 关闭」在当前环境物理上不成立。</li>
+<li>- 用法（与 2.10 指令等价，仅入口不同）：在 WorkBuddy 对话里说「开始抓视频」→ 我执行 `wx_capture.py start` → 你去微信看视频 → 文件落盘。关闭无需对我说，在启动窗口按 **Ctrl+C**。</li>
+<li>- 与 OpenClaw 方案对比：</li>
+</ul>
+<table>
+<tr>
+<td>维度</td>
+<td>WorkBuddy 直接触发</td>
+<td>OpenClaw + 微信</td>
+</tr>
+<tr>
+<td>安装成本</td>
+<td>**零**</td>
+<td>装 Node/npm/OpenClaw/插件/扫码</td>
+</tr>
+<tr>
+<td>触发入口</td>
+<td>WorkBuddy 对话</td>
+<td>微信对话（手机/PC）</td>
+</tr>
+<tr>
+<td>远程微信触发</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>本机命令执行</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>管理员权限</td>
+<td>✅ 脚本自动 UAC 提权</td>
+<td>⚠️ 需管理员 PowerShell</td>
+</tr>
+<tr>
+<td>出错面</td>
+<td>**小**</td>
+<td>大</td>
+</tr>
+</table>
+<ul>
+<li>- 唯一代价与前提：代价——失去「在微信里远程说一句话触发」的能力；前提 G4——`start` 会改系统代理+安装根证书，需管理员，脚本已内置 UAC 自提权；关闭方式——启动窗口 Ctrl+C，仅异常残留时 `stop` 兜底。</li>
+<li>- 全局热键方案（AutoHotkey）：按 **Ctrl+Alt+V** 切换开/关代理（避开 F9 等冲突键）。`Ctrl+Alt+Q` 退出热键脚本。</li>
+<li>- 最终落地方案（2026-07-13 实测后定稿）：</li>
+<li>- 启动：桌面快捷方式指向 `python wx_capture.py start`，双击 → 自提权弹 UAC → 捕获窗口 → 去微信看视频 → 落盘。</li>
+<li>- 关闭：启动窗口按 **Ctrl+C** → 恢复代理、结束下载器、清 pid。</li>
+<li>- 兜底：窗口崩溃残留进程，双击「微信视频捕获-停止」快捷方式（`stop`）。</li>
+<li>- 转录：`watch_inbox.py` 常驻，落盘视频自动 ASR，无需 WorkBuddy 介入。</li>
+<blockquote>WorkBuddy 在本方案里**只负责后台自动转录**（`watch_inbox` 常驻），不再承担「触发开/关代理」职责。</blockquote>
+</ul>
+<p>#### 注意事项</p>
+<ul>
+<li>- **敏感副作用（启动时）**：设置系统代理(127.0.0.1:2023) + 安装根证书。关闭时优先恢复系统代理。</li>
+<li>- **捕获范围**：抓你查看过的**所有**微信视频（群、私聊、视频号）。</li>
+<li>- **必须先查看/播放**：只看缩略图不会触发。</li>
+<li>- **视频号同样适用**。</li>
+<li>- **隐私**：群视频可能含他人人脸/对话，入库前请确认有权留存。</li>
+<li>- **ASR 质量**：自动转录可能误识别，素材笔记状态 `needs_review`，进 Wiki 前建议人工复核。</li>
+</ul>
+<p>#### 故障排查</p>
+<table>
+<tr>
+<td>现象</td>
+<td>可能原因</td>
+<td>处理</td>
+</tr>
+<tr>
+<td>待处理里没出现视频</td>
+<td>微信没真正播放 / 工具未运行</td>
+<td>先 `start`，再在微信播放；`status` 确认</td>
+</tr>
+<tr>
+<td>系统上不了网 / 变慢</td>
+<td>**代理残留**（极少见）</td>
+<td>`stop` 兜底；`taskkill /F /IM wx_video_download.exe`；重启 WorkBuddy/微信</td>
+</tr>
+<tr>
+<td>watch 未触发</td>
+<td>脚本未运行 / 路径不对</td>
+<td>`watch_inbox.py --once` 验证</td>
+</tr>
+<tr>
+<td>ASR 失败</td>
+<td>无音频 / 模型未下载</td>
+<td>看素材笔记占位说明，手动补摘要</td>
+</tr>
+<tr>
+<td>文件进了 失败文件/</td>
+<td>格式不支持或处理异常</td>
+<td>看日志，手动处理</td>
+</tr>
+</table>
+<h3>关键公式 / 伪代码</h3>
+<p><strong>watch_inbox 稳定性判定（防半文件）</strong>：文件需满足「大小连续 5 秒不变」<strong>且</strong>「能被以读模式打开」，且不在临时文件后缀（`.part / .crdownload / .tmp / .download / .!qb`）中，才送入处理。</p>
+<p><strong>自动关代理状态机（计划，见 2.9）</strong>：</p>
+<pre><code>
+IDLE → 待处理出现新 mp4 → DOWNLOADING → 稳定 → SILENT（静默 N=30s）→ 期满 stop
+</code></pre>
+<h2>适用场景</h2>
+<ul>
+<li>- 微信群 / 视频号里出现值得留存的视频，希望零操作自动入库</li>
+<li>- 已有 `watch_inbox.py` 常驻的本地知识库摄入流水线</li>
+<li>- 不依赖云端、全部在本机完成的隐私可控方案</li>
+</ul>
+<h2>代表实现与关联论文</h2>
+<ul>
+<li>- 代表实现：wx_video_download（本地代理捕获微信视频流量，github 工具，需根证书）、watch_inbox.py（常驻监控 `原始资料/待处理/`，稳定后触发处理）、asr_video.py（faster-whisper 音频转录，默认 small / CPU int8；medium 更准更慢，经 `KB_ASR_MODEL=medium` 切换）</li>
+<li>- 关联论文：无（工程方案，非学术方法；关联论文字段为空）</li>
+</ul>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="OpenClaw.html">OpenClaw</a> — OpenClaw / 小龙虾 触发方案的相关框架</li>
+<li>- <a href="ima-知识库.html">ima 知识库</a> — 知识库摄入目标</li>
+<li>- <a href="Obsidian+AI工作台.html">Obsidian+AI工作台</a> — 相关工作台</li>
+<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 本方案里负责后台自动转录（`watch_inbox` 常驻）</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="OpenClaw.html" class="link-btn">OpenClaw</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a><a href="Obsidian+AI工作台.html" class="link-btn">Obsidian+AI工作台</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#639922">AI技术</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">微信视频接入知识库.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-11</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-11</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-向量检索.html" class="tag">向量检索</a> <a href="tag-方法论.html" class="tag">方法论</a> <a href="tag-实践案例.html" class="tag">实践案例</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (1)</h3>
+            <div><a href="微信视频号视频下载工具.html" class="backlink-item">微信视频号视频下载工具</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (1)</h3>
+            <div><a href="微信视频号视频下载工具.html" class="backlink-item">微信视频号视频下载工具</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

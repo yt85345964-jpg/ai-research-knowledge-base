@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>OpenClaw</h1>
+            <div class="sub">AI产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>OpenClaw</h1>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：OpenClaw 是一个开源(MIT)、自托管的「个人 AI 助手」框架——它本身不是大模型，而是模型无关的编排壳，通过 Markdown 配置文件定义行为，支持 40+ 消息渠道接入，内置技能系统、心跳调度和 MCP 集成。</blockquote>
+<h2>核心功能</h2>
+<h3>核心组件（五件套）</h3>
+<table>
+<tr>
+<td>组件</td>
+<td>作用</td>
+<td>关键文件/机制</td>
+</tr>
+<tr>
+<td>Gateway（网关）</td>
+<td>常驻进程，统一控制平面</td>
+<td>JSON-RPC/WebSocket，所有渠道/会话/配置统一通信</td>
+</tr>
+<tr>
+<td>Brain（推理引擎）</td>
+<td>底层大模型路由</td>
+<td>模型无关，可接 Claude/GPT/Gemini/DeepSeek/Kimi/GLM/Ollama</td>
+</tr>
+<tr>
+<td>Hands（执行环境）</td>
+<td>Shell/浏览器/文件/智能家居操作</td>
+<td>由 Skills 与内置工具提供</td>
+</tr>
+<tr>
+<td>Memory（记忆系统）</td>
+<td>零运维本地持久化记忆</td>
+<td>Markdown 文件 + SQLite FTS5，无云依赖</td>
+</tr>
+<tr>
+<td>Heartbeat（心跳）</td>
+<td>默认 30 分钟自主循环</td>
+<td>HEARTBEAT.md 定义，是「主动而非被动」的关键机制</td>
+</tr>
+</table>
+<h3>关键能力</h3>
+<ul>
+<li>- **全渠道接入**：飞书、企业微信、Slack、Telegram、Discord、Web UI、CLI 等 40+ 渠道</li>
+<li>- **技能系统(Skills)**：SKILL.md 格式，渐进式披露，模型按需翻阅而非一次性塞入上下文；三种来源：人工编写、ClawHub(社区市场)、智能体自主生成</li>
+<li>- **心跳调度(Heartbeat)**：周期性自主循环，支撑晨报、巡检等「主动性」任务</li>
+<li>- **MCP 集成(MCPorter)**：通过标准协议接入外部工具和数据源</li>
+<li>- **ACP 桥接**：通过 Agent Client Protocol 接入外部编程 Harness（Claude Code、Codex CLI 等）</li>
+</ul>
+<h3>与 Harness 的关系</h3>
+<p>OpenClaw 内置轻量 Harness（代号 Pi），同时通过 ACP 把重量级编程 Harness 接入为后台可恢复会话：</p>
+<pre><code>
+编排层(OpenClaw) ←ACP→ 执行层(Claude Code/Codex CLI)
+  负责：何时做、给谁做     负责：具体怎么写代码
+</code></pre>
+<p>这是 OpenClaw 生态已验证的成熟模式（有 openclaw-code-agent、claw-orchestrator 等社区插件）。详见 <a href="Harness(智能体执行壳).html">Harness(智能体执行壳)</a>。</p>
+<h3>设计原则</h3>
+<p>OpenClaw+Harness 架构方案的五条设计原则，对任何 AI Agent 系统都有参考价值：</p>
+<ol>
+<li>**本地优先/数据主权** — 核心数据本地 Markdown+SQLite，云端以可插拔增强层接入</li>
+<li>**渐进式自主权** — 从「只建议不执行」起步，积累验证后才放开</li>
+<li>**人在回路** — 高风险动作设强制审批点</li>
+<li>**可审计可回滚** — 纯文本配置天然适合 Git 版本化</li>
+<li>**关注点分离** — 编排/执行/工具/存储各自独立可替换</li>
+</ol>
+<blockquote>综合判断：这些原则与本知识库 AGENTS.md 的设计理念高度一致——本地 Markdown 优先、知识可追溯、人审核关键变更。</blockquote>
+<h3>实施路线</h3>
+<table>
+<tr>
+<td>Phase</td>
+<td>内容</td>
+<td>时间参考</td>
+</tr>
+<tr>
+<td>0</td>
+<td>基础设施(Gateway+渠道+心跳)</td>
+<td>1-2 周</td>
+</tr>
+<tr>
+<td>1</td>
+<td>记忆+日常管理</td>
+<td>2-4 周</td>
+</tr>
+<tr>
+<td>2</td>
+<td>接入编程 Harness(ACP)</td>
+<td>3-6 周</td>
+</tr>
+<tr>
+<td>3</td>
+<td>MCP 生态接入</td>
+<td>4-8 周</td>
+</tr>
+<tr>
+<td>4</td>
+<td>自进化闭环上线(先全人工复核)</td>
+<td>持续</td>
+</tr>
+<tr>
+<td>5</td>
+<td>安全加固与观测(贯穿全程)</td>
+<td>持续</td>
+</tr>
+</table>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>需要多渠道统一入口的个人/小团队 AI 助手</td>
+<td>只需单一编程场景（直接用 Claude Code 更简单）</td>
+</tr>
+<tr>
+<td>需要主动性任务（晨报、巡检、定期研究）</td>
+<td>对安全合规要求极高的企业级部署</td>
+</tr>
+<tr>
+<td>想搭建「编排+执行」分层架构</td>
+<td>不愿投入安全加固成本</td>
+</tr>
+</table>
+<h2>竞品对比</h2>
+<table>
+<tr>
+<td>维度</td>
+<td>OpenClaw</td>
+<td>[[WorkBuddy]]</td>
+<td>[[Codex]]</td>
+</tr>
+<tr>
+<td>定位</td>
+<td>通用编排壳（全渠道）</td>
+<td>桌面 AI Agent 平台</td>
+<td>终端级 AI 编程 Agent</td>
+</tr>
+<tr>
+<td>开源</td>
+<td>✅ MIT</td>
+<td>❌</td>
+<td>部分</td>
+</tr>
+<tr>
+<td>渠道数</td>
+<td>40+</td>
+<td>桌面端</td>
+<td>CLI</td>
+</tr>
+<tr>
+<td>模型支持</td>
+<td>模型无关</td>
+<td>模型无关</td>
+<td>OpenAI 为主</td>
+</tr>
+<tr>
+<td>技能生态</td>
+<td>ClawHub（社区市场）</td>
+<td>专家团</td>
+<td>无</td>
+</tr>
+<tr>
+<td>记忆系统</td>
+<td>Markdown+SQLite</td>
+<td>云端+本地</td>
+<td>无持久记忆</td>
+</tr>
+</table>
+<h3>⚠️ 安全风险（重要）</h3>
+<blockquote>单一来源观点：以下安全事件均来自多家安全机构交叉验证，但风险严重程度需要结合实际部署环境评估。</blockquote>
+<table>
+<tr>
+<td>事件</td>
+<td>详情</td>
+<td>来源</td>
+</tr>
+<tr>
+<td>CVE-2026-25253 (CVSS 8.8)</td>
+<td>跨权限边界资源传递不当</td>
+<td>安全研究团队 + 官方修复</td>
+</tr>
+<tr>
+<td>ClawHavoc 供应链投毒</td>
+<td>300+ 恶意技能包，生态约 10-20% 恶意</td>
+<td>Koi Security、Bitdefender 等</td>
+</tr>
+<tr>
+<td>ToxicSkills 审计</td>
+<td>约 36% 提示注入特征</td>
+<td>Snyk 专项报告</td>
+</tr>
+<tr>
+<td>默认配置暴露公网</td>
+<td>约 13.5 万暴露实例</td>
+<td>安全评级机构扫描</td>
+</tr>
+<tr>
+<td>恶意软件捆绑</td>
+<td>部分捆绑 macOS infostealer</td>
+<td>安全厂商威胁情报</td>
+</tr>
+</table>
+<p><strong>核心教训</strong>：Agent Skill 运行时拥有宿主完全权限，不像传统软件包有沙箱隔离。安装恶意技能 ≈ 把对应权限交给未知第三方。</p>
+<p><strong>致命三角</strong>(Simon Willison)：访问私有数据 + 处理不可信内容 + 具备对外通信能力 → 风险指数级放大。</p>
+<p><strong>加固建议（10 条）</strong>：</p>
+<ol>
+<li>网络隔离：Gateway 仅监听本地回环/内网</li>
+<li>账号隔离：系统账号与个人主账号分离</li>
+<li>环境隔离：容器/受限用户权限</li>
+<li>技能供应链管控：安装前扫描+信誉检查</li>
+<li>自生成技能同等审查</li>
+<li>记忆写入治理：高风险规则不自动生效</li>
+<li>持续完整性监控：校验和+漂移检测</li>
+<li>审计可回滚：所有变更纳入 Git</li>
+<li>高风险动作强制人工审批</li>
+<li>及时更新：关注安全公告，第一时间升级</li>
+</ol>
+<h2>团队评估</h2>
+<blockquote>OpenClaw+Harness 架构方案的设计原则（本地优先、渐进式自主权、人在回路、可审计可回滚、关注点分离）与本知识库 AGENTS.md 高度一致。其「编排层 ←ACP→ 执行层」模式已验证，并需注意其安全风险（供应链投毒、默认配置暴露公网等），部署时应落实 10 条加固建议。</blockquote>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="Harness(智能体执行壳).html">Harness(智能体执行壳)</a> — 执行壳概念</li>
+<li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — OpenClaw+Harness 是编排-执行模式的实例</li>
+<li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — OpenClaw Skills(SKILL.md)是提示词设计的产品化</li>
+<li>- <a href="Codex.html">Codex</a> — 可通过 ACP 接入的编程 Harness</li>
+<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 竞品（桌面 Agent 平台）</li>
+<li>- <a href="MCP.html">MCP</a> — 工具接入协议</li>
+<li>- <a href="AI原生组织.html">AI原生组织</a> — Agent 自进化与组织变革</li>
+<li>- <a href="Howie-Liu.html">Howie Liu</a> — 在 AI Engineer World's Fair 2026 提出「claw」级 Agent 时直接借用 OpenClaw 之名</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Harness(智能体执行壳).html" class="link-btn">Harness(智能体执行壳)</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Codex.html" class="link-btn">Codex</a><a href="Harness(智能体执行壳).html" class="link-btn">Harness(智能体执行壳)</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="Codex.html" class="link-btn">Codex</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="MCP.html" class="link-btn">MCP</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="Howie-Liu.html" class="link-btn">Howie Liu</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">OpenClaw.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-中">中</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-06</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-06</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-研究公共AI.html" class="tag">研究公共AI</a> <a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-工具评测.html" class="tag">工具评测</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (7)</h3>
+            <div><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="Howie-Liu.html" class="backlink-item">Howie Liu</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="MCP.html" class="backlink-item">MCP</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (7)</h3>
+            <div><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="Howie-Liu.html" class="backlink-item">Howie Liu</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="MCP.html" class="backlink-item">MCP</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

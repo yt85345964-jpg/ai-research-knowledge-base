@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pete Koomen - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #534AB7; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>Pete Koomen</h1>
+            <div class="sub">AI人物 · 活跃</div>
+        </div>
+        <div class="content"><h1>Pete Koomen</h1>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：Y Combinator 合伙人，A/B 测试平台 Optimizely 联合创始人，YC 内部 AI 原生转型的「总架构师」——主导搭建了 Agent harness、工具注册表与技能自进化系统。</blockquote>
+<h2>主要贡献</h2>
+<ul>
+<li>- YC 现任 General Partner（Group Partner）。</li>
+<li>- 联合创立 Optimizely（YC W10），帮助企业网站与 App 做 A/B 实验，从零做到 1 亿美元+ ARR，2020 年被收购；合著《A/B Testing: The Most Powerful Way to Turn Clicks into Customers》。</li>
+<li>- 伊利诺伊大学厄巴纳-香槟分校（UIUC）计算机科学硕士。</li>
+<li>- 在 YC 全面负责内部 AI 基础设施建设，被访谈称为这次内部 AI 转型的「总架构师」。</li>
+<li>- 约一年前（2025 年左右）主导在 YC 内部搭建 Agent harness，起点是解决财务团队低效的传统软件开发流程。</li>
+<li>- 提出并落地「基础设施三件套」：① 共享上下文层（所有业务数据集中于单一 Postgres + 统一 Schema）；② 内部工具注册表（从 20 个工具起步，现已超 350 个，内部 Agent 与个人 Claude Code 均可调用）；③ 共享技能系统（技能 = 工具的抽象层，含「夜间自我改进循环 / Dream Cycle」）。</li>
+<li>- 提出「无马马车」隐喻：正确的 AI 原生方向是「Agent 包裹确定性工具」，而非在旧软件里塞一小块 AI。</li>
+<li>- 核心论断：「组织超级智能」来自把合伙人散落在对话中的隐性经验沉淀为可迭代的共享技能——改进后的技能可超越任何单个合伙人。</li>
+</ul>
+<h2>代表观点</h2>
+<ul>
+<li>- 「把所有上下文放到一个地方，加上一点 schema 说明，Agent 就能回答关于我们业务的任何问题。」</li>
+<li>- 「降低查询成本不是问题变少了，是人们敢问更多了。」（杰文斯悖论在 AI 查询上的体现）</li>
+<li>- 「不是替代人，是让每个人都更强。」</li>
+<li>- 「最佳 AI 软件往往是最小的，只在模型能力之上加最少量的预写代码。」</li>
+</ul>
+<h2>争议与待验证</h2>
+<p>（暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</p>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="Garry-Tan.html">Garry Tan</a> — YC CEO，本次 AI 转型对话的主持人</li>
+<li>- <a href="AI原生组织.html">AI原生组织</a> — Koomen 的实践是本库该主题页的核心案例</li>
+<li>- <a href="AI-API网关.html">AI API网关</a> — YC 工具注册表本质上是企业内部 API 网关</li>
+<li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — Dream Cycle = 多 Agent 协作 + 自我改进循环</li>
+<li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — YC 技能系统是提示词设计模式的企业级应用</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Garry-Tan.html" class="link-btn">Garry Tan</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#534AB7">AI人物</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">Pete-Koomen.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-17</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-17</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-行业观点.html" class="tag">行业观点</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (2)</h3>
+            <div><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (2)</h3>
+            <div><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

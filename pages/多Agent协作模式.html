@@ -66,30 +66,45 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>多Agent协作模式</h1>
-            <div class="sub">concept · AI 技术 · 活跃</div>
+            <div class="sub">AI技术 · 活跃</div>
         </div>
         <div class="content"><h1>多Agent协作模式</h1>
-<h2>一句话定义</h2>
-<p>多个 AI Agent 通过明确的协作规则和通信机制共同完成复杂任务的设计范式。</p>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：多个 AI Agent 通过明确的协作规则和通信机制共同完成复杂任务的设计范式。</blockquote>
 <h2>为什么重要</h2>
 <p>单个 Agent 受限于能力边界和上下文窗口，复杂任务往往需要多个专业 Agent 协同。理解不同的协作模式，是设计和评估 Agent 系统的关键。</p>
-<h2>核心模式</h2>
-<h3>1. 调度-执行（编排者模式）</h3>
-<p>WorkBuddy 专家团采用的模式，也是最基础的多Agent结构。</p>
-<p><strong>工作流程</strong>：</p>
+<blockquote>对我们团队的启示：这个模式可以直接指导我们设计 AI 知识库的编译流程。WorkBuddy 作为"主理人"调度处理脚本、格式转换、Wiki 编译等"子Agent"，通过 AGENTS.md 固化的就是协作规则。</blockquote>
+<h2>关键机制</h2>
+<h3>机制概述</h3>
+<p><strong>1. 调度-执行（编排者模式）</strong>：WorkBuddy 专家团采用的模式，也是最基础的多Agent结构。</p>
 <pre><code>
 主 Agent 分析用户请求 → 拆解为子任务
     → 为每个子任务生成目标、上下文和输出要求
     → 子 Agent 在独立上下文中执行
     → 主 Agent 收集中转结果 → 冲突处理、信息合并 → 最终回复
 </code></pre>
-<p><strong>关键规则</strong>：</p>
+<p>关键规则：</p>
 <ul>
 <li>- 主理人只管调度，不代写专业产出</li>
 <li>- 成员之间不直接通信，所有信息流经主理人中转</li>
 <li>- 成员专业产出以成员结论为准</li>
 </ul>
-<h3>2. 其他协作范式</h3>
+<p><strong>2. 编排-执行（Harness 模式）</strong>：OpenClaw + Harness 架构采用的模式——编排层与执行层通过 ACP(Agent Client Protocol) 桥接。</p>
+<pre><code>
+编排层(OpenClaw Gateway) 分析任务 → 路由决策
+    → 简单问答: Pi(内置 Harness) 直接处理
+    → 代码任务: 通过 ACP 拉起 Claude Code 在独立 worktree 中工作
+    → 研究任务: Research 子会话 + web search
+    → 执行结果回传编排层 → 按审批策略(自动/复核/人工)提交 → 状态同步
+</code></pre>
+<p>关键特点：</p>
+<ul>
+<li>- 编排层管「何时做、给谁做」，执行层管「具体怎么写代码」</li>
+<li>- 会话可恢复（重启不丢进度）、独立 worktree 隔离（多任务并行不冲突）</li>
+<li>- 分级审批：直接执行 / 委托编排层复核 / 人工审批 / 自动开 PR</li>
+<blockquote>来源：素材笔记/AI技术/OpenClaw-Harness智能工作管理架构方案</blockquote>
+</ul>
+<p><strong>3. 其他协作范式</strong></p>
 <table>
 <tr>
 <td>模式</td>
@@ -112,77 +127,65 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>需要实时状态同步</td>
 </tr>
 </table>
-<h2>关键设计要点</h2>
-<h3>任务分配预检</h3>
-<p>在派发任务前先做能力匹配，防止误派：</p>
-<ol>
-<li>解析用户意图</li>
-<li>对照能力速查表</li>
-<li>能力匹配 → 派发；不匹配 → 告知限制</li>
-</ol>
-<h3>消息中转的必要性</h3>
+<p><strong>关键设计要点</strong></p>
 <ul>
-<li>- 避免 Agent 之间互相调用造成的上下文污染</li>
-<li>- 所有通信有记录，所有决策有责任人</li>
-<li>- 出错时可追溯</li>
+<li>- **任务分配预检**：在派发任务前先做能力匹配，防止误派。步骤：解析用户意图 → 对照能力速查表 → 能力匹配则派发，不匹配则告知限制。</li>
+<li>- **消息中转的必要性**：避免 Agent 之间互相调用造成的上下文污染；所有通信有记录，所有决策有责任人；出错时可追溯。</li>
+<li>- **异常处理**：超时机制（如超过10分钟未回传 → 通报用户）；失败重试上限（如失败超2次 → 终止并说明原因）；强制性交付检查清单。</li>
+<li>- **预设 Workflow**：将常见协作场景固化为 Workflow，每个包含：触发条件、执行阶段、关键决策点、产物交付规范。</li>
 </ul>
-<h3>异常处理</h3>
+<h3>关键公式 / 伪代码</h3>
+<p>（见上方「调度-执行」「编排-执行」工作流架构图；本概念无统一数学公式。）</p>
+<h2>适用场景</h2>
 <ul>
-<li>- 超时机制（如超过10分钟未回传 → 通报用户）</li>
-<li>- 失败重试上限（如失败超2次 → 终止并说明原因）</li>
-<li>- 强制性交付检查清单</li>
+<li>- 复杂任务需要多个专业 Agent 协同（超出单 Agent 能力边界 / 上下文窗口）</li>
+<li>- 产品化：WorkBuddy 专家团（调度-执行）、OpenClaw 编排-执行、Dify 规划中的多智能体协作系统</li>
 </ul>
-<h3>预设 Workflow</h3>
-<p>将常见协作场景固化为 Workflow，每个包含：</p>
+<h2>代表实现与关联论文</h2>
 <ul>
-<li>- 触发条件</li>
-<li>- 执行阶段</li>
-<li>- 关键决策点</li>
-<li>- 产物交付规范</li>
+<li>- 代表实现：<a href="WorkBuddy.html">WorkBuddy</a>（已产品化的专家团，调度-执行模式）、<a href="OpenClaw.html">OpenClaw</a>（开源编排壳 + Harness 执行层，经 ACP 桥接）、<a href="Dify.html">Dify</a>（正在规划多智能体协作系统）</li>
+<li>- 关联论文：无（关联论文字段为空）</li>
 </ul>
-<h2>对我们团队的启示</h2>
-<blockquote>这个模式可以直接指导我们设计 AI 知识库的编译流程。WorkBuddy 作为"主理人"调度处理脚本、格式转换、Wiki 编译等"子Agent"，通过 AGENTS.md 固化的就是协作规则。</blockquote>
-<h2>相关概念</h2>
+<p><strong>行业趋势</strong>：多个产品平台正在将多 Agent 协作作为未来发展方向——WorkBuddy（已产品化的专家团）、OpenClaw（开源编排壳 + Harness 执行层）、Dify（正在规划多智能体协作系统，来源 素材笔记/AI产品/Dify平台Agent开发入门指南）；共同趋势：从单 Agent 走向 Agent 团队，从手动编排走向智能调度。</p>
+<blockquote>综合判断：多 Agent 协作正在从"实验性设计模式"进入"产品化标准功能"阶段。编排-执行（Harness）模式为多 Agent 协作提供了新的技术解耦思路——编排层和执行层可以独立演进，通过 ACP 协议桥接。</blockquote>
+<h2>争议与待验证</h2>
 <ul>
-<li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 单个Agent的结构化设计</li>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 单个 Agent 的结构化设计</li>
 <li>- <a href="WorkBuddy.html">WorkBuddy</a> — 该模式的产品化实现</li>
 <li>- <a href="Dify.html">Dify</a> — 未来将支持多 Agent 协同的 LLMOps 平台</li>
 <li>- <a href="AI原生组织.html">AI原生组织</a> — YC 内部的 Dream Cycle = 多 Agent 协作 + 自我改进循环</li>
-</ul>
-<h2>行业趋势</h2>
-<p>多个产品平台正在将多 Agent 协作作为未来发展方向：</p>
-<ul>
-<li>- WorkBuddy：已产品化的专家团（调度-执行模式）</li>
-<li>- Dify：正在规划多智能体协作系统（不同专长 Agent 配合完成复杂任务，来源 <span class="dangling" title="页面尚未创建">素材笔记/AI 产品/2026-07-02_Dify平台Agent开发入门指南</span>）</li>
-<li>- 共同趋势：从单 Agent 走向 Agent 团队，从手动编排走向智能调度</li>
-</ul>
-<blockquote>综合判断：多 Agent 协作正在从"实验性设计模式"进入"产品化标准功能"阶段。</blockquote>
-<p>---</p>
-<p><em>创建: 2026-07-01 | 更新: 2026-07-01</em></p></div>
+<li>- <a href="OpenClaw.html">OpenClaw</a> — 编排-执行(Harness)模式的开源实现</li>
+<li>- <a href="Harness(智能体执行壳).html">Harness(智能体执行壳)</a> — 编排层与执行层解耦的技术概念</li>
+<li>- <a href="Howie-Liu.html">Howie Liu</a> — 提出 Agent 演进五级阶梯（含 agent 编排级），其「奢侈雇员」即多 Agent 并行协作的通俗表述</li>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
-            <a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Dify.html" class="link-btn">Dify</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a>
+            <a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="OpenClaw.html" class="link-btn">OpenClaw</a><a href="Dify.html" class="link-btn">Dify</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Dify.html" class="link-btn">Dify</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="OpenClaw.html" class="link-btn">OpenClaw</a><a href="Harness(智能体执行壳).html" class="link-btn">Harness(智能体执行壳)</a><a href="Howie-Liu.html" class="link-btn">Howie Liu</a>
         </div>
     </div>
 
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#639922">AI 技术</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">concept</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#639922">AI技术</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">多Agent协作模式.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-high">high</span></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-01</span></div>
-            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-06</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI技术</span> <span class="tag">Agent</span> <span class="tag">多Agent协作</span> <span class="tag">系统设计</span></div>
+            <div><a href="tag-研究公共AI.html" class="tag">研究公共AI</a> <a href="tag-多智能体.html" class="tag">多智能体</a> <a href="tag-方法论.html" class="tag">方法论</a></div>
         </div>
 
         <div class="sidebar-card">
-            <h3>反向链接 (8)</h3>
-            <div><a href="Dify.html" class="backlink-item">Dify</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-03_顶尖1%的人用AI的方式.html" class="backlink-item">2026-07-03_顶尖1%的人用AI的方式</a></div>
+            <h3>反向链接 (18)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="Dify.html" class="backlink-item">Dify</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="Howie-Liu.html" class="backlink-item">Howie Liu</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="MCP.html" class="backlink-item">MCP</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="判断力飞轮.html" class="backlink-item">判断力飞轮</a><a href="奢侈雇员（Luxury-Hires）.html" class="backlink-item">奢侈雇员（Luxury Hires）</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a><a href="顶尖1%的人用AI的方式.html" class="backlink-item">顶尖1%的人用AI的方式</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -191,12 +194,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         </div>
 
         <div class="sidebar-card">
-            <h3>被引用 (8)</h3>
-            <div><a href="Dify.html" class="backlink-item">Dify</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-03_顶尖1%的人用AI的方式.html" class="backlink-item">2026-07-03_顶尖1%的人用AI的方式</a></div>
+            <h3>被引用 (18)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="Dify.html" class="backlink-item">Dify</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="Howie-Liu.html" class="backlink-item">Howie Liu</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="MCP.html" class="backlink-item">MCP</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="判断力飞轮.html" class="backlink-item">判断力飞轮</a><a href="奢侈雇员（Luxury-Hires）.html" class="backlink-item">奢侈雇员（Luxury Hires）</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a><a href="顶尖1%的人用AI的方式.html" class="backlink-item">顶尖1%的人用AI的方式</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嘉立创EDA_AI操控 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>嘉立创EDA_AI操控</h1>
+            <div class="sub">AI产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>嘉立创 EDA AI 操控</h1>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：嘉立创 EDA 专业版已可通过**官方扩展 / 第三方 Skill / Agent Connector** 三种路径实现"AI 直接操控编辑器画原理图与 PCB"，目前**已证明路径可行但效果一般**——复杂场景仍需工程师介入。</blockquote>
+<h2>核心功能</h2>
+<h3>三套方案对比</h3>
+<ul>
+<li>- **方案一：社区 Skill（easyeda-api / easyeda-agent）⭐⭐⭐⭐**</li>
+<li>- **架构**：Skill 描述工作流 → Go CLI/Daemon (端口 49620-49629) → WebSocket → .eext Connector → eda.* API</li>
+<li>- **安装**：`curl -fsSL https://raw.githubusercontent.com/zhoushoujianwork/easyeda-agent/main/install.sh | sh`；在嘉立创 EDA 扩展管理器安装 EasyEDA Agent Connector 扩展（github.com/zhoushoujianwork/easyeda-agent，Apache-2.0）；`easyeda daemon` 启动守护进程；`easyeda health` 验证（→ daemon: online, connector: connected）</li>
+<li>- **AI 控制命令示例**（与 Hermes / Claude Code / Codex 配合）：</li>
+<pre><code>
+    easyeda sch search --keyword STM32H753
+    easyeda sch place --lib-uuid xxx --designator U1 --x 3000 --y 3000
+    easyeda sch connect-pin --designator U1 --pin PA9 --net USART1_TX
+    easyeda sch power-flag --net VDD_3V3
+    easyeda sch ground-flag --net GND
+    easyeda sch drc
+    easyeda sch export netlist
+    easyeda sch export bom --format xlsx
+</code></pre>
+<li>- **方案二：官方 eext-run-api-gateway ⭐⭐⭐⭐**</li>
+<li>- **架构**：AI 编程工具 (Cursor/Claude Code/Hermes) ← WebSocket → eext-run-api-gateway → LCEDA 编辑器</li>
+<li>- 在嘉立创 EDA Pro → 扩展 → 扩展广场 搜索 `eext-run-api-gateway` 安装；网关默认端口 9527；通过 WebSocket 调用 LCEDA 99% 功能</li>
+<li>- **Python 客户端示例**：`await lceda("run_drc", {"type": "sch"})`；`await lceda("export_bom", {"format": "csv"})`</li>
+<li>- **方案三：自定义扩展文件桥接 ⭐⭐**</li>
+<li>- 传统方式：Hermes Agent 将网表写入 JSON 文件；LCEDA 扩展轮询读取后执行；通用性差，仅作过渡方案</li>
+</ul>
+<h3>Claude Code 对接示例</h3>
+<ol>
+<li>安装 easyeda-api skill（输入给 Claude Code：`https://github.com/easyeda/easyeda-api-skill 帮我安装这个 skill`，或自行下载放在 skill 目录）</li>
+<li>嘉立创 EDA 侧安装扩展（高级 → 扩展管理器 → 搜 "run" → 安装 → 勾选三个选项）</li>
+<li>`claude code` → `EDA 启动！` → 建立 WebSocket 连接，即可让 AI 画原理图</li>
+</ol>
+<h3>三大应用场景</h3>
+<ol>
+<li>**自动画原理图**：减少重复性手动操作，缩短设计周期；一致性保证，避免人为错误；知识沉淀为可复用自动化脚本；让工程师专注创造性设计</li>
+<li>**嵌入式开发协同**（配合 <a href="Codex.html">Codex</a> / Claude Code）：自动建库（easyeda-api 提供 KiCad 库 → 立创商城映射）；一键导出 BOM（与立创商城库存联动）；DFM 预检（与立创 PCB/SMT 工艺匹配）</li>
+<li>**平衡车 / 自动驾驶项目**：嘉立创 EDA 是嵌入式实战跳板（电源管理、MCU、运动传感器、电机驱动、无线通信、传感器接口等核心模块），配合 <a href="SailWind.html">SailWind</a> 等 AI EDA 工具形成完整链路</li>
+</ol>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>简单原理图模块搭建、基础器件放置、单步连线</td>
+<td>复杂 PCB 布局、高速信号规则布线、多层板电源平面优化</td>
+</tr>
+<tr>
+<td>BOM/Netlist 导出、DRC 检查</td>
+<td>对精度要求极高的关键参数（阻抗/差分/等长）调整</td>
+</tr>
+<tr>
+<td>工程师主导 + AI 辅助的嵌入式实战项目</td>
+<td>完全无人介入的端到端 PCB 生成</td>
+</tr>
+</table>
+<blockquote>实际能力边界：✅ 适用：简单原理图模块搭建、基础器件放置、单步连线、BOM/Netlist 导出；❌ 不足：复杂 PCB 布局、高速信号规则布线、多层板电源平面优化；⚠️ 仍需工程师：DRC 误报甄别、关键参数调整。</blockquote>
+<h2>团队评估</h2>
+<blockquote>关键洞察：</blockquote>
+<blockquote>1. **AI 操控 EDA 已"证明可行"**：从代码/自然语言到真实编辑器里的 typed action，已走过 0→1 阶段。瓶颈在 1→100 的工程化细节。</blockquote>
+<blockquote>2. **三方案生态井喷**：官方 gateway + 社区 Skill + Agent Connector，说明这是行业级共识，嘉立创 EDA 正主动接入 AI Agent 生态。</blockquote>
+<blockquote>3. **计算密集型场景**：AI 协作需要 32GB+ 内存，复杂工程 64GB+；Node.js Bridge Server 默认堆内存 1.4GB 不足，需要 `--max-old-space-size=4096`。</blockquote>
+<blockquote>4. **与 KiCad 形成两条路径**：嘉立创 EDA（国产 + 商业生态）vs KiCad（开源 + 全球生态），AI 化路径趋同但工具栈不同。</blockquote>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="Codex.html">Codex</a> — 嵌入式开发协同 / Claude Code 对接的 AI 编程 Agent</li>
+<li>- <a href="SailWind.html">SailWind</a> — 兄弟 Wiki（AI EDA 工具，形成完整链路）</li>
+<li>- <a href="KiCad+AI工作流.html">KiCad+AI工作流</a> — 兄弟 Wiki（开源 EDA AI 工作流）</li>
+<li>- <a href="BOM自动化.html">BOM自动化</a> — 兄弟 Wiki（BOM 自动化）</li>
+<li>- <a href="MCP.html">MCP</a> — MCP 版扩展</li>
+<li>- Hermes / Claude Code / 华秋 KiCad — 涉及产品与概念</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Codex.html" class="link-btn">Codex</a><a href="SailWind.html" class="link-btn">SailWind</a><a href="Codex.html" class="link-btn">Codex</a><a href="SailWind.html" class="link-btn">SailWind</a><a href="KiCad+AI工作流.html" class="link-btn">KiCad+AI工作流</a><a href="BOM自动化.html" class="link-btn">BOM自动化</a><a href="MCP.html" class="link-btn">MCP</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">嘉立创EDA_AI操控.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-13</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-13</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-硬件AI.html" class="tag">硬件AI</a> <a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-实践案例.html" class="tag">实践案例</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (3)</h3>
+            <div><a href="BOM自动化.html" class="backlink-item">BOM自动化</a><a href="AI辅助硬件研发工作流.html" class="backlink-item">AI辅助硬件研发工作流</a><a href="KiCad+AI工作流.html" class="backlink-item">KiCad+AI工作流</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (3)</h3>
+            <div><a href="BOM自动化.html" class="backlink-item">BOM自动化</a><a href="AI辅助硬件研发工作流.html" class="backlink-item">AI辅助硬件研发工作流</a><a href="KiCad+AI工作流.html" class="backlink-item">KiCad+AI工作流</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

@@ -66,80 +66,27 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>Agent提示词设计模式</h1>
-            <div class="sub">concept · AI 技术 · 活跃</div>
+            <div class="sub">AI技术 · 活跃</div>
         </div>
         <div class="content"><h1>Agent提示词设计模式</h1>
-<h2>一句话定义</h2>
-<p>将专业领域的专家行为模式固化为 Agent 提示词的通用结构模板，使 Agent 从"自由发挥"变为"可预期的专业交付"。</p>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：将专业领域的专家行为模式固化为 Agent 提示词的通用结构模板，使 Agent 从"自由发挥"变为"可预期的专业交付"。</blockquote>
 <h2>为什么重要</h2>
 <p>普通 Agent 缺乏领域约束时容易自由发挥、输出不稳定。通过结构化的提示词设计，可以让 Agent 像真正的专家一样按照固定方法论工作，产出质量和风格更加可控。</p>
-<h2>核心原理</h2>
-<h3>八层结构</h3>
-<p>从 WorkBuddy 专家的提示词设计中提炼出的通用结构：</p>
+<h2>关键机制</h2>
+<h3>机制概述</h3>
+<p><strong>八层结构</strong>（从 WorkBuddy 专家的提示词设计中提炼出的通用结构）：</p>
 <ol>
-<li>**角色覆盖和身份锚定**</li>
-<li>- 使用 Role Override 机制清空之前上下文中的角色</li>
-<li>- 定义 Role、Personality、Memory、Experience</li>
-<li>- 关键：让模型不被之前对话中的身份影响</li>
+<li>**角色覆盖和身份锚定**：使用 Role Override 机制清空之前上下文中的角色；定义 Role、Personality、Memory、Experience；关键：让模型不被之前对话中的身份影响。</li>
+<li>**核心使命**：一句话定义专家的职责范围；明确专家的能力边界（能做什么、不做什么）。</li>
+<li>**关键规则和默认行为**：约束 Agent 不要依赖通用知识自由发挥；示例：Foundation-First（先打地基再开发）、Developer Productivity Focus（替开发者做架构决策）。</li>
+<li>**工作流程和执行步骤**：明确的 SOP，分步拆解任务；每步有清晰的输入、输出和检查点；示例：分析项目需求 → 创建技术基础 → UX结构规划 → 开发者交接文档。</li>
+<li>**交互模板和质量标准**：定义交付物模板（如 Theme Toggle 组件代码）；定义 Success Metrics（可验证的成功标准）；定义 Communication Style（沟通风格示例）。</li>
+<li>**能力支持和工具声明**：Agent 可用工具和技能清单；工具调用方式和限制说明。</li>
+<li>**持续牵引与下一步引导**：任务完成后引导用户下一步操作；保持对话的连续性和生产力。</li>
+<li>**Agent Runtime 说明**：记忆系统、安全规则、工作模式；任务管理、上下文管理、工具使用规则。</li>
 </ol>
-<ol>
-<li>**核心使命**</li>
-<li>- 一句话定义专家的职责范围</li>
-<li>- 明确专家的能力边界（能做什么、不做什么）</li>
-</ol>
-<ol>
-<li>**关键规则和默认行为**</li>
-<li>- 约束 Agent 不要依赖通用知识自由发挥</li>
-<li>- 示例：Foundation-First（先打地基再开发）</li>
-<li>- 示例：Developer Productivity Focus（替开发者做架构决策）</li>
-</ol>
-<ol>
-<li>**工作流程和执行步骤**</li>
-<li>- 明确的 SOP，分步拆解任务</li>
-<li>- 每步有清晰的输入、输出和检查点</li>
-<li>- 示例：分析项目需求 → 创建技术基础 → UX结构规划 → 开发者交接文档</li>
-</ol>
-<ol>
-<li>**交互模板和质量标准**</li>
-<li>- 定义交付物模板（如 Theme Toggle 组件代码）</li>
-<li>- 定义 Success Metrics（可验证的成功标准）</li>
-<li>- 定义 Communication Style（沟通风格示例）</li>
-</ol>
-<ol>
-<li>**能力支持和工具声明**</li>
-<li>- Agent 可用工具和技能清单</li>
-<li>- 工具调用方式和限制说明</li>
-</ol>
-<ol>
-<li>**持续牵引与下一步引导**</li>
-<li>- 任务完成后引导用户下一步操作</li>
-<li>- 保持对话的连续性和生产力</li>
-</ol>
-<ol>
-<li>**Agent Runtime 说明**</li>
-<li>- 记忆系统、安全规则、工作模式</li>
-<li>- 任务管理、上下文管理、工具使用规则</li>
-</ol>
-<h3>本质公式</h3>
-<pre><code>
-专家Agent = 普通Agent + 领域方法论 + 交付模板 + 工作流约束
-        ≈ 普通Agent + 领域知识Skills
-</code></pre>
-<h2>应用场景</h2>
-<ul>
-<li>- 需要稳定产出的专业领域（如UX设计、长文档写作）</li>
-<li>- 多Agent协作系统中的子Agent定义</li>
-<li>- AI知识库的编译规则设计（如本知识库的 AGENTS.md）</li>
-</ul>
-<h2>相关概念</h2>
-<ul>
-<li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — 多个结构化Agent如何协作</li>
-<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 该模式的产品化实现</li>
-<li>- <a href="DeepSeek.html">DeepSeek</a> — 推理模型 vs 通用模型提示策略的重要案例</li>
-<li>- <span class="dangling" title="页面尚未创建">LLM Wiki</span> — 类似的"编译而非生成"思路</li>
-</ul>
-<h2>推理模型 vs 通用模型的策略差异</h2>
-<p>这是提示词工程的一个重要进阶分支（来源：<span class="dangling" title="页面尚未创建">素材笔记/AI 技术/2026-07-02_DeepSeek从入门到精通</span>）：</p>
+<p><strong>推理模型 vs 通用模型的策略差异</strong>（来源：<span class="dangling" title="页面尚未创建">素材笔记/AI技术/DeepSeek从入门到精通</span>）：</p>
 <table>
 <tr>
 <td>维度</td>
@@ -164,12 +111,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </table>
 <p>对八层结构的启示：</p>
 <ul>
-<li>- 对推理模型使用八层结构时，**第 4 层（工作流）应简化**——模型已内化推理，过度拆解反而限制其能力</li>
-<li>- 对通用模型仍建议完整使用八层结构，特别是工作流拆解和交互模板</li>
+<li>- 对推理模型使用八层结构时，**第 4 层（工作流）应简化**——模型已内化推理，过度拆解反而限制其能力。</li>
+<li>- 对通用模型仍建议完整使用八层结构，特别是工作流拆解和交互模板。</li>
 </ul>
 <blockquote>综合判断：推理模型更接近"专家"——它有内在方法，你只需要明确目标；通用模型更接近"助手"——你需要补上它缺失的结构。</blockquote>
-<h2>框架对比：八层 vs 三段式</h2>
-<p>不同平台的提示词设计理念各有侧重（来源：<span class="dangling" title="页面尚未创建">素材笔记/AI 产品/2026-07-02_Dify平台Agent开发入门指南</span>）：</p>
+<p><strong>框架对比：八层 vs 三段式</strong>（来源：<span class="dangling" title="页面尚未创建">素材笔记/AI产品/Dify平台Agent开发入门指南</span>）：</p>
 <table>
 <tr>
 <td>维度</td>
@@ -198,48 +144,123 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </tr>
 </table>
 <blockquote>综合判断：两者不是对错之分，而是场景之分。八层适合"封装好给人用"，三段式适合"搭好框架让人改"。本知识库的 AGENTS.md 更接近八层——因为知识库运营是一个需要固化交付标准的专业行为。</blockquote>
-<h2>主流实现</h2>
+<p><strong>渐进式披露（Progressive Disclosure）</strong>（Claude Code 提出的核心设计哲学，来源：<span class="dangling" title="页面尚未创建">素材笔记/AI技术/Claude_Code设计哲学渐进式披露</span>）：</p>
+<blockquote>**不一次性把所有信息塞给模型，而是给模型工具让它自己层层深入**——借鉴自 UI 设计领域「只在需要时展示复杂信息」的原则。</blockquote>
 <ul>
-<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 专家系统实现</li>
-<li>- Custom GPTs（OpenAI）— 概念相似但结构简化</li>
-<li>- Coze Bot — 字节跳动的Agent平台</li>
+<li>- **是什么**：渐进式披露是 Agent Skills 系统中的上下文加载策略，将技能的**可发现性元数据**与**完整执行指令**分层存储、按需加载。</li>
+<li>- **解决什么问题**：100 个技能全量加载需 ~500,000 tokens，超出上下文限制。</li>
+<li>- **怎么用**：通过 `SKILL.md` 分离 YAML Frontmatter（元数据层）和 Markdown 正文（指令层），加外部资源文件（资源层），构成三层按需加载架构。</li>
 </ul>
-<h2>与 Dream Cycle 的闭环</h2>
+<p>Agent Skills 三层披露：</p>
+<table>
+<tr>
+<td>层级</td>
+<td>内容</td>
+<td>加载时机</td>
+</tr>
+<tr>
+<td>第一层：元数据</td>
+<td>SKILL.md 的 YAML frontmatter（name + description）</td>
+<td>启动时全部加载到 system prompt</td>
+</tr>
+<tr>
+<td>第二层：核心指令</td>
+<td>SKILL.md 的正文 Markdown</td>
+<td>Claude 认为相关时按需加载</td>
+</tr>
+<tr>
+<td>第三层：详细资源</td>
+<td>引用的 `reference.md` / `forms.md` 等附属文件</td>
+<td>Claude 主动点击进入时加载</td>
+</tr>
+</table>
+<p>对八层结构的启示：</p>
+<ul>
+<li>- 第 4 层（工作流程）应**按需展开**——不要把整个工作流的每一步都硬塞进初始提示词。</li>
+<li>- 第 6 层（能力支持）应**元数据化**——只暴露 name + description，详细使用方式由 subagent 按需加载。</li>
+<li>- 配套使用 `claude-code-guide` subagent 处理低频问题，避免主上下文被低频信息污染。</li>
+</ul>
+<p>经典反例 vs 正例：</p>
+<table>
+<tr>
+<td>反例</td>
+<td>正例</td>
+</tr>
+<tr>
+<td>一次性把 100 个技能完整指令塞进 system prompt</td>
+<td>启动只加载 100 个技能的元数据（name + description）</td>
+</tr>
+<tr>
+<td>把"如何添加 MCP"完整文档放在主提示词</td>
+<td>触发 `claude-code-guide` subagent 按需读取</td>
+</tr>
+<tr>
+<td>给 Claude 越多越好</td>
+<td>**克制 = 释放 AI 潜力**</td>
+</tr>
+</table>
+<p>详见 <a href="Harness(智能体执行壳).html">Harness(智能体执行壳)</a> 中关于 Agent Skills 的描述。</p>
+<p><strong>与 Dream Cycle 的闭环</strong>（来源：<span class="dangling" title="页面尚未创建">素材笔记/AI组织/YC内部AI实操</span>）：</p>
 <p>YC 内部的技能自我进化（Dream Cycle）为提示词设计模式提供了企业级闭环：</p>
 <pre><code>
 探索发现有效模式 → 固化为技能（提示词设计模式） → Dream Cycle 持续优化 → 再探索
 </code></pre>
-<p>这说明提示词设计不是终点，而是中间态——好的提示词应该在使用中持续进化，而不是一次性写完就锁死。</p>
-<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI 应用/2026-07-03_YC内部AI实操</span></blockquote>
-<p>详见 <a href="AI原生组织.html">AI原生组织</a></p>
-<h2>团队笔记</h2>
-<blockquote>这个提示词设计模式可以直接用于我们知识库的 AGENTS.md 设计。AGENTS.md 本质上就是把「AI知识编译专家」的行为模式固化下来。</blockquote>
-<p>---</p>
-<p><em>创建: 2026-07-01 | 更新: 2026-07-03</em></p></div>
+<p>这说明提示词设计不是终点，而是中间态——好的提示词应该在使用中持续进化，而不是一次性写完就锁死。详见 <a href="AI原生组织.html">AI原生组织</a>。</p>
+<p><strong>团队笔记</strong>：这个提示词设计模式可以直接用于我们知识库的 AGENTS.md 设计。AGENTS.md 本质上就是把「AI知识编译专家」的行为模式固化下来。</p>
+<h3>关键公式 / 伪代码</h3>
+<p>本质公式：</p>
+<pre><code>
+专家Agent = 普通Agent + 领域方法论 + 交付模板 + 工作流约束
+        ≈ 普通Agent + 领域知识Skills
+</code></pre>
+<h2>适用场景</h2>
+<ul>
+<li>- 需要稳定产出的专业领域（如UX设计、长文档写作）</li>
+<li>- 多Agent协作系统中的子Agent定义</li>
+<li>- AI知识库的编译规则设计（如本知识库的 AGENTS.md）</li>
+</ul>
+<h2>代表实现与关联论文</h2>
+<ul>
+<li>- 代表实现：<a href="WorkBuddy.html">WorkBuddy</a>（专家系统实现）、Custom GPTs（OpenAI，概念相似但结构简化）、Coze Bot（字节跳动 Agent 平台）</li>
+<li>- 关联论文：无（关联论文字段为空）</li>
+</ul>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — 多个结构化 Agent 如何协作</li>
+<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 该模式的产品化实现</li>
+<li>- <a href="DeepSeek.html">DeepSeek</a> — 推理模型 vs 通用模型提示策略的重要案例</li>
+<li>- <a href="LLM-Wiki.html">LLM Wiki</a> — 类似的"编译而非生成"思路</li>
+<li>- <a href="Harness(智能体执行壳).html">Harness(智能体执行壳)</a> — 其中 Agent Skills 即渐进式披露的产品化</li>
+<li>- <a href="AI原生组织.html">AI原生组织</a> — YC 的 Dream Cycle 闭环</li>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
-            <a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="DeepSeek.html" class="link-btn">DeepSeek</a><span class="link-btn dangling">LLM Wiki</span><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a>
+            <a href="Harness(智能体执行壳).html" class="link-btn">Harness(智能体执行壳)</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="DeepSeek.html" class="link-btn">DeepSeek</a><a href="LLM-Wiki.html" class="link-btn">LLM Wiki</a><a href="Harness(智能体执行壳).html" class="link-btn">Harness(智能体执行壳)</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a>
         </div>
     </div>
 
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#639922">AI 技术</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">concept</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#639922">AI技术</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">Agent提示词设计模式.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-high">high</span></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-01</span></div>
-            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-13</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI技术</span> <span class="tag">提示词工程</span> <span class="tag">Agent</span> <span class="tag">产品化</span></div>
+            <div><a href="tag-提示词.html" class="tag">提示词</a> <a href="tag-方法论.html" class="tag">方法论</a> <a href="tag-智能体.html" class="tag">智能体</a></div>
         </div>
 
         <div class="sidebar-card">
-            <h3>反向链接 (10)</h3>
-            <div><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a><a href="2026-07-03_顶尖1%的人用AI的方式.html" class="backlink-item">2026-07-03_顶尖1%的人用AI的方式</a></div>
+            <h3>反向链接 (19)</h3>
+            <div><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="patent-disclosure-skill.html" class="backlink-item">patent-disclosure-skill</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="Builder-心态.html" class="backlink-item">Builder 心态</a><a href="判断力飞轮.html" class="backlink-item">判断力飞轮</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="中国专利skill_自动生成专利交底书.html" class="backlink-item">中国专利skill_自动生成专利交底书</a><a href="中国专利Skill从草稿到交底书.html" class="backlink-item">中国专利Skill从草稿到交底书</a><a href="Claude_Code设计哲学渐进式披露.html" class="backlink-item">Claude_Code设计哲学渐进式披露</a><a href="DeepSeek从入门到精通.html" class="backlink-item">DeepSeek从入门到精通</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a><a href="顶尖1%的人用AI的方式.html" class="backlink-item">顶尖1%的人用AI的方式</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -248,12 +269,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         </div>
 
         <div class="sidebar-card">
-            <h3>被引用 (10)</h3>
-            <div><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a><a href="2026-07-03_顶尖1%的人用AI的方式.html" class="backlink-item">2026-07-03_顶尖1%的人用AI的方式</a></div>
+            <h3>被引用 (19)</h3>
+            <div><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="patent-disclosure-skill.html" class="backlink-item">patent-disclosure-skill</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="Builder-心态.html" class="backlink-item">Builder 心态</a><a href="判断力飞轮.html" class="backlink-item">判断力飞轮</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="中国专利skill_自动生成专利交底书.html" class="backlink-item">中国专利skill_自动生成专利交底书</a><a href="中国专利Skill从草稿到交底书.html" class="backlink-item">中国专利Skill从草稿到交底书</a><a href="Claude_Code设计哲学渐进式披露.html" class="backlink-item">Claude_Code设计哲学渐进式披露</a><a href="DeepSeek从入门到精通.html" class="backlink-item">DeepSeek从入门到精通</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a><a href="顶尖1%的人用AI的方式.html" class="backlink-item">顶尖1%的人用AI的方式</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>

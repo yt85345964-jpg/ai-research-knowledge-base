@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>部门索引 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.6; }
+.container { max-width:800px; margin:0 auto; padding:2rem 1.5rem; }
+.header { margin-bottom:2rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header p { font-size:0.85rem; color:#666; margin-top:0.25rem; }
+.tag-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; }
+.tag-card { background:#fff; border-radius:10px; padding:1rem; text-decoration:none; border:1px solid #eee; transition:border-color 0.15s; display:flex; flex-direction:column; }
+.tag-card:hover { border-color:#ccc; }
+.tag-name { font-size:0.95rem; color:#333; font-weight:600; }
+.tag-count { font-size:0.7rem; color:#999; margin-top:4px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="index.html">← 返回首页</a>
+        <h1>部门索引</h1>
+        <p>共 4 个部门被标注（受控词表见 AGENTS.md §5.1）</p>
+    </div>
+    <div class="tag-grid" id="deptGrid">
+        
+        <a href="dept-研究公共AI.html" class="tag-card">
+            <span class="tag-name">研究公共AI</span>
+            <span class="tag-count">14</span>
+        </a>
+        <a href="dept-硬件AI.html" class="tag-card">
+            <span class="tag-name">硬件AI</span>
+            <span class="tag-count">12</span>
+        </a>
+        <a href="dept-市场AI.html" class="tag-card">
+            <span class="tag-name">市场AI</span>
+            <span class="tag-count">2</span>
+        </a>
+        <a href="dept-销售AI.html" class="tag-card">
+            <span class="tag-name">销售AI</span>
+            <span class="tag-count">2</span>
+        </a>
+    </div>
+</div>
+</body>
+</html>

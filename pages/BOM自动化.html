@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOM自动化 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>BOM自动化</h1>
+            <div class="sub">AI产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>交互式 BOM 表（AI 自动生成 PCB 物料清单）</h1>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**："交互式 BOM 表"是 AI Agent 时代的物料清单新形态——把传统 Excel BOM 升级为可对话、可追溯、可下单、可版本管理的「活动文档」。KiCad MCP、NextBoard、bom-generator 等多种工具已落地。</blockquote>
+<h2>核心功能</h2>
+<ul>
+<li>- **自动选型**：从需求描述 → 推荐合适器件 + 国产替代</li>
+<li>- **Datasheet 自动下载**：避免工程师去官网逐个查</li>
+<li>- **实时比价**：多分销商（DigiKey / Mouser / LCSC / element14 / JLCPCB / PCBWay）瞬时对比</li>
+<li>- **兼容性检查**：电压 / 电流 / 封装 / 接口匹配</li>
+<li>- **库存预警**：避免选停产 / 缺货器件</li>
+<li>- **下单文件生成**：BOM → 嘉立创 / PCBWay 订单格式</li>
+</ul>
+<h3>代表工具全景</h3>
+<ol>
+<li>**KiCad MCP**（最直接）：通过 <a href="MCP.html">MCP</a> 协议调用 KiCad，做项目管理、设计分析、网表与 BOM 提取、自动化 DRC 报告。详见 <a href="KiCad+AI工作流.html">KiCad+AI工作流</a>。</li>
+<li>**NextBoard**（最完整方案）：github.com/LeoKemp223/NextBoard——面向硬件方案设计的 AI Agent，自动需求确认 → 芯片选型 → 下载 datasheet → 输出 BOM → 计算价格 → 输出模块原理图 → 整合可落地技术方案。安装：`claude plugin marketplace add LeoKemp223/NextBoard` 或 `--plugin-dir`。</li>
+<li>**bom-generator Skill**（轻量级）：触发于"我需要什么部件"，输出含 part numbers / quantities / suppliers 的 BOM，导出 xlsx / csv / md / json。</li>
+<li>**Claude Code Bom Skill**（最专业）：调度 DigiKey / Mouser / LCSC / JLCPCB / KiCad 多个子 Skill，BOM 数据存为 KiCad 原理图符号属性（single source of truth）。</li>
+<li>**generate-bom Skill**（结构化输出）：输入 components.json，输出 Markdown 表格 + CSV（去重合并），可导入采购 / ERP / CAM。</li>
+</ol>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>PCB 设计阶段的器件选型与 BOM 初稿</td>
+<td>纯机械 / 无源结构件清单（仍需人工）</td>
+</tr>
+<tr>
+<td>多供应商实时比价与成本估算</td>
+<td>非 KiCad / 非 EDA 生态的散件采购</td>
+</tr>
+<tr>
+<td>设计 → 下单一体化（BOM→订单）</td>
+<td>已固化的量产物料（ERP 主数据为准）</td>
+</tr>
+<tr>
+<td>团队可复用 Skill 沉淀</td>
+<td>极简一次性的小样机</td>
+</tr>
+</table>
+<h2>竞品对比</h2>
+<table>
+<tr>
+<td>维度</td>
+<td>传统 BOM（Excel）</td>
+<td>交互式 BOM（AI）</td>
+</tr>
+<tr>
+<td>数据源</td>
+<td>Excel/Word 手动维护</td>
+<td>KiCad 符号属性（SSOT）</td>
+</tr>
+<tr>
+<td>选型</td>
+<td>工程师查手册</td>
+<td>AI 自动选型 + 实时 datasheet 下载</td>
+</tr>
+<tr>
+<td>比价</td>
+<td>手动查分销商</td>
+<td>多分销商实时比价</td>
+</tr>
+<tr>
+<td>下单</td>
+<td>复制粘贴到下单页</td>
+<td>一键生成订单文件</td>
+</tr>
+<tr>
+<td>版本管理</td>
+<td>文件名 v1/v2/v3</td>
+<td>时间戳 + 修订日志</td>
+</tr>
+<tr>
+<td>错误检查</td>
+<td>人工</td>
+<td>自动（兼容性、库存、价格）</td>
+</tr>
+<tr>
+<td>知识沉淀</td>
+<td>个人经验</td>
+<td>Skill 可复用 + 团队共享</td>
+</tr>
+</table>
+<h2>团队评估</h2>
+<blockquote>交互式 BOM 已从"概念"进入"日常可用"：NextBoard 等工具覆盖"需求 → 选型 → 下载 datasheet → 输出 BOM → 输出原理图 → 计算价格 → 整合技术方案"完整链路；多 Skill 协同是 BOM 场景的标配。关键工程原则是 **Single Source of Truth**——所有 BOM 操作基于 KiCad 符号属性，避免数据分散在 Excel/Word/邮件。</blockquote>
+<h3>关键洞察</h3>
+<ol>
+<li>**BOM 的范式转移**：从"死的 Excel"到"活的数据资产"——AI 时代的 BOM 与 KiCad 工程文件、供应链、下单系统深度集成。</li>
+<li>**"硬件方案设计 Agent"已成型**：NextBoard 不是简单生成 BOM，而是覆盖完整链路。</li>
+<li>**多 Skill 协同是 BOM 场景的标配**：Bom Skill 调度多个子 Skill，按需组合。</li>
+<li>**「Single Source of Truth」是 BOM 数据管理关键**：所有操作基于 KiCad 符号属性。</li>
+</ol>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="KiCad+AI工作流.html">KiCad+AI工作流</a></li>
+<li>- <a href="嘉立创EDA_AI操控.html">嘉立创EDA_AI操控</a></li>
+<li>- <a href="SailWind.html">SailWind</a></li>
+<li>- <a href="MCP.html">MCP</a></li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="MCP.html" class="link-btn">MCP</a><a href="KiCad+AI工作流.html" class="link-btn">KiCad+AI工作流</a><a href="KiCad+AI工作流.html" class="link-btn">KiCad+AI工作流</a><a href="嘉立创EDA_AI操控.html" class="link-btn">嘉立创EDA_AI操控</a><a href="SailWind.html" class="link-btn">SailWind</a><a href="MCP.html" class="link-btn">MCP</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">BOM自动化.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-13</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-13</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-硬件AI.html" class="tag">硬件AI</a> <a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-实践案例.html" class="tag">实践案例</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (4)</h3>
+            <div><a href="嘉立创EDA_AI操控.html" class="backlink-item">嘉立创EDA_AI操控</a><a href="AI辅助硬件研发工作流.html" class="backlink-item">AI辅助硬件研发工作流</a><a href="KiCad+AI工作流.html" class="backlink-item">KiCad+AI工作流</a><a href="交互式BOM表.html" class="backlink-item">交互式BOM表</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (4)</h3>
+            <div><a href="嘉立创EDA_AI操控.html" class="backlink-item">嘉立创EDA_AI操控</a><a href="AI辅助硬件研发工作流.html" class="backlink-item">AI辅助硬件研发工作流</a><a href="KiCad+AI工作流.html" class="backlink-item">KiCad+AI工作流</a><a href="交互式BOM表.html" class="backlink-item">交互式BOM表</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KiCad+AI工作流 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #0F6E56; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>KiCad+AI工作流</h1>
+            <div class="sub">AI流程 · 活跃</div>
+        </div>
+        <div class="content"><h1>KiCad + AI 工作流</h1>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**："新手小白只靠和 AI 聊天就画出 PCB 原理图并导出 KiCad 工程文件"已完全可行——核心路径是 KiCad + AI Agent Skill/MCP/插件，2026 已进入"自然语言 → 真实电路"成熟期。</blockquote>
+<h2>目标</h2>
+<p>让无深度 EDA 经验的工程师/新手，仅凭自然语言对话即可完成从需求分析、原理图/PCB 设计、验证到下单生产的完整 PCB 流程；缩短设计周期，降低 EDA 工具使用门槛，并实现一键 DFM 与下单。</p>
+<h2>适用场景</h2>
+<ul>
+<li>- 新手首次画 PCB、快速原型、测试治具、转接板等"先跑通再优化"的场景（Quilter.ai 适用）</li>
+<li>- 日常可用的对话式 PCB 设计（华秋 KiCad Copilot 开箱即用）</li>
+<li>- 程序员友好的参数化/代码化设计（SKiDL、atopile）</li>
+<li>- 隐私/离线项目（Ollama + KIC-AI 本地大模型）</li>
+<li>- 边界：端到端生成框架（CircuitLM 等）仍处于实验阶段，不直接用于生产</li>
+</ul>
+<h2>流程阶段 · 角色 · AI能力</h2>
+<table>
+<tr>
+<td>阶段</td>
+<td>负责角色</td>
+<td>AI 能力</td>
+<td>输入 → 输出</td>
+<td>工具</td>
+</tr>
+<tr>
+<td>需求</td>
+<td>工程师 + AI</td>
+<td>自然语言理解需求</td>
+<td>设计需求 → 方案 / 核心器件</td>
+<td>华秋 Copilot、Claude Code</td>
+</tr>
+<tr>
+<td>设计</td>
+<td>工程师 + AI</td>
+<td>对话式画板 / MCP 控制 / 脚本生成</td>
+<td>方案 → KiCad 工程文件</td>
+<td>KiCad MCP、atopile、SKiDL</td>
+</tr>
+<tr>
+<td>验证</td>
+<td>AI</td>
+<td>ERC / DRC、DFM 预检</td>
+<td>工程 → 检查报告</td>
+<td>KiCad MCP、Quilter.ai</td>
+</tr>
+<tr>
+<td>下单</td>
+<td>工程师</td>
+<td>一键 DFM + 下单</td>
+<td>工程 → PCB 订单</td>
+<td>华秋 KiCad、JLCPCB</td>
+</tr>
+</table>
+<h2>关键步骤</h2>
+<ol>
+<li>**需求（方案与选型）**：在 Copilot 面板输入自然语言（如"设计一个 5V 转 3.3V 的 LDO 电路"），AI 给出方案、核心器件和原理图；选中原理图/PCB 区域用 @上下文问答针对性提问；输入器件型号用 @查资料返回价格、库存、datasheet 链接。</li>
+<li>**设计（生成工程文件）**：</li>
+<li>- 华秋 KiCad Copilot：粘贴 Datasheet 引脚图/封装尺寸图，AI 识别并生成 KiCad 原理图符号或 PCB 封装（支持 BGA/QFN/QFP/SOP 等 IPC 标准封装）。</li>
+<li>- KiCad MCP：`claude mcp add --transport stdio kicad uvx kicad-mcp-server`，再描述需求（如"新建 50mm×50mm 的 LEDBoard，四角放 3mm 安装孔"），AI 调用工具落到 KiCad 工程。</li>
+<li>- atopile：`ato create project` / `ato create part -s` / `ato build`（每改一步 build 验证），纯 `ato build` 验证连接时不需要 KiCad。</li>
+<li>- SKiDL：用 Python 描述电路（如 `res = Part("Device","R",value="1k")`），生成网表/原理图。</li>
+<li>- 直接 Python 脚本：用 KiCad 内置 `pcbnew` API（PCB 编辑器自带 Python 控制台）放置器件、绘制走线。</li>
+<li>**验证**：AI 执行 ERC/DRC、DFM 预检，输出检查报告（KiCad MCP、Quilter.ai 物理驱动布局布线）。</li>
+<li>**下单**：检查完成后在华秋 KiCad / JLCPCB 一键 DFM + 下单，对接 LCSC 部件号选型与打样备料。</li>
+<li>**规则固化**：在项目根目录 `CLAUDE.md` 或自定义 Skill 中定义工作流、输出规范、验证门禁（build 必跑）与出错回滚策略；用 git 对 PCB 做版本控制。</li>
+</ol>
+<h2>效果指标</h2>
+<ul>
+<li>- 新手可画 PCB：新手只靠和 AI 聊天即可从模块设计到原理图生成、再到 KiCad 工程导出（2026 已日常可用）。</li>
+<li>- 设计周期缩短：减少重复性手动操作，对话式/脚本化设计显著压缩画图时间。</li>
+<li>- 一键 DFM + 下单：检查完可直接在华秋下单生产，打通设计到制造闭环。</li>
+</ul>
+<h2>异常处理</h2>
+<ul>
+<li>- 本地依赖缺失（KiCad MCP 依赖本地 KiCad 安装和 Python 环境）→ 改用华秋 KiCad Copilot（开箱即用）或 Ollama + KIC-AI（离线）方案。</li>
+<li>- SKiDL / Python 代码错误：LLM 可能产生需修正的代码 → 需用户懂基本 Python 语法修正。</li>
+<li>- 端到端生成框架（CircuitLM、直接 S-表达式）仍实验阶段 → 不用于正式生产，仅作研究。</li>
+<li>- 设计意图不确定 → 用 Copilot 右键"猜测设计意图""归纳核心器件""未连接引脚检查"等预置菜单辅助。</li>
+</ul>
+<h2>实施方法与效果</h2>
+<ul>
+<li>- 实施方法：</li>
+<li>- 新手路线：下载华秋 KiCad 发行版 → 安装 → 工具栏 Copilot 图标 → 输入需求 → AI 给方案+器件+原理图草稿 → 微调 → 一键 DFM → 一键下单。</li>
+<li>- 进阶路线：安装 KiCad + Claude Code + KiCad MCP → 在 `CLAUDE.md` 定义设计工作流 → 自然语言描述需求 → MCP 工具调用 → 真实 KiCad 工程 → git 版本管理 + atopile 自动化验证。</li>
+<li>- 极客路线：Ollama 本地大模型 + KIC-AI 插件，全程离线、零云端依赖，适合隐私项目/学习研究。</li>
+<li>- 效果评估：</li>
+<li>- "AI 画 PCB"已从"概念验证"进入"日常可用"（2026）。</li>
+<li>- KiCad 生态 AI 集成是 2026 主旋律：华秋 Copilot、Quilter、KIC-AI、KiCad MCP、atopile——开源 EDA 的 AI 化比商业 EDA 更激进。</li>
+<li>- 经验总结：</li>
+<blockquote>"AI Agent + 工具调用"（LLM 不直接写复杂代码，而是调用脚本/插件）是当前最优解；SKiDL 等代码生成中间件程序员友好但学习曲线陡。真正决定体验的是给 Claude Code 的规则文件（CLAUDE.md / Skill）。"自然语言 → 真实电路"是从手动画图 → 参数化脚本 → 自然语言对话的 EDA 范式跃迁，下一里程碑是"自然语言 → 完整产品"（含结构、PCB、固件）。</blockquote>
+</ul>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="MCP.html">MCP</a>（KiCad MCP 是 MCP 应用）</li>
+<li>- <a href="SailWind.html">SailWind</a></li>
+<li>- <a href="嘉立创EDA_AI操控.html">嘉立创EDA_AI操控</a></li>
+<li>- <a href="BOM自动化.html">BOM自动化</a></li>
+<li>- <span class="dangling" title="页面尚未创建">素材笔记/AI技术/Claude辅助设计软硬件</span></li>
+<li>- 跨部门：硬件AI / 嵌入式AI</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="MCP.html" class="link-btn">MCP</a><a href="SailWind.html" class="link-btn">SailWind</a><a href="嘉立创EDA_AI操控.html" class="link-btn">嘉立创EDA_AI操控</a><a href="BOM自动化.html" class="link-btn">BOM自动化</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#0F6E56">AI流程</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">KiCad+AI工作流.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-13</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-13</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-硬件AI.html" class="tag">硬件AI</a> <a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-实践案例.html" class="tag">实践案例</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (5)</h3>
+            <div><a href="BOM自动化.html" class="backlink-item">BOM自动化</a><a href="SailWind.html" class="backlink-item">SailWind</a><a href="嘉立创EDA_AI操控.html" class="backlink-item">嘉立创EDA_AI操控</a><a href="CST_Runtime_CLI.html" class="backlink-item">CST_Runtime_CLI</a><a href="AI辅助硬件研发工作流.html" class="backlink-item">AI辅助硬件研发工作流</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (5)</h3>
+            <div><a href="BOM自动化.html" class="backlink-item">BOM自动化</a><a href="SailWind.html" class="backlink-item">SailWind</a><a href="嘉立创EDA_AI操控.html" class="backlink-item">嘉立创EDA_AI操控</a><a href="CST_Runtime_CLI.html" class="backlink-item">CST_Runtime_CLI</a><a href="AI辅助硬件研发工作流.html" class="backlink-item">AI辅助硬件研发工作流</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

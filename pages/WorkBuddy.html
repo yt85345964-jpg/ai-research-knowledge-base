@@ -66,11 +66,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>WorkBuddy</h1>
-            <div class="sub">product · AI 产品 · 活跃</div>
+            <div class="sub">AI产品 · 活跃</div>
         </div>
         <div class="content"><h1>WorkBuddy</h1>
-<h2>一句话定位</h2>
-<p>WorkBuddy 是腾讯推出的桌面 AI Agent 平台，将底层 Agent 能力封装为「专家」和「专家团」，让用户无需了解提示词工程即可使用专业 AI 能力。</p>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：WorkBuddy 是腾讯推出的桌面 AI Agent 平台，将底层 Agent 能力封装为「专家」和「专家团」，让用户无需了解提示词工程即可使用专业 AI 能力。</blockquote>
 <h2>核心功能</h2>
 <h3>专家（Single Expert）</h3>
 <ul>
@@ -85,25 +85,25 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 主理人负责拆需求、配成员、看进度、收产出</li>
 <li>- 示例：AI 内容创作专家团</li>
 </ul>
-<h2>技术特点</h2>
-<h3>专家提示词设计</h3>
-<p>WorkBuddy 专家的提示词结构 = 普通Agent + 领域方法论 + 交付模板 + 工作流约束</p>
-<p>核心维度：</p>
-<ol>
-<li>**角色覆盖**：Role Override 机制重置模型身份</li>
-<li>**工作流程**：明确 SOP 约束 Agent 行为</li>
-<li>**交付标准**：定义成功指标和交付物模板</li>
-<li>**沟通风格**：固化专业行为模式</li>
-</ol>
-<p>详见 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a></p>
-<h3>多Agent协作机制</h3>
-<p>详见 <a href="多Agent协作模式.html">多Agent协作模式</a></p>
-<p>关键设计：</p>
+<h3>技术特点</h3>
 <ul>
+<li>- **专家提示词设计**：结构 = 普通Agent + 领域方法论 + 交付模板 + 工作流约束</li>
+<li>- 角色覆盖：Role Override 机制重置模型身份</li>
+<li>- 工作流程：明确 SOP 约束 Agent 行为</li>
+<li>- 交付标准：定义成功指标和交付物模板</li>
+<li>- 沟通风格：固化专业行为模式</li>
+<li>- 详见 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a></li>
+<li>- **多Agent协作机制**：详见 <a href="多Agent协作模式.html">多Agent协作模式</a></li>
 <li>- 任务分配预检（防止误派）</li>
 <li>- 预设 Workflow（固化协作流程）</li>
 <li>- 消息中转模式（避免上下文污染）</li>
 <li>- 异常处理和交付检查</li>
+</ul>
+<h3>自定义模型接入</h3>
+<p>WorkBuddy 支持通过 OpenAI 兼容协议接入自定义模型，不限于内置模型商：</p>
+<ul>
+<li>- **配置方式**：设置 → 模型 → 新增模型 → 自定义；填写接口地址（需兼容 OpenAI API 协议）、API Key、模型名称、上下文窗口；保存后在对话界面底部切换使用</li>
+<li>- **企业场景**：支持通过企业内部 <a href="AI-API网关.html">AI API网关</a> 接入，员工无需各自申请模型 API Key，由网关统一管理令牌和额度。来源：素材笔记/AI流程/Workbuddy配置公司中转站操作手册 中记录了通过华诺星空 AI 网关接入 deepseek-v4-pro 的完整配置流程。</li>
 </ul>
 <h2>适用场景</h2>
 <table>
@@ -126,27 +126,10 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </table>
 <h2>团队评估</h2>
 <blockquote>WorkBuddy 的专家系统代表了 Agent 产品化的一个方向：将提示词工程的最佳实践固化为可复用的专家角色。对我们的 AI 研究知识库来说，其 AGENTS.md 的设计思路与此高度一致。</blockquote>
-<h2>相关概念</h2>
+<h2>争议与待验证</h2>
 <ul>
-<li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 专家提示词的通用结构</li>
-<li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — 专家团的底层协作机制</li>
-<li>- <span class="dangling" title="页面尚未创建">LLM Wiki</span> — 基于类似思路的知识库方法论</li>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
 </ul>
-<h2>相关实体</h2>
-<ul>
-<li>- <a href="叶小钗.html">叶小钗</a> — 原文作者，AI 心法公众号</li>
-</ul>
-<h2>自定义模型接入</h2>
-<p>WorkBuddy 支持通过 OpenAI 兼容协议接入自定义模型，不限于内置模型商：</p>
-<h3>配置方式</h3>
-<ol>
-<li>设置 → 模型 → 新增模型 → 自定义</li>
-<li>填写接口地址（需兼容 OpenAI API 协议）、API Key、模型名称、上下文窗口</li>
-<li>保存后在对话界面底部切换使用</li>
-</ol>
-<h3>企业场景</h3>
-<p>支持通过企业内部 <a href="AI-API网关.html">AI API网关</a> 接入，员工无需各自申请模型 API Key，由网关统一管理令牌和额度。</p>
-<blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/工作流/2026-07-02_Workbuddy配置公司中转站操作手册</span> 中记录了通过华诺星空 AI 网关接入 deepseek-v4-pro 的完整配置流程。</blockquote>
 <h2>相关页面</h2>
 <ul>
 <li>- <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> — 专家提示词的通用结构</li>
@@ -156,33 +139,32 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- <a href="AI-API网关.html">AI API网关</a> — 企业场景下 WorkBuddy 接入自定义模型的标准中转方式</li>
 <li>- <a href="AI原生组织.html">AI原生组织</a> — WorkBuddy 专家系统与 YC 工具注册表+技能系统同构</li>
 <li>- <a href="AI使用哲学.html">AI使用哲学</a> — Builder 心态与"从用户变训练师"</li>
-</ul>
-<p>---</p>
-<p><em>创建: 2026-07-01 | 更新: 2026-07-03</em></p></div>
+<li>- 叶小钗 — 原文作者，AI 心法公众号</li>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
-            <a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><span class="link-btn dangling">LLM Wiki</span><a href="叶小钗.html" class="link-btn">叶小钗</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Obsidian+AI工作台.html" class="link-btn">Obsidian+AI工作台</a><a href="Codex.html" class="link-btn">Codex</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a>
+            <a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Obsidian+AI工作台.html" class="link-btn">Obsidian+AI工作台</a><a href="Codex.html" class="link-btn">Codex</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a>
         </div>
     </div>
 
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">product</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">WorkBuddy.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-01</span></div>
             <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI产品</span> <span class="tag">Agent平台</span> <span class="tag">多Agent</span> <span class="tag">桌面Agent</span></div>
+            <div><a href="tag-研究公共AI.html" class="tag">研究公共AI</a> <a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-工具评测.html" class="tag">工具评测</a></div>
         </div>
 
         <div class="sidebar-card">
-            <h3>反向链接 (20)</h3>
-            <div><a href="AI-API网关.html" class="backlink-item">AI API网关</a><a href="Codex.html" class="backlink-item">Codex</a><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="rtk.html" class="backlink-item">rtk</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="叶小钗.html" class="backlink-item">叶小钗</a><a href="Obsidian+AI工作台.html" class="backlink-item">Obsidian+AI工作台</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a><a href="2026-07-03_InfiniteTalk开源.html" class="backlink-item">2026-07-03_InfiniteTalk开源</a><a href="2026-07-03_rtk-CLI代理降低LLM令牌消耗.html" class="backlink-item">2026-07-03_rtk-CLI代理降低LLM令牌消耗</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a><a href="2026-07-03_顶尖1%的人用AI的方式.html" class="backlink-item">2026-07-03_顶尖1%的人用AI的方式</a><a href="2026-07-02_Workbuddy配置公司中转站操作手册.html" class="backlink-item">2026-07-02_Workbuddy配置公司中转站操作手册</a></div>
+            <h3>反向链接 (25)</h3>
+            <div><a href="AI-API网关.html" class="backlink-item">AI API网关</a><a href="Codex.html" class="backlink-item">Codex</a><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="Obsidian+AI工作台.html" class="backlink-item">Obsidian+AI工作台</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="rtk.html" class="backlink-item">rtk</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="Builder-心态.html" class="backlink-item">Builder 心态</a><a href="Problem-Hunting.html" class="backlink-item">Problem Hunting</a><a href="奢侈雇员（Luxury-Hires）.html" class="backlink-item">奢侈雇员（Luxury Hires）</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="InfiniteTalk开源.html" class="backlink-item">InfiniteTalk开源</a><a href="rtk-CLI代理降低LLM令牌消耗.html" class="backlink-item">rtk-CLI代理降低LLM令牌消耗</a><a href="DeepSeek从入门到精通.html" class="backlink-item">DeepSeek从入门到精通</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a><a href="顶尖1%的人用AI的方式.html" class="backlink-item">顶尖1%的人用AI的方式</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -191,12 +173,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         </div>
 
         <div class="sidebar-card">
-            <h3>被引用 (20)</h3>
-            <div><a href="AI-API网关.html" class="backlink-item">AI API网关</a><a href="Codex.html" class="backlink-item">Codex</a><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="rtk.html" class="backlink-item">rtk</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="叶小钗.html" class="backlink-item">叶小钗</a><a href="Obsidian+AI工作台.html" class="backlink-item">Obsidian+AI工作台</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="2026-07-02_Dify平台Agent开发入门指南.html" class="backlink-item">2026-07-02_Dify平台Agent开发入门指南</a><a href="2026-07-03_InfiniteTalk开源.html" class="backlink-item">2026-07-03_InfiniteTalk开源</a><a href="2026-07-03_rtk-CLI代理降低LLM令牌消耗.html" class="backlink-item">2026-07-03_rtk-CLI代理降低LLM令牌消耗</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-02_DeepSeek从入门到精通.html" class="backlink-item">2026-07-02_DeepSeek从入门到精通</a><a href="2026-07-03_顶尖1%的人用AI的方式.html" class="backlink-item">2026-07-03_顶尖1%的人用AI的方式</a><a href="2026-07-02_Workbuddy配置公司中转站操作手册.html" class="backlink-item">2026-07-02_Workbuddy配置公司中转站操作手册</a></div>
+            <h3>被引用 (25)</h3>
+            <div><a href="AI-API网关.html" class="backlink-item">AI API网关</a><a href="Codex.html" class="backlink-item">Codex</a><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="Dify.html" class="backlink-item">Dify</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="Obsidian+AI工作台.html" class="backlink-item">Obsidian+AI工作台</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="rtk.html" class="backlink-item">rtk</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="Harness(智能体执行壳).html" class="backlink-item">Harness(智能体执行壳)</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="Builder-心态.html" class="backlink-item">Builder 心态</a><a href="Problem-Hunting.html" class="backlink-item">Problem Hunting</a><a href="奢侈雇员（Luxury-Hires）.html" class="backlink-item">奢侈雇员（Luxury Hires）</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="Dify平台Agent开发入门指南.html" class="backlink-item">Dify平台Agent开发入门指南</a><a href="InfiniteTalk开源.html" class="backlink-item">InfiniteTalk开源</a><a href="rtk-CLI代理降低LLM令牌消耗.html" class="backlink-item">rtk-CLI代理降低LLM令牌消耗</a><a href="DeepSeek从入门到精通.html" class="backlink-item">DeepSeek从入门到精通</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a><a href="顶尖1%的人用AI的方式.html" class="backlink-item">顶尖1%的人用AI的方式</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>

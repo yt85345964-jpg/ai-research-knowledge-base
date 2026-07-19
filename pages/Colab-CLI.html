@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colab CLI - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>Colab CLI</h1>
+            <div class="sub">AI产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>Colab CLI</h1>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：Google Colab CLI 是 Google 推出的命令行工具，让开发者和 AI Agent 在本地终端直接申请和管理云端 GPU/TPU 算力，实现"算力即命令"的零摩擦体验。它是云计算民主化的下一站——让 GPU 像 `apt install` 一样触手可及。</blockquote>
+<h2>核心功能</h2>
+<h3>算力申请</h3>
+<pre><code>
+colab --gpu A100    # 申请 A100 GPU
+colab --gpu T4      # 申请 T4 GPU
+colab --gpu TPU     # 申请 TPU
+</code></pre>
+<h3>远程执行</h3>
+<pre><code>
+colab exec script.py           # 在远程运行时执行本地脚本
+colab exec -f pipeline.py      # 执行完整的 ML 管道
+</code></pre>
+<h3>产物管理</h3>
+<pre><code>
+colab download                  # 下载所有产物
+colab log --output log.ipynb    # 保存可重放的 notebook 日志
+</code></pre>
+<h3>交互式访问</h3>
+<pre><code>
+colab repl        # 进入 Python REPL
+colab console     # 进入完整控制台
+</code></pre>
+<h3>Agent 集成</h3>
+<p>Colab CLI 包含预置的 [Skill 文件](https://github.com/googlecolab/google-colab-cli/blob/main/COLAB_SKILL.md)，为 Agent 提供：</p>
+<ul>
+<li>- Colab CLI 所有命令和参数说明</li>
+<li>- 典型工作流示例</li>
+<li>- 最佳实践</li>
+</ul>
+<p>支持的 Agent 平台：Antigravity、Claude Code、<a href="Codex.html">Codex</a>、及其他任何有终端访问权限的 Agent。</p>
+<h3>典型工作流：Agent 驱动的 QLoRA 微调</h3>
+<p>以微调 Gemma 3-1B 实现 Text-to-SQL 为例，Agent 执行的完整命令序列：</p>
+<pre><code>
+$ colab new --gpu T4                                              # 1. 申请 GPU
+$ colab install transformers datasets peft trl bitsandbytes       # 2. 安装 ML 依赖
+$ colab exec -f finetune_run.py                                  # 3. 远程执行微调脚本
+$ colab log --output gemma_finetune_log.ipynb                     # 4. 保存日志
+$ colab download                                                   # 5. 下载模型产物
+$ colab stop                                                       # 6. 释放资源
+</code></pre>
+<blockquote>关键特征：全程单终端操作，无需登录云控制台、无需管理 SSH 密钥、无需关心实例生命周期。6 条命令完成从算力申请到模型产出的端到端流程。</blockquote>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>Agent 需要临时 GPU 跑模型训练/推理</td>
+<td>需要持续运行的在线推理服务</td>
+</tr>
+<tr>
+<td>个人开发者/小团队快速实验</td>
+<td>需要复杂 GPU 集群调度的大规模训练</td>
+</tr>
+<tr>
+<td>CI/CD 中的 ML 任务自动化</td>
+<td>对数据出境有严格合规要求的企业</td>
+</tr>
+<tr>
+<td>教学/演示中的一键 GPU 环境</td>
+<td>需要自定义 VM 镜像或网络配置的场景</td>
+</tr>
+</table>
+<h2>竞品对比</h2>
+<table>
+<tr>
+<td>维度</td>
+<td>Colab CLI</td>
+<td>[[Codex]]</td>
+<td>[[AI API网关]]</td>
+</tr>
+<tr>
+<td>定位</td>
+<td>云算力 CLI 入口</td>
+<td>终端 AI Agent</td>
+<td>模型 API 统一接入</td>
+</tr>
+<tr>
+<td>解决的问题</td>
+<td>如何直接申请 GPU 供 Agent 使用</td>
+<td>如何让 Agent 操作本地环境</td>
+<td>如何管理多个模型 API</td>
+</tr>
+<tr>
+<td>Agent 集成</td>
+<td>原生（内置 Skill 文件）</td>
+<td>自身就是 Agent</td>
+<td>需手动配置</td>
+</tr>
+<tr>
+<td>资源类型</td>
+<td>GPU/TPU 算力</td>
+<td>本地计算资源</td>
+<td>API 令牌（token）</td>
+</tr>
+<tr>
+<td>开源</td>
+<td>是（MIT）</td>
+<td>是（Apache 2.0）</td>
+<td>取决于实现</td>
+</tr>
+</table>
+<blockquote>Colab CLI 和 <a href="AI-API网关.html">AI API网关</a> 是互补关系：前者解决算力从哪里来，后者解决模型 API 怎么管。</blockquote>
+<h2>团队评估</h2>
+<blockquote>Colab CLI 是 AI 基础设施"命令行化"趋势的最新代表。它与 <a href="Codex.html">Codex</a> 的组合可能形成高性价比的 Agent 开发环境——Codex 负责推理和编排，Colab CLI 提供弹性 GPU 算力。对于本知识库的自动化流程，Colab CLI 可用于未来"AI 编译知识库"时的模型推理加速（如本地模型不足时弹性使用云端 GPU）。</blockquote>
+<blockquote>需要注意的是认证和配额管理目前仍是潜在瓶颈——社区反馈表明基于浏览器的认证流程可能对 Agent 不友好。建议关注后续改进。</blockquote>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
+<ul>
+<li>- <a href="Codex.html">Codex</a> — 终端 AI Agent，可集成 Colab CLI 获取远程 GPU</li>
+<li>- <a href="WorkBuddy.html">WorkBuddy</a> — 桌面 AI Agent 平台，内部集成方式不同但共享"Agent + 工具"范式</li>
+<li>- <a href="AI-API网关.html">AI API网关</a> — 模型 API 的统一管理层，与 Colab CLI 互补（算力 vs 令牌）</li>
+<li>- <a href="Dify.html">Dify</a> — LLMOps 平台，其模型管理能力与 Colab CLI 的算力供给互补</li>
+<li>- <a href="AI原生组织.html">AI原生组织</a> — Colab CLI 降低 Agent 获取算力的摩擦，是 AI-Native 工作流的基础设施拼图</li>
+<li>- <a href="多Agent协作模式.html">多Agent协作模式</a> — Agent 自主调用 Colab CLI 执行 ML 任务是典型的编排-执行模式</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Codex.html" class="link-btn">Codex</a><a href="Codex.html" class="link-btn">Codex</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="Codex.html" class="link-btn">Codex</a><a href="Codex.html" class="link-btn">Codex</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="Dify.html" class="link-btn">Dify</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">Colab-CLI.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-07</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-07</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-研究公共AI.html" class="tag">研究公共AI</a> <a href="tag-大模型.html" class="tag">大模型</a> <a href="tag-工具评测.html" class="tag">工具评测</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (1)</h3>
+            <div><a href="Codex.html" class="backlink-item">Codex</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (1)</h3>
+            <div><a href="Codex.html" class="backlink-item">Codex</a></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

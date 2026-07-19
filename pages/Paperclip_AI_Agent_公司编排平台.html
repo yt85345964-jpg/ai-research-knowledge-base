@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paperclip_AI_Agent_公司编排平台 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>Paperclip_AI_Agent_公司编排平台</h1>
+            <div class="sub">AI产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>Paperclip：72K Star 的 AI Agent 公司编排平台（"一人公司"基础设施）</h1>
+<blockquote>来源：微信视频号「Codex 打造一人公司，72K Star 神器，一个人 + Codex = 一人公司 — Paperclip」本地视频（21MB）</blockquote>
+<blockquote>综合来源：ZupHP 深度介绍、Tenten.co 报道、josenobile.co 指南、fast.io 评测、opentechhub.io 企业分析</blockquote>
+<p>---</p>
+<h2>一句话总结</h2>
+<p><strong>Paperclip 是一个开源（MIT）的"AI Agent 公司管理系统"</strong>——把 Agent 当员工管理。GitHub 7.2 万星、一行命令开箱即用。<strong>"如果 OpenClaw 是一个员工，Paperclip 就是整个公司"</strong>。</p>
+<p>---</p>
+<h2>核心理念</h2>
+<blockquote>2025 年是 AI Agent 的**个体能力爆发年**——Claude Code 能写生产级代码、Codex 能独立交付模块、OpenClaw 能连续运行数小时。**真正的瓶颈不是能力，是「规模化的协调」**。</blockquote>
+<p><strong>痛点场景</strong>：</p>
+<ul>
+<li>- 同时开 20 个 Claude Code 窗口，记不清谁在干什么</li>
+<li>- 重启后所有工作上下文消失</li>
+<li>- 一个失控循环烧掉几百美元 token</li>
+<li>- 花 15 分钟找上下文提醒 Agent 它在做什么</li>
+</ul>
+<p><strong>作者背景</strong>（@dotta）：原管理一个自动化对冲基金的复杂工作流，并行大量 Claude Code 会话，缺乏统一协调层——痛点催生项目。</p>
+<p>---</p>
+<h2>关键数据</h2>
+<table>
+<tr>
+<td>指标</td>
+<td>数值</td>
+</tr>
+<tr>
+<td>GitHub Stars</td>
+<td>72,900+（4 个月内）</td>
+</tr>
+<tr>
+<td>Forks</td>
+<td>13,400+</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>上线时间</td>
+<td>2026-03-02</td>
+</tr>
+<tr>
+<td>最新版本</td>
+<td>v2026.626.0（2026-06-27）</td>
+</tr>
+<tr>
+<td>Open Issues</td>
+<td>5,018（健康活跃指标）</td>
+</tr>
+<tr>
+<td>一行启动</td>
+<td>`npx paperclipai onboard --yes`</td>
+</tr>
+<tr>
+<td>技术栈</td>
+<td>Node.js + React + PostgreSQL（嵌入式）</td>
+</tr>
+</table>
+<p>---</p>
+<h2>六大核心能力</h2>
+<h3>1. 🏢 组织架构（Org Charts）</h3>
+<ul>
+<li>- Agent 有职位、头衔、汇报线、权限、预算</li>
+<li>- **严格的树状层级**：CEO → CTO → 工程师（实际指挥链）</li>
+<li>- 上报与任务委派沿组织架构自动流动</li>
+<li>- 不是模拟，是真实的层级管理</li>
+</ul>
+<h3>2. 🎯 目标对齐</h3>
+<ul>
+<li>- 每个任务都追溯到公司使命</li>
+<li>- Agent 知道做什么，**更知道为什么做**</li>
+</ul>
+<h3>3. 💰 预算控制</h3>
+<ul>
+<li>- 每个 Agent 有月度预算，到限额自动停止</li>
+<li>- 80% 警告 / 100% 自动暂停 / 董事会可 override</li>
+<li>- 防止"跑一晚烧几百刀"的事故</li>
+</ul>
+<h3>4. 📋 任务管理</h3>
+<ul>
+<li>- 原子化任务签出：不重复执行、不丢失上下文</li>
+<li>- 支持阻塞依赖、评论、附件</li>
+<li>- 状态机驱动</li>
+</ul>
+<h3>5. 💓 心跳调度（核心创新）</h3>
+<ul>
+<li>- Agent 按计划醒来 → 检查工作 → 执行任务 → 休眠</li>
+<li>- 间隔可配（15 分钟 ~ 数小时）</li>
+<li>- 事件触发：@-mention 或直接任务分配时立即唤醒</li>
+<li>- 解决 Agent **无状态问题**——能力存在但跨会话丢失上下文</li>
+</ul>
+<h3>6. 🔒 治理与审批</h3>
+<ul>
+<li>- 董事会审批工作流（结构性变更需批准）</li>
+<li>- 执行策略：哪些可自主、哪些需人工 sign-off</li>
+<li>- 版本化配置 + rollback 能力</li>
+</ul>
+<h3>7. 📊 完整审计</h3>
+<ul>
+<li>- 每次对话可追溯、每个决策有解释</li>
+<li>- 完整工具调用追踪 + 不可变审计日志</li>
+<li>- 满足合规审查</li>
+</ul>
+<h3>8. 🏗️ 多公司隔离</h3>
+<ul>
+<li>- 一个部署可跑无数公司</li>
+<li>- 数据完全隔离（多租户）</li>
+</ul>
+<p>---</p>
+<h2>支持的 Agent 类型（BYO-Agent）</h2>
+<ul>
+<li>- ✅ **Claude Code**</li>
+<li>- ✅ **OpenAI Codex**</li>
+<li>- ✅ **Cursor / Gemini / bash 等 CLI Agent**</li>
+<li>- ✅ **OpenClaw**（HTTP/Webhook Bot）</li>
+<li>- ✅ **Nous Research Hermes**（via hermes-paperclip-adapter）</li>
+<li>- ✅ **Pi / OpenCode**</li>
+<li>- ✅ **任何能接收心跳的 Agent**（甚至 bash 脚本、HTTP webhook）</li>
+</ul>
+<blockquote>"Bring Your Own Agent" 哲学——任何能接收心跳信号的事物都可以被"雇进"组织架构。</blockquote>
+<p>---</p>
+<h2>架构组件</h2>
+<table>
+<tr>
+<td>组件</td>
+<td>职责</td>
+</tr>
+<tr>
+<td>Org Charts</td>
+<td>层级化 Agent 结构（CEO 委派给部门，部门委派给员工）</td>
+</tr>
+<tr>
+<td>Governance</td>
+<td>治理规则：决策边界、冲突解决、强制审批</td>
+</tr>
+<tr>
+<td>React UI</td>
+<td>Dashboard 可视化 + WebSocket 实时更新</td>
+</tr>
+<tr>
+<td>PostgreSQL Backend</td>
+<td>任务队列、Agent 分配、执行日志、审计追踪</td>
+</tr>
+<tr>
+<td>Skills System</td>
+<td>可插拔技能（可跨多 Agent 协调，如"部署到生产"skill 协调 Codex 测试 + Bash CI + HTTP 触发）</td>
+</tr>
+<tr>
+<td>Heartbeat Protocol</td>
+<td>启动检查清单：读身份 → 查计划 → 拉任务 → 执行 → 存记忆 → 报告</td>
+</tr>
+</table>
+<p>---</p>
+<h2>与 OpenClaw 的对比</h2>
+<table>
+<tr>
+<td>维度</td>
+<td>OpenClaw</td>
+<td>Paperclip</td>
+</tr>
+<tr>
+<td>定位</td>
+<td>**单个员工**</td>
+<td>**整个公司**</td>
+</tr>
+<tr>
+<td>形态</td>
+<td>单一 AI 助手框架</td>
+<td>多 Agent 协调平台</td>
+</tr>
+<tr>
+<td>心跳</td>
+<td>✅（单 Agent）</td>
+<td>✅（多 Agent 协同）</td>
+</tr>
+<tr>
+<td>预算</td>
+<td>单 Agent</td>
+<td>每个 Agent 独立预算</td>
+</tr>
+<tr>
+<td>审计</td>
+<td>会话级</td>
+<td>不可变审计日志</td>
+</tr>
+<tr>
+<td>多公司</td>
+<td>❌</td>
+<td>✅ 多租户隔离</td>
+</tr>
+</table>
+<p><strong>关系</strong>：OpenClaw 是"员工"，Paperclip 是"公司"。Paperclip 不替代个体 Agent，是它们的管理层。</p>
+<p>---</p>
+<h2>"Day 2" 现实</h2>
+<h3>优势</h3>
+<ul>
+<li>- 🟢 治理、审计、RBAC、隔离等付费平台功能免费</li>
+<li>- 🟢 自托管：数据不离开自己基础设施</li>
+<li>- 🟢 零 LLM 厂商锁定（BYO Agent + BYO Key）</li>
+<li>- 🟢 团队从"一次性实验"过渡到"管理化运营"</li>
+</ul>
+<h3>风险</h3>
+<ul>
+<li>- 🔴 2026 早期项目，单一公司治理，无独立基金会</li>
+<li>- 🔴 5,018 个未解决问题（活跃但年轻）</li>
+<li>- 🔴 缺第三方安全认证</li>
+<li>- 🔴 总线因子风险：维护连续性</li>
+</ul>
+<p>---</p>
+<h2>适用场景</h2>
+<ul>
+<li>- ✅ 团队 Agent 数量从「几个」到「几十个」的过渡阶段</li>
+<li>- ✅ 需要预算控制、审计追踪、董事会审批的中大型组织</li>
+<li>- ✅ 已经在用 Claude Code / Codex / OpenClaw 想统一管理</li>
+<li>- ❌ 个人极简 Agent 爱好者（OpenClaw 足够）</li>
+<li>- ❌ 单纯聊天/对话场景（用 ChatGPT/Claude.ai 即可）</li>
+</ul>
+<p>---</p>
+<h2>关键洞察</h2>
+<ol>
+<li>**"AI Agent 协调层"是新蓝海**：当 Agent 数量突破单兵作战阈值，"管理 Agent 的系统"成为新刚需。Paperclip 4 个月 7 万星印证了这一点。</li>
+<li>**"Bring Your Own Agent" 是正确抽象**：Paperclip 不做模型、不做 Agent——只做协调。模型和 Agent 留给专业玩家，平台做中立层。</li>
+<li>**「心跳 + 预算 + 审计」三件套是 Agent Ops 标配**：缺一不可。无心跳 Agent 会失忆；无预算会烧钱；无审计会失控。</li>
+<li>**从"Copilot"到"Co-Worker"再到"Co-Org"**：AI 进化的三阶段——Copilot（辅助）、Co-Worker（同事）、Co-Org（组织成员）。Paperclip 是 Co-Org 阶段的开源代表。</li>
+</ol>
+<p>---</p>
+<h2>知识点映射</h2>
+<ul>
+<li>- 涉及产品：<a href="Codex.html">Codex</a>、<a href="OpenClaw.html">OpenClaw</a>、Claude Code、Cursor、Gemini CLI、Paperclip</li>
+<li>- 涉及概念：<a href="Harness(智能体执行壳).html">Harness(智能体执行壳)</a>、<a href="多Agent协作模式.html">多Agent协作模式</a>、<a href="AI原生组织.html">AI原生组织</a>、<a href="AI使用哲学.html">AI使用哲学</a></li>
+<li>- 涉及概念：心跳协议、预算控制、审计日志、组织架构、Bring Your Own Agent</li>
+<li>- 对应 Wiki 页面：尚未建立（建议新建 `Paperclip` 产品页 + 更新 `AI原生组织` Wiki）</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="Codex.html" class="link-btn">Codex</a><a href="OpenClaw.html" class="link-btn">OpenClaw</a><a href="Harness(智能体执行壳).html" class="link-btn">Harness(智能体执行壳)</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">Paperclip_AI_Agent_公司编排平台.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-13</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value"></span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-实践案例.html" class="tag">实践案例</a> <a href="tag-趋势研判.html" class="tag">趋势研判</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><span class="meta-link">[[Paperclip]]</span><span class="meta-link">[[AI原生组织]]</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

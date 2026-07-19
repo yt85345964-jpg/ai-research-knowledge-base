@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI操控嘉立创EDA画PCB - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>AI操控嘉立创EDA画PCB</h1>
+            <div class="sub">AI产品 · 活跃</div>
+        </div>
+        <div class="content"><h1>2 步教会你用 AI 操控嘉立创 EDA 画 PCB</h1>
+<blockquote>来源：微信视频号「AI 操控嘉立创 EDA 画 PCB」本地视频（68MB）</blockquote>
+<blockquote>时间：2026-07-11 入库</blockquote>
+<blockquote>视频信息密度较低，主要演示价值；本素材笔记综合嘉立创 EDA 官方 + easyeda-agent/easyeda-api Skill + Run API Gateway 三套社区方案整理</blockquote>
+<p>---</p>
+<h2>一句话总结</h2>
+<p>嘉立创 EDA 专业版已可通过<strong>官方扩展 / 第三方 Skill / Agent Connector</strong> 三种路径实现"AI 直接操控编辑器画原理图与 PCB"，目前<strong>已证明路径可行但效果一般</strong>——复杂场景仍需工程师介入。</p>
+<p>---</p>
+<h2>三套方案对比</h2>
+<h3>方案一：社区 Skill（easyeda-api / easyeda-agent）⭐⭐⭐⭐</h3>
+<p><strong>架构</strong>：Skill 描述工作流 → Go CLI/Daemon (端口 49620-49629) → WebSocket → .eext Connector → eda.* API</p>
+<p><strong>安装步骤</strong>：</p>
+<pre><code>
+# 1. 安装 easyeda-agent
+curl -fsSL https://raw.githubusercontent.com/zhoushoujianwork/easyeda-agent/main/install.sh | sh
+
+# 2. 在嘉立创 EDA 扩展管理器安装 EasyEDA Agent Connector 扩展
+#    仓库: github.com/zhoushoujianwork/easyeda-agent (Apache-2.0)
+
+# 3. 启动守护进程
+easyeda daemon
+
+# 4. 验证
+easyeda health
+# → daemon: online, connector: connected
+</code></pre>
+<p><strong>AI 控制命令示例</strong>（与 Hermes / Claude Code / Codex 配合）：</p>
+<pre><code>
+# 搜索器件
+easyeda sch search --keyword STM32H753
+
+# 放置芯片
+easyeda sch place --lib-uuid xxx --designator U1 --x 3000 --y 3000
+
+# 单步连引脚
+easyeda sch connect-pin --designator U1 --pin PA9 --net USART1_TX
+
+# 电源/地标
+easyeda sch power-flag --net VDD_3V3
+easyeda sch ground-flag --net GND
+
+# DRC + 导出
+easyeda sch drc
+easyeda sch export netlist
+easyeda sch export bom --format xlsx
+</code></pre>
+<h3>方案二：官方 eext-run-api-gateway ⭐⭐⭐⭐</h3>
+<p><strong>架构</strong>：AI 编程工具 (Cursor/Claude Code/Hermes) ← WebSocket → eext-run-api-gateway → LCEDA 编辑器</p>
+<ul>
+<li>- 在嘉立创 EDA Pro → 扩展 → 扩展广场 搜索 `eext-run-api-gateway` 安装</li>
+<li>- 网关默认端口 9527</li>
+<li>- 通过 WebSocket 调用 LCEDA 99% 功能</li>
+</ul>
+<p><strong>Python 客户端示例</strong>：</p>
+<pre><code>
+import asyncio, websockets, json
+
+async def lceda(action, params):
+    # ... 连接到 ws://localhost:9527 并发送 typed action
+    pass
+
+# DRC 检查
+await lceda("run_drc", {"type": "sch"})
+# 导出 BOM
+await lceda("export_bom", {"format": "csv"})
+</code></pre>
+<h3>方案三：自定义扩展文件桥接 ⭐⭐</h3>
+<ul>
+<li>- 传统方式：Hermes Agent 将网表写入 JSON 文件</li>
+<li>- LCEDA 扩展轮询读取后执行</li>
+<li>- 通用性差，仅作过渡方案</li>
+</ul>
+<p>---</p>
+<h2>实际能力边界</h2>
+<p>视频作者实测后评价：<strong>"虽然效果一般般，但是已经证明了这个路径的可能"</strong>。</p>
+<ul>
+<li>- ✅ 适用：简单原理图模块搭建、基础器件放置、单步连线、BOM/Netlist 导出</li>
+<li>- ❌ 不足：复杂 PCB 布局、高速信号规则布线、多层板电源平面优化</li>
+<li>- ⚠️ 仍需工程师：DRC 误报甄别、关键参数（阻抗/差分/等长）调整</li>
+</ul>
+<p>---</p>
+<h2>关键洞察</h2>
+<ol>
+<li>**AI 操控 EDA 已"证明可行"**：从代码/自然语言到真实编辑器里的 typed action，已经走过 0→1 阶段。瓶颈在 1→100 的工程化细节。</li>
+<li>**三方案生态井喷**：官方 gateway + 社区 Skill + Agent Connector，说明这是行业级共识，嘉立创 EDA 正主动接入 AI Agent 生态。</li>
+<li>**计算密集型场景**：AI 协作需要 32GB+ 内存，复杂工程 64GB+；Node.js Bridge Server 默认堆内存 1.4GB 不足，需要 `--max-old-space-size=4096`。</li>
+</ol>
+<p>---</p>
+<h2>知识点映射</h2>
+<ul>
+<li>- 涉及产品：嘉立创 EDA（专业版 / EasyEDA Pro）、Hermes、Claude Code、Codex、SailWind</li>
+<li>- 涉及概念：<a href="MCP.html">MCP</a>（MCP 版扩展）、WebSocket 桥接、Agent Connector、Skill 工作流</li>
+<li>- 对应 Wiki 页面：尚未建立（建议新建 `嘉立创 EDA AI 操控` 流程页）</li>
+<li>- 兄弟 Wiki：硬件AI 类目下其他实践（Claude 辅助设计软硬件、KiCad + Claude Code、PCB 自动化 BOM 等）</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="MCP.html" class="link-btn">MCP</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">AI操控嘉立创EDA画PCB.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-13</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value"></span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-硬件AI.html" class="tag">硬件AI</a> <a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-实践案例.html" class="tag">实践案例</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><span class="meta-link">[[嘉立创EDA_AI操控]]</span><span class="meta-link">[[AI辅助硬件研发工作流]]</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一个人亲手做企业AI服务的3个思考 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #BA7517; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>一个人亲手做企业AI服务的3个思考</h1>
+            <div class="sub">AI理念 · 已处理</div>
+        </div>
+        <div class="content"><h1>一个人亲手做企业AI服务的3个思考</h1>
+<p>来源：微信视频号 → 本地视频文件（879MB，9分29秒）→ B站/抖音多平台分发</p>
+<blockquote>✅ 已用 faster-whisper 对原视频做 ASR 转录（3993字），本笔记内容基于转录全文提炼，AI 已核。转录稿见文末「转录文稿」章节，关键同音误识别（如 SaaS、Claude、护城河）已修正。</blockquote>
+<h2>视频元数据</h2>
+<table>
+<tr>
+<td>字段</td>
+<td>内容</td>
+</tr>
+<tr>
+<td>**标题**</td>
+<td>一个人亲手做企业AI服务的3个思考</td>
+</tr>
+<tr>
+<td>**作者**</td>
+<td>第四种黑猩猩CHIMP</td>
+</tr>
+<tr>
+<td>**发布时间**</td>
+<td>2026-06-29（B站）/ 2026-06-28（抖音）</td>
+</tr>
+<tr>
+<td>**时长**</td>
+<td>569 秒（约 9分29秒）</td>
+</tr>
+<tr>
+<td>**B站数据**</td>
+<td>播放 7,478、弹幕 15、评论 42、收藏 548、赞 537</td>
+</tr>
+<tr>
+<td>**抖音数据**</td>
+<td>153.2万 喜欢</td>
+</tr>
+<tr>
+<td>**平台**</td>
+<td>B站 BV1dyKQ6REpf / 抖音 7656379464788426161 / 今日头条</td>
+</tr>
+</table>
+<h2>核心内容（基于 ASR 转录全文提炼）</h2>
+<p>作者（第四种黑猩猩）2026上半年亲自做了大量企业 AI 落地（自主培训 + FDE 前线部署工程师双线），视频提出三个思考：</p>
+<h3>思考一：市场行情</h3>
+<ul>
+<li>- **两个判断**：①企业 AI 服务缺口极大，市场才刚开始；②市场虽大，但选对客户极关键。</li>
+<li>- **现实落差**：99% 的公司还没真正落地，多数停留在「问豆包/大模型问题」阶段；技术端与企业端之间存在巨大「信息鸿沟」，企业需要既懂技术又懂商业/产品/运营的综合性人才。</li>
+<li>- **选客户三标准**：①原业务尽量数字化（少线下环节）；②从业人员学习/适应能力强；③**有钱**（能接受新事物、付得起服务溢价）。</li>
+</ul>
+<h3>思考二：人的因素（两个反直觉）</h3>
+<ul>
+<li>- **老板反直觉**：看后台 token 消耗，企业里用 Agent 最猛的恰恰是部门负责人/一把手——「token 不会说谎」。老板想法多但过去执行慢，Agent 相当于随叫随到的执行者，想法可快速验证。**结论：一把手自己不上手亲自用 Agent，企业 AI 落地基本推不动。**</li>
+<li>- **员工反直觉**：目标不该是「提升整个部门效率」，而是「用 AI 扩展每个员工个人能力」（把部门做成 10 个超级个体）。原因：①当前 Agent 设计（受 Claude/某 Peter 影响）本就是为个人服务；②公司用熟 AI 后最慢环节是人，工作关系分人-人 / 人-Agent / Agent-Agent，最慢的是人-人，故应扩大个人能力边界、减少无意义人际接触。</li>
+</ul>
+<h3>思考三：具体怎么做 —— 公式 agents + skills + data（智能体+技能+数据）</h3>
+<ul>
+<li>- **agent（最不重要）**：直接用世界上最好的（Codex、Claude Code 等），别自己折腾——你不是 Agent 创业公司，折腾不过别人。</li>
+<li>- **skills（技能）**：把所有重复性工作（流程手册、甚至重复认知）做成 skills 供 Agent 调用。两阶段：①把原流程做成 skills（多数企业卡在这）；②**按 AI 时代特点把流程重做一遍**（真正提升）——类比电脑刚出现被当打字机、打印归档；今天 Agent 生成方案却丢回老 SaaS 系统，流程改造是难点，但优化好流程即成「公司第二大数字资产」。</li>
+<li>- **data（数据，最难、第一大数字资产）**：两层难点——①怎么搞到数据（线上会议自动记录、线下配硬件、官方接口/爬虫）；②怎么组织管理（小范围用 Wiki 知识库、何时用传统 DB、何时向量 DB、每日新增如何管理）。**胜负手**：Agent 与模型是公开花钱能买的，差距在「谁的数据好、管理得好」。</li>
+<li>- **总结**：企业 AI 落地的胜负手从不在最酷炫的 Agent，而在最不起眼处——先换习惯 → 学用 Agent → 重做流程 → 把数据一点点喂进去，过程又慢又脏，但正是它构成企业自己的护城河。</li>
+</ul>
+<h2>关键洞察</h2>
+<ol>
+<li>**一人公司/个体户企业AI服务模式正在兴起**：作者"一个人亲手做企业AI服务"，印证了 <a href="AI使用哲学.html">AI使用哲学</a> 中 Builder 心态的现实路径——个人也可以交付企业级 AI 服务。</li>
+<li>**视频多平台分发验证**：同一内容在B站、抖音、头条均有分发，作者（第四种黑猩猩CHIMP）在多个平台有账号，说明个体 AI 从业者正在形成跨平台内容IP。</li>
+<li>**"公式"隐喻**：作者声称有自己的"公式"，暗示企业AI服务交付正从"手艺"走向"可复制方法论"——这与 <a href="AI原生组织.html">AI原生组织</a> 的技能自进化、<a href="Agent提示词设计模式.html">Agent提示词设计模式</a> 的模式固化理念同构。</li>
+</ol>
+<h2>知识点映射</h2>
+<ul>
+<li>- 对应概念：<a href="AI原生组织.html">AI原生组织</a> — 企业AI服务是AI原生组织建设的外部视角</li>
+<li>- 涉及概念：<a href="AI使用哲学.html">AI使用哲学</a> — Builder 心态在ToB场景的落地</li>
+<li>- 涉及产品：<a href="WorkBuddy.html">WorkBuddy</a>、<a href="Dify.html">Dify</a> — 企业Agent落地的工具平台</li>
+<li>- 相关话题：<a href="多Agent协作模式.html">多Agent协作模式</a> — 企业Agent的核心技术范式</li>
+</ul>
+<h2>处理备注</h2>
+<ul>
+<li>- ✅ 已通过 ASR（faster-whisper small）转录原视频音频，获取全文（3993字），本笔记内容据此更新</li>
+<li>- 视频源文件保留于 `原始资料/2026-07-07_一个人亲手做企业AI服务的3个思考_微信视频号.mp4`（按 AGENTS.md 规则，原始资料不可编辑，作为永久来源）</li>
+<li>- 词汇层误识别已修正：SARS→SaaS、小龍蝦→Claude、互成合→护城河、地上黑经理营→第四种黑猩猩、Weki→Wiki、相量数据库→向量数据库</li>
+<li>- 存疑点（待你核对）："年初小龍蝦的Peter"指代（疑为 Claude 相关设计者）；"張夏文"具体含义不明</li>
+</ul>
+<h2>转录文稿（ASR 原文，faster-whisper small，仅供溯源）</h2>
+<blockquote>语音识别自动生成，含同音误识别（如 SARS→SaaS、小龍蝦→Claude、互成合→护城河、地上黑经理营→第四种黑猩猩）。核心观点以「核心内容」章节的 AI 提炼为准。</blockquote>
+<p><strong>[00:00:00]</strong> 最近半年我做了很多企業的AI服務</p>
+<p><strong>[00:00:02]</strong> 然後在內部社群裡面</p>
+<p><strong>[00:00:03]</strong> 也跟大家斷斷續續的聊過不少</p>
+<p><strong>[00:00:05]</strong> 今天就跟大家稍微完整的講一講</p>
+<p><strong>[00:00:06]</strong> 我是半年的一些思考</p>
+<p><strong>[00:00:07]</strong> 然後如果你也在幫企業去做AI的落地</p>
+<p><strong>[00:00:11]</strong> 或者你就是想把AI塞進自己公司裡面的老闆</p>
+<p><strong>[00:00:14]</strong> 我覺得這期視頻可能會對你有些幫助</p>
+<p><strong>[00:00:16]</strong> 首先來跟大家說一下</p>
+<p><strong>[00:00:17]</strong> 這個企業AI服務</p>
+<p><strong>[00:00:18]</strong> 我這半年到底在幹什麼</p>
+<p><strong>[00:00:19]</strong> 大致分成兩塊</p>
+<p><strong>[00:00:20]</strong> 一塊是自尋培訓</p>
+<p><strong>[00:00:22]</strong> 就是教大家怎麼去用AI工具</p>
+<p><strong>[00:00:24]</strong> 怎麼用agent</p>
+<p><strong>[00:00:25]</strong> 然後每周會更新</p>
+<p><strong>[00:00:26]</strong> 這則有什麼新的工具</p>
+<p><strong>[00:00:27]</strong> 新的趨勢</p>
+<p><strong>[00:00:28]</strong> 新的玩法</p>
+<p><strong>[00:00:28]</strong> 第二块更像是工程师的工作</p>
+<p><strong>[00:00:30]</strong> 这个综合这种工程师的工作</p>
+<p><strong>[00:00:32]</strong> 现在有个名字叫做FDE</p>
+<p><strong>[00:00:34]</strong> 翻译过来叫做前线部署工程师</p>
+<p><strong>[00:00:36]</strong> 就是让每个企业里面的人</p>
+<p><strong>[00:00:37]</strong> 都能够稳定的用上</p>
+<p><strong>[00:00:38]</strong> 世界上最顶尖的模型工具</p>
+<p><strong>[00:00:40]</strong> 然后把AI柔进公司的业务里面</p>
+<p><strong>[00:00:42]</strong> 流程里面</p>
+<p><strong>[00:00:42]</strong> 然后如果碰上一些非技术的公司</p>
+<p><strong>[00:00:45]</strong> 比如说Agent的开发</p>
+<p><strong>[00:00:46]</strong> 工作者的开发这些工作</p>
+<p><strong>[00:00:47]</strong> 我也抱下来也会一起做</p>
+<p><strong>[00:00:48]</strong> 这个视频我有三点比较想聊的</p>
+<p><strong>[00:00:50]</strong> 第一个就是</p>
+<p><strong>[00:00:51]</strong> 现在整个企业服务的市场</p>
+<p><strong>[00:00:53]</strong> 到底情况怎么样</p>
+<p><strong>[00:00:54]</strong> 第二个就是这个过程当中</p>
+<p><strong>[00:00:56]</strong> 最关键的人的这些问题</p>
+<p><strong>[00:00:57]</strong> 第三个就是具体是怎么做的</p>
+<p><strong>[00:00:59]</strong> 当然我有一个自己的公式</p>
+<p><strong>[00:01:01]</strong> 等会最后也会跟大家分享</p>
+<p><strong>[00:01:02]</strong> 好 我们先来来第一点</p>
+<p><strong>[00:01:03]</strong> 就是我这半年来对于市场的整体的思考</p>
+<p><strong>[00:01:05]</strong> 先说一下现在整体情况</p>
+<p><strong>[00:01:07]</strong> 我有两个判断</p>
+<p><strong>[00:01:07]</strong> 一个就是现在的整体的AI企业服务的缺狂</p>
+<p><strong>[00:01:10]</strong> 真的非常大</p>
+<p><strong>[00:01:11]</strong> 而且这个市场才刚刚开始</p>
+<p><strong>[00:01:12]</strong> 另外一个判断就是虽然市场非常大</p>
+<p><strong>[00:01:14]</strong> 但是挑选其中的客户我觉得非常关键</p>
+<p><strong>[00:01:17]</strong> 然后我们来想起说一说</p>
+<p><strong>[00:01:18]</strong> 就是大家如果自闻起说多了</p>
+<p><strong>[00:01:19]</strong> 可能觉得说现在每一个人都已经非常实用的</p>
+<p><strong>[00:01:22]</strong> 每天在使用Cloud Code</p>
+<p><strong>[00:01:23]</strong> Codex这些智能体了</p>
+<p><strong>[00:01:24]</strong> 但现实的情况</p>
+<p><strong>[00:01:25]</strong> 就是我們生活這種情況其實還差得很遠</p>
+<p><strong>[00:01:27]</strong> 我這半年接觸下來</p>
+<p><strong>[00:01:28]</strong> 感覺幾乎99%的公司都還沒有開始落地</p>
+<p><strong>[00:01:31]</strong> 這個A&M</p>
+<p><strong>[00:01:32]</strong> 只停留在可能問一問豆包</p>
+<p><strong>[00:01:34]</strong> 然後問一問大模型一些問題而已</p>
+<p><strong>[00:01:36]</strong> 這個階段我們更宏觀一點的角度來看</p>
+<p><strong>[00:01:38]</strong> 就是技術創新的一端</p>
+<p><strong>[00:01:39]</strong> 然後一些新的技術 新的工具</p>
+<p><strong>[00:01:41]</strong> 開始慢慢可以用了</p>
+<p><strong>[00:01:42]</strong> 然後成熟落地了</p>
+<p><strong>[00:01:43]</strong> 但是企業那一端的大量的企業</p>
+<p><strong>[00:01:45]</strong> 才剛剛開始認知到這個點</p>
+<p><strong>[00:01:47]</strong> 然後開始採納這個階段</p>
+<p><strong>[00:01:48]</strong> 中間有巨大的紅購</p>
+<p><strong>[00:01:49]</strong> 同時這些企業落地</p>
+<p><strong>[00:01:50]</strong> 就需要有很懂的人</p>
+<p><strong>[00:01:51]</strong> 幫他們去解決這些實際問題</p>
+<p><strong>[00:01:53]</strong> 這些實際問題</p>
+<p><strong>[00:01:54]</strong> 不僅是技術問題</p>
+<p><strong>[00:01:55]</strong> 還包括了比如說商業問題</p>
+<p><strong>[00:01:56]</strong> 產品問題</p>
+<p><strong>[00:01:57]</strong> 運營問題等等</p>
+<p><strong>[00:01:58]</strong> 所以對於人的綜合性的能力</p>
+<p><strong>[00:02:00]</strong> 要求也會比較高</p>
+<p><strong>[00:02:00]</strong> 然後另外一點</p>
+<p><strong>[00:02:01]</strong> 我作為一個人一個人來說</p>
+<p><strong>[00:02:03]</strong> 我覺得上半年獲取的客戶的數量</p>
+<p><strong>[00:02:05]</strong> 已經非常非常大</p>
+<p><strong>[00:02:06]</strong> 很多時候</p>
+<p><strong>[00:02:06]</strong> 其實更多的時間</p>
+<p><strong>[00:02:07]</strong> 是在挑選客戶</p>
+<p><strong>[00:02:08]</strong> 每一個企業其實都可以去結合</p>
+<p><strong>[00:02:10]</strong> 但是我自己的因為時間經歷有限</p>
+<p><strong>[00:02:12]</strong> 所以肯定要挑選其中</p>
+<p><strong>[00:02:14]</strong> 更適合我去服務的這樣的客戶</p>
+<p><strong>[00:02:16]</strong> 更有性價比的客戶</p>
+<p><strong>[00:02:17]</strong> 我自己挑選大概有這樣的幾個標準</p>
+<p><strong>[00:02:19]</strong> 首先就是原來的業務</p>
+<p><strong>[00:02:21]</strong> 最好都是數字化的</p>
+<p><strong>[00:02:23]</strong> 支持性的工作业务</p>
+<p><strong>[00:02:24]</strong> 因为太多的线下的部分</p>
+<p><strong>[00:02:26]</strong> 会让整个服务过程</p>
+<p><strong>[00:02:27]</strong> 变得非常的繁琐</p>
+<p><strong>[00:02:28]</strong> 第二点就是这个行业的从业人员</p>
+<p><strong>[00:02:30]</strong> 最好是那些比较喜欢</p>
+<p><strong>[00:02:32]</strong> 接收新事物的学习能力</p>
+<p><strong>[00:02:34]</strong> 比较强</p>
+<p><strong>[00:02:34]</strong> 适应能力比较好的</p>
+<p><strong>[00:02:35]</strong> 这样的行业</p>
+<p><strong>[00:02:36]</strong> 在业的落地阶段</p>
+<p><strong>[00:02:37]</strong> 现在起步阶段</p>
+<p><strong>[00:02:38]</strong> 很多的能力</p>
+<p><strong>[00:02:38]</strong> 很多的技术都是</p>
+<p><strong>[00:02:39]</strong> 每天每周都在变化</p>
+<p><strong>[00:02:41]</strong> 所以这样的学习能力</p>
+<p><strong>[00:02:42]</strong> 比较强的行业</p>
+<p><strong>[00:02:43]</strong> 我觉得对于我去服务来说</p>
+<p><strong>[00:02:44]</strong> 也是会节省我很多时间的</p>
+<p><strong>[00:02:46]</strong> 第三点也是我觉得最重要的</p>
+<p><strong>[00:02:48]</strong> 就是这个行业或者是这个公司</p>
+<p><strong>[00:02:49]</strong> 一定要得有钱</p>
+<p><strong>[00:02:51]</strong> 有钱的他可以去接受这些现在的AI的新事物</p>
+<p><strong>[00:02:54]</strong> 有钱的他可以付的起你更多的这些服务的一价</p>
+<p><strong>[00:02:57]</strong> 第二点聊完整个市场</p>
+<p><strong>[00:02:58]</strong> 我们来聊一下其中的人</p>
+<p><strong>[00:02:59]</strong> 两类人</p>
+<p><strong>[00:03:00]</strong> 一个是老板</p>
+<p><strong>[00:03:01]</strong> 一个是手下的员工</p>
+<p><strong>[00:03:02]</strong> 有两个跟我原先认知完全相反的事情</p>
+<p><strong>[00:03:04]</strong> 第一个反直觉的事情就是关于老板的</p>
+<p><strong>[00:03:06]</strong> 我服务之前我觉得说想象中一把手</p>
+<p><strong>[00:03:09]</strong> 就是不干活的</p>
+<p><strong>[00:03:10]</strong> 然后动动嘴皮去指挥手下的</p>
+<p><strong>[00:03:12]</strong> 自己在上面躺着</p>
+<p><strong>[00:03:13]</strong> 比如说我们以前去服务SARS</p>
+<p><strong>[00:03:15]</strong> 或者是CRM这些系统的时候</p>
+<p><strong>[00:03:17]</strong> 但这一波Agent服务里恰恰相反</p>
+<p><strong>[00:03:19]</strong> 你去看后台的token消耗</p>
+<p><strong>[00:03:21]</strong> 企业里面用的最猛的就是</p>
+<p><strong>[00:03:22]</strong> 部门的负责人或者企业的一把手</p>
+<p><strong>[00:03:24]</strong> token不会说谎</p>
+<p><strong>[00:03:25]</strong> 一目了然</p>
+<p><strong>[00:03:26]</strong> 但是为什么呢</p>
+<p><strong>[00:03:27]</strong> 我觉得回过来想</p>
+<p><strong>[00:03:28]</strong> 是因为老板这种人</p>
+<p><strong>[00:03:29]</strong> 就是脑子里想法特别多</p>
+<p><strong>[00:03:30]</strong> 但以前的苦于说</p>
+<p><strong>[00:03:32]</strong> 执行太慢 执行太懒</p>
+<p><strong>[00:03:33]</strong> 所以一个念头的落地</p>
+<p><strong>[00:03:35]</strong> 往往要等好几个礼拜</p>
+<p><strong>[00:03:36]</strong> 让手下一点点的去执行</p>
+<p><strong>[00:03:38]</strong> 但现在agent帮他部署好的之话</p>
+<p><strong>[00:03:39]</strong> 真的好用</p>
+<p><strong>[00:03:40]</strong> 等于身边多了一个随教随道的</p>
+<p><strong>[00:03:42]</strong> 这种执行者</p>
+<p><strong>[00:03:42]</strong> 他那些天马行空的想法</p>
+<p><strong>[00:03:44]</strong> 可以白天晚上一个一个的</p>
+<p><strong>[00:03:45]</strong> 接着去验证</p>
+<p><strong>[00:03:46]</strong> 所以我有一个很强的体感</p>
+<p><strong>[00:03:48]</strong> 就是离一个企业</p>
+<p><strong>[00:03:49]</strong> 如果他一把手自己不上手</p>
+<p><strong>[00:03:51]</strong> 自己不亲自去使用这些agent</p>
+<p><strong>[00:03:53]</strong> 我觉得企业的AI的落地</p>
+<p><strong>[00:03:54]</strong> 基本是推不动的</p>
+<p><strong>[00:03:55]</strong> 第二个反之觉得是前</p>
+<p><strong>[00:03:56]</strong> 我觉得是在员工部门层面</p>
+<p><strong>[00:03:58]</strong> 很多人一上来就想到说</p>
+<p><strong>[00:04:00]</strong> 能不能用AI帮我们把</p>
+<p><strong>[00:04:01]</strong> 某个部门的整体效率提上去</p>
+<p><strong>[00:04:04]</strong> 有点像以前SARS的时代的这种打法</p>
+<p><strong>[00:04:06]</strong> 但经过这半年</p>
+<p><strong>[00:04:07]</strong> 我觉得到现在为止</p>
+<p><strong>[00:04:08]</strong> 至少这个想法是错的</p>
+<p><strong>[00:04:09]</strong> 更好的方法</p>
+<p><strong>[00:04:10]</strong> 不是去提升整个部门的效率</p>
+<p><strong>[00:04:12]</strong> 而是用AI去扩展</p>
+<p><strong>[00:04:13]</strong> 每个员工的能力</p>
+<p><strong>[00:04:14]</strong> 讓部門裡面做著10個超級個體</p>
+<p><strong>[00:04:16]</strong> 去提升個人</p>
+<p><strong>[00:04:17]</strong> 而不是去提升部門</p>
+<p><strong>[00:04:18]</strong> 但這個原因是為什麼的</p>
+<p><strong>[00:04:19]</strong> 然後我後面反過頭來想一想</p>
+<p><strong>[00:04:21]</strong> 我覺得大家可能也有兩個原因</p>
+<p><strong>[00:04:22]</strong> 一個就是因為我們今年用的這一代</p>
+<p><strong>[00:04:24]</strong> 到目前為止Agent</p>
+<p><strong>[00:04:25]</strong> 很大程度上是受很年初小龍蝦的Peter</p>
+<p><strong>[00:04:29]</strong> 他的這個影響</p>
+<p><strong>[00:04:29]</strong> 但是Peter去設計小龍蝦的最初目的</p>
+<p><strong>[00:04:32]</strong> 是幫助他個人去提高能力</p>
+<p><strong>[00:04:33]</strong> 所以現在的整個Agent的設計</p>
+<p><strong>[00:04:35]</strong> 更多的是為了個人服務去設計的</p>
+<p><strong>[00:04:37]</strong> 所以在企業服務部門服務</p>
+<p><strong>[00:04:39]</strong> 整體的團隊服務上面</p>
+<p><strong>[00:04:40]</strong> 我覺得還沒有達到這麼好的</p>
+<p><strong>[00:04:42]</strong> 使用的狀態</p>
+<p><strong>[00:04:43]</strong> 反而是對個人的能力的幫助非常大</p>
+<p><strong>[00:04:45]</strong> 然後第二點就是說</p>
+<p><strong>[00:04:46]</strong> 當一家公司真正用熟了AI</p>
+<p><strong>[00:04:48]</strong> 用熟了Agent之後</p>
+<p><strong>[00:04:49]</strong> 整個鏈條裡面</p>
+<p><strong>[00:04:50]</strong> 其實最慢的環節當然就變成人</p>
+<p><strong>[00:04:52]</strong> 工作關係也會大概分成三種</p>
+<p><strong>[00:04:54]</strong> 一個是人跟人</p>
+<p><strong>[00:04:55]</strong> 一個是人跟Agent</p>
+<p><strong>[00:04:56]</strong> 一個是Agent和Agent</p>
+<p><strong>[00:04:57]</strong> 但裡面最慢的就是人跟人</p>
+<p><strong>[00:04:59]</strong> 所以如果一個流程裡面</p>
+<p><strong>[00:05:00]</strong> 人跟人交流的交換信息的步驟太多</p>
+<p><strong>[00:05:03]</strong> 效率肯定是提不上去的</p>
+<p><strong>[00:05:04]</strong> 我覺得當下在這個技術框架下</p>
+<p><strong>[00:05:06]</strong> 比較聰明的打法</p>
+<p><strong>[00:05:07]</strong> 就是盡量去擴大每個人的能力邊界</p>
+<p><strong>[00:05:09]</strong> 減少人跟人之間這種無聊的</p>
+<p><strong>[00:05:11]</strong> 或者沒有意義的這種接觸</p>
+<p><strong>[00:05:12]</strong> 这是我的看法</p>
+<p><strong>[00:05:13]</strong> 然后第三点</p>
+<p><strong>[00:05:14]</strong> 具体怎么做</p>
+<p><strong>[00:05:15]</strong> 当然每家企业都不一样</p>
+<p><strong>[00:05:16]</strong> 但是我觉得都里面有些共性</p>
+<p><strong>[00:05:18]</strong> 我总结着自己的一个公式</p>
+<p><strong>[00:05:19]</strong> 就是agents加上skills</p>
+<p><strong>[00:05:20]</strong> 加上data</p>
+<p><strong>[00:05:21]</strong> 智能体加技能加数据</p>
+<p><strong>[00:05:23]</strong> 这样一个公式</p>
+<p><strong>[00:05:23]</strong> 这个公式具体怎么理解</p>
+<p><strong>[00:05:25]</strong> 我来跟大家解释一下</p>
+<p><strong>[00:05:26]</strong> 我们知道几乎所有的工作</p>
+<p><strong>[00:05:27]</strong> 都可以看成一件事情</p>
+<p><strong>[00:05:28]</strong> 就是你一个智能体</p>
+<p><strong>[00:05:30]</strong> 去调用你的skills</p>
+<p><strong>[00:05:31]</strong> 也就是你的认知跟流程</p>
+<p><strong>[00:05:33]</strong> 去处理你的data</p>
+<p><strong>[00:05:34]</strong> 也就是你公司的这些数据</p>
+<p><strong>[00:05:35]</strong> 文档会记录等等这些东西</p>
+<p><strong>[00:05:37]</strong> 最后得到一些新的结果</p>
+<p><strong>[00:05:39]</strong> 如果很一般的结果</p>
+<p><strong>[00:05:40]</strong> 可能看一眼就扔了</p>
+<p><strong>[00:05:41]</strong> 但好的結果存下來又變成了未來的數據</p>
+<p><strong>[00:05:44]</strong> 好的過程存下來又變成了新的skills</p>
+<p><strong>[00:05:46]</strong> 這就是這樣一個循環</p>
+<p><strong>[00:05:48]</strong> 然後幾乎我覺得服務到現在應該能覆蓋</p>
+<p><strong>[00:05:50]</strong> 所有公司的絕大部分的這樣的場景</p>
+<p><strong>[00:05:52]</strong> 然後我們裡面一個個來說</p>
+<p><strong>[00:05:54]</strong> 先說agent</p>
+<p><strong>[00:05:54]</strong> 這玩意就是看起來很高端</p>
+<p><strong>[00:05:56]</strong> 聽起來很高端</p>
+<p><strong>[00:05:57]</strong> 然後現在大家都在聊這個</p>
+<p><strong>[00:05:59]</strong> 對吧</p>
+<p><strong>[00:05:59]</strong> 然後也是跟AI最有密切關係的</p>
+<p><strong>[00:06:01]</strong> 但其實是最沒什麼好研究的</p>
+<p><strong>[00:06:03]</strong> 然後我們就是去找世界上</p>
+<p><strong>[00:06:04]</strong> 現在別人Honest的最好的agent</p>
+<p><strong>[00:06:06]</strong> 然後最好的模型</p>
+<p><strong>[00:06:08]</strong> 國內管的都行</p>
+<p><strong>[00:06:08]</strong> 只要你能接觸到的</p>
+<p><strong>[00:06:09]</strong> 然后你有资源</p>
+<p><strong>[00:06:10]</strong> 你有费用去接触到的都行</p>
+<p><strong>[00:06:12]</strong> Codex Cloud Code Pie</p>
+<p><strong>[00:06:13]</strong> 我觉得哪个顺手你就有那个</p>
+<p><strong>[00:06:14]</strong> 然后千万不要自己去折腾</p>
+<p><strong>[00:06:16]</strong> 这个Agent</p>
+<p><strong>[00:06:16]</strong> 因为你又不是Agent的创业公司</p>
+<p><strong>[00:06:18]</strong> 你公司有你公司主营的业务</p>
+<p><strong>[00:06:19]</strong> 你也折腾不过别人</p>
+<p><strong>[00:06:20]</strong> 真正的难点</p>
+<p><strong>[00:06:21]</strong> 我觉得反倒是后面两个</p>
+<p><strong>[00:06:22]</strong> Skills和Data</p>
+<p><strong>[00:06:23]</strong> 他们分别对你的企业络技的</p>
+<p><strong>[00:06:25]</strong> 我觉得得要到最大的难关</p>
+<p><strong>[00:06:26]</strong> 流程的优化和上下方的管理</p>
+<p><strong>[00:06:28]</strong> 我们先来说Skills</p>
+<p><strong>[00:06:29]</strong> Skills是所有重复性的工作</p>
+<p><strong>[00:06:31]</strong> 重点在于重复两个字</p>
+<p><strong>[00:06:32]</strong> 包括你的流程操作手册</p>
+<p><strong>[00:06:34]</strong> 甚至你思想层面的</p>
+<p><strong>[00:06:35]</strong> 重複性的认知都可以做成skills</p>
+<p><strong>[00:06:37]</strong> 然后让agents取之性</p>
+<p><strong>[00:06:38]</strong> 这里就有两个阶段了</p>
+<p><strong>[00:06:39]</strong> 第一阶段比较直接</p>
+<p><strong>[00:06:40]</strong> 然后现在大部分企业</p>
+<p><strong>[00:06:41]</strong> 可能也只是卡在第一阶段而已</p>
+<p><strong>[00:06:43]</strong> 就是把你原来公司的流程</p>
+<p><strong>[00:06:44]</strong> 员工的固定的工作做成skills</p>
+<p><strong>[00:06:46]</strong> 但是真正的挑战</p>
+<p><strong>[00:06:47]</strong> 真正的提升</p>
+<p><strong>[00:06:48]</strong> 我觉得来自于第二阶段</p>
+<p><strong>[00:06:49]</strong> 就是按照AI时代的特点</p>
+<p><strong>[00:06:51]</strong> 把以前的流程重新给优化一遍</p>
+<p><strong>[00:06:53]</strong> 这样抽象的时候</p>
+<p><strong>[00:06:53]</strong> 你可能不太理解</p>
+<p><strong>[00:06:54]</strong> 我举个例子你就懂了</p>
+<p><strong>[00:06:55]</strong> 比如说我们追溯到</p>
+<p><strong>[00:06:56]</strong> 以前电脑刚发明的那的话</p>
+<p><strong>[00:06:57]</strong> 然后大家可能一开始出来的时候</p>
+<p><strong>[00:06:59]</strong> 都不只把它当做一个打字机</p>
+<p><strong>[00:07:00]</strong> 确实快了点</p>
+<p><strong>[00:07:05]</strong> 数字化了之后还是要把它打印出来</p>
+<p><strong>[00:07:07]</strong> 打印成纸质版</p>
+<p><strong>[00:07:08]</strong> 在赛金书架里面的这个档案代里面</p>
+<p><strong>[00:07:09]</strong> 为什么</p>
+<p><strong>[00:07:10]</strong> 因为以前流程一直是怎么走的</p>
+<p><strong>[00:07:11]</strong> 然后文件的管理一直是这么管理的</p>
+<p><strong>[00:07:13]</strong> 今天也一模一样</p>
+<p><strong>[00:07:14]</strong> 就是很多人的agent生成了方案</p>
+<p><strong>[00:07:16]</strong> 生成了文案</p>
+<p><strong>[00:07:17]</strong> 但回头还是丢到老的</p>
+<p><strong>[00:07:19]</strong> EP系统里面</p>
+<p><strong>[00:07:19]</strong> SARS系统里面</p>
+<p><strong>[00:07:20]</strong> 这个办公系统里面</p>
+<p><strong>[00:07:21]</strong> 效率提升了</p>
+<p><strong>[00:07:22]</strong> 效率还是卡在以前老的那些软件上面</p>
+<p><strong>[00:07:25]</strong> 所以这一步是流程上改造</p>
+<p><strong>[00:07:27]</strong> 要花大力气的</p>
+<p><strong>[00:07:28]</strong> 要去配合公司</p>
+<p><strong>[00:07:29]</strong> 要努力去探索的</p>
+<p><strong>[00:07:30]</strong> 但是怎么说呢</p>
+<p><strong>[00:07:31]</strong> 虽然花力气</p>
+<p><strong>[00:07:32]</strong> 但是一旦优化好这些流程</p>
+<p><strong>[00:07:33]</strong> 它就将会变成公司的第二大数字资产</p>
+<p><strong>[00:07:36]</strong> 为什么是第二大</p>
+<p><strong>[00:07:37]</strong> 因为还有第一大数字资产</p>
+<p><strong>[00:07:38]</strong> 那就是data数据</p>
+<p><strong>[00:07:39]</strong> 比如说公司的文档会议记录</p>
+<p><strong>[00:07:41]</strong> 所有的业务数据</p>
+<p><strong>[00:07:42]</strong> 各种各样的</p>
+<p><strong>[00:07:43]</strong> 张夏文</p>
+<p><strong>[00:07:44]</strong> 我跟大家实话实说</p>
+<p><strong>[00:07:45]</strong> 我觉得这半年来最难的部分</p>
+<p><strong>[00:07:47]</strong> 然后也是最花时间的部分</p>
+<p><strong>[00:07:49]</strong> 就是数据的部分</p>
+<p><strong>[00:07:50]</strong> 难在两层</p>
+<p><strong>[00:07:51]</strong> 第一层就是怎么把数据搞到手</p>
+<p><strong>[00:07:53]</strong> 比如说每场线上的会议</p>
+<p><strong>[00:07:54]</strong> 我们怎么自动记录下来</p>
+<p><strong>[00:07:55]</strong> 然后当然现在有些会议呈件</p>
+<p><strong>[00:07:57]</strong> 你做得很好</p>
+<p><strong>[00:07:57]</strong> 然后线下的会议</p>
+<p><strong>[00:07:58]</strong> 我们怎么去记录下来</p>
+<p><strong>[00:07:59]</strong> 限下的活动怎么记录下来</p>
+<p><strong>[00:08:01]</strong> 然后是不是得配一点硬件</p>
+<p><strong>[00:08:02]</strong> 再比如说公司本来没有这些数据</p>
+<p><strong>[00:08:04]</strong> 但是他又想要拿到这些数据</p>
+<p><strong>[00:08:06]</strong> 那到底是用官方的接口去买</p>
+<p><strong>[00:08:08]</strong> 去接还是用爬虫脚本去爬等等</p>
+<p><strong>[00:08:11]</strong> 这些都是怎么去获取的数据的问题</p>
+<p><strong>[00:08:13]</strong> 第二层就是有了数据之后</p>
+<p><strong>[00:08:15]</strong> 怎么去管理这些数据</p>
+<p><strong>[00:08:17]</strong> 组织这些数据</p>
+<p><strong>[00:08:18]</strong> 才能让Agent能够更好地用起来</p>
+<p><strong>[00:08:20]</strong> 比如说小范围的知识</p>
+<p><strong>[00:08:21]</strong> 用这个Weki的知识库</p>
+<p><strong>[00:08:22]</strong> 什么时候要去用到传统的数据库</p>
+<p><strong>[00:08:24]</strong> 什么时候用上相量数据库</p>
+<p><strong>[00:08:26]</strong> 每天新增的数据又怎么样去</p>
+<p><strong>[00:08:29]</strong> 用一套流程去规划去管理</p>
+<p><strong>[00:08:30]</strong> 这些全都是企业上下方管理的问题</p>
+<p><strong>[00:08:33]</strong> 为什么我说data是最难的呢</p>
+<p><strong>[00:08:35]</strong> 因为agent跟模型就是公开的</p>
+<p><strong>[00:08:37]</strong> 全世界能用到</p>
+<p><strong>[00:08:38]</strong> 就是你花钱就能买到的</p>
+<p><strong>[00:08:40]</strong> 然后大家其实都用的差不多</p>
+<p><strong>[00:08:41]</strong> 然后skill你还能慢慢学</p>
+<p><strong>[00:08:43]</strong> 慢慢抄</p>
+<p><strong>[00:08:43]</strong> 以及说你企业里面之前</p>
+<p><strong>[00:08:45]</strong> 本身就寄来了很多的这样的SOP</p>
+<p><strong>[00:08:47]</strong> 但是信息差</p>
+<p><strong>[00:08:48]</strong> 企业跟企业的信息差</p>
+<p><strong>[00:08:50]</strong> 行业的信息差永远都是存在的</p>
+<p><strong>[00:08:52]</strong> 模型会越来越强</p>
+<p><strong>[00:08:53]</strong> 越来越便宜</p>
+<p><strong>[00:08:54]</strong> 但最后大家手里的agent</p>
+<p><strong>[00:08:55]</strong> 都差不多的时候</p>
+<p><strong>[00:08:56]</strong> 真正拉开差距的</p>
+<p><strong>[00:08:57]</strong> 就是谁的数据好</p>
+<p><strong>[00:08:58]</strong> 谁的数据管理得好</p>
+<p><strong>[00:08:59]</strong> 所以你看</p>
+<p><strong>[00:09:00]</strong> 绕了一圈</p>
+<p><strong>[00:09:00]</strong> 我的经验就是</p>
+<p><strong>[00:09:01]</strong> 企业AI落地真正的重点</p>
+<p><strong>[00:09:03]</strong> 真正的胜负手</p>
+<p><strong>[00:09:04]</strong> 从来不在最酷炫</p>
+<p><strong>[00:09:05]</strong> 最新的Agent上面</p>
+<p><strong>[00:09:06]</strong> 而是在最不起眼的地方</p>
+<p><strong>[00:09:07]</strong> 先让企业把习惯换过来</p>
+<p><strong>[00:09:09]</strong> 然后开始学着用Agent</p>
+<p><strong>[00:09:10]</strong> 然后再把流程重做一遍</p>
+<p><strong>[00:09:12]</strong> 最后再把数据一点点的卫进去</p>
+<p><strong>[00:09:14]</strong> 这整个过程是一个又慢又脏的</p>
+<p><strong>[00:09:16]</strong> 一个过程</p>
+<p><strong>[00:09:16]</strong> 但也正是因为它慢</p>
+<p><strong>[00:09:18]</strong> 它脏</p>
+<p><strong>[00:09:18]</strong> 它才是真正属于</p>
+<p><strong>[00:09:19]</strong> 你企业自己的互成合</p>
+<p><strong>[00:09:20]</strong> 然后上面这些</p>
+<p><strong>[00:09:21]</strong> 大概就是我今天想到的</p>
+<p><strong>[00:09:22]</strong> 我这半年来对于</p>
+<p><strong>[00:09:23]</strong> 企业服务的一点思考</p>
+<p><strong>[00:09:25]</strong> 希望对你有帮助</p>
+<p><strong>[00:09:25]</strong> 好了</p>
+<p><strong>[00:09:26]</strong> 今天视频就到这里</p>
+<p><strong>[00:09:26]</strong> 我是地上黑经理营</p>
+<p><strong>[00:09:27]</strong> 我们下次见</p></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="AI原生组织.html" class="link-btn">AI原生组织</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Dify.html" class="link-btn">Dify</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#BA7517">AI理念</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">一个人亲手做企业AI服务的3个思考.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">已处理</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-中">中</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value"></span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value"></span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-销售AI.html" class="tag">销售AI</a> <a href="tag-大模型.html" class="tag">大模型</a> <a href="tag-行业观点.html" class="tag">行业观点</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

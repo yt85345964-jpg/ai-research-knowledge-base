@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>给律所做FDE的销售复盘10坑 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #993C1D; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>给律所做FDE的销售复盘10坑</h1>
+            <div class="sub">AI组织 · 已处理</div>
+        </div>
+        <div class="content"><h1>给律所做FDE的销售复盘10坑</h1>
+<blockquote>来源：微信视频号视频音频 ASR 转录（faster-whisper/small） | 原始文件：`2026-07-07_最近在美国给律所做FDE业务销售新人复盘10坑_微信视频号.mp4`</blockquote>
+<blockquote>⚠️ 本稿由语音识别自动生成，属单一来源、自动内容，存在同音误识别（如"话术"被识为"画术"、"播客"→"波壳"、"护城河"→"护唇盒"、Naval→"纳瓦尔"、Forward Deployed Engineer→"Full World Deploying Engineer"）；关键结论请以原视频核对。</blockquote>
+<h2>AI 词汇修正（ASR 误识别还原）</h2>
+<blockquote>**AI 判定（2026-07-11）**：本稿语义整体清晰、10 坑论述完整，**可判定**，故状态由「待审核」升为「已处理」、置信度「低→中」。以下为 faster-whisper/small 误识别的词汇级还原（原始转录正文保留不动，便于溯源）。</blockquote>
+<table>
+<tr>
+<td>转录误识</td>
+<td>还原</td>
+<td>说明</td>
+</tr>
+<tr>
+<td>Full World Deploying Engineer</td>
+<td>**Forward Deployed Engineer（FDE，前沿部署工程师）**</td>
+<td>Palantir 式岗位术语，AI 直接还原</td>
+</tr>
+<tr>
+<td>画术 / 画术命根字</td>
+<td>话术</td>
+<td>高频误识</td>
+</tr>
+<tr>
+<td>护唇盒</td>
+<td>护城河</td>
+<td>高频误识</td>
+</tr>
+<tr>
+<td>波壳</td>
+<td>播客</td>
+<td>高频误识</td>
+</tr>
+<tr>
+<td>纳�尔</td>
+<td>纳瓦尔（Naval）</td>
+<td>缺字误识</td>
+</tr>
+<tr>
+<td>郭佳佳</td>
+<td>过家家（存疑）</td>
+<td>语境推断，待核对</td>
+</tr>
+<tr>
+<td>新铭器盒</td>
+<td>新的框架（存疑）</td>
+<td>语境推断，待核对</td>
+</tr>
+<tr>
+<td>大外儿说</td>
+<td>某管理学家名言（存疑）</td>
+<td>语境为管理名言，具体人名待核对</td>
+</tr>
+<tr>
+<td>CL加交付</td>
+<td>"其实就是交付"（存疑）</td>
+<td>"CL" 疑似语气词误识</td>
+</tr>
+<tr>
+<td>Oing / Patch / Hedge</td>
+<td>作者产品名（待核对）</td>
+<td>原视频英文专名，需你确认拼写</td>
+</tr>
+</table>
+<h2>转录文稿</h2>
+<p><strong>[00:00:00]</strong> 哈嘍大家好</p>
+<p><strong>[00:00:00]</strong> 呃我最近在给美国的律所当FDE</p>
+<p><strong>[00:00:04]</strong> 也就是Full World Deploying Engineer</p>
+<p><strong>[00:00:05]</strong> 说容话就是加进客户现场的部署工程师</p>
+<p><strong>[00:00:09]</strong> 天天把AI3G人家的业务里做自动化</p>
+<p><strong>[00:00:12]</strong> 然后我最近又正好刷到了那般而其专门讲</p>
+<p><strong>[00:00:14]</strong> 怎么卖东西的波壳</p>
+<p><strong>[00:00:16]</strong> 跑步的时候听完赶紧开真的非常多吧</p>
+<p><strong>[00:00:18]</strong> 因为我发现我们大部分人</p>
+<p><strong>[00:00:20]</strong> 自备惯的那套销售观念</p>
+<p><strong>[00:00:22]</strong> 10个有10个是坑</p>
+<p><strong>[00:00:23]</strong> 今天我把这10个坑一个一个给你跑出来</p>
+<p><strong>[00:00:25]</strong> 你边听边对着</p>
+<p><strong>[00:00:26]</strong> 看看你中了几个</p>
+<p><strong>[00:00:28]</strong> 这么越多越得看完</p>
+<p><strong>[00:00:29]</strong> 然后我先出一个反直觉的</p>
+<p><strong>[00:00:31]</strong> 公司的本质其实就是销售</p>
+<p><strong>[00:00:33]</strong> 大家可能一听到销售</p>
+<p><strong>[00:00:34]</strong> 就想到楼下推销办卡的</p>
+<p><strong>[00:00:36]</strong> 但是在AI时代Bu的一个东西</p>
+<p><strong>[00:00:37]</strong> 越来越便宜</p>
+<p><strong>[00:00:38]</strong> 一个智能体可能一个晚上</p>
+<p><strong>[00:00:40]</strong> 就给你糊出来了</p>
+<p><strong>[00:00:41]</strong> 真正稀缺的其实是把它卖出去</p>
+<p><strong>[00:00:43]</strong> 让别人愿意为它买单的能力</p>
+<p><strong>[00:00:44]</strong> 我在律所现场天天干的</p>
+<p><strong>[00:00:46]</strong> 其实本质上就是CL加交付</p>
+<p><strong>[00:00:48]</strong> 但越久越确定一件事情</p>
+<p><strong>[00:00:50]</strong> 就是销售的底层根本不是画术</p>
+<p><strong>[00:00:52]</strong> 恰恰是那些把画术当做命根字的人</p>
+<p><strong>[00:00:55]</strong> 才进入第一个坑</p>
+<p><strong>[00:00:55]</strong> 然后第一个坑我觉得就是</p>
+<p><strong>[00:00:57]</strong> 迷信画术和技巧</p>
+<p><strong>[00:00:58]</strong> 以为练好套路就可以成交</p>
+<p><strong>[00:01:00]</strong> 其实纳瓦尔说的我觉得挺好的</p>
+<p><strong>[00:01:02]</strong> 他说Club的幸运比任何推销画术都管用</p>
+<p><strong>[00:01:05]</strong> 其实你想想你自己只要</p>
+<p><strong>[00:01:06]</strong> 一感觉到对方在推销</p>
+<p><strong>[00:01:08]</strong> 第一反应都是立刻竖起一刀防线</p>
+<p><strong>[00:01:10]</strong> 其实大家都一样</p>
+<p><strong>[00:01:11]</strong> 给你讲一个我自己的事</p>
+<p><strong>[00:01:12]</strong> 下个给一个美国的小律所</p>
+<p><strong>[00:01:14]</strong> 找过来想要做AI自动画</p>
+<p><strong>[00:01:15]</strong> 然后我进去看了一圈</p>
+<p><strong>[00:01:17]</strong> 他们的流程其实非常简单</p>
+<p><strong>[00:01:18]</strong> 就那么几张表</p>
+<p><strong>[00:01:19]</strong> 做完也省不了多少时间</p>
+<p><strong>[00:01:20]</strong> 所以我直接跟老板说</p>
+<p><strong>[00:01:21]</strong> 我说这套ROI太低了</p>
+<p><strong>[00:01:23]</strong> 我不能卖给你</p>
+<p><strong>[00:01:24]</strong> 然后当场少签一单</p>
+<p><strong>[00:01:25]</strong> 但是过了两个礼拜</p>
+<p><strong>[00:01:26]</strong> 他把他认识一个大嫂的老板</p>
+<p><strong>[00:01:28]</strong> 介绍给我</p>
+<p><strong>[00:01:29]</strong> 所以新人是商业世界里最值钱的通行者</p>
+<p><strong>[00:01:31]</strong> 这玩意是靠画术骗不来的</p>
+<p><strong>[00:01:33]</strong> 然后第二坑我觉得就是</p>
+<p><strong>[00:01:34]</strong> 在聪美人面前爽套舞</p>
+<p><strong>[00:01:36]</strong> 这是我其实最有感触的一条</p>
+<p><strong>[00:01:38]</strong> 因为你越是跟顶尖的人打交道</p>
+<p><strong>[00:01:40]</strong> 你越要说大实话</p>
+<p><strong>[00:01:41]</strong> 那些销售客可能教你的画术</p>
+<p><strong>[00:01:43]</strong> 心理战术</p>
+<p><strong>[00:01:43]</strong> 今天最后两名</p>
+<p><strong>[00:01:44]</strong> 而在一个认知很高的人的眼里</p>
+<p><strong>[00:01:47]</strong> 其实跟郭佳佳一样</p>
+<p><strong>[00:01:48]</strong> 一眼就看穿</p>
+<p><strong>[00:01:49]</strong> 对付聪美人其实唯一的办法</p>
+<p><strong>[00:01:50]</strong> 就是有一说一不撒谎</p>
+<p><strong>[00:01:52]</strong> 出发点永远是双赢</p>
+<p><strong>[00:01:53]</strong> 但前提是你的基本功真的很硬</p>
+<p><strong>[00:01:55]</strong> 能够把一个简单的技术</p>
+<p><strong>[00:01:56]</strong> 或者说一个简单的商业模型</p>
+<p><strong>[00:01:58]</strong> 用最简单的话</p>
+<p><strong>[00:02:00]</strong> 讲明白</p>
+<p><strong>[00:02:00]</strong> 对方自然就知道你有真东西</p>
+<p><strong>[00:02:02]</strong> 第三个坑我觉得就是</p>
+<p><strong>[00:02:03]</strong> 被拒绝的还死缠烂打</p>
+<p><strong>[00:02:05]</strong> 然后管着叫狼性</p>
+<p><strong>[00:02:06]</strong> 其实以前最爱讲销售</p>
+<p><strong>[00:02:08]</strong> 就是要有狼性</p>
+<p><strong>[00:02:09]</strong> 被拒绝的也没关系</p>
+<p><strong>[00:02:10]</strong> 接着打电话</p>
+<p><strong>[00:02:11]</strong> 一直铺上去绝不放弃</p>
+<p><strong>[00:02:13]</strong> 在今天其实我觉得就是一个大坑</p>
+<p><strong>[00:02:15]</strong> 纳瓦尔说的挺好</p>
+<p><strong>[00:02:16]</strong> 他说这个时代</p>
+<p><strong>[00:02:17]</strong> 每个人的时间都贵得要命</p>
+<p><strong>[00:02:19]</strong> 你抛出一个想法</p>
+<p><strong>[00:02:20]</strong> 一个项目</p>
+<p><strong>[00:02:20]</strong> 对方听了半天没共鸣</p>
+<p><strong>[00:02:22]</strong> 就微笑握个手</p>
+<p><strong>[00:02:23]</strong> 然后继续往前走就可以了</p>
+<p><strong>[00:02:25]</strong> 因为事件很大</p>
+<p><strong>[00:02:26]</strong> 你总能找到那个人产生共鸣的人</p>
+<p><strong>[00:02:28]</strong> 把死缠烂打</p>
+<p><strong>[00:02:29]</strong> 剩下来的精力去留给队的人</p>
+<p><strong>[00:02:31]</strong> 这才是效率最高的打法</p>
+<p><strong>[00:02:33]</strong> 然后第四个坑</p>
+<p><strong>[00:02:34]</strong> 我觉得就是一沟通就急了反驳</p>
+<p><strong>[00:02:36]</strong> 在情绪里跟人兑现</p>
+<p><strong>[00:02:37]</strong> 我们跟人产生争执</p>
+<p><strong>[00:02:39]</strong> 十有八九是因为双方</p>
+<p><strong>[00:02:40]</strong> 都泡在自己的情绪里</p>
+<p><strong>[00:02:42]</strong> 纳瓦尔给了一个特别好的词</p>
+<p><strong>[00:02:43]</strong> 叫理性的同理心</p>
+<p><strong>[00:02:45]</strong> 意思就是说交流的时候</p>
+<p><strong>[00:02:46]</strong> 先把你的情绪放在一边</p>
+<p><strong>[00:02:48]</strong> 在逻辑上推一遍</p>
+<p><strong>[00:02:49]</strong> 对方为什么会这么想</p>
+<p><strong>[00:02:50]</strong> 如果他说的有道理</p>
+<p><strong>[00:02:52]</strong> 你别急着反驳</p>
+<p><strong>[00:02:53]</strong> 先大大方方的肯定他一句</p>
+<p><strong>[00:02:55]</strong> 你说的对</p>
+<p><strong>[00:02:55]</strong> 然后在这个基础上</p>
+<p><strong>[00:02:56]</strong> 在新铭器盒的讲你的立场</p>
+<p><strong>[00:02:58]</strong> 为什么也站得住脚</p>
+<p><strong>[00:02:59]</strong> 其实就是那个Yes and No</p>
+<p><strong>[00:03:01]</strong> 先认可再叠加</p>
+<p><strong>[00:03:02]</strong> 然后这样对方才能够听得进去</p>
+<p><strong>[00:03:04]</strong> 然后第五坑</p>
+<p><strong>[00:03:05]</strong> 我觉得就是做决策的时候</p>
+<p><strong>[00:03:06]</strong> 然后被面子和自己的利益所裹挟</p>
+<p><strong>[00:03:09]</strong> 这条我自己其实也非常去惨</p>
+<p><strong>[00:03:10]</strong> 我们给建议做决定的时候</p>
+<p><strong>[00:03:12]</strong> 其实特别容易被我的面子</p>
+<p><strong>[00:03:13]</strong> 我的好处牵着走</p>
+<p><strong>[00:03:14]</strong> 纳瓦尔这条我太喜欢了</p>
+<p><strong>[00:03:16]</strong> 他说尽量客观</p>
+<p><strong>[00:03:17]</strong> 把面子和自我从对话里面拿掉</p>
+<p><strong>[00:03:19]</strong> 所以你想象一下</p>
+<p><strong>[00:03:20]</strong> 如果是一个跟这个事好利益关系的第三方</p>
+<p><strong>[00:03:24]</strong> 他会怎么建议</p>
+<p><strong>[00:03:25]</strong> 那个建议往往才是对的</p>
+<p><strong>[00:03:27]</strong> 我发现一个规律就是说</p>
+<p><strong>[00:03:29]</strong> 你自我越重的时候</p>
+<p><strong>[00:03:30]</strong> 越卖不出去东西</p>
+<p><strong>[00:03:31]</strong> 你把自我剥离出去</p>
+<p><strong>[00:03:32]</strong> 你看到的世界会清晰一百倍</p>
+<p><strong>[00:03:34]</strong> 第六坑把我说话值当个性来标吧</p>
+<p><strong>[00:03:37]</strong> 总有人说</p>
+<p><strong>[00:03:38]</strong> 我这个人就是直不会拐弯</p>
+<p><strong>[00:03:40]</strong> 对不起你那个不叫直</p>
+<p><strong>[00:03:41]</strong> 你这叫情商低</p>
+<p><strong>[00:03:42]</strong> 所以纳�尔说个人的魅力的本质</p>
+<p><strong>[00:03:44]</strong> 是诚实加上善良</p>
+<p><strong>[00:03:46]</strong> 力量和善意的结合</p>
+<p><strong>[00:03:47]</strong> 你光有诚实一点情面都不给</p>
+<p><strong>[00:03:49]</strong> 对方出于自我保护</p>
+<p><strong>[00:03:50]</strong> 根本听不进去</p>
+<p><strong>[00:03:51]</strong> 你那句真话</p>
+<p><strong>[00:03:53]</strong> 所以真正的魅力是</p>
+<p><strong>[00:03:54]</strong> 你说真话</p>
+<p><strong>[00:03:54]</strong> 同时让对方真切感觉到</p>
+<p><strong>[00:03:57]</strong> 你指出他的问题</p>
+<p><strong>[00:03:58]</strong> 是因为你在乎他</p>
+<p><strong>[00:04:00]</strong> 你想帮他照顾别人的体面</p>
+<p><strong>[00:04:01]</strong> 你的真话才有力量</p>
+<p><strong>[00:04:02]</strong> 第七个坑</p>
+<p><strong>[00:04:03]</strong> 用KPI和鞭子去管一群聪明的人</p>
+<p><strong>[00:04:06]</strong> 在工厂时代管理就是发号施令</p>
+<p><strong>[00:04:09]</strong> 开一个任务你赶紧干</p>
+<p><strong>[00:04:10]</strong> 但今天你带的是一群聪明人</p>
+<p><strong>[00:04:12]</strong> 身边还有AI这么能干的东西</p>
+<p><strong>[00:04:14]</strong> 你在拿鞭子抽</p>
+<p><strong>[00:04:15]</strong> 拿大饼去画</p>
+<p><strong>[00:04:17]</strong> 其实没用了</p>
+<p><strong>[00:04:18]</strong> 大外儿说管理是发号施令</p>
+<p><strong>[00:04:21]</strong> 领导力是激发别人内心的渴望</p>
+<p><strong>[00:04:23]</strong> 你得花时间坐下来</p>
+<p><strong>[00:04:25]</strong> 听你的团队你的合伙人</p>
+<p><strong>[00:04:26]</strong> 他们这辈子到底想要什么</p>
+<p><strong>[00:04:29]</strong> 然后把他们的个人目标</p>
+<p><strong>[00:04:31]</strong> 和你想做的事拧带一起</p>
+<p><strong>[00:04:33]</strong> 找到那个重合点</p>
+<p><strong>[00:04:34]</strong> 你不用赶</p>
+<p><strong>[00:04:35]</strong> 他们自己会往前去冲的</p>
+<p><strong>[00:04:36]</strong> 第八个坑是找合伙人</p>
+<p><strong>[00:04:38]</strong> 只看能力不看性能和目标</p>
+<p><strong>[00:04:39]</strong> 因为我们都知道人类几万年</p>
+<p><strong>[00:04:42]</strong> 都是靠小型狩猎部落活下来的</p>
+<p><strong>[00:04:45]</strong> 一起打一头大象</p>
+<p><strong>[00:04:46]</strong> 你必须能够把后背交给对方</p>
+<p><strong>[00:04:48]</strong> 不然他在你身后一刀就把你捅</p>
+<p><strong>[00:04:50]</strong> 今天的商业一模一样</p>
+<p><strong>[00:04:52]</strong> 你要的是每个人独当一面</p>
+<p><strong>[00:04:54]</strong> 一起解决大难题</p>
+<p><strong>[00:04:55]</strong> 一起分支头大象</p>
+<p><strong>[00:04:56]</strong> 举个例子</p>
+<p><strong>[00:04:56]</strong> 我跟我的一个合伙人</p>
+<p><strong>[00:04:58]</strong> 我们有一天晚上从恒冰</p>
+<p><strong>[00:04:59]</strong> 一路喝到东京</p>
+<p><strong>[00:05:01]</strong> 边走边聊</p>
+<p><strong>[00:05:01]</strong> AI和人类的未来</p>
+<p><strong>[00:05:03]</strong> 聊到千块亮了</p>
+<p><strong>[00:05:04]</strong> 那一晚上我就知道</p>
+<p><strong>[00:05:05]</strong> 这个人能处</p>
+<p><strong>[00:05:06]</strong> 后面交给他是没问题的</p>
+<p><strong>[00:05:08]</strong> 所以找合伙人这件事</p>
+<p><strong>[00:05:09]</strong> 真的和找对象一样</p>
+<p><strong>[00:05:11]</strong> 只有把目标拧在一起</p>
+<p><strong>[00:05:12]</strong> 后面一切才变得简单</p>
+<p><strong>[00:05:13]</strong> 第九个坑</p>
+<p><strong>[00:05:14]</strong> 我觉得是去卖一个你自己都不信</p>
+<p><strong>[00:05:16]</strong> 最不在乎的东西</p>
+<p><strong>[00:05:17]</strong> 这是最大的坑</p>
+<p><strong>[00:05:18]</strong> 老派销售最爱看的花儿街猪狼</p>
+<p><strong>[00:05:20]</strong> 上来就是Sellme Dispan</p>
+<p><strong>[00:05:22]</strong> 对吧</p>
+<p><strong>[00:05:23]</strong> 把这支笔卖给我</p>
+<p><strong>[00:05:24]</strong> 那玩说这个测试本身就特别扯</p>
+<p><strong>[00:05:26]</strong> 他让你去推销一个</p>
+<p><strong>[00:05:27]</strong> 你毫无感觉毫不关键的东西</p>
+<p><strong>[00:05:29]</strong> 他说你只应该去卖那些</p>
+<p><strong>[00:05:31]</strong> 你真正热爱真正痴迷的东西</p>
+<p><strong>[00:05:33]</strong> 我现在在Oing做一个产品</p>
+<p><strong>[00:05:35]</strong> 叫做Patch</p>
+<p><strong>[00:05:36]</strong> 我先不气说他具体是干嘛的</p>
+<p><strong>[00:05:38]</strong> 你只要知道他是帮你在AI这个时代</p>
+<p><strong>[00:05:41]</strong> 建立你自己的职业护唇盒的</p>
+<p><strong>[00:05:43]</strong> 为什么是我做</p>
+<p><strong>[00:05:43]</strong> 因为他就是我的血核肉</p>
+<p><strong>[00:05:45]</strong> 我自己就是那个被AI逼着</p>
+<p><strong>[00:05:47]</strong> 重新去找护唇盒的人</p>
+<p><strong>[00:05:49]</strong> 所以我跟你聊他的时候</p>
+<p><strong>[00:05:50]</strong> 我根本不需要任何销售技巧</p>
+<p><strong>[00:05:52]</strong> 因为我是真的性</p>
+<p><strong>[00:05:53]</strong> 当你对一个东西的认可度满道</p>
+<p><strong>[00:05:55]</strong> 意义出来</p>
+<p><strong>[00:05:56]</strong> 你只是在真诚分享你的热情和确信</p>
+<p><strong>[00:05:59]</strong> 对方自己就会想满</p>
+<p><strong>[00:06:00]</strong> 促成合作变成一件</p>
+<p><strong>[00:06:01]</strong> 水道渠成毫不费力的事</p>
+<p><strong>[00:06:03]</strong> 第十个坑</p>
+<p><strong>[00:06:04]</strong> 我觉得是在银头小粒上死磕</p>
+<p><strong>[00:06:05]</strong> 为了核气把烂胶也牵了</p>
+<p><strong>[00:06:07]</strong> 我们活在一个回报高度</p>
+<p><strong>[00:06:09]</strong> 非线性的时代</p>
+<p><strong>[00:06:10]</strong> 你做一百件事情</p>
+<p><strong>[00:06:11]</strong> 真正带来大受益的</p>
+<p><strong>[00:06:13]</strong> 可能就一两件</p>
+<p><strong>[00:06:13]</strong> 所以别在那些仓营腿大的小粒意义上</p>
+<p><strong>[00:06:17]</strong> 跟人没完没了的讨价还价</p>
+<p><strong>[00:06:19]</strong> 把目光放到那些</p>
+<p><strong>[00:06:20]</strong> 有100倍1000倍空间的事上</p>
+<p><strong>[00:06:22]</strong> 最重要的是保持选择权</p>
+<p><strong>[00:06:24]</strong> 如果一个合作</p>
+<p><strong>[00:06:25]</strong> 你闻出来是一个长期的坑</p>
+<p><strong>[00:06:26]</strong> 投资人也好</p>
+<p><strong>[00:06:27]</strong> 合伙人也好</p>
+<p><strong>[00:06:28]</strong> 很不地道</p>
+<p><strong>[00:06:29]</strong> 那你宁可咬着牙</p>
+<p><strong>[00:06:30]</strong> 把这单搅黄</p>
+<p><strong>[00:06:31]</strong> 也别为了一句</p>
+<p><strong>[00:06:32]</strong> 没事咱们一起弄吧</p>
+<p><strong>[00:06:33]</strong> 委屈签字</p>
+<p><strong>[00:06:34]</strong> 一旦你妥协签了字</p>
+<p><strong>[00:06:36]</strong> 这种没底线的妥协</p>
+<p><strong>[00:06:37]</strong> 是做成一家好公司的天底</p>
+<p><strong>[00:06:39]</strong> OK</p>
+<p><strong>[00:06:39]</strong> 所以这十个坑过完了</p>
+<p><strong>[00:06:41]</strong> 你回头看</p>
+<p><strong>[00:06:41]</strong> 会发现他们的底层是同一句话</p>
+<p><strong>[00:06:43]</strong> 别再迷信话术和套路</p>
+<p><strong>[00:06:45]</strong> 尊正的销售是姓人是真诚</p>
+<p><strong>[00:06:47]</strong> 是只卖你尊信的东西</p>
+<p><strong>[00:06:48]</strong> 是做长远的事</p>
+<p><strong>[00:06:49]</strong> 说白了</p>
+<p><strong>[00:06:50]</strong> 无论是做生意</p>
+<p><strong>[00:06:51]</strong> 还是做任何事情</p>
+<p><strong>[00:06:53]</strong> 底层的逻辑都一样</p>
+<p><strong>[00:06:55]</strong> 找对的人说真诚的话</p>
+<p><strong>[00:06:57]</strong> 做长远的事</p>
+<p><strong>[00:06:58]</strong> 你确得从来不是话术</p>
+<p><strong>[00:07:00]</strong> 而是知道底层逻辑</p>
+<p><strong>[00:07:02]</strong> 而我现在在做Hedge</p>
+<p><strong>[00:07:03]</strong> 做的就是这件事</p>
+<p><strong>[00:07:04]</strong> 帮你在AI把一切view的</p>
+<p><strong>[00:07:05]</strong> 都变得廉价的今天</p>
+<p><strong>[00:07:07]</strong> 搭一条别人抢不走</p>
+<p><strong>[00:07:08]</strong> AI也剃不掉的职业护身盒</p>
+<p><strong>[00:07:10]</strong> 所以评论区大家可以聊聊</p>
+<p><strong>[00:07:11]</strong> 这十个坑你中了几个</p>
+<p><strong>[00:07:13]</strong> 你现在最想卖出去的</p>
+<p><strong>[00:07:14]</strong> 是你自己真心的东西吗</p>
+<h2>处理备注</h2>
+<p>音频 ASR 转录（faster-whisper/small，语言=zh，285 片段）。自动生成，可能存在误识别，建议人工/多模态复核。</p></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#993C1D">AI组织</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">给律所做FDE的销售复盘10坑.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">已处理</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-中">中</span></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value"></span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value"></span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-销售AI.html" class="tag">销售AI</a> <a href="tag-大模型.html" class="tag">大模型</a> <a href="tag-实践案例.html" class="tag">实践案例</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

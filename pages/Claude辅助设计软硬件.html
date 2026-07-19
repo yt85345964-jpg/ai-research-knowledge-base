@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude辅助设计软硬件 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
+.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
+.main { min-width:0; }
+.sidebar { }
+
+.header { margin-bottom:1.5rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+
+.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
+.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
+.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
+.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
+.content p { font-size:0.88rem; margin-bottom:0.6rem; }
+.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
+.content li { margin-bottom:0.25rem; }
+.content blockquote { border-left:3px solid #639922; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
+.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
+.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
+.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
+.content a { color:#378ADD; text-decoration:none; }
+.content a:hover { text-decoration:underline; }
+
+.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+
+.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
+.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+
+.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
+.meta-row:last-child { border-bottom:none; }
+.meta-label { color:#888; }
+.meta-value { color:#333; font-weight:500; }
+
+.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
+.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
+.badge-high { background:#e6f4ea; color:#1e8e3e; }
+.badge-medium { background:#fef7e0; color:#f9ab00; }
+.badge-low { background:#fce8e6; color:#d93025; }
+
+.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
+.meta-link:hover { text-decoration:underline; }
+
+.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
+.backlink-item:hover { color:#378ADD; }
+
+.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
+.link-btn:hover { background:#e0e0e0; }
+
+.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <div class="header">
+            <a href="../index.html">← 返回首页</a>
+            <h1>Claude辅助设计软硬件</h1>
+            <div class="sub">AI技术 · 活跃</div>
+        </div>
+        <div class="content"><h1>Claude 辅助设计软硬件（嘉立创 EDA / 嵌入式 / 平衡车 / 自动驾驶）</h1>
+<blockquote>来源：微信视频号「Claude 辅助设计软硬件」本地视频（43MB）</blockquote>
+<blockquote>视频信息密度较低（演示型），本素材笔记综合嘉立创 EDA AI 化与 Claude Code 嵌入式调试两条相关线索整理</blockquote>
+<p>---</p>
+<h2>一句话总结</h2>
+<p>Claude（Code）已可深度介入<strong>软硬件研发全流程</strong>——从嘉立创 EDA 自动画原理图、到嵌入式 MCU 远程调试（AI 调试器 AixProbe），再延伸到平衡车/自动驾驶等具体产品形态，AI 正在成为"看得见硬件、动得了硬件"的研发副驾。</p>
+<p>---</p>
+<h2>三大应用场景</h2>
+<h3>1. 嘉立创 EDA + Claude Code：自动画原理图</h3>
+<p><strong>实施路径</strong>（已成熟）：</p>
+<pre><code>
+# Step 1：安装 easyeda-api skill
+claude mcp add --transport stdio kicad ...
+# 或
+https://github.com/easyeda/easyeda-api-skill  帮我安装这个 skill
+
+# Step 2：嘉立创 EDA 侧安装扩展
+# 高级 → 扩展管理器 → 搜 "run" → 安装 → 勾选三个选项
+
+# Step 3：连接
+claude code
+&gt; EDA 启动！
+# → 建立 WebSocket 连接
+</code></pre>
+<p><strong>价值</strong>：</p>
+<ul>
+<li>- 减少重复性手动操作，缩短设计周期</li>
+<li>- 一致性保证，避免人为错误</li>
+<li>- 知识沉淀：设计经验 → 可复用自动化脚本</li>
+<li>- 让工程师专注创造性设计</li>
+</ul>
+<h3>2. AI 调试器 AixProbe：首个开源 AI 远程调试器</h3>
+<blockquote>视频未直接展示 AixProbe，但"嵌入式"主题是核心之一，资料来自同主题的《首个AI远程调试器》头条文章。</blockquote>
+<p><strong>核心</strong>：T113-S3 微型网关设备 + 内置 OpenOCD 引擎 + WiFi 6 + JTAG/SWD 协议 + <strong>MCP 服务接口</strong>。</p>
+<p><strong>架构特点</strong>：</p>
+<ul>
+<li>- AI 能直接"操作"硬件（不仅看代码）</li>
+<li>- 配套 Skill 技能包涵盖日常工作场景</li>
+<li>- 两种配置方式：CLI 命令行（嵌入式老炮） + GUI 图形界面（小白）</li>
+<li>- 上位机自动切换 ssh / adb，电脑端双击单文件 exe 即可运行</li>
+</ul>
+<p><strong>核心硬件</strong>（基于嘉立创 EDA 设计的四层板）：</p>
+<table>
+<tr>
+<td>模块</td>
+<td>型号</td>
+</tr>
+<tr>
+<td>主控</td>
+<td>T113-S3</td>
+</tr>
+<tr>
+<td>模拟开关</td>
+<td>CH442Q</td>
+</tr>
+<tr>
+<td>DC-DC</td>
+<td>SY8113BADC</td>
+</tr>
+<tr>
+<td>LDO</td>
+<td>XC6206P252MR</td>
+</tr>
+<tr>
+<td>NAND</td>
+<td>GD5F1GQ4UBYIGR</td>
+</tr>
+<tr>
+<td>WiFi/蓝牙</td>
+<td>rtl8723bs</td>
+</tr>
+<tr>
+<td>USB 转换</td>
+<td>CH347F</td>
+</tr>
+</table>
+<h3>3. 平衡车 / 自动驾驶：嘉立创 EDA 实战跳板</h3>
+<p><strong>为什么平衡车是好项目</strong>：</p>
+<ul>
+<li>- 涉及电源管理（锂电池 + DC-DC + LDO）+ MCU（GD32F303C8T6）+ 运动传感器（陀螺仪）+ 执行机构（TB6612 电机驱动）+ 无线通信（蓝牙）+ 传感器接口（编码器、红外）</li>
+<li>- 几乎涵盖所有嵌入式硬件核心模块</li>
+<li>- **对硬件可靠性要求极高**：动态系统，任何毛刺都会"翻车"</li>
+</ul>
+<p><strong>AI 辅助价值</strong>：</p>
+<ul>
+<li>- AI 可参与电源完整性、信号完整性、EMC 设计的早期评估</li>
+<li>- 自动检测"未连接引脚"、"相似器件推荐"、"检查连接关系"</li>
+<li>- 平衡车的"翻车压力"对硬件工程是绝佳实战场景</li>
+</ul>
+<p>---</p>
+<h2>AI 工具栈全景</h2>
+<table>
+<tr>
+<td>工具/平台</td>
+<td>角色</td>
+<td>关键能力</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td>AI 编程大脑</td>
+<td>自然语言理解 + 代码生成 + 任务规划</td>
+</tr>
+<tr>
+<td>easyeda-api (Skill)</td>
+<td>工作流引擎</td>
+<td>AI → EDA 桥接</td>
+</tr>
+<tr>
+<td>Run API Gateway</td>
+<td>EDA 侧网关</td>
+<td>暴露 99% 内部 API</td>
+</tr>
+<tr>
+<td>EasyEDA Agent Connector</td>
+<td>薄桥</td>
+<td>本地 daemon ↔ eda.* API</td>
+</tr>
+<tr>
+<td>KiCad MCP</td>
+<td>跨 EDA</td>
+<td>Python 脚本控制 KiCad</td>
+</tr>
+<tr>
+<td>华秋 KiCad Copilot</td>
+<td>KiCad 发行版内嵌</td>
+<td>对话式设计 + DFM + 下单</td>
+</tr>
+<tr>
+<td>NextBoard</td>
+<td>硬件方案设计 Agent</td>
+<td>自动器件选型 + BOM + 原理图</td>
+</tr>
+<tr>
+<td>AixProbe</td>
+<td>嵌入式调试</td>
+<td>JTAG/SWD + MCP 接口</td>
+</tr>
+<tr>
+<td>atopile</td>
+<td>代码化硬件</td>
+<td>Python 描述电路 → KiCad 工程</td>
+</tr>
+</table>
+<p>---</p>
+<h2>关键洞察</h2>
+<ol>
+<li>**AI 硬件研发范式已成型**：从「画板」（EDA 自动化）→「调试」（JTAG + MCP）→「产品」（平衡车/自动驾驶），全链条都有 AI 切入点。</li>
+<li>**"AI 看硬件、动硬件"是 2026 的关键突破**：过去 AI 只能看代码、猜硬件 Bug；现在 AI 能直接操作硬件读寄存器、烧录、单步执行。</li>
+<li>**国产 EDA 正在主动拥抱 AI**：嘉立创 EDA 推出 Run API Gateway、推出 easyeda-api Skill、推出 Agent Connector 三套方案——这是行业级共识。</li>
+<li>**平衡车是 AI 嵌入式练手神器**：兼具挑战性、模块丰富度、社区资源，是验证 AI 全栈辅助的最佳载体。</li>
+</ol>
+<p>---</p>
+<h2>知识点映射</h2>
+<ul>
+<li>- 涉及产品：嘉立创 EDA、Claude Code、Codex、Hermes、华秋 KiCad、NextBoard、AixProbe、atopile</li>
+<li>- 涉及概念：<a href="MCP.html">MCP</a>（AixProbe、KiCad MCP 都是 MCP 应用）、Agent Connector、WebSocket 桥接、SKILL.md</li>
+<li>- 兄弟 Wiki：AI 操控嘉立创 EDA 画 PCB、KiCad + Claude Code 生成 PCB</li>
+<li>- 跨部门：硬件AI / 嵌入式AI / 算法和数据处理AI</li>
+</ul></div>
+        <div class="link-buttons" style="margin-top:1rem;">
+            <a href="MCP.html" class="link-btn">MCP</a>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>页面信息</h3>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#639922">AI技术</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">Claude辅助设计软硬件.html</span></div>
+            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"></span></div>
+            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-13</span></div>
+            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value"></span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>标签</h3>
+            <div><a href="tag-硬件AI.html" class="tag">硬件AI</a> <a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-实践案例.html" class="tag">实践案例</a></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>反向链接 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>参考来源</h3>
+            <div><span class="meta-link">[[AI辅助硬件研发工作流]]</span><span class="meta-link">[[嘉立创EDA_AI操控]]</span></div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3>被引用 (0)</h3>
+            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
+        </div>
+    </aside>
+
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</div>
+</body>
+</html>

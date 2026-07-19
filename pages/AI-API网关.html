@@ -66,12 +66,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         <div class="header">
             <a href="../index.html">← 返回首页</a>
             <h1>AI API网关</h1>
-            <div class="sub">concept · AI 产品 · 活跃</div>
+            <div class="sub">AI产品 · 活跃</div>
         </div>
         <div class="content"><h1>AI API 网关</h1>
-<h2>一句话定位</h2>
-<p>AI API 网关是企业内部统一管理和调度 AI 模型 API 调用的中间层，提供令牌管理、流量控制、模型路由等能力，降低团队接入 AI 的门槛。</p>
-<h2>核心能力</h2>
+<h2>核心定义</h2>
+<blockquote>**一句话定位**：AI API 网关是企业内部统一管理和调度 AI 模型 API 调用的中间层，提供令牌管理、流量控制、模型路由等能力，降低团队接入 AI 的门槛。</blockquote>
+<h2>核心功能</h2>
 <h3>统一令牌管理</h3>
 <ul>
 <li>- 管理员创建令牌，绑定可用模型列表和额度限制</li>
@@ -89,7 +89,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 后端可灵活切换实际模型厂商和版本</li>
 <li>- 对接多个模型（DeepSeek、Claude、GLM 等）</li>
 </ul>
-<h2>企业价值</h2>
+<h3>企业价值</h3>
 <table>
 <tr>
 <td>场景</td>
@@ -117,16 +117,37 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>集中管控，可设置 IP 白名单</td>
 </tr>
 </table>
-<h2>已知案例</h2>
-<blockquote>单一来源：<span class="dangling" title="页面尚未创建">素材笔记/工作流/2026-07-02_Workbuddy配置公司中转站操作手册</span></blockquote>
+<h3>已知案例</h3>
+<blockquote>单一来源：<span class="dangling" title="页面尚未创建">素材笔记/AI流程/Workbuddy配置公司中转站操作手册</span></blockquote>
 <blockquote>华诺星空公司部署了 AI 网关（aigateway.novasky.cn），支持 deepseek-v4-pro 模型。员工通过 OA 系统的"AI 网关"入口获取令牌，然后在 WorkBuddy 中配置自定义模型即可使用。</blockquote>
-<h2>产品关联</h2>
+<h2>适用场景</h2>
+<table>
+<tr>
+<td>适用</td>
+<td>不适用</td>
+</tr>
+<tr>
+<td>企业内部统一接入多个模型 API</td>
+<td>个人单独使用单一模型</td>
+</tr>
+<tr>
+<td>需要集中额度与成本管控</td>
+<td>无需追踪个人用量</td>
+</tr>
+<tr>
+<td>需 IP 限制、密钥集中管控等安全合规场景</td>
+<td>无合规要求的小型实验</td>
+</tr>
+</table>
+<h2>争议与待验证</h2>
+<ul>
+<li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
+</ul>
+<h2>相关页面</h2>
 <ul>
 <li>- <a href="WorkBuddy.html">WorkBuddy</a> — 支持通过 OpenAI 兼容协议接入自定义模型，AI 网关是其企业部署场景的标准接入方式</li>
 <li>- <a href="Codex.html">Codex</a> — 同为 AI Agent 平台，理论上也可通过类似方式接入企业网关（待验证）</li>
-</ul>
-<p>---</p>
-<p><em>创建: 2026-07-02 | 更新: 2026-07-02</em></p></div>
+</ul></div>
         <div class="link-buttons" style="margin-top:1rem;">
             <a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Codex.html" class="link-btn">Codex</a>
         </div>
@@ -135,22 +156,22 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
     <aside class="sidebar">
         <div class="sidebar-card">
             <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI 产品</span></div>
-            <div class="meta-row"><span class="meta-label">类型</span><span class="meta-value">concept</span></div>
+            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
+            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">AI-API网关.html</span></div>
             <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-medium">medium</span></span></div>
+            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-中">中</span></span></div>
             <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-02</span></div>
             <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
         </div>
 
         <div class="sidebar-card">
             <h3>标签</h3>
-            <div><span class="tag">AI基础设施</span> <span class="tag">API网关</span> <span class="tag">模型管理</span></div>
+            <div><a href="tag-研究公共AI.html" class="tag">研究公共AI</a> <a href="tag-大模型.html" class="tag">大模型</a> <a href="tag-工具评测.html" class="tag">工具评测</a></div>
         </div>
 
         <div class="sidebar-card">
-            <h3>反向链接 (5)</h3>
-            <div><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-02_Workbuddy配置公司中转站操作手册.html" class="backlink-item">2026-07-02_Workbuddy配置公司中转站操作手册</a></div>
+            <h3>反向链接 (6)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a></div>
         </div>
 
         <div class="sidebar-card">
@@ -159,12 +180,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
         </div>
 
         <div class="sidebar-card">
-            <h3>被引用 (5)</h3>
-            <div><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a><a href="2026-07-03_YC内部AI实操.html" class="backlink-item">2026-07-03_YC内部AI实操</a><a href="2026-07-02_Workbuddy配置公司中转站操作手册.html" class="backlink-item">2026-07-02_Workbuddy配置公司中转站操作手册</a></div>
+            <h3>被引用 (6)</h3>
+            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="DeepSeek.html" class="backlink-item">DeepSeek</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="AI原生组织.html" class="backlink-item">AI原生组织</a></div>
         </div>
     </aside>
 
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-03 16:56</div>
+    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
 </div>
 </body>
 </html>
