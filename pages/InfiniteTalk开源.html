@@ -10,31 +10,104 @@
   --grey-bg:#f8f9fa; --border:#a2a9b1; --border-light:#c8ccd1; --grey-text:#54595d;
   --ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
   --serif-font:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+  --panel-bg:#f8f9fa; --panel-border:#a2a9b1;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:var(--serif-font);color:var(--text);background:var(--grey-bg);line-height:1.6;font-size:15px;}
+html{scroll-behavior:smooth;}
+html.txt-small body{font-size:13px;}
+html.txt-large body{font-size:17px;}
+html.width-wide .wm-body{max-width:100%;}
+html.theme-dark{--bg:#0d1117;--text:#c9d1d9;--grey-bg:#161b22;--panel-bg:#161b22;--panel-border:#30363d;--border:#30363d;--border-light:#21262d;--grey-text:#8b949e;--link:#58a6ff;--link-visited:#a371f7;}
+html.theme-dark .wm-topbar,html.theme-dark .wm-tabs{background:#0d1117;border-color:#30363d;}
+html.theme-dark a{color:#58a6ff;}
+html.theme-dark a:visited{color:#a371f7;}
+html.theme-dark .wm-banner{background:linear-gradient(90deg,#0d1117 0%,#161b22 100%);}
+html.theme-dark .wm-banner h1,html.theme-dark .wm-banner .motto{color:var(--text);}
+html.theme-dark .wm-banner-stats .big{color:var(--text);}
+html.theme-dark .featured-thumb{background:#161b22;border-color:#30363d;}
+body{font-family:var(--serif-font);color:var(--text);background:var(--bg);line-height:1.6;font-size:15px;}
 a{color:var(--link);text-decoration:none;}
 a:hover{text-decoration:underline;}
 a:visited{color:var(--link-visited);}
 
-/* 页眉 */
-.mw-header{background:var(--bg);border-bottom:1px solid var(--border-light);box-shadow:0 1px 3px rgba(0,0,0,.04);}
-.mw-header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;}
-.mw-site{font-family:var(--ui-font);font-size:1.05rem;font-weight:600;color:var(--text);}
-.mw-site:hover{text-decoration:none;}
-.mw-search{position:relative;}
-.mw-search input{font-family:var(--ui-font);width:220px;padding:0.35rem 0.7rem;font-size:0.82rem;border:1px solid var(--border-light);border-radius:2px;outline:none;}
-.mw-search input:focus{border-color:#36c;box-shadow:0 0 0 2px rgba(51,102,204,.15);}
+/* 顶部：维基式三栏（logo | 搜索 | 用户链接） */
+.wm-topbar{background:#fff;border-bottom:1px solid var(--border-light);padding:0.5rem 1rem;}
+.wm-topbar-inner{max-width:1286px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.wm-logo{display:flex;align-items:center;gap:0.55rem;color:var(--text);font-family:var(--ui-font);font-size:1.15rem;font-weight:600;}
+.wm-logo-icon{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#f8f9fa 0%,#e8f0ff 100%);border:1px solid var(--border-light);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.wm-logo:hover{text-decoration:none;}
+.wm-search{flex:1;max-width:480px;position:relative;}
+.wm-search form{display:flex;border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+.wm-search input{flex:1;padding:0.45rem 0.7rem;font-size:0.9rem;border:none;outline:none;font-family:var(--ui-font);}
+.wm-search button{padding:0 0.8rem;background:#36c;color:#fff;border:none;cursor:pointer;font-size:0.85rem;font-family:var(--ui-font);}
+.wm-search button:hover{background:#2b54a3;}
+.wm-toplinks{font-family:var(--ui-font);font-size:0.82rem;color:var(--grey-text);display:flex;gap:0.7rem;align-items:center;}
+.wm-toplinks a{color:#54595d;}
+.wm-toplinks a:hover{color:var(--link);}
 
-/* 布局：左栏导航 + 主内容 */
-.mw-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;}
-.mw-nav{width:150px;flex-shrink:0;padding:1rem 0.4rem;border-right:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;min-height:calc(100vh - 56px);}
-.mw-nav .nav-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);padding:0.5rem 0.5rem 0.2rem;font-weight:600;}
-.mw-nav a{display:block;padding:0.22rem 0.5rem;color:var(--link);border-radius:2px;}
-.mw-nav a:hover{background:var(--grey-bg);text-decoration:none;}
-.mw-nav .nav-sep{border-top:1px solid var(--border-light);margin:0.4rem 0.3rem;}
+/* 页面标签导航（阅读 | 查看源代码...） */
+.wm-tabs{background:#fff;border-bottom:1px solid var(--border-light);}
+.wm-tabs-inner{max-width:1286px;margin:0 auto;padding:0.35rem 1rem;display:flex;gap:1.2rem;align-items:center;font-family:var(--ui-font);font-size:0.85rem;}
+.wm-tabs a{color:#202122;}
+.wm-tabs a:hover{color:var(--link);}
+.wm-tabs a.active{font-weight:600;border-bottom:2px solid #202122;padding-bottom:0.2rem;}
 
-.mw-main{flex:1;min-width:0;background:var(--bg);border:1px solid var(--border-light);border-top:none;padding:1.1rem 1.6rem 2.2rem;margin:0 0 2rem;}
+/* 主体：左侧内容 + 右侧外观面板 */
+.wm-body{max-width:1286px;margin:0 auto;display:flex;align-items:flex-start;gap:1.2rem;padding:1.2rem 1rem 3rem;}
+.wm-main{flex:1;min-width:0;}
+.wm-panel{width:248px;flex-shrink:0;border:1px solid var(--panel-border);background:var(--panel-bg);padding:0.8rem;font-family:var(--ui-font);font-size:0.82rem;}
+.wm-panel-title{font-weight:600;margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.wm-panel-row{margin-bottom:0.55rem;}
+.wm-panel-row label{display:block;color:var(--grey-text);font-size:0.75rem;margin-bottom:0.25rem;}
+.wm-panel-opt{display:flex;align-items:center;gap:0.45rem;margin:0.2rem 0;}
+.wm-panel input[type="radio"]{margin:0;}
+.wm-panel hr{border:none;border-top:1px solid var(--border-light);margin:0.6rem 0;}
+
+/* 维基式 banner（首页） */
+.wm-banner{display:flex;align-items:center;gap:1.2rem;background:linear-gradient(90deg,#fff 0%,#f8f9fa 100%);border:1px solid var(--border-light);border-radius:2px;padding:1.2rem 1.5rem;margin-bottom:1.2rem;}
+.wm-banner-icon{font-size:3.5rem;line-height:1;}
+.wm-banner-text{flex:1;}
+.wm-banner h1{font-family:var(--serif-font);font-size:1.9rem;font-weight:400;margin-bottom:0.2rem;line-height:1.2;}
+.wm-banner .motto{font-family:var(--serif-font);font-size:1.05rem;color:#202122;margin-bottom:0.3rem;}
+.wm-banner .sub{font-family:var(--ui-font);font-size:0.8rem;color:var(--grey-text);}
+.wm-banner-stats{text-align:right;min-width:140px;}
+.wm-banner-stats .big{font-family:var(--ui-font);font-size:1.5rem;font-weight:600;color:#202122;}
+.wm-banner-stats .label{font-family:var(--ui-font);font-size:0.75rem;color:var(--grey-text);}
+.wm-banner-stats .links{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:flex-end;margin-top:0.4rem;font-size:0.78rem;}
+.wm-banner-stats .links a{background:var(--grey-bg);border:1px solid var(--border-light);padding:0.05rem 0.4rem;border-radius:2px;}
+
+/* 首页：经典维基两栏（左侧 60% / 右侧 40%） */
+.home-grid-wiki{display:grid;grid-template-columns:1.4fr 1fr;gap:1.5rem;align-items:start;}
+.home-col-left{background:#fff;}
+.home-col-right{background:#fff;}
+.wiki-box{border:1px solid var(--border-light);padding:1rem;margin-bottom:1.2rem;}
+.wiki-box-title{font-family:var(--ui-font);font-size:1.15rem;font-weight:600;color:#202122;border-bottom:1px solid var(--border-light);padding-bottom:0.35rem;margin-bottom:0.7rem;}
+.wiki-box-title a{color:#202122;}
+.wiki-box-title a:hover{color:var(--link);}
+.featured-wrap{display:flex;gap:1rem;}
+.featured-thumb{width:160px;height:110px;background:var(--grey-bg);border:1px solid var(--border-light);display:flex;align-items:center;justify-content:center;color:#999;font-size:0.8rem;flex-shrink:0;}
+.featured-thumb img{max-width:100%;max-height:100%;object-fit:cover;}
+.featured-text{font-family:var(--serif-font);font-size:0.95rem;}
+.featured-text p{margin-bottom:0.5rem;}
+.news-list{font-family:var(--ui-font);font-size:0.9rem;}
+.news-list li{margin-bottom:0.5rem;list-style:disc inside;}
+.didyouknow-list{font-family:var(--serif-font);font-size:0.9rem;}
+.didyouknow-list li{margin-bottom:0.5rem;list-style:disc inside;}
+
+/* 分类索引页：图标网格 */
+.catidx-title{font-family:var(--serif-font);font-size:1.8rem;font-weight:400;text-align:center;margin-bottom:0.3rem;}
+.catidx-subtitle{font-family:var(--ui-font);font-size:0.85rem;color:var(--grey-text);text-align:center;margin-bottom:1.2rem;}
+.catidx-tabs{font-family:var(--ui-font);font-size:0.85rem;text-align:center;border-bottom:1px solid var(--border-light);padding-bottom:0.5rem;margin-bottom:1.5rem;}
+.catidx-tabs a{display:inline-block;margin:0 0.5rem;color:#202122;}
+.catidx-tabs a.active{font-weight:600;border-bottom:2px solid #202122;}
+.catidx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+.catidx-card{display:flex;gap:0.9rem;align-items:flex-start;}
+.catidx-icon{font-size:2.2rem;line-height:1;min-width:48px;text-align:center;}
+.catidx-name{font-family:var(--ui-font);font-size:1.2rem;font-weight:600;color:#202122;margin-bottom:0.3rem;}
+.catidx-name a{color:#202122;}
+.catidx-subs{font-family:var(--ui-font);font-size:0.83rem;color:var(--grey-text);line-height:1.6;}
+.catidx-subs a{color:var(--link);white-space:nowrap;}
+.catidx-subs .sep{color:#a2a9b1;margin:0 0.25rem;}
 
 /* 标题 */
 .mw-title h1{font-family:var(--ui-font);font-size:1.7rem;font-weight:400;line-height:1.25;border-bottom:1px solid var(--border-light);padding-bottom:0.3rem;margin-bottom:0.2rem;}
@@ -96,22 +169,6 @@ a:visited{color:var(--link-visited);}
 .catpage-list .pl-meta{color:var(--grey-text);font-size:0.78rem;margin-left:0.6rem;}
 .catpage-list .pl-meta .tagpill{font-size:0.7rem;}
 
-/* 首页：分类/最近更新 区块 */
-.home-intro{font-family:var(--ui-font);font-size:0.92rem;color:#333;margin-bottom:1.2rem;line-height:1.6;}
-.home-grid{display:grid;grid-template-columns:1fr 320px;gap:1.6rem;align-items:start;}
-.home-cats{font-family:var(--ui-font);}
-.home-cat-row{display:flex;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid #f0f0f0;}
-.home-cat-row .hc-name{font-size:1rem;font-weight:600;min-width:120px;}
-.home-cat-row .hc-name a{color:var(--link);}
-.home-cat-row .hc-count{color:var(--grey-text);font-size:0.8rem;margin-left:0.6rem;min-width:54px;}
-.home-cat-row .hc-desc{color:var(--grey-text);font-size:0.82rem;margin-left:0.6rem;flex:1;}
-.home-side .box{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.8rem 1rem;margin-bottom:1rem;font-family:var(--ui-font);}
-.home-side .box h3{font-size:0.9rem;font-weight:600;margin-bottom:0.5rem;color:#202122;}
-.home-side .upd{font-size:0.82rem;padding:0.25rem 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;}
-.home-side .upd a{color:var(--link);}
-.home-side .upd .ud{color:#aaa;font-size:0.72rem;white-space:nowrap;margin-left:0.5rem;}
-.graph-box svg{width:100%;height:300px;}
-
 /* 层级导航（标签父/子，对标维基 category 页） */
 .hierarchy{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.6rem 0.9rem;margin:0.2rem 0 1.2rem;font-family:var(--ui-font);font-size:0.84rem;}
 .hier-row{margin:0.3rem 0;}
@@ -132,36 +189,38 @@ a:visited{color:var(--link-visited);}
 .metalist a{color:var(--link);display:block;padding:0.22rem 0;border-bottom:1px solid #f5f5f5;}
 .footer-note{text-align:center;color:#aaa;font-family:var(--ui-font);font-size:0.74rem;margin-top:1.5rem;}
 
-@media (max-width:900px){
-  .mw-body{flex-direction:column;}
-  .mw-nav{width:100%;min-height:0;border-right:none;border-bottom:1px solid var(--border-light);display:flex;flex-wrap:wrap;gap:0.2rem;padding:0.5rem;}
-  .mw-nav .nav-title,.mw-nav .nav-sep{display:none;}
+@media (max-width:1020px){
+  .wm-body{flex-direction:column;}
+  .wm-panel{width:100%;order:-1;}
+  .home-grid-wiki{grid-template-columns:1fr;}
+  .catidx-grid{grid-template-columns:1fr;}
   .infobox{float:none;width:auto;margin:1rem 0;}
-  .home-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
-<header class="mw-header">
-    <div class="mw-header-inner">
-        <a class="mw-site" href="../index.html">AI 研究团队知识库</a>
-        <form class="mw-search" onsubmit="return false;">
-            <input type="text" id="searchInput" placeholder="搜索..." oninput="doSearch(this.value)">
-        </form>
+<header class="wm-topbar">
+    <div class="wm-topbar-inner">
+        <a class="wm-logo" href="../index.html">
+            <div class="wm-logo-icon">🧠</div>
+            <span>AI 研究团队知识库</span>
+        </a>
+        <div class="wm-search">
+            <form onsubmit="return doSearch();">
+                <input type="text" id="searchInput" placeholder="搜索知识库..." autocomplete="off">
+                <button type="submit">搜索</button>
+            </form>
+        </div>
+        <div class="wm-toplinks">
+            <a href="../tags.html">标签</a>
+            <a href="../category-index.html">分类</a>
+            <a href="https://github.com/yt85345964-jpg/ai-research-knowledge-base">GitHub</a>
+        </div>
     </div>
 </header>
-<div class="mw-body">
-    <nav class="mw-nav">
-        <div class="nav-title">导航</div>
-        <a href="../index.html">首页</a>
-        <div class="nav-sep"></div>
-        <div class="nav-title">分类</div>
-        <a href="../category-AI人物.html">AI人物</a><a href="../category-AI产品.html">AI产品</a><a href="../category-AI技术.html">AI技术</a><a href="../category-AI组织.html">AI组织</a><a href="../category-AI理念.html">AI理念</a><a href="../category-AI流程.html">AI流程</a>
-        <div class="nav-sep"></div>
-        <div class="nav-title">标签</div>
-        <a href="../tags.html">标签索引</a>
-    </nav>
-    <main class="mw-main">
+<div class="wm-tabs"><div class="wm-tabs-inner"><a href="../index.html" class="">首页</a> · <a href="../all-pages.html" class="">条目索引</a> · <a href="../category-index.html" class="">分类</a> · <a href="../tags.html" class="">主题</a> · <a href="../tag-list.html" class="">列表</a></div></div>
+<div class="wm-body">
+    <main class="wm-main">
         <div class="mw-title"><h1>InfiniteTalk开源</h1><div class="sub">AI产品 · 活跃</div></div>
         
         <div class="mw-content"><div class="infobox"><div class="ib-title">InfiniteTalk开源</div><div class="ib-row"><div class="ib-label">分类</div><div class="ib-value"><a href="../category-AI产品.html" style="color:#3366cc">AI产品</a></div></div><div class="ib-row"><div class="ib-label">官网</div><div class="ib-value"><a href="InfiniteTalk开源.html" style="color:#3366cc">InfiniteTalk开源.html</a></div></div><div class="ib-row"><div class="ib-label">状态</div><div class="ib-value">活跃</div></div><div class="ib-row"><div class="ib-label">创建</div><div class="ib-value">2026-07-03</div></div><div class="ib-row"><div class="ib-label">更新</div><div class="ib-value">2026-07-03</div></div><div class="ib-row"><div class="ib-label">标签</div><div class="ib-value"><a href="../tag-多模态.html" class="tagpill">多模态</a> <a href="../tag-工具评测.html" class="tagpill">工具评测</a></div></div></div><div class="toc"><div class="toc-title">目录</div><ul><li><span class="toc-n">1</span><a href="#sec-2-1">一句话总结</a></li></ul><ul><li><span class="toc-n">2</span><a href="#sec-2-2">核心亮点</a></li></ul><ul><li><span class="toc-n">3</span><a href="#sec-2-3">技术原理</a></li><li><span class="toc-n">3.1</span><a href="#sec-3-1">稀疏帧配音框架（核心创新）</a></li><li><span class="toc-n">3.2</span><a href="#sec-3-2">技术栈</a></li><li><span class="toc-n">3.3</span><a href="#sec-3-3">关键参数</a></li><li><span class="toc-n">3.4</span><a href="#sec-3-4">加速方案</a></li></ul><ul><li><span class="toc-n">4</span><a href="#sec-2-4">使用场景</a></li></ul><ul><li><span class="toc-n">5</span><a href="#sec-2-5">社区表现</a></li></ul><ul><li><span class="toc-n">6</span><a href="#sec-2-6">开源地址</a></li></ul><ul><li><span class="toc-n">7</span><a href="#sec-2-7">与已有知识的关联</a></li></ul></div><h1 id="sec-1-1">InfiniteTalk — 开源音频驱动无限时长视频生成框架</h1>
@@ -299,16 +358,63 @@ a:visited{color:var(--link-visited);}
 <li>- <a href="AI原生组织.html">AI原生组织</a> — 自媒体机构可借此实现"AI 原生内容生产"：内容策略 + AI 视频生成 + 批量分发</li>
 </ul><h2>相关页面</h2><div class="metalist"><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="AI原生组织.html">AI原生组织</a></div></div></div>
         <footer class="mw-catlinks"><span class="cl-prefix">分类：</span><a href="../category-AI产品.html">AI产品</a> · <a href="../tag-多模态.html">多模态</a> <a href="../tag-工具评测.html">工具评测</a></footer>
-        <div class="footer-note">AI 研究团队知识库 · 自动生成于 2026-07-19 20:39</div>
+        <div class="footer-note">AI 研究团队知识库 · 自动生成于 2026-07-19 21:32</div>
     </main>
+    
+<div class="wm-panel">
+    <div class="wm-panel-title">外观 <span style="font-weight:400;font-size:0.75rem;color:var(--grey-text);">显示</span></div>
+    <div class="wm-panel-row">
+        <label>文本</label>
+        <div class="wm-panel-opt"><input type="radio" name="txtsize" value="small" onclick="setTextSize('small')"> <span>小</span></div>
+        <div class="wm-panel-opt"><input type="radio" name="txtsize" value="normal" checked onclick="setTextSize('normal')"> <span>标准</span></div>
+        <div class="wm-panel-opt"><input type="radio" name="txtsize" value="large" onclick="setTextSize('large')"> <span>大</span></div>
+    </div>
+    <hr>
+    <div class="wm-panel-row">
+        <label>宽度</label>
+        <div class="wm-panel-opt"><input type="radio" name="layoutwidth" value="normal" checked onclick="setLayoutWidth('normal')"> <span>标准</span></div>
+        <div class="wm-panel-opt"><input type="radio" name="layoutwidth" value="wide" onclick="setLayoutWidth('wide')"> <span>宽</span></div>
+    </div>
+    <hr>
+    <div class="wm-panel-row">
+        <label>颜色</label>
+        <div class="wm-panel-opt"><input type="radio" name="colortheme" value="light" checked onclick="setColorTheme('light')"> <span>浅色</span></div>
+        <div class="wm-panel-opt"><input type="radio" name="colortheme" value="dark" onclick="setColorTheme('dark')"> <span>深色</span></div>
+    </div>
+</div>
+
 </div>
 <script>
-function doSearch(q){
-    q=(q||'').toLowerCase().trim();
-    if(!q){ return; }
-    // 详情页（子目录）自身无搜索数据，跳首页并带查询参数，由首页统一处理
+function doSearch(){
+    var q=document.getElementById('searchInput').value.toLowerCase().trim();
+    if(!q) return false;
     location.href='../index.html#q='+encodeURIComponent(q);
+    return false;
 }
+function setTextSize(s){
+    document.documentElement.classList.remove('txt-small','txt-normal','txt-large');
+    document.documentElement.classList.add('txt-'+s);
+    localStorage.setItem('wm-txtsize', s);
+}
+function setLayoutWidth(w){
+    document.documentElement.classList.remove('width-normal','width-wide');
+    document.documentElement.classList.add('width-'+w);
+    localStorage.setItem('wm-width', w);
+}
+function setColorTheme(t){
+    document.documentElement.classList.remove('theme-light','theme-dark');
+    document.documentElement.classList.add('theme-'+t);
+    localStorage.setItem('wm-theme', t);
+}
+(function(){
+    var s=localStorage.getItem('wm-txtsize')||'normal';
+    var w=localStorage.getItem('wm-width')||'normal';
+    var t=localStorage.getItem('wm-theme')||'light';
+    setTextSize(s); setLayoutWidth(w); setColorTheme(t);
+    document.querySelectorAll('input[name="txtsize"]').forEach(function(el){el.checked=(el.value===s);});
+    document.querySelectorAll('input[name="layoutwidth"]').forEach(function(el){el.checked=(el.value===w);});
+    document.querySelectorAll('input[name="colortheme"]').forEach(function(el){el.checked=(el.value===t);});
+})();
 </script>
 
 </body>
