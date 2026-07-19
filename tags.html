@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>标签索引 - AI 研究团队知识库</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.6; }
+.container { max-width:800px; margin:0 auto; padding:2rem 1.5rem; }
+.header { margin-bottom:2rem; }
+.header a { color:#888; text-decoration:none; font-size:0.85rem; }
+.header a:hover { color:#378ADD; }
+.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
+.header p { font-size:0.85rem; color:#666; margin-top:0.25rem; }
+.block-title { font-size:1rem; font-weight:600; margin:1.5rem 0 0.75rem; color:#333; }
+.tagtree { list-style:none; padding-left:0; }
+.tagtree ul { list-style:none; padding-left:1.25rem; border-left:1px solid #eee; margin-left:0.4rem; }
+.tagtree li { padding:3px 0; font-size:0.9rem; }
+.tagtree .tn { color:#333; text-decoration:none; font-weight:500; }
+.tagtree .tn:hover { color:#378ADD; }
+.tagtree .tc { font-size:0.7rem; color:#999; margin-left:4px; }
+.tag-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; }
+.tag-card { background:#fff; border-radius:10px; padding:1rem; text-decoration:none; border:1px solid #eee; transition:border-color 0.15s; display:flex; flex-direction:column; }
+.tag-card:hover { border-color:#ccc; }
+.tag-name { font-size:0.95rem; color:#333; font-weight:600; }
+.tag-count { font-size:0.7rem; color:#999; margin-top:4px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="index.html">← 返回首页</a>
+        <h1>标签索引</h1>
+        <p>主题标签按 IS-A 层级树展示（父分类自动含子类）；形态 / 场景平铺。词表见 AGENTS.md §6.1</p>
+    </div>
+    <p class="block-title">主题层级树</p>
+    <ul class="tagtree"><li><a href="tag-RAG.html" class="tn">RAG</a> <span class="tc">7</span><ul><li><a href="tag-向量检索.html" class="tn">向量检索</a> <span class="tc">5</span></li></ul></li><li><a href="tag-向量检索.html" class="tn">向量检索</a> <span class="tc">5</span></li><li><a href="tag-多模态.html" class="tn">多模态</a> <span class="tc">2</span></li><li><a href="tag-大模型.html" class="tn">大模型</a> <span class="tc">16</span></li><li><a href="tag-提示词.html" class="tn">提示词</a> <span class="tc">5</span></li><li><a href="tag-智能体.html" class="tn">智能体</a> <span class="tc">36</span><ul><li><a href="tag-多智能体.html" class="tn">多智能体</a> <span class="tc">1</span></li><li><a href="tag-工具调用.html" class="tn">工具调用</a> <span class="tc">1</span></li></ul></li><li><a href="tag-知识库.html" class="tn">知识库</a> <span class="tc">6</span></li></ul>
+    <p class="block-title">形态 / 场景 / 其他</p>
+    <div class="tag-grid" id="tagGrid">
+        <a href="tag-实践案例.html" class="tag-card"><span class="tag-name">实践案例</span><span class="tag-count">15</span></a><a href="tag-工具评测.html" class="tag-card"><span class="tag-name">工具评测</span><span class="tag-count">19</span></a><a href="tag-市场AI.html" class="tag-card"><span class="tag-name">市场AI</span><span class="tag-count">2</span></a><a href="tag-方法论.html" class="tag-card"><span class="tag-name">方法论</span><span class="tag-count">11</span></a><a href="tag-研究公共AI.html" class="tag-card"><span class="tag-name">研究公共AI</span><span class="tag-count">14</span></a><a href="tag-硬件AI.html" class="tag-card"><span class="tag-name">硬件AI</span><span class="tag-count">12</span></a><a href="tag-科普教程.html" class="tag-card"><span class="tag-name">科普教程</span><span class="tag-count">3</span></a><a href="tag-行业观点.html" class="tag-card"><span class="tag-name">行业观点</span><span class="tag-count">11</span></a><a href="tag-趋势研判.html" class="tag-card"><span class="tag-name">趋势研判</span><span class="tag-count">3</span></a><a href="tag-销售AI.html" class="tag-card"><span class="tag-name">销售AI</span><span class="tag-count">2</span></a>
+    </div>
+</div>
+</body>
+</html>
