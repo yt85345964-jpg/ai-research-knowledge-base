@@ -5,93 +5,189 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Obsidian+AI工作台 - AI 研究团队知识库</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
-.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
-.main { min-width:0; }
-.sidebar { }
+:root{
+  --link:#3366cc; --link-visited:#795cb2; --text:#202122; --bg:#fff;
+  --grey-bg:#f8f9fa; --border:#a2a9b1; --border-light:#c8ccd1; --grey-text:#54595d;
+  --ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif-font:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--serif-font);color:var(--text);background:var(--grey-bg);line-height:1.6;font-size:15px;}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:visited{color:var(--link-visited);}
 
-.header { margin-bottom:1.5rem; }
-.header a { color:#888; text-decoration:none; font-size:0.85rem; }
-.header a:hover { color:#378ADD; }
-.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
-.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+/* 页眉 */
+.mw-header{background:var(--bg);border-bottom:1px solid var(--border-light);box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.mw-header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;}
+.mw-site{font-family:var(--ui-font);font-size:1.05rem;font-weight:600;color:var(--text);}
+.mw-site:hover{text-decoration:none;}
+.mw-search{position:relative;}
+.mw-search input{font-family:var(--ui-font);width:220px;padding:0.35rem 0.7rem;font-size:0.82rem;border:1px solid var(--border-light);border-radius:2px;outline:none;}
+.mw-search input:focus{border-color:#36c;box-shadow:0 0 0 2px rgba(51,102,204,.15);}
 
-.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
-.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
-.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
-.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
-.content p { font-size:0.88rem; margin-bottom:0.6rem; }
-.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
-.content li { margin-bottom:0.25rem; }
-.content blockquote { border-left:3px solid #378ADD; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
-.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
-.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
-.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
-.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
-.content a { color:#378ADD; text-decoration:none; }
-.content a:hover { text-decoration:underline; }
+/* 布局：左栏导航 + 主内容 */
+.mw-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;}
+.mw-nav{width:150px;flex-shrink:0;padding:1rem 0.4rem;border-right:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;min-height:calc(100vh - 56px);}
+.mw-nav .nav-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);padding:0.5rem 0.5rem 0.2rem;font-weight:600;}
+.mw-nav a{display:block;padding:0.22rem 0.5rem;color:var(--link);border-radius:2px;}
+.mw-nav a:hover{background:var(--grey-bg);text-decoration:none;}
+.mw-nav .nav-sep{border-top:1px solid var(--border-light);margin:0.4rem 0.3rem;}
 
-.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+.mw-main{flex:1;min-width:0;background:var(--bg);border:1px solid var(--border-light);border-top:none;padding:1.1rem 1.6rem 2.2rem;margin:0 0 2rem;}
 
-.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
-.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+/* 标题 */
+.mw-title h1{font-family:var(--ui-font);font-size:1.7rem;font-weight:400;line-height:1.25;border-bottom:1px solid var(--border-light);padding-bottom:0.3rem;margin-bottom:0.2rem;}
+.mw-title .sub{font-family:var(--ui-font);font-size:0.8rem;color:var(--grey-text);margin-bottom:0.6rem;}
 
-.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
-.meta-row:last-child { border-bottom:none; }
-.meta-label { color:#888; }
-.meta-value { color:#333; font-weight:500; }
+/* 正文排版 */
+.mw-content h1{font-family:var(--ui-font);font-size:1.45rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.4rem 0 0.5rem;}
+.mw-content h2{font-family:var(--ui-font);font-size:1.25rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.3rem 0 0.5rem;}
+.mw-content h3{font-family:var(--ui-font);font-size:1.02rem;font-weight:600;margin:1rem 0 0.35rem;}
+.mw-content h4{font-family:var(--ui-font);font-size:0.92rem;font-weight:600;margin:0.8rem 0 0.3rem;}
+.mw-content p{margin-bottom:0.7rem;}
+.mw-content ul,.mw-content ol{margin:0.5rem 0 0.6rem 1.7rem;}
+.mw-content li{margin-bottom:0.25rem;}
+.mw-content blockquote{border-left:3px solid var(--border);padding:0.3rem 1rem;background:var(--grey-bg);margin:0.7rem 0;color:var(--grey-text);font-size:0.92rem;}
+.mw-content table{border-collapse:collapse;margin:0.7rem 0;font-size:0.9rem;width:auto;}
+.mw-content td,.mw-content th{border:1px solid var(--border-light);padding:0.4rem 0.65rem;text-align:left;}
+.mw-content th{background:var(--grey-bg);font-family:var(--ui-font);font-weight:600;}
+.mw-content code{font-family:"SF Mono",Consolas,monospace;background:var(--grey-bg);padding:0.1rem 0.32rem;border-radius:2px;font-size:0.85em;}
+.mw-content pre{background:var(--grey-bg);padding:0.7rem 0.9rem;border:1px solid var(--border-light);border-radius:3px;overflow-x:auto;font-size:0.82rem;margin:0.7rem 0;}
+.mw-content .dangling{color:#d85a30;border-bottom:1px dashed #d85a30;cursor:help;}
 
-.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
-.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
-.badge-high { background:#e6f4ea; color:#1e8e3e; }
-.badge-medium { background:#fef7e0; color:#f9ab00; }
-.badge-low { background:#fce8e6; color:#d93025; }
+/* 信息框 infobox（右浮动） */
+.infobox{float:right;width:290px;margin:0.4rem 0 1rem 1.6rem;background:var(--grey-bg);border:1px solid var(--border);border-radius:3px;font-family:var(--ui-font);font-size:0.84rem;clear:right;}
+.infobox .ib-title{background:#eaf3ff;border-bottom:1px solid var(--border);text-align:center;font-weight:600;padding:0.45rem 0.5rem;font-size:0.95rem;color:#202122;}
+.infobox .ib-sub{text-align:center;font-size:0.78rem;color:var(--grey-text);padding:0.25rem;}
+.infobox .ib-row{display:flex;border-bottom:1px solid var(--border-light);}
+.infobox .ib-row:last-child{border-bottom:none;}
+.infobox .ib-label{flex:0 0 38%;padding:0.35rem 0.55rem;background:#f3f6fa;color:var(--grey-text);font-weight:500;border-right:1px solid var(--border-light);}
+.infobox .ib-value{flex:1;padding:0.35rem 0.55rem;word-break:break-word;}
+.infobox .ib-value a{color:var(--link);}
 
-.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
-.meta-link:hover { text-decoration:underline; }
+/* 自动目录 TOC */
+.toc{display:inline-block;background:var(--grey-bg);border:1px solid var(--border-light);padding:0.6rem 1rem 0.7rem;margin:0.3rem 0 1.1rem;font-family:var(--ui-font);font-size:0.84rem;border-radius:2px;min-width:240px;}
+.toc .toc-title{font-weight:600;margin-bottom:0.35rem;color:#202122;}
+.toc ul{list-style:none;margin:0;padding-left:1.1rem;}
+.toc>ul{padding-left:0;}
+.toc li{margin:0.15rem 0;line-height:1.4;}
+.toc a{color:var(--link);}
+.toc .toc-n{color:var(--grey-text);margin-right:0.3rem;}
 
-.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
-.backlink-item:hover { color:#378ADD; }
+/* 底部分类栏 */
+.mw-catlinks{margin-top:2rem;padding:0.55rem 0.8rem;background:var(--grey-bg);border:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;color:var(--grey-text);}
+.mw-catlinks .cl-prefix{font-weight:600;margin-right:0.4rem;}
+.mw-catlinks a{color:var(--link);}
 
-.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
-.link-btn:hover { background:#e0e0e0; }
+/* 维基式标签/徽章 */
+.tagpill{display:inline-block;font-family:var(--ui-font);font-size:0.74rem;background:var(--grey-bg);border:1px solid var(--border-light);padding:1px 7px;border-radius:3px;margin:1px;}
+.tagpill a{color:var(--link);}
+.badge{display:inline-block;font-family:var(--ui-font);font-size:0.72rem;padding:1px 7px;border-radius:3px;color:#fff;}
+.badge-high{background:#1e8e3e;} .badge-medium{background:#f9ab00;color:#202122;} .badge-low{background:#d93025;}
 
-.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+/* 分类页 / 标签页 列表 */
+.catpage-section{margin-bottom:1.6rem;}
+.catpage-section h2{font-family:var(--ui-font);font-size:1.15rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin-bottom:0.6rem;}
+.catpage-list{list-style:none;margin:0;padding:0;}
+.catpage-list li{padding:0.34rem 0.2rem;border-bottom:1px solid #f0f0f0;font-family:var(--ui-font);font-size:0.9rem;display:flex;align-items:baseline;}
+.catpage-list li:last-child{border-bottom:none;}
+.catpage-list .pl-title{font-weight:500;}
+.catpage-list .pl-meta{color:var(--grey-text);font-size:0.78rem;margin-left:0.6rem;}
+.catpage-list .pl-meta .tagpill{font-size:0.7rem;}
+
+/* 首页：分类/最近更新 区块 */
+.home-intro{font-family:var(--ui-font);font-size:0.92rem;color:#333;margin-bottom:1.2rem;line-height:1.6;}
+.home-grid{display:grid;grid-template-columns:1fr 320px;gap:1.6rem;align-items:start;}
+.home-cats{font-family:var(--ui-font);}
+.home-cat-row{display:flex;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid #f0f0f0;}
+.home-cat-row .hc-name{font-size:1rem;font-weight:600;min-width:120px;}
+.home-cat-row .hc-name a{color:var(--link);}
+.home-cat-row .hc-count{color:var(--grey-text);font-size:0.8rem;margin-left:0.6rem;min-width:54px;}
+.home-cat-row .hc-desc{color:var(--grey-text);font-size:0.82rem;margin-left:0.6rem;flex:1;}
+.home-side .box{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.8rem 1rem;margin-bottom:1rem;font-family:var(--ui-font);}
+.home-side .box h3{font-size:0.9rem;font-weight:600;margin-bottom:0.5rem;color:#202122;}
+.home-side .upd{font-size:0.82rem;padding:0.25rem 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;}
+.home-side .upd a{color:var(--link);}
+.home-side .upd .ud{color:#aaa;font-size:0.72rem;white-space:nowrap;margin-left:0.5rem;}
+.graph-box svg{width:100%;height:300px;}
+
+/* 层级导航（标签父/子，对标维基 category 页） */
+.hierarchy{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.6rem 0.9rem;margin:0.2rem 0 1.2rem;font-family:var(--ui-font);font-size:0.84rem;}
+.hier-row{margin:0.3rem 0;}
+.hier-label{color:var(--grey-text);font-weight:600;margin-right:0.4rem;}
+.hier-link{color:var(--link);}
+.hier-none{color:#aaa;}
+.hier-note{color:var(--grey-text);}
+
+/* 标签总览树 */
+.tagtree{list-style:none;padding-left:0;font-family:var(--ui-font);}
+.tagtree ul{list-style:none;padding-left:1.3rem;border-left:1px solid var(--border-light);margin-left:0.4rem;}
+.tagtree li{padding:3px 0;font-size:0.9rem;}
+.tagtree .tn{color:var(--link);}
+.tagtree .tc{font-size:0.72rem;color:var(--grey-text);margin-left:0.3rem;}
+
+/* 详情页引用的反向链接/来源列表 */
+.metalist{font-family:var(--ui-font);font-size:0.84rem;}
+.metalist a{color:var(--link);display:block;padding:0.22rem 0;border-bottom:1px solid #f5f5f5;}
+.footer-note{text-align:center;color:#aaa;font-family:var(--ui-font);font-size:0.74rem;margin-top:1.5rem;}
+
+@media (max-width:900px){
+  .mw-body{flex-direction:column;}
+  .mw-nav{width:100%;min-height:0;border-right:none;border-bottom:1px solid var(--border-light);display:flex;flex-wrap:wrap;gap:0.2rem;padding:0.5rem;}
+  .mw-nav .nav-title,.mw-nav .nav-sep{display:none;}
+  .infobox{float:none;width:auto;margin:1rem 0;}
+  .home-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="main">
-        <div class="header">
-            <a href="../index.html">← 返回首页</a>
-            <h1>Obsidian+AI工作台</h1>
-            <div class="sub">AI产品 · 活跃</div>
-        </div>
-        <div class="content"><h1>Obsidian+AI工作台</h1>
-<h2>核心定义</h2>
+<header class="mw-header">
+    <div class="mw-header-inner">
+        <a class="mw-site" href="../index.html">AI 研究团队知识库</a>
+        <form class="mw-search" onsubmit="return false;">
+            <input type="text" id="searchInput" placeholder="搜索..." oninput="doSearch(this.value)">
+        </form>
+    </div>
+</header>
+<div class="mw-body">
+    <nav class="mw-nav">
+        <div class="nav-title">导航</div>
+        <a href="../index.html">首页</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">分类</div>
+        <a href="../category-AI人物.html">AI人物</a><a href="../category-AI产品.html">AI产品</a><a href="../category-AI技术.html">AI技术</a><a href="../category-AI组织.html">AI组织</a><a href="../category-AI理念.html">AI理念</a><a href="../category-AI流程.html">AI流程</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">标签</div>
+        <a href="../tags.html">标签索引</a>
+    </nav>
+    <main class="mw-main">
+        <div class="mw-title"><h1>Obsidian+AI工作台</h1><div class="sub">AI产品 · 活跃</div></div>
+        
+        <div class="mw-content"><div class="infobox"><div class="ib-title">Obsidian+AI工作台</div><div class="ib-row"><div class="ib-label">分类</div><div class="ib-value"><a href="../category-AI产品.html" style="color:#3366cc">AI产品</a></div></div><div class="ib-row"><div class="ib-label">官网</div><div class="ib-value"><a href="Obsidian+AI工作台.html" style="color:#3366cc">Obsidian+AI工作台.html</a></div></div><div class="ib-row"><div class="ib-label">状态</div><div class="ib-value">活跃</div></div><div class="ib-row"><div class="ib-label">可信度</div><div class="ib-value"><span class="badge badge-高">高</span></div></div><div class="ib-row"><div class="ib-label">创建</div><div class="ib-value">2026-07-02</div></div><div class="ib-row"><div class="ib-label">更新</div><div class="ib-value">2026-07-02</div></div><div class="ib-row"><div class="ib-label">标签</div><div class="ib-value"><a href="../tag-研究公共AI.html" class="tagpill">研究公共AI</a> <a href="../tag-向量检索.html" class="tagpill">向量检索</a> <a href="../tag-方法论.html" class="tagpill">方法论</a></div></div></div><div class="toc"><div class="toc-title">目录</div><ul><li><span class="toc-n">1</span><a href="#sec-2-1">核心定义</a></li></ul><ul><li><span class="toc-n">2</span><a href="#sec-2-2">核心功能</a></li><li><span class="toc-n">2.1</span><a href="#sec-3-1">目标</a></li><li><span class="toc-n">2.2</span><a href="#sec-3-2">核心模式</a></li><li><span class="toc-n">2.3</span><a href="#sec-3-3">步骤</a></li><li><span class="toc-n">2.4</span><a href="#sec-3-4">主流实现</a></li><li><span class="toc-n">2.5</span><a href="#sec-3-5">与我们的知识库</a></li></ul><ul><li><span class="toc-n">3</span><a href="#sec-2-3">适用场景</a></li></ul><ul><li><span class="toc-n">4</span><a href="#sec-2-4">竞品对比</a></li></ul><ul><li><span class="toc-n">5</span><a href="#sec-2-5">团队评估</a></li></ul><ul><li><span class="toc-n">6</span><a href="#sec-2-6">争议与待验证</a></li></ul><ul><li><span class="toc-n">7</span><a href="#sec-2-7">相关页面</a></li></ul></div><h1 id="sec-1-1">Obsidian+AI工作台</h1>
+<h2 id="sec-2-1">核心定义</h2>
 <blockquote>**一句话定位**：以 Obsidian 作为本地 Markdown 知识库，接入 AI Agent（Codex / Claude Code / WorkBuddy 等）实现自动化知识管理的本地工作台范式。</blockquote>
-<h2>核心功能</h2>
-<h3>目标</h3>
+<h2 id="sec-2-2">核心功能</h2>
+<h3 id="sec-3-1">目标</h3>
 <p>解决两个核心问题：</p>
 <ol>
 <li>**知识沉淀**：将碎片化的AI研究资料持续编译为结构化的 Wiki 知识库</li>
 <li>**隐私可控**：所有数据在本地，不依赖云端平台</li>
 </ol>
-<h3>核心模式</h3>
+<h3 id="sec-3-2">核心模式</h3>
 <pre><code>
 [原始资料] → [AI Agent 处理] → [Obsidian Markdown 文件] → [知识图谱/索引]
    ↑                               ↓
    └────── AI 发现缺口 ←──── 人类审核与反馈
 </code></pre>
-<h3>步骤</h3>
+<h3 id="sec-3-3">步骤</h3>
 <ol>
 <li>**知识摄入**：从各种来源收集资料（微信文章、PDF、视频链接等）；AI Agent 读取并提取结构化信息；按模板生成素材笔记</li>
 <li>**知识编译**：AI Agent 分析素材笔记，发现主题和联系；创建/更新 Wiki 页面，建立双向链接；检测重复、矛盾、过时内容</li>
 <li>**结构维护**：更新索引.md、日志.md；维护跨页面的 wikilinks；清理孤立页面和失效链接</li>
 <li>**报告生成**：从知识库提取数据生成周报；统计知识增长、发现缺口；输出团队可读的摘要</li>
 </ol>
-<h3>主流实现</h3>
+<h3 id="sec-3-4">主流实现</h3>
 <table>
 <tr>
 <td>方案</td>
@@ -114,7 +210,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>Anthropic生态、代码理解强</td>
 </tr>
 </table>
-<h3>与我们的知识库</h3>
+<h3 id="sec-3-5">与我们的知识库</h3>
 <p>本团队的知识库本质上就是一个 Obsidian+AI 工作台的实例：</p>
 <ul>
 <li>- **知识库载体**：Obsidian Vault (`E:\AI-团队知识库`)</li>
@@ -123,7 +219,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- **编译规范**：AGENTS.md（三层架构：原始资料→知识库→The schema）</li>
 <li>- **调度方式**：WorkBuddy 自动化（每日同步编译、每周报告）</li>
 </ul>
-<h2>适用场景</h2>
+<h2 id="sec-2-3">适用场景</h2>
 <table>
 <tr>
 <td>适用</td>
@@ -142,7 +238,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>纯单次笔记记录</td>
 </tr>
 </table>
-<h2>竞品对比</h2>
+<h2 id="sec-2-4">竞品对比</h2>
 <table>
 <tr>
 <td>方案</td>
@@ -165,57 +261,31 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>Anthropic生态、代码理解强</td>
 </tr>
 </table>
-<h2>团队评估</h2>
+<h2 id="sec-2-5">团队评估</h2>
 <blockquote>Obsidian+AI 工作台将碎片化 AI 研究资料持续编译为结构化 Wiki 知识库，所有数据在本地、不依赖云端平台。本团队知识库即其实例：以 Obsidian Vault 为载体、WorkBuddy 为 Agent、IMA 为采集入口、AGENTS.md 为编译规范，通过 WorkBuddy 自动化实现每日同步编译与每周报告。</blockquote>
-<h2>争议与待验证</h2>
+<h2 id="sec-2-6">争议与待验证</h2>
 <ul>
 <li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
 </ul>
-<h2>相关页面</h2>
+<h2 id="sec-2-7">相关页面</h2>
 <ul>
 <li>- <a href="WorkBuddy.html">WorkBuddy</a> — 腾讯桌面 Agent 平台（本团队采用）</li>
 <li>- <a href="Codex.html">Codex</a> — OpenAI 的终端 AI Agent</li>
 <li>- <a href="LLM-Wiki.html">LLM Wiki</a> — 编译式知识库的方法论基础</li>
 <li>- IMA — 腾讯知识管理工具（本团队的采集入口）</li>
-</ul></div>
-        <div class="link-buttons" style="margin-top:1rem;">
-            <a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Codex.html" class="link-btn">Codex</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Codex.html" class="link-btn">Codex</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Codex.html" class="link-btn">Codex</a><a href="LLM-Wiki.html" class="link-btn">LLM Wiki</a>
-        </div>
-    </div>
-
-    <aside class="sidebar">
-        <div class="sidebar-card">
-            <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#378ADD">AI产品</span></div>
-            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">Obsidian+AI工作台.html</span></div>
-            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
-            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-02</span></div>
-            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-02</span></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>标签</h3>
-            <div><a href="tag-研究公共AI.html" class="tag">研究公共AI</a> <a href="tag-向量检索.html" class="tag">向量检索</a> <a href="tag-方法论.html" class="tag">方法论</a></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>反向链接 (5)</h3>
-            <div><a href="Codex.html" class="backlink-item">Codex</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>参考来源</h3>
-            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>被引用 (5)</h3>
-            <div><a href="Codex.html" class="backlink-item">Codex</a><a href="ima-知识库.html" class="backlink-item">ima 知识库</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信视频接入知识库.html" class="backlink-item">微信视频接入知识库</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a></div>
-        </div>
-    </aside>
-
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</ul><h2>相关页面</h2><div class="metalist"><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="Codex.html">Codex</a></div><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="Codex.html">Codex</a></div><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="Codex.html">Codex</a></div><div class="metalist"><a href="LLM-Wiki.html">LLM Wiki</a></div></div><h2>被引用（5）</h2><div class="metalist"><div class="metalist"><a href="Codex.html">Codex</a></div><div class="metalist"><a href="ima-知识库.html">ima 知识库</a></div><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="微信视频接入知识库.html">微信视频接入知识库</a></div><div class="metalist"><a href="LLM-Wiki.html">LLM Wiki</a></div></div></div>
+        <footer class="mw-catlinks"><span class="cl-prefix">分类：</span><a href="../category-AI产品.html">AI产品</a> · <a href="../tag-研究公共AI.html">研究公共AI</a> <a href="../tag-向量检索.html">向量检索</a> <a href="../tag-方法论.html">方法论</a></footer>
+        <div class="footer-note">AI 研究团队知识库 · 自动生成于 2026-07-19 20:39</div>
+    </main>
 </div>
+<script>
+function doSearch(q){
+    q=(q||'').toLowerCase().trim();
+    if(!q){ return; }
+    // 详情页（子目录）自身无搜索数据，跳首页并带查询参数，由首页统一处理
+    location.href='../index.html#q='+encodeURIComponent(q);
+}
+</script>
+
 </body>
 </html>

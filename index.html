@@ -3,93 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 研究团队知识库</title>
+<title>AI 研究团队知识库 - AI 研究团队知识库</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.6; }
-.container { max-width:900px; margin:0 auto; padding:2rem 1.5rem; }
+:root{
+  --link:#3366cc; --link-visited:#795cb2; --text:#202122; --bg:#fff;
+  --grey-bg:#f8f9fa; --border:#a2a9b1; --border-light:#c8ccd1; --grey-text:#54595d;
+  --ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif-font:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--serif-font);color:var(--text);background:var(--grey-bg);line-height:1.6;font-size:15px;}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:visited{color:var(--link-visited);}
 
-.header { margin-bottom:2rem; }
-.header h1 { font-size:1.6rem; font-weight:600; }
-.header p { font-size:0.9rem; color:#666; margin-top:0.25rem; }
+/* 页眉 */
+.mw-header{background:var(--bg);border-bottom:1px solid var(--border-light);box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.mw-header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;}
+.mw-site{font-family:var(--ui-font);font-size:1.05rem;font-weight:600;color:var(--text);}
+.mw-site:hover{text-decoration:none;}
+.mw-search{position:relative;}
+.mw-search input{font-family:var(--ui-font);width:220px;padding:0.35rem 0.7rem;font-size:0.82rem;border:1px solid var(--border-light);border-radius:2px;outline:none;}
+.mw-search input:focus{border-color:#36c;box-shadow:0 0 0 2px rgba(51,102,204,.15);}
 
-.search-box { width:100%; padding:0.6rem 1rem; font-size:0.9rem; border:1px solid #ddd; border-radius:8px; margin-bottom:1.5rem; outline:none; }
-.search-box:focus { border-color:#378ADD; box-shadow:0 0 0 3px rgba(55,138,221,0.1); }
+/* 布局：左栏导航 + 主内容 */
+.mw-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;}
+.mw-nav{width:150px;flex-shrink:0;padding:1rem 0.4rem;border-right:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;min-height:calc(100vh - 56px);}
+.mw-nav .nav-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);padding:0.5rem 0.5rem 0.2rem;font-weight:600;}
+.mw-nav a{display:block;padding:0.22rem 0.5rem;color:var(--link);border-radius:2px;}
+.mw-nav a:hover{background:var(--grey-bg);text-decoration:none;}
+.mw-nav .nav-sep{border-top:1px solid var(--border-light);margin:0.4rem 0.3rem;}
 
-.cat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-bottom:2rem; }
-.cat-card { background:#fff; border-radius:10px; padding:1rem; text-decoration:none; border:1px solid #eee; transition:border-color 0.15s; display:flex; flex-direction:column; }
-.cat-card:hover { border-color:#ccc; }
-.cat-count { font-size:1.8rem; font-weight:700; }
-.cat-label { font-size:0.85rem; color:#333; margin-top:4px; font-weight:600; }
-.cat-sub { font-size:0.7rem; color:#999; margin-top:2px; }
+.mw-main{flex:1;min-width:0;background:var(--bg);border:1px solid var(--border-light);border-top:none;padding:1.1rem 1.6rem 2.2rem;margin:0 0 2rem;}
 
-.section-title { font-size:1rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+/* 标题 */
+.mw-title h1{font-family:var(--ui-font);font-size:1.7rem;font-weight:400;line-height:1.25;border-bottom:1px solid var(--border-light);padding-bottom:0.3rem;margin-bottom:0.2rem;}
+.mw-title .sub{font-family:var(--ui-font);font-size:0.8rem;color:var(--grey-text);margin-bottom:0.6rem;}
 
-.graph-container { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:2rem; overflow:hidden; }
-.graph-container svg { width:100%; height:320px; }
+/* 正文排版 */
+.mw-content h1{font-family:var(--ui-font);font-size:1.45rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.4rem 0 0.5rem;}
+.mw-content h2{font-family:var(--ui-font);font-size:1.25rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.3rem 0 0.5rem;}
+.mw-content h3{font-family:var(--ui-font);font-size:1.02rem;font-weight:600;margin:1rem 0 0.35rem;}
+.mw-content h4{font-family:var(--ui-font);font-size:0.92rem;font-weight:600;margin:0.8rem 0 0.3rem;}
+.mw-content p{margin-bottom:0.7rem;}
+.mw-content ul,.mw-content ol{margin:0.5rem 0 0.6rem 1.7rem;}
+.mw-content li{margin-bottom:0.25rem;}
+.mw-content blockquote{border-left:3px solid var(--border);padding:0.3rem 1rem;background:var(--grey-bg);margin:0.7rem 0;color:var(--grey-text);font-size:0.92rem;}
+.mw-content table{border-collapse:collapse;margin:0.7rem 0;font-size:0.9rem;width:auto;}
+.mw-content td,.mw-content th{border:1px solid var(--border-light);padding:0.4rem 0.65rem;text-align:left;}
+.mw-content th{background:var(--grey-bg);font-family:var(--ui-font);font-weight:600;}
+.mw-content code{font-family:"SF Mono",Consolas,monospace;background:var(--grey-bg);padding:0.1rem 0.32rem;border-radius:2px;font-size:0.85em;}
+.mw-content pre{background:var(--grey-bg);padding:0.7rem 0.9rem;border:1px solid var(--border-light);border-radius:3px;overflow-x:auto;font-size:0.82rem;margin:0.7rem 0;}
+.mw-content .dangling{color:#d85a30;border-bottom:1px dashed #d85a30;cursor:help;}
 
-.updates { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem 1.25rem; margin-bottom:2rem; }
-.update-item { display:flex; align-items:center; padding:0.5rem 0; border-bottom:1px solid #f0f0f0; font-size:0.85rem; }
-.update-item:last-child { border-bottom:none; }
-.update-name { color:#1a1a2e; text-decoration:none; flex:1; }
-.update-name:hover { color:#378ADD; }
-.update-cat { font-size:0.7rem; padding:1px 6px; border-radius:4px; margin:0 8px; white-space:nowrap; }
-.update-date { color:#aaa; font-size:0.75rem; white-space:nowrap; }
+/* 信息框 infobox（右浮动） */
+.infobox{float:right;width:290px;margin:0.4rem 0 1rem 1.6rem;background:var(--grey-bg);border:1px solid var(--border);border-radius:3px;font-family:var(--ui-font);font-size:0.84rem;clear:right;}
+.infobox .ib-title{background:#eaf3ff;border-bottom:1px solid var(--border);text-align:center;font-weight:600;padding:0.45rem 0.5rem;font-size:0.95rem;color:#202122;}
+.infobox .ib-sub{text-align:center;font-size:0.78rem;color:var(--grey-text);padding:0.25rem;}
+.infobox .ib-row{display:flex;border-bottom:1px solid var(--border-light);}
+.infobox .ib-row:last-child{border-bottom:none;}
+.infobox .ib-label{flex:0 0 38%;padding:0.35rem 0.55rem;background:#f3f6fa;color:var(--grey-text);font-weight:500;border-right:1px solid var(--border-light);}
+.infobox .ib-value{flex:1;padding:0.35rem 0.55rem;word-break:break-word;}
+.infobox .ib-value a{color:var(--link);}
 
-.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; }
+/* 自动目录 TOC */
+.toc{display:inline-block;background:var(--grey-bg);border:1px solid var(--border-light);padding:0.6rem 1rem 0.7rem;margin:0.3rem 0 1.1rem;font-family:var(--ui-font);font-size:0.84rem;border-radius:2px;min-width:240px;}
+.toc .toc-title{font-weight:600;margin-bottom:0.35rem;color:#202122;}
+.toc ul{list-style:none;margin:0;padding-left:1.1rem;}
+.toc>ul{padding-left:0;}
+.toc li{margin:0.15rem 0;line-height:1.4;}
+.toc a{color:var(--link);}
+.toc .toc-n{color:var(--grey-text);margin-right:0.3rem;}
 
-.node-label { font-size:10px; font-family:-apple-system,BlinkMacSystemFont,sans-serif; }
-.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+/* 底部分类栏 */
+.mw-catlinks{margin-top:2rem;padding:0.55rem 0.8rem;background:var(--grey-bg);border:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;color:var(--grey-text);}
+.mw-catlinks .cl-prefix{font-weight:600;margin-right:0.4rem;}
+.mw-catlinks a{color:var(--link);}
+
+/* 维基式标签/徽章 */
+.tagpill{display:inline-block;font-family:var(--ui-font);font-size:0.74rem;background:var(--grey-bg);border:1px solid var(--border-light);padding:1px 7px;border-radius:3px;margin:1px;}
+.tagpill a{color:var(--link);}
+.badge{display:inline-block;font-family:var(--ui-font);font-size:0.72rem;padding:1px 7px;border-radius:3px;color:#fff;}
+.badge-high{background:#1e8e3e;} .badge-medium{background:#f9ab00;color:#202122;} .badge-low{background:#d93025;}
+
+/* 分类页 / 标签页 列表 */
+.catpage-section{margin-bottom:1.6rem;}
+.catpage-section h2{font-family:var(--ui-font);font-size:1.15rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin-bottom:0.6rem;}
+.catpage-list{list-style:none;margin:0;padding:0;}
+.catpage-list li{padding:0.34rem 0.2rem;border-bottom:1px solid #f0f0f0;font-family:var(--ui-font);font-size:0.9rem;display:flex;align-items:baseline;}
+.catpage-list li:last-child{border-bottom:none;}
+.catpage-list .pl-title{font-weight:500;}
+.catpage-list .pl-meta{color:var(--grey-text);font-size:0.78rem;margin-left:0.6rem;}
+.catpage-list .pl-meta .tagpill{font-size:0.7rem;}
+
+/* 首页：分类/最近更新 区块 */
+.home-intro{font-family:var(--ui-font);font-size:0.92rem;color:#333;margin-bottom:1.2rem;line-height:1.6;}
+.home-grid{display:grid;grid-template-columns:1fr 320px;gap:1.6rem;align-items:start;}
+.home-cats{font-family:var(--ui-font);}
+.home-cat-row{display:flex;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid #f0f0f0;}
+.home-cat-row .hc-name{font-size:1rem;font-weight:600;min-width:120px;}
+.home-cat-row .hc-name a{color:var(--link);}
+.home-cat-row .hc-count{color:var(--grey-text);font-size:0.8rem;margin-left:0.6rem;min-width:54px;}
+.home-cat-row .hc-desc{color:var(--grey-text);font-size:0.82rem;margin-left:0.6rem;flex:1;}
+.home-side .box{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.8rem 1rem;margin-bottom:1rem;font-family:var(--ui-font);}
+.home-side .box h3{font-size:0.9rem;font-weight:600;margin-bottom:0.5rem;color:#202122;}
+.home-side .upd{font-size:0.82rem;padding:0.25rem 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;}
+.home-side .upd a{color:var(--link);}
+.home-side .upd .ud{color:#aaa;font-size:0.72rem;white-space:nowrap;margin-left:0.5rem;}
+.graph-box svg{width:100%;height:300px;}
+
+/* 层级导航（标签父/子，对标维基 category 页） */
+.hierarchy{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.6rem 0.9rem;margin:0.2rem 0 1.2rem;font-family:var(--ui-font);font-size:0.84rem;}
+.hier-row{margin:0.3rem 0;}
+.hier-label{color:var(--grey-text);font-weight:600;margin-right:0.4rem;}
+.hier-link{color:var(--link);}
+.hier-none{color:#aaa;}
+.hier-note{color:var(--grey-text);}
+
+/* 标签总览树 */
+.tagtree{list-style:none;padding-left:0;font-family:var(--ui-font);}
+.tagtree ul{list-style:none;padding-left:1.3rem;border-left:1px solid var(--border-light);margin-left:0.4rem;}
+.tagtree li{padding:3px 0;font-size:0.9rem;}
+.tagtree .tn{color:var(--link);}
+.tagtree .tc{font-size:0.72rem;color:var(--grey-text);margin-left:0.3rem;}
+
+/* 详情页引用的反向链接/来源列表 */
+.metalist{font-family:var(--ui-font);font-size:0.84rem;}
+.metalist a{color:var(--link);display:block;padding:0.22rem 0;border-bottom:1px solid #f5f5f5;}
+.footer-note{text-align:center;color:#aaa;font-family:var(--ui-font);font-size:0.74rem;margin-top:1.5rem;}
+
+@media (max-width:900px){
+  .mw-body{flex-direction:column;}
+  .mw-nav{width:100%;min-height:0;border-right:none;border-bottom:1px solid var(--border-light);display:flex;flex-wrap:wrap;gap:0.2rem;padding:0.5rem;}
+  .mw-nav .nav-title,.mw-nav .nav-sep{display:none;}
+  .infobox{float:none;width:auto;margin:1rem 0;}
+  .home-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>AI 研究团队 知识库</h1>
-        <p>63 个 Wiki 页面 · 0 篇素材笔记 · 6 个主题 · <a href="tags.html" style="color:#378ADD;text-decoration:none;">按标签浏览</a></p>
+<header class="mw-header">
+    <div class="mw-header-inner">
+        <a class="mw-site" href="index.html">AI 研究团队知识库</a>
+        <form class="mw-search" onsubmit="return false;">
+            <input type="text" id="searchInput" placeholder="搜索..." oninput="doSearch(this.value)">
+        </form>
     </div>
-
-    <input type="text" class="search-box" placeholder="搜索页面、标签或内容..." oninput="doSearch(this.value)" id="search" autocomplete="off">
-
-    <div id="searchResults" style="display:none; margin-bottom:1.5rem;"></div>
-
-    <div class="cat-grid" id="catGrid">
+</header>
+<div class="mw-body">
+    <nav class="mw-nav">
+        <div class="nav-title">导航</div>
+        <a href="index.html">首页</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">分类</div>
+        <a href="category-AI人物.html">AI人物</a><a href="category-AI产品.html">AI产品</a><a href="category-AI技术.html">AI技术</a><a href="category-AI组织.html">AI组织</a><a href="category-AI理念.html">AI理念</a><a href="category-AI流程.html">AI流程</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">标签</div>
+        <a href="tags.html">标签索引</a>
+    </nav>
+    <main class="mw-main">
+        <div class="mw-title"><h1>AI 研究团队知识库</h1><div class="sub">63 个 Wiki 页面 · 0 篇素材笔记 · 6 个分类</div></div>
         
-        <a href="category-AI人物.html" class="cat-card">
-            <span class="cat-count" style="color:#534AB7">3</span>
-            <span class="cat-label">AI人物</span>
-            <span class="cat-sub">Wiki 3 · 素材 0</span>
-        </a>
-        <a href="category-AI产品.html" class="cat-card">
-            <span class="cat-count" style="color:#378ADD">31</span>
-            <span class="cat-label">AI产品</span>
-            <span class="cat-sub">Wiki 31 · 素材 0</span>
-        </a>
-        <a href="category-AI技术.html" class="cat-card">
-            <span class="cat-count" style="color:#639922">13</span>
-            <span class="cat-label">AI技术</span>
-            <span class="cat-sub">Wiki 13 · 素材 0</span>
-        </a>
-        <a href="category-AI组织.html" class="cat-card">
-            <span class="cat-count" style="color:#993C1D">4</span>
-            <span class="cat-label">AI组织</span>
-            <span class="cat-sub">Wiki 4 · 素材 0</span>
-        </a>
-        <a href="category-AI理念.html" class="cat-card">
-            <span class="cat-count" style="color:#BA7517">8</span>
-            <span class="cat-label">AI理念</span>
-            <span class="cat-sub">Wiki 8 · 素材 0</span>
-        </a>
-        <a href="category-AI流程.html" class="cat-card">
-            <span class="cat-count" style="color:#0F6E56">4</span>
-            <span class="cat-label">AI流程</span>
-            <span class="cat-sub">Wiki 4 · 素材 0</span>
-        </a>
+        <div class="mw-content">
+    <div class="home-intro">本知识库系统梳理 AI 团队所需的 <strong>人物、产品、技术、组织、理念、流程</strong> 六类知识，采用框架锚定分类与受控标签体系（对标维基百科的 category 树与同义词归并）。目前共 <strong>63</strong> 个 Wiki 页面、<strong>0</strong> 篇素材笔记。</div>
+    <div class="home-grid">
+        <div class="home-cats">
+            <div class="catpage-section"><h2>分类</h2>
+        <div class="home-cat-row">
+            <span class="hc-name"><a href="category-AI人物.html">AI人物</a></span>
+            <span class="hc-count">3</span>
+            <span class="hc-desc">AI 领域的代表人物：研究者、创业者、思想领袖</span>
+        </div>
+        <div class="home-cat-row">
+            <span class="hc-name"><a href="category-AI产品.html">AI产品</a></span>
+            <span class="hc-count">31</span>
+            <span class="hc-desc">已上市或公开的 AI 产品与工具</span>
+        </div>
+        <div class="home-cat-row">
+            <span class="hc-name"><a href="category-AI技术.html">AI技术</a></span>
+            <span class="hc-count">13</span>
+            <span class="hc-desc">底层算法、架构与单点技术</span>
+        </div>
+        <div class="home-cat-row">
+            <span class="hc-name"><a href="category-AI组织.html">AI组织</a></span>
+            <span class="hc-count">4</span>
+            <span class="hc-desc">AI 落地的组织架构与岗位范式</span>
+        </div>
+        <div class="home-cat-row">
+            <span class="hc-name"><a href="category-AI理念.html">AI理念</a></span>
+            <span class="hc-count">8</span>
+            <span class="hc-desc">方法论层与哲学性认知</span>
+        </div>
+        <div class="home-cat-row">
+            <span class="hc-name"><a href="category-AI流程.html">AI流程</a></span>
+            <span class="hc-count">4</span>
+            <span class="hc-desc">公司流程 / SOP 的 AI 应用方式</span>
+        </div></div>
+        </div>
+        <div class="home-side">
+            <div class="box"><h3>最近更新</h3>
+        <div class="upd"><a href="pages/Paperclip.html">Paperclip</a><span class="ud">2026-07-19</span></div>
+        <div class="upd"><a href="pages/RAG（检索增强生成）.html">RAG（检索增强生成）</a><span class="ud">2026-07-19</span></div>
+        <div class="upd"><a href="pages/Builder-心态.html">Builder 心态</a><span class="ud">2026-07-19</span></div>
+        <div class="upd"><a href="pages/Problem-Hunting.html">Problem Hunting</a><span class="ud">2026-07-19</span></div>
+        <div class="upd"><a href="pages/判断力飞轮.html">判断力飞轮</a><span class="ud">2026-07-19</span></div>
+        <div class="upd"><a href="pages/奢侈雇员（Luxury-Hires）.html">奢侈雇员（Luxury Hires）</a><span class="ud">2026-07-19</span></div></div>
+        </div>
     </div>
-
-    <p class="section-title">知识图谱</p>
-    <div class="graph-container" id="graphSection">
-        <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+    <div class="catpage-section"><h2>知识图谱</h2><div class="graph-box"><svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
 <defs><marker id="ga" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#ccc" stroke-width="1"/></marker></defs>
 <line x1="401.8664628612426" y1="57.17713885988928" x2="340" y2="160" stroke="#ddd" stroke-width="0.5" marker-end="url(#ga)"/>
 <line x1="401.8664628612426" y1="57.17713885988928" x2="313.5496636468387" y2="196.40576474687265" stroke="#ddd" stroke-width="0.5" marker-end="url(#ga)"/>
@@ -585,94 +706,49 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <text x="327.02571778912704" y="43.70344514147685" text-anchor="middle" font-size="10" fill="#993C1D" font-family="system-ui,sans-serif" font-weight="500">给律所做FDE的</text>
 <title>给律所做FDE的销售复盘10坑 · 0 引用</title>
 </a>
-</svg>
+</svg></div></div>
     </div>
-
-    <p class="section-title">最近更新</p>
-    <div class="updates" id="updatesSection">
-        
-        <div class="update-item">
-            <a href="pages/Paperclip.html" class="update-name">Paperclip</a>
-            <span class="update-cat" style="background:#378ADD1a;color:#378ADD">AI产品</span>
-            <span class="update-date">2026-07-19</span>
-        </div>
-        <div class="update-item">
-            <a href="pages/RAG（检索增强生成）.html" class="update-name">RAG（检索增强生成）</a>
-            <span class="update-cat" style="background:#6399221a;color:#639922">AI技术</span>
-            <span class="update-date">2026-07-19</span>
-        </div>
-        <div class="update-item">
-            <a href="pages/Builder-心态.html" class="update-name">Builder 心态</a>
-            <span class="update-cat" style="background:#BA75171a;color:#BA7517">AI理念</span>
-            <span class="update-date">2026-07-19</span>
-        </div>
-        <div class="update-item">
-            <a href="pages/Problem-Hunting.html" class="update-name">Problem Hunting</a>
-            <span class="update-cat" style="background:#BA75171a;color:#BA7517">AI理念</span>
-            <span class="update-date">2026-07-19</span>
-        </div>
-        <div class="update-item">
-            <a href="pages/判断力飞轮.html" class="update-name">判断力飞轮</a>
-            <span class="update-cat" style="background:#BA75171a;color:#BA7517">AI理念</span>
-            <span class="update-date">2026-07-19</span>
-        </div>
-        <div class="update-item">
-            <a href="pages/奢侈雇员（Luxury-Hires）.html" class="update-name">奢侈雇员（Luxury Hires）</a>
-            <span class="update-cat" style="background:#BA75171a;color:#BA7517">AI理念</span>
-            <span class="update-date">2026-07-19</span>
-        </div>
-    </div>
-
-    <div class="footer">
-        AI 研究团队知识库 · 自动生成于 2026-07-19 15:26
-    </div>
+        <footer class="mw-catlinks"><span class="cl-prefix">分类：</span><a href="category-AI人物.html">AI人物</a> <a href="category-AI产品.html">AI产品</a> <a href="category-AI技术.html">AI技术</a> <a href="category-AI组织.html">AI组织</a> <a href="category-AI理念.html">AI理念</a> <a href="category-AI流程.html">AI流程</a> · <a href="tags.html">按标签浏览</a></footer>
+        <div class="footer-note">AI 研究团队知识库 · 自动生成于 2026-07-19 20:39</div>
+    </main>
 </div>
-
 <script>
-// 搜索数据已内联（支持 file:// 直接打开）
-var searchData = [{"title": "AI API网关", "url": "AI-API网关.html", "category": "AI产品", "tags": ["大模型", "工具评测", "研究公共AI"], "text": " # AI API 网关  ## 核心定义 > **一句话定位**：AI API 网关是企业内部统一管理和调度 AI 模型 API 调用的中间层，提供令牌管理、流量控制、模型路由等能力，降低团队接入 AI 的门槛。  ## 核心功能 ### 统一令牌管理 - 管理员创建令牌，绑定可用模型列表和额度限制 - 员工只需复制密钥即可使用，无需各自申请模型厂商的 API Key  ### 流量控制与治理 - 统一的调用额度管理，避免个人超量 - 可设置 IP 限制、过期时间等安全策略 - 集中监控和日志审计  ### 模型路由 - 向员工暴露统一的兼容接口（通常为 OpenAI 兼容协议） - 后端可"}, {"title": "BOM自动化", "url": "BOM自动化.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": " # 交互式 BOM 表（AI 自动生成 PCB 物料清单）  ## 核心定义 > **一句话定位**：'交互式 BOM 表'是 AI Agent 时代的物料清单新形态——把传统 Excel BOM 升级为可对话、可追溯、可下单、可版本管理的「活动文档」。KiCad MCP、NextBoard、bom-generator 等多种工具已落地。  ## 核心功能 - **自动选型**：从需求描述 → 推荐合适器件 + 国产替代 - **Datasheet 自动下载**：避免工程师去官网逐个查 - **实时比价**：多分销商（DigiKey / Mouser / LCSC / element14 /"}, {"title": "Codex", "url": "Codex.html", "category": "AI产品", "tags": ["工具评测", "智能体", "研究公共AI"], "text": " # Codex  ## 核心定义 > **一句话定位**：Codex 是 OpenAI 推出的终端级 AI 编程 Agent，直接在命令行环境中运行，可操作本地文件系统、执行 Shell 命令、调用 Git 等工具，实现'AI 直接操作本地项目'的开发范式。  ## 核心功能 ### 终端原生 - 运行在终端中，不依赖特定 IDE 或编辑器 - 可直接执行 Shell 命令、读写文件、操作 Git - 支持 Linux、macOS、Windows (WSL)  ### 本地文件系统操作 - 直接读写本地项目文件 - 可操作任意目录结构——这也使其成为 Obsidian 等知识管理工具的天然搭"}, {"title": "Colab CLI", "url": "Colab-CLI.html", "category": "AI产品", "tags": ["大模型", "工具评测", "研究公共AI"], "text": " # Colab CLI  ## 核心定义 > **一句话定位**：Google Colab CLI 是 Google 推出的命令行工具，让开发者和 AI Agent 在本地终端直接申请和管理云端 GPU/TPU 算力，实现'算力即命令'的零摩擦体验。它是云计算民主化的下一站——让 GPU 像 `apt install` 一样触手可及。  ## 核心功能 ### 算力申请 ``` colab --gpu A100    # 申请 A100 GPU colab --gpu T4      # 申请 T4 GPU colab --gpu TPU     # 申请 TPU ```  ### 远程执行"}, {"title": "DeepSeek", "url": "DeepSeek.html", "category": "AI产品", "tags": ["大模型", "工具评测"], "text": " # DeepSeek  ## 核心定义 > **一句话定位**：DeepSeek（深度求索）是一家专注 AGI 的中国科技公司，推出 DeepSeek-R1（推理模型）和 DeepSeek-V3（通用模型）等开源大模型，以高性价比和免费商用策略获得广泛关注。  ## 核心功能 ### DeepSeek-R1（推理模型） - 开源的推理模型，性能对齐 OpenAI o1 正式版 - 在后训练阶段大规模使用强化学习，极少量标注数据即可提升推理能力 - 擅长：数学推导、代码生成、复杂问题拆解 - 免费商用  ### DeepSeek-V3（通用模型） - 适用于大多数任务的通用大模型 - 擅长：文"}, {"title": "Dify", "url": "Dify.html", "category": "AI产品", "tags": ["工具评测", "智能体"], "text": " # Dify  ## 核心定义 > **一句话定位**：Dify 是一个 LLMOps 平台，帮助开发者通过低代码方式持续定义和改进 AI 应用。名称源自 'define' + 'modify'。  ## 核心功能 ### Agent 四大支柱 | 能力 | 说明 | |------|------| | 自主规划 | 根据目标自动拆解任务步骤 | | 工具调用 | 无缝集成搜索、计算器、数据库等外部 API | | 上下文记忆 | 短期对话 + 长期知识存储 | | 人机协同 | 关键决策时主动请求人类介入 |  ### 部署选项 | 方案 | 适用场景 | |------|--------"}, {"title": "ima 知识库", "url": "ima-知识库.html", "category": "AI产品", "tags": ["向量检索", "工具评测", "知识库"], "text": " # ima 知识库  ## 核心定义 > **一句话定位**：腾讯推出的 AI 知识库工具，支持个人知识库和共享知识库，可与微信生态深度整合，是本团队知识库的**采集入口**。  ## 核心功能 - **知识收藏**：上传 PDF、Word、图片等格式，浏览网页时随时收藏 - **知识管理**：标签分类、全文搜索 - **AI 问答**：基于知识库内容的个性化回答 - **共享知识库**：创建共享知识库、成员管理、权限控制 - **多端同步**：PC客户端 + 微信小程序  ### 技术特点 - 搭载腾讯混元 + DeepSeek 大模型 - 支持模糊搜索和语义检索 - 微信生态原生整合（公"}, {"title": "InfiniteTalk", "url": "InfiniteTalk.html", "category": "AI产品", "tags": ["多模态", "工具评测"], "text": " # InfiniteTalk  ## 核心定义 > **一句话定位**：美团视觉团队开源的音频驱动视频生成框架，一张照片 + 一段音频 = 无限时长、唇形精准同步的说话视频。  ## 核心功能 InfiniteTalk 解决的是'数字人视频生产'的终极问题：**让任何人都能用最低成本（一张照片）产出高质量的说话视频**。  当前同类工具要么时长受限、要么唇形同步不准、要么闭源收费。InfiniteTalk 用稀疏帧黑科技同时解决了这三个问题。  ### 技术亮点：稀疏帧配音 这是 InfiniteTalk 与其他方案的根本区别： ``` 传统方案：音频 → 逐帧生成视频 → 量大了撑不住 I"}, {"title": "Obsidian+AI工作台", "url": "Obsidian+AI工作台.html", "category": "AI产品", "tags": ["向量检索", "方法论", "研究公共AI"], "text": " # Obsidian+AI工作台  ## 核心定义 > **一句话定位**：以 Obsidian 作为本地 Markdown 知识库，接入 AI Agent（Codex / Claude Code / WorkBuddy 等）实现自动化知识管理的本地工作台范式。  ## 核心功能 ### 目标 解决两个核心问题： 1. **知识沉淀**：将碎片化的AI研究资料持续编译为结构化的 Wiki 知识库 2. **隐私可控**：所有数据在本地，不依赖云端平台  ### 核心模式 ``` [原始资料] → [AI Agent 处理] → [Obsidian Markdown 文件] → [知识图谱/索"}, {"title": "OpenClaw", "url": "OpenClaw.html", "category": "AI产品", "tags": ["工具评测", "智能体", "研究公共AI"], "text": " # OpenClaw  ## 核心定义 > **一句话定位**：OpenClaw 是一个开源(MIT)、自托管的「个人 AI 助手」框架——它本身不是大模型，而是模型无关的编排壳，通过 Markdown 配置文件定义行为，支持 40+ 消息渠道接入，内置技能系统、心跳调度和 MCP 集成。  ## 核心功能 ### 核心组件（五件套） | 组件 | 作用 | 关键文件/机制 | |---|---|---| | Gateway（网关） | 常驻进程，统一控制平面 | JSON-RPC/WebSocket，所有渠道/会话/配置统一通信 | | Brain（推理引擎） | 底层大模型路由 | 模型"}, {"title": "Paperclip", "url": "Paperclip.html", "category": "AI产品", "tags": ["工具评测", "智能体", "趋势研判"], "text": " # Paperclip  ## 核心定义 > **一句话定位**：Paperclip 是 2026 年 3 月上线的开源（MIT）「AI Agent 公司管理系统」——把 Agent 当员工管理。GitHub 7.2 万星、一行命令开箱即用。**「如果 OpenClaw 是一个员工，Paperclip 就是整个公司」**。  ## 核心功能 ### 核心理念 > 2025 年是 AI Agent 的个体能力爆发年——Claude Code 能写生产级代码、Codex 能独立交付模块、OpenClaw 能连续运行数小时。**真正的瓶颈不是能力，是规模化的协调**。  痛点场景： - 同时开 2"}, {"title": "patent-disclosure-skill", "url": "patent-disclosure-skill.html", "category": "AI产品", "tags": ["工具评测", "提示词", "智能体"], "text": " # patent-disclosure-skill（中国专利 .skill）  ## 核心定义 > **一句话定位**：patent-disclosure-skill 是 handsomestWei 开源的 Agent Skill，GitHub Star 已破 3000，**把研发写专利交底书的时间从 3 天压缩到 30 分钟**——从代码/文档自动出稿到代理人可直接改的 Word。  ## 核心功能 ### 项目基本信息 | 字段 | 值 | |------|-----| | 项目名 | patent-disclosure-skill | | 仓库 | github.com/handsom"}, {"title": "rtk", "url": "rtk.html", "category": "AI产品", "tags": ["工具评测", "智能体"], "text": " # rtk  ## 核心定义 > **一句话定位**：高性能 CLI 代理，在命令输出到达 LLM 之前过滤压缩，降低 60-90% Token 消耗。  ## 核心功能 ### 是什么 rtk 是一个**单文件 Rust 二进制程序**，零外部依赖。它作为 CLI 代理运行在 Shell 和 AI Agent 之间：拦截常见开发命令的输出，在传给 LLM 之前进行智能过滤、分组、截断和去重，将 Token 消耗降低 60-90%，额外开销 <10ms。  **68.1k Stars**（2026-07），支持 100+ 命令，兼容 Claude Code、Copilot、Cursor、Co"}, {"title": "SailWind", "url": "SailWind.html", "category": "AI产品", "tags": ["大模型", "工具评测", "硬件AI"], "text": " # SailWind  ## 核心定义 > **一句话定位**：**SailWind（派兹互连）是国产 EDA 工具 + AI 全链智能化平台**——三大智能体（建库/布局/设计助手）覆盖 PCB 从元件库到 DFM 检查的完整流程，与熠瓴大模型深度集成，目标是'一句话输出整套硬件项目资料'。  ## 核心功能 ### 项目基本信息 | 字段 | 值 | |------|-----| | 厂商 | 派兹互连（dtop-tech） | | 旗舰产品 | **SailWind 4.0**（2025 发布，100% 源代码自主可控） | | 前身 | 西门子 EDA PADS（2024 推出平替版"}, {"title": "WorkBuddy", "url": "WorkBuddy.html", "category": "AI产品", "tags": ["工具评测", "智能体", "研究公共AI"], "text": " # WorkBuddy  ## 核心定义 > **一句话定位**：WorkBuddy 是腾讯推出的桌面 AI Agent 平台，将底层 Agent 能力封装为「专家」和「专家团」，让用户无需了解提示词工程即可使用专业 AI 能力。  ## 核心功能 ### 专家（Single Expert） - 封装好的单个 Agent，内置角色定义、工作流程、交付模板 - 用户选择专家即可开始工作，无需编写提示词 - 示例：用户体验架构师、长文档手稿专家  ### 专家团（Expert Squad） - 封装好的多 Agent 协作流程 - 采用「调度-执行」模式（编排者模式） - 主理人负责拆需求、配成"}, {"title": "嘉立创EDA_AI操控", "url": "嘉立创EDA_AI操控.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": " # 嘉立创 EDA AI 操控  ## 核心定义 > **一句话定位**：嘉立创 EDA 专业版已可通过**官方扩展 / 第三方 Skill / Agent Connector** 三种路径实现'AI 直接操控编辑器画原理图与 PCB'，目前**已证明路径可行但效果一般**——复杂场景仍需工程师介入。  ## 核心功能 ### 三套方案对比 - **方案一：社区 Skill（easyeda-api / easyeda-agent）⭐⭐⭐⭐**   - **架构**：Skill 描述工作流 → Go CLI/Daemon (端口 49620-49629) → WebSocket → .eext"}, {"title": "微信小微", "url": "微信小微.html", "category": "AI产品", "tags": ["工具评测", "市场AI", "智能体"], "text": " # 微信小微  ## 核心定义 > **一句话定位**：微信原生 AI 助手，2026 年 6 月 20 日开启灰度测试。14.32 亿月活用户的超级 App 首次内置 Agent。  ## 核心功能 ### 是什么 「小微」是微信官方推出的原生 AI Agent，以绿色眼睛图标出现在微信主界面左上角。用户通过语音或文字直接操控微信功能、调用小程序服务、分析聊天内容、甚至一句话生成小程序。  采用自研 WeLM + DeepSeek 混合模型架构，由微信事业群技术架构负责人周颢带队。计划 2026 Q3 正式开放。  ### 为什么重要 1. **用户基数**：14.32 亿月活。朋友圈渗透"}, {"title": "Garry Tan", "url": "Garry-Tan.html", "category": "AI人物", "tags": ["大模型", "行业观点"], "text": " # Garry Tan  ## 核心定义 > **一句话定位**：Y Combinator 现任总裁兼 CEO，前创业者与投资人，推动 YC 内部向「AI 原生组织」转型，并提出「一人公司」「氛围编程（Vibe Coding）」等 AI 时代创业论断。  ## 主要贡献 - 美籍华裔（中文名陈嘉兴），父母为新加坡移民，出身普通家庭，14 岁自学编程。 - 斯坦福大学计算机系统工程学士。毕业后曾任微软工程师，后加入 Palantir 成为早期员工（约第 10 号），设计了沿用至今的公司 Logo。 - 2008 年（YC S08）创立轻博客平台 Posterous，2012 年被 Twitte"}, {"title": "Howie Liu", "url": "Howie-Liu.html", "category": "AI人物", "tags": ["智能体", "行业观点"], "text": " # Howie Liu  ## 核心定义 > **一句话定位**：Airtable 联合创始人兼 CEO，HyperAgent 创建者；以「Builder 心态 + 判断力规模化」与「把 Agent 当员工来雇」的论断，成为 AI 原生工作方式的代表性产品思考者。  ## 主要贡献 - Airtable 联合创始人兼 CEO（2013 年创立），估值约 117 亿美元；个人净资产估算 10–12 亿美元（主要源于 Airtable 股权）。 - 13 岁自学 C++；杜克大学机械工程与公共政策专业（2005–2009），在校结识日后共同创立 Airtable 的 Andrew Ofstad "}, {"title": "Pete Koomen", "url": "Pete-Koomen.html", "category": "AI人物", "tags": ["智能体", "行业观点"], "text": " # Pete Koomen  ## 核心定义 > **一句话定位**：Y Combinator 合伙人，A/B 测试平台 Optimizely 联合创始人，YC 内部 AI 原生转型的「总架构师」——主导搭建了 Agent harness、工具注册表与技能自进化系统。  ## 主要贡献 - YC 现任 General Partner（Group Partner）。 - 联合创立 Optimizely（YC W10），帮助企业网站与 App 做 A/B 实验，从零做到 1 亿美元+ ARR，2020 年被收购；合著《A/B Testing: The Most Powerful Way to T"}, {"title": "Agent提示词设计模式", "url": "Agent提示词设计模式.html", "category": "AI技术", "tags": ["提示词", "方法论", "智能体"], "text": " # Agent提示词设计模式  ## 核心定义 > **一句话定位**：将专业领域的专家行为模式固化为 Agent 提示词的通用结构模板，使 Agent 从'自由发挥'变为'可预期的专业交付'。  ## 为什么重要 普通 Agent 缺乏领域约束时容易自由发挥、输出不稳定。通过结构化的提示词设计，可以让 Agent 像真正的专家一样按照固定方法论工作，产出质量和风格更加可控。  ## 关键机制 ### 机制概述 **八层结构**（从 WorkBuddy 专家的提示词设计中提炼出的通用结构）： 1. **角色覆盖和身份锚定**：使用 Role Override 机制清空之前上下文中的角色；定义"}, {"title": "CST_Runtime_CLI", "url": "CST_Runtime_CLI.html", "category": "AI技术", "tags": ["实践案例", "智能体", "硬件AI"], "text": " # CST Runtime CLI（CST MCP + CST Simulation Workflow Skill）  ## 核心定义 > **一句话定位**：CST Runtime CLI 是 CST Studio Suite 的 MCP Server——让 AI Agent（Codex、Claude Code 等）通过 [[MCP]] 协议直接控制 CST 完成电磁仿真任务，从自然语言需求到 S 参数 / 远场 / Touchstone 文件全自动导出。  ## 为什么重要 纯靠人工驱动电磁仿真软件，建模→求解→导出→对比链路长、迭代慢。AI Agent 接入后把'自然语言任务'直接变成"}, {"title": "Harness(智能体执行壳)", "url": "Harness(智能体执行壳).html", "category": "AI技术", "tags": ["方法论", "智能体", "研究公共AI"], "text": " # Harness(智能体执行壳)  ## 核心定义 > **一句话定位**：Harness 是包裹在大模型外面、让它成为一个可用智能体的完整基础设施。模型提供智能，Harness 提供手、眼、记忆和安全边界。  > 原文定义：'An Agent Harness is the complete infrastructure that wraps around an LLM to make it a functional agent. The model provides intelligence; the harness provides hands, eyes, memory, and s"}, {"title": "MCP", "url": "MCP.html", "category": "AI技术", "tags": ["工具调用", "方法论"], "text": " # MCP  ## 核心定义 > **一句话定位**：MCP（Model Context Protocol，模型上下文协议）是由 Anthropic 于 2024-11-25 提出的**开放标准协议**，为大型语言模型（LLM）与外部数据源、工具之间提供统一的通信接口，常被类比为「AI 应用的 USB-C 接口」。  > 原文定位（Anthropic）：'Think of MCP like a USB-C port for AI applications.' MCP 让 Claude、ChatGPT 等 AI 应用能连接数据源（本地文件、数据库）与工具（搜索引擎、计算器）及工作流（专用提示词"}, {"title": "RAG（检索增强生成）", "url": "RAG（检索增强生成）.html", "category": "AI技术", "tags": ["RAG", "方法论"], "text": " # RAG（检索增强生成）  ## 核心定义 > **一句话定位**：RAG（Retrieval-Augmented Generation，检索增强生成）是一种'检索式知识库'范式——查询时从原始文档检索相关片段 → LLM 理解 → 综合生成回答，让模型在生成时'带着资料作答'，而非仅依赖参数内记忆。  ## 为什么重要 RAG 是当前 LLM + 外部知识的标准方案之一：它让模型能回答训练数据之外、或需要最新/私有资料的问题，覆盖面广、上手快、无需预先综合。对团队而言，RAG 是 [[LLM Wiki]]（编译式知识库）的互补对照物——理解两者差异，才能在'检索'与'编译'之间做出正确的"}, {"title": "多Agent协作模式", "url": "多Agent协作模式.html", "category": "AI技术", "tags": ["多智能体", "方法论", "研究公共AI"], "text": " # 多Agent协作模式  ## 核心定义 > **一句话定位**：多个 AI Agent 通过明确的协作规则和通信机制共同完成复杂任务的设计范式。  ## 为什么重要 单个 Agent 受限于能力边界和上下文窗口，复杂任务往往需要多个专业 Agent 协同。理解不同的协作模式，是设计和评估 Agent 系统的关键。  > 对我们团队的启示：这个模式可以直接指导我们设计 AI 知识库的编译流程。WorkBuddy 作为'主理人'调度处理脚本、格式转换、Wiki 编译等'子Agent'，通过 AGENTS.md 固化的就是协作规则。  ## 关键机制 ### 机制概述 **1. 调度-执行（编"}, {"title": "微信视频接入知识库", "url": "微信视频接入知识库.html", "category": "AI技术", "tags": ["向量检索", "实践案例", "方法论"], "text": " # 微信视频接入知识库  ## 核心定义 > **一句话定位**：微信群 / 视频号里看到值得留存的视频，只需「在微信里点开看一眼」，视频即自动落盘到知识库、自动 ASR 转录、自动生成素材笔记，省去手动下载 + 上传。  ## 为什么重要 视频是高质量 AI 资讯的重要载体（技术拆解、产品发布、访谈复盘），但微信的视频散落在群聊 / 视频号，传统方式需手动下载再上传到知识库，链路长、易遗漏。本方法把'查看即捕获'做成端到端管道，让视频内容像文章一样自动进入知识库摄入流水线。  ## 关键机制 ### 机制概述 **端到端管道** ``` 你在微信群 / 视频号里【查看或播放】想留存的视频 "}, {"title": "AI辅助硬件研发工作流", "url": "AI辅助硬件研发工作流.html", "category": "AI流程", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# AI 辅助硬件研发工作流  ## 核心定义 > **一句话定位**：Claude（Code）已可深度介入软硬件研发全流程——从嘉立创 EDA 自动画原理图、到嵌入式 MCU 远程调试（AI 调试器 AixProbe），再延伸到平衡车/自动驾驶等具体产品形态，AI 正在成为'看得见硬件、动得了硬件'的研发副驾。  ## 目标 让 AI 深度介入软硬件研发全流程：从 EDA 自动画原理图/PCB，到嵌入式 MCU 远程调试（读寄存器、烧录、单步），再到具体产品形态落地；缩短设计周期、保证一致性、沉淀可复用的设计经验。  ## 适用场景 - 原理图/PCB 自动生成（嘉立创 EDA + Clau"}, {"title": "KiCad+AI工作流", "url": "KiCad+AI工作流.html", "category": "AI流程", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# KiCad + AI 工作流  ## 核心定义 > **一句话定位**：'新手小白只靠和 AI 聊天就画出 PCB 原理图并导出 KiCad 工程文件'已完全可行——核心路径是 KiCad + AI Agent Skill/MCP/插件，2026 已进入'自然语言 → 真实电路'成熟期。  ## 目标 让无深度 EDA 经验的工程师/新手，仅凭自然语言对话即可完成从需求分析、原理图/PCB 设计、验证到下单生产的完整 PCB 流程；缩短设计周期，降低 EDA 工具使用门槛，并实现一键 DFM 与下单。  ## 适用场景 - 新手首次画 PCB、快速原型、测试治具、转接板等'先跑通再优化'的"}, {"title": "AI使用哲学", "url": "AI使用哲学.html", "category": "AI理念", "tags": ["大模型", "行业观点"], "text": " # AI使用哲学  ## 核心定义 > **一句话定位**：AI 时代拉开差距的不是工具使用能力，而是**Builder 心态**（主动折腾、驱动工具）和**判断力规模化**（把好判断施加到更多线程）——执行层交 Agent，判断层永远是人。  ## 概述 覆盖什么范围？为什么值得单独成页？  AI 使用哲学描述 Agent 时代人类竞争力的结构翻转：核心竞争力从执行能力转为判断力，稀缺资源从技术人才转为问题定义能力。本页围绕 Builder 心态、判断力飞轮、Problem Hunting、奢侈雇员等概念展开，是理解本团队 Agent 化工作流的思想底座（来源：[[素材笔记/AI理念/顶尖"}, {"title": "Builder 心态", "url": "Builder-心态.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # Builder 心态  ## 核心定义 > **一句话定位**：Builder 心态不是指'会写代码'，而是指**愿意下场动手、主动驱动工具**，而不是等着工具告诉你它还能做什么——AI 时代拉开差距的核心心态之一。  ## 概述 Builder 心态是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 在《Silicon Valley Girl》播客中提出。它回答的问题是：在 Agent 时代，普通用户与顶尖 1% 用户的差距从何而来？答案不是工具本身，而是使用者是否具备'折腾、驱动工具'的主动心态。  **核心特征**： - **Tinker"}, {"title": "LLM Wiki", "url": "LLM-Wiki.html", "category": "AI理念", "tags": ["RAG", "方法论", "知识库"], "text": " # LLM Wiki  ## 核心定义 > **一句话定位**：LLM Wiki 是一种「编译式知识库」范式：让 LLM 在用户和原始文档之间扮演**知识编译器**，把原始资料提前编译成结构化、相互链接、持续维护的 Markdown Wiki，而不是每次提问都临时从原文检索。  综合判断：本团队知识库（AGENTS.md 设计的 `原始资料/` → `知识库/` → `AGENTS.md/方案.md` 三层结构）正是 LLM Wiki 范式的直接实践。详见文末「本知识库即 LLM Wiki 实践」。  ## 概述 覆盖什么范围？为什么值得单独成页？  LLM Wiki 把知识库从「检索式」翻"}, {"title": "Problem Hunting", "url": "Problem-Hunting.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # Problem Hunting  ## 核心定义 > **一句话定位**：Problem Hunting（问题狩猎）主张'找到问题占了整个事情的 80%'——Agent 让构建方案变简单后，真正的稀缺能力反转为**问题定义能力**。  ## 概述 Problem Hunting 是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 提出。它刻画了 Agent 时代的价值反转：过去找问题容易、构建方案难（要写代码、雇人、花钱）；现在反转了——Agent 让构建方案变简单，**真正的难度全在前端**：你到底想解决什么问题？  **实操建议**： 1."}, {"title": "判断力飞轮", "url": "判断力飞轮.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # 判断力飞轮  ## 核心定义 > **一句话定位**：Agent 让你可以同时跑 10–50 个并行任务，但每个任务的质量天花板取决于你的**判断力**；Agent 跑得越多，判断力积累越快，从而形成正反馈飞轮——**Agent 越强，判断力的价值越大**。  ## 概述 判断力飞轮是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 提出。它刻画了 Agent 时代人类竞争力的结构翻转：核心竞争力从执行能力转为判断力，而判断力会随 Agent 的规模化使用而自我强化。  **飞轮机制**：  ``` Agent 跑更多实验 → 判断力积累更快 "}, {"title": "奢侈雇员（Luxury Hires）", "url": "奢侈雇员（Luxury-Hires）.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # 奢侈雇员（Luxury Hires）  ## 核心定义 > **一句话定位**：奢侈雇员指过去太多'不值得专门雇人做'的事（旅行规划、行情追踪、营销实验……），Agent 让这些'奢侈岗位'变得可行——设定偏好和规则，24 小时跑，不需要工资。  ## 概述 奢侈雇员是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 提出。它是 [[多Agent协作模式]] 的通俗表述：用多个 Agent 并行处理不同任务。  **商业意义**：同时跑更多实验 → 更多击球机会 → 更多正确方向。以前因成本太高而放弃的岗位，现在可以用 Agent 低成本填补，"}, {"title": "AI原生组织", "url": "AI原生组织.html", "category": "AI组织", "tags": ["大模型", "智能体", "趋势研判"], "text": " # AI原生组织  ## 核心定义 > **一句话定位**：把 AI 作为整个组织运转的**建设层**（而非'把 AI 当 Copilot 用'的旧模式）——数据集中、工具注册、技能自进化，让组织每天都在变聪明；等价定义：**AI 进来之后，组织里的等待有没有变少**。  ## 组织范式  （概述该 AI 组织范式的核心主张 —— 如何通过架构与岗位把 AI 嵌入组织运转）  AI 原生组织不是'买工具'而是'让等待消失'。其本质是用三层基础设施 + 角色重构 + 多 Agent 协调，把 AI 嵌进组织的运行规则，影响任务分配、信息使用、责任定义与协作方式。  ### Copilot vs"}, {"title": "_说明", "url": "_说明.html", "category": "", "tags": [], "text": "# 待入库暂存区  > 本文件夹是 8 分类之外的**暂存区**，对应 AGENTS.md §5.5。存放 LLM 从材料分解出、但**拿不准是否建正式 Wiki 页**的候选条目。  ## 规则  1. **来源**：单材料建页决策（§5.5）第 4 步中，判为'拿不准建/不建、或归类/方向存疑'的候选，写入本目录，不静默建、也不静默砍。 2. **lint 放宽**：本目录内文件**不参与**孤立页 / 悬挂链接 / 元数据质量 / 标签 检查，也不计入 Wiki 页面总数。允许 frontmatter 不完整。 3. **兜底**：每个待入库条目都应有对应素材笔记（原材料真相源永不丢，§"}, {"title": "AI操控嘉立创EDA画PCB", "url": "AI操控嘉立创EDA画PCB.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# 2 步教会你用 AI 操控嘉立创 EDA 画 PCB  > 来源：微信视频号「AI 操控嘉立创 EDA 画 PCB」本地视频（68MB） > 时间：2026-07-11 入库 > 视频信息密度较低，主要演示价值；本素材笔记综合嘉立创 EDA 官方 + easyeda-agent/easyeda-api Skill + Run API Gateway 三套社区方案整理  ---  ## 一句话总结  嘉立创 EDA 专业版已可通过**官方扩展 / 第三方 Skill / Agent Connector** 三种路径实现'AI 直接操控编辑器画原理图与 PCB'，目前**已证明路径可行但效果一"}, {"title": "Dify平台Agent开发入门指南", "url": "Dify平台Agent开发入门指南.html", "category": "AI产品", "tags": ["智能体", "科普教程"], "text": "# Dify平台Agent开发入门指南  来源：IMA「杨添的知识库」→ Word（16KB）  ## 核心内容  该文档是 Dify 平台的 Agent 开发入门教程，以'会议纪要小助手'为案例，系统介绍了从环境准备到部署优化的全流程。  ### 1. Dify 平台定位 - 名称含义：'define' + 'modify' = 持续定义和改进 AI 应用 - 核心理念：LLMOps（大语言模型运维），将模型管理抽象为低代码操作 - 部署选项：Cloud（SaaS）、社区版、企业版 - 模型兼容：OpenAI GPT、Claude、国内主流大模型均支持  ### 2. Agent 四大核心能"}, {"title": "ima知识库使用指南", "url": "ima知识库使用指南.html", "category": "AI产品", "tags": ["向量检索", "知识库", "科普教程"], "text": "# ima知识库使用指南  来源：杨添的知识库 → Word文档  ## 核心内容  ima知识库是腾讯推出的专属知识空间，包括个人知识库与共享知识库，支持增添、管理、检索知识资源。基于知识库问问ima，可以聚焦知识库得到更个性化的回答。  支持 PC端（ima.copilot客户端）和微信小程序。  ## PC端功能  ### 1. 收藏知识 - 上传PDF、DOC、JPEG、PNG等格式的内容至知识库 - 浏览网页、进行问答、记笔记时都能随时收藏  ### 2. 管理知识 - 为知识打上标签，便捷管理 - 在知识库搜索框输入关键词，回溯找寻知识灵感  ### 3. 应用知识 - 提出问题，"}, {"title": "InfiniteTalk开源", "url": "InfiniteTalk开源.html", "category": "AI产品", "tags": ["多模态", "工具评测"], "text": "# InfiniteTalk — 开源音频驱动无限时长视频生成框架  **来源**: 微信视频号（原始为视频），通过 CSDN/头条等多源文字拆解还原 **开发团队**: MeiGen AI（美团基础研发平台视觉智能团队） **开源协议**: Apache 2.0  ## 一句话总结  InfiniteTalk 是美团视觉团队开源的一款 AI 数字人视频生成工具，只需一张照片 + 一段音频，就能生成无限时长、唇形精准同步、表情自然的说话视频。  ## 核心亮点  | 特性 | 说明 | |------|------| | 一张照片就能用 | 静态图像 → 无限时长说话视频 | | 稀疏帧黑科技"}, {"title": "Paperclip_AI_Agent_公司编排平台", "url": "Paperclip_AI_Agent_公司编排平台.html", "category": "AI产品", "tags": ["实践案例", "智能体", "趋势研判"], "text": " # Paperclip：72K Star 的 AI Agent 公司编排平台（'一人公司'基础设施）  > 来源：微信视频号「Codex 打造一人公司，72K Star 神器，一个人 + Codex = 一人公司 — Paperclip」本地视频（21MB） > 综合来源：ZupHP 深度介绍、Tenten.co 报道、josenobile.co 指南、fast.io 评测、opentechhub.io 企业分析  ---  ## 一句话总结  **Paperclip 是一个开源（MIT）的'AI Agent 公司管理系统'**——把 Agent 当员工管理。GitHub 7.2 万星、一行"}, {"title": "rtk-CLI代理降低LLM令牌消耗", "url": "rtk-CLI代理降低LLM令牌消耗.html", "category": "AI产品", "tags": ["工具评测", "智能体"], "text": "# rtk — 高性能 CLI 代理，降低 LLM Token 消耗 60-90%  > 来源：GitHub 仓库 rtk-ai/rtk | 68.1k Stars | 4.2k Forks | Rust 93.1% > 版本：v0.43.0 | 许可证：Apache-2.0  ---  ## 一句话总结  rtk 是一个**单文件 Rust 二进制 CLI 代理**，在命令输出到达 LLM 上下文之前进行过滤和压缩，使常见开发命令的 Token 消耗降低 60-90%，开销 <10ms。支持 100+ 命令，兼容 14 种 AI 编程工具。  ---  ## 核心机制  ``` 没有 rtk"}, {"title": "SailWind_派兹互连国产EDA_AI平台", "url": "SailWind_派兹互连国产EDA_AI平台.html", "category": "AI产品", "tags": ["大模型", "工具评测", "硬件AI"], "text": "# SailWind：派兹互连国产 EDA 的 AI 全链智能化平台  > 来源：微信视频号「SailWind 在线 AI 平台，一键输出整套硬件项目资料」本地视频（13MB） > 综合来源：派兹互连 KGS PDF 资料、CSDN 问答、x-techcon 行业分析、网易 EDA365 报道、dtop-tech 介绍  ---  ## 一句话总结  SailWind（派兹互连）是国产 EDA 工具 + AI 全链智能化系统，**三大智能体（建库/布局/设计助手）覆盖 PCB 从元件库到 DFM 检查的完整流程**，与熠瓴大模型深度集成，目标'一句话输出整套硬件项目资料'。  ---  ## "}, {"title": "中国专利skill_自动生成专利交底书", "url": "中国专利skill_自动生成专利交底书.html", "category": "AI产品", "tags": ["工具评测", "提示词", "智能体"], "text": " # 中国专利 .skill：AI 自动生成专利交底书（GitHub 3000+ Star）  > 来源：微信视频号「GitHub 爆款中国专利.skill，从草稿到交底书 AI 自动生成」本地视频（4.4MB） > 综合来源：今日头条深度介绍、SkillHub 官方页、墨天轮（modb.pro）实测分析  ---  ## 一句话总结  **patent-disclosure-skill** 是 handsomestWei 开源的 Agent Skill，GitHub Star 已破 3000，把研发写专利交底书的时间从 3 天压缩到 30 分钟——从代码/文档自动出稿到代理人可直接改的 Wo"}, {"title": "中国专利Skill从草稿到交底书", "url": "中国专利Skill从草稿到交底书.html", "category": "AI产品", "tags": ["研究公共AI"], "text": "# GitHub 爆款「中国专利 .skill」：从草稿到交底书 AI 自动生成  > 来源：微信视频号「GitHub 爆款'中国专利.skill'，从草稿到交底书AI自动生成，效率提升10倍」 > 综合参考：GitHub fuyuxiang/patent-disclosure-skill + Sven-LI-sankyuu/patent-disclosure-skill + 今日头条深度拆解 + jun.ee 上手指南  ---  ## 一句话总结  **patent-disclosure-skill** 是面向 Claude Code / Cursor 的 AI Agent Skill，通"}, {"title": "交互式BOM表", "url": "交互式BOM表.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# 交互式 BOM 表（AI 硬件辅助工具）  > 来源：微信视频号「交互式BOM表」本地视频 > 综合参考：Altium Designer InteractiveHtmlBomForAD 脚本 + OpenBOM AI Agent MCP + 芯团AI BOM 分析  ---  ## 一句话总结  **交互式 BOM 表**是 PCB 装配调试的实用辅助工具——在网页中可视化展示元件位置、高亮选中零件、支持按类别筛选，配合 AI（如 OpenBOM MCP Agent、芯团AI）可实现 BOM 智能分析、国产替代推荐和成本透视。  ---  ## 核心内容  ### 传统交互式 BOM（In"}, {"title": "微信Agent小微灰度上线", "url": "微信Agent小微灰度上线.html", "category": "AI产品", "tags": ["实践案例", "市场AI", "智能体"], "text": ""}, {"title": "微信视频号视频下载工具", "url": "微信视频号视频下载工具.html", "category": "AI产品", "tags": ["知识库"], "text": "# 微信视频号视频下载工具  > 原始材料：`原始资料/2026-07-03_微信视频号视频下载工具.md`  ## 核心内容  B站视频（2026-06-04）介绍了一款用于下载**微信视频号视频**的通用工具。这类工具属于「微信视频流量嗅探 / 代理拦截」方案族，与知识库接入管道中主推的 `wx_video_download` 同属一类（另见 res-downloader 等嗅探工具，见 [[微信视频接入知识库]] 第七节）。  ## 归类说明（分类：AI产品 · 标签：知识库）  - 本知识库已建立 [[微信视频接入知识库]] 工作流：将微信视频号视频自动落盘 → ASR 转录 → 生成"}, {"title": "新手小白用AI画PCB", "url": "新手小白用AI画PCB.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# 新手小白用 AI 画 PCB：KiCad + Claude Code 全流程实战  > 来源：微信视频号「挑战成功！新手小白只靠和 AI 聊天就画出了 PCB 原理图」本地视频（95MB） > 综合来源：madlive.cn 四大方案、hhai.net Flux vs KiCad 对比、csdn KiCad 对话式生成、tommickey.cn Claude Code PCB 实战评估  ---  ## 一句话总结  **'新手小白只靠和 AI 聊天就画出 PCB 原理图并导出 KiCad 工程文件'已完全可行**——核心路径是 **KiCad + AI Agent Skill/MCP/插"}, {"title": "谷歌宣布开放ColabCli", "url": "谷歌宣布开放ColabCli.html", "category": "AI产品", "tags": ["大模型", "工具评测", "研究公共AI"], "text": ""}, {"title": "Claude_Code设计哲学渐进式披露", "url": "Claude_Code设计哲学渐进式披露.html", "category": "AI技术", "tags": ["提示词", "方法论", "智能体"], "text": " # Claude Code 设计哲学：渐进式披露（Progressive Disclosure）  > 来源：微信视频号「Claude Code 的设计哲学：渐进式披露」本地视频（190MB） > 综合参考：CSDN 深度文章 + Anthropic 官方「Equipping agents for the real world with Agent Skills」+ 掘金架构演进分析  ---  ## 一句话总结  渐进式披露（Progressive Disclosure）是 Claude Code 的核心设计哲学——**不一次性把所有信息塞给模型，而是给模型工具让它自己层层深入**，借鉴自"}, {"title": "Claude辅助设计软硬件", "url": "Claude辅助设计软硬件.html", "category": "AI技术", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# Claude 辅助设计软硬件（嘉立创 EDA / 嵌入式 / 平衡车 / 自动驾驶）  > 来源：微信视频号「Claude 辅助设计软硬件」本地视频（43MB） > 视频信息密度较低（演示型），本素材笔记综合嘉立创 EDA AI 化与 Claude Code 嵌入式调试两条相关线索整理  ---  ## 一句话总结  Claude（Code）已可深度介入**软硬件研发全流程**——从嘉立创 EDA 自动画原理图、到嵌入式 MCU 远程调试（AI 调试器 AixProbe），再延伸到平衡车/自动驾驶等具体产品形态，AI 正在成为'看得见硬件、动得了硬件'的研发副驾。  ---  ## 三大应"}, {"title": "CST_MCP_77GHz毫米波雷达仿真", "url": "CST_MCP_77GHz毫米波雷达仿真.html", "category": "AI技术", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# CST MCP + CST Simulation Workflow Skill：Codex 自动控制 77GHz 毫米波雷达电磁仿真  > 来源：微信视频号「Codex 通过 CST MCP + CST Simulation Workflow Skill 自动控制 CST Studio Suite 完成 77GHz 毫米波雷达电磁仿真」本地视频 > 综合来源：bbl21/cst-runtime-cli MCP Server、think-s CST 77GHz 案例、model-key 茂鎧 CST 毫米波教程、Zhou Ming CST 仿真文章  ---  ## 一句话总结  **Cod"}, {"title": "DeepSeek从入门到精通", "url": "DeepSeek从入门到精通.html", "category": "AI技术", "tags": ["大模型", "科普教程"], "text": "# DeepSeek从入门到精通(完整版)  来源：IMA「杨添的知识库」→ PPT（6.8MB，大量图文内容）  ## 核心内容  该 PPT 是一份面向普通用户的 DeepSeek 综合性教程，内容涵盖：  ### 1. DeepSeek 产品认知 - DeepSeek 是专注 AGI 的中国科技公司，主攻大模型研发 - DeepSeek-R1 是开源推理模型，性能对齐 OpenAI o1，可免费商用 - 支持文本生成、语义理解、代码生成、联网搜索等  ### 2. 推理模型 vs 通用模型的提示策略差异（核心知识点）  这是一个重要的概念区分：  | 维度 | 推理模型（R1） | 通用"}, {"title": "OpenClaw-Harness智能工作管理架构方案", "url": "OpenClaw-Harness智能工作管理架构方案.html", "category": "AI技术", "tags": ["方法论", "智能体", "研究公共AI"], "text": ""}, {"title": "WorkBuddy专家团提示词分析", "url": "WorkBuddy专家团提示词分析.html", "category": "AI技术", "tags": ["提示词", "方法论"], "text": "# WorkBuddy专家团提示词全曝光：多Agent协作原来是这样产品化的  来源：杨添的知识库 → 微信公众号文章  ## 核心结论  WorkBuddy的**专家** = 封装好的单个Agent WorkBuddy的**专家团** = 封装好的多Agent协作流程  ## 专家的提示词结构（通用模板）  从「用户体验架构师」和「长文档手稿专家」两个专家中提炼出通用结构：  1. **角色覆盖和身份锚定**（Role Override）：让模型不被之前上下文影响，重置为专家身份 2. **核心使命**：定义专家的职责范围 3. **关键规则和默认行为**：约束Agent不要自由发挥（如 F"}, {"title": "Codex+Obsidian搭建本地AI项目工作台", "url": "Codex+Obsidian搭建本地AI项目工作台.html", "category": "AI流程", "tags": ["向量检索", "知识库", "研究公共AI"], "text": ""}, {"title": "Workbuddy配置公司中转站操作手册", "url": "Workbuddy配置公司中转站操作手册.html", "category": "AI流程", "tags": ["大模型", "知识库", "研究公共AI"], "text": ""}, {"title": "一个人亲手做企业AI服务的3个思考", "url": "一个人亲手做企业AI服务的3个思考.html", "category": "AI理念", "tags": ["大模型", "行业观点", "销售AI"], "text": "# 一个人亲手做企业AI服务的3个思考  来源：微信视频号 → 本地视频文件（879MB，9分29秒）→ B站/抖音多平台分发  > ✅ 已用 faster-whisper 对原视频做 ASR 转录（3993字），本笔记内容基于转录全文提炼，AI 已核。转录稿见文末「转录文稿」章节，关键同音误识别（如 SaaS、Claude、护城河）已修正。  ## 视频元数据  | 字段 | 内容 | |------|------| | **标题** | 一个人亲手做企业AI服务的3个思考 | | **作者** | 第四种黑猩猩CHIMP | | **发布时间** | 2026-06-29（B站）/ 202"}, {"title": "顶尖1%的人用AI的方式", "url": "顶尖1%的人用AI的方式.html", "category": "AI理念", "tags": ["大模型", "行业观点"], "text": "# 顶尖1%的人用AI的方式，跟你完全不一样  **来源**: 微信公众号「是大鱼呀」，2026-06-27 发布 **主题**: Airtable CEO Howie Liu 在《Silicon Valley Girl》播客中的访谈解读 **核心人物**: Howie Liu（Airtable CEO，Hyper Agent 创建者）  ## 一句话总结  AI 时代真正拉开差距的不是工具使用能力，而是**发现并定义问题的能力**和**把好判断力规模化输出的能力**——即 Builder 心态 + 判断力飞轮。  ## 关键观点  ### 1. Builder 心态（Tinker） - 't"}, {"title": "AI原生组织不是买工具而是让等待消失", "url": "AI原生组织不是买工具而是让等待消失.html", "category": "AI组织", "tags": ["大模型", "行业观点"], "text": "# 素材笔记：AI 原生组织不是买工具，而是让等待消失  > 来源：原始资料/2026-07-03_真正的AI Native...mp4（微信视频号） > 文字版本确认：掘金 @冬奇Lab（2026-06-28）— 标题完全匹配，确认为同一内容 ✅ > 分类：AI 理念 / AI 应用（交叉）  ---  ## 元信息  - **来源形式**: 微信视频号 mp4（38MB）→ 通过搜索找到精确文字版 - **文字版 URL**: https://juejin.cn/post/7655977856870694952 - **发布日期**: 2026-06-28 - **作者**: 冬奇Lab "}, {"title": "YC内部AI实操", "url": "YC内部AI实操.html", "category": "AI组织", "tags": ["大模型", "实践案例", "研究公共AI"], "text": ""}, {"title": "给律所做FDE的销售复盘10坑", "url": "给律所做FDE的销售复盘10坑.html", "category": "AI组织", "tags": ["大模型", "实践案例", "销售AI"], "text": "# 给律所做FDE的销售复盘10坑  > 来源：微信视频号视频音频 ASR 转录（faster-whisper/small） | 原始文件：`2026-07-07_最近在美国给律所做FDE业务销售新人复盘10坑_微信视频号.mp4` > ⚠️ 本稿由语音识别自动生成，属单一来源、自动内容，存在同音误识别（如'话术'被识为'画术'、'播客'→'波壳'、'护城河'→'护唇盒'、Naval→'纳瓦尔'、Forward Deployed Engineer→'Full World Deploying Engineer'）；关键结论请以原视频核对。  ## AI 词汇修正（ASR 误识别还原）  > **"}];
-
-function doSearch(q) {
-    var grid = document.getElementById('catGrid');
-    var graph = document.getElementById('graphSection');
-    var updates = document.getElementById('updatesSection');
-    var results = document.getElementById('searchResults');
-
-    if (!q || q.trim() === '') {
-        results.style.display = 'none';
-        grid.style.display = '';
-        graph.style.display = '';
-        updates.style.display = '';
-        return;
-    }
-
-    q = q.toLowerCase();
-    var hits = searchData.filter(function(p) {
-        var txt = (p.title + ' ' + p.category + ' ' + p.tags.join(' ') + ' ' + p.text).toLowerCase();
-        return txt.includes(q);
-    });
-
-    grid.style.display = 'none';
-    graph.style.display = 'none';
-    updates.style.display = 'none';
-    results.style.display = '';
-
-    if (hits.length === 0) {
-        results.innerHTML = '<p style="color:#999;font-size:0.9rem;padding:1rem;background:#fff;border-radius:8px;border:1px solid #eee;">没有找到匹配的结果</p>';
-        return;
-    }
-
-    var html = '<p style="font-weight:600;margin-bottom:0.75rem;color:#333;">找到 ' + hits.length + ' 个结果</p>';
-    hits.forEach(function(p) {
-        var prefix = (p.url.indexOf('pages/') === 0 || document.location.pathname.indexOf('web') >= 0) ? 'pages/' : '';
-        html += '<a href="pages/' + p.url + '" style="display:block;background:#fff;border-radius:8px;border:1px solid #eee;padding:0.75rem 1rem;margin-bottom:6px;text-decoration:none;color:#1a1a2e;">';
-        html += '<span style="font-weight:600;font-size:0.9rem;">' + p.title + '</span>';
-        html += '<span style="float:right;font-size:0.7rem;color:#999;">' + p.category + '</span>';
-        html += '<p style="font-size:0.8rem;color:#666;margin:4px 0 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + (p.text || '') + '</p>';
-        html += '</a>';
-    });
-    results.innerHTML = html;
+function doSearch(q){
+    q=(q||'').toLowerCase().trim();
+    if(!q){ return; }
+    // 详情页（子目录）自身无搜索数据，跳首页并带查询参数，由首页统一处理
+    location.href='index.html#q='+encodeURIComponent(q);
 }
 </script>
+<script>
+    var searchData = [{"title": "AI API网关", "url": "AI-API网关.html", "category": "AI产品", "tags": ["大模型", "工具评测", "研究公共AI"], "text": " # AI API 网关  ## 核心定义 > **一句话定位**：AI API 网关是企业内部统一管理和调度 AI 模型 API 调用的中间层，提供令牌管理、流量控制、模型路由等能力，降低团队接入 AI 的门槛。  ## 核心功能 ### 统一令牌管理 - 管理员创建令牌，绑定可用模型列表和额度限制 - 员工只需复制密钥即可使用，无需各自申请模型厂商的 API Key  ### 流量控制与治理 - 统一的调用额度管理，避免个人超量 - 可设置 IP 限制、过期时间等安全策略 - 集中监控和日志审计  ### 模型路由 - 向员工暴露统一的兼容接口（通常为 OpenAI 兼容协议） - 后端可"}, {"title": "BOM自动化", "url": "BOM自动化.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": " # 交互式 BOM 表（AI 自动生成 PCB 物料清单）  ## 核心定义 > **一句话定位**：'交互式 BOM 表'是 AI Agent 时代的物料清单新形态——把传统 Excel BOM 升级为可对话、可追溯、可下单、可版本管理的「活动文档」。KiCad MCP、NextBoard、bom-generator 等多种工具已落地。  ## 核心功能 - **自动选型**：从需求描述 → 推荐合适器件 + 国产替代 - **Datasheet 自动下载**：避免工程师去官网逐个查 - **实时比价**：多分销商（DigiKey / Mouser / LCSC / element14 /"}, {"title": "Codex", "url": "Codex.html", "category": "AI产品", "tags": ["工具评测", "智能体", "研究公共AI"], "text": " # Codex  ## 核心定义 > **一句话定位**：Codex 是 OpenAI 推出的终端级 AI 编程 Agent，直接在命令行环境中运行，可操作本地文件系统、执行 Shell 命令、调用 Git 等工具，实现'AI 直接操作本地项目'的开发范式。  ## 核心功能 ### 终端原生 - 运行在终端中，不依赖特定 IDE 或编辑器 - 可直接执行 Shell 命令、读写文件、操作 Git - 支持 Linux、macOS、Windows (WSL)  ### 本地文件系统操作 - 直接读写本地项目文件 - 可操作任意目录结构——这也使其成为 Obsidian 等知识管理工具的天然搭"}, {"title": "Colab CLI", "url": "Colab-CLI.html", "category": "AI产品", "tags": ["大模型", "工具评测", "研究公共AI"], "text": " # Colab CLI  ## 核心定义 > **一句话定位**：Google Colab CLI 是 Google 推出的命令行工具，让开发者和 AI Agent 在本地终端直接申请和管理云端 GPU/TPU 算力，实现'算力即命令'的零摩擦体验。它是云计算民主化的下一站——让 GPU 像 `apt install` 一样触手可及。  ## 核心功能 ### 算力申请 ``` colab --gpu A100    # 申请 A100 GPU colab --gpu T4      # 申请 T4 GPU colab --gpu TPU     # 申请 TPU ```  ### 远程执行"}, {"title": "DeepSeek", "url": "DeepSeek.html", "category": "AI产品", "tags": ["大模型", "工具评测"], "text": " # DeepSeek  ## 核心定义 > **一句话定位**：DeepSeek（深度求索）是一家专注 AGI 的中国科技公司，推出 DeepSeek-R1（推理模型）和 DeepSeek-V3（通用模型）等开源大模型，以高性价比和免费商用策略获得广泛关注。  ## 核心功能 ### DeepSeek-R1（推理模型） - 开源的推理模型，性能对齐 OpenAI o1 正式版 - 在后训练阶段大规模使用强化学习，极少量标注数据即可提升推理能力 - 擅长：数学推导、代码生成、复杂问题拆解 - 免费商用  ### DeepSeek-V3（通用模型） - 适用于大多数任务的通用大模型 - 擅长：文"}, {"title": "Dify", "url": "Dify.html", "category": "AI产品", "tags": ["工具评测", "智能体"], "text": " # Dify  ## 核心定义 > **一句话定位**：Dify 是一个 LLMOps 平台，帮助开发者通过低代码方式持续定义和改进 AI 应用。名称源自 'define' + 'modify'。  ## 核心功能 ### Agent 四大支柱 | 能力 | 说明 | |------|------| | 自主规划 | 根据目标自动拆解任务步骤 | | 工具调用 | 无缝集成搜索、计算器、数据库等外部 API | | 上下文记忆 | 短期对话 + 长期知识存储 | | 人机协同 | 关键决策时主动请求人类介入 |  ### 部署选项 | 方案 | 适用场景 | |------|--------"}, {"title": "ima 知识库", "url": "ima-知识库.html", "category": "AI产品", "tags": ["向量检索", "工具评测", "知识库"], "text": " # ima 知识库  ## 核心定义 > **一句话定位**：腾讯推出的 AI 知识库工具，支持个人知识库和共享知识库，可与微信生态深度整合，是本团队知识库的**采集入口**。  ## 核心功能 - **知识收藏**：上传 PDF、Word、图片等格式，浏览网页时随时收藏 - **知识管理**：标签分类、全文搜索 - **AI 问答**：基于知识库内容的个性化回答 - **共享知识库**：创建共享知识库、成员管理、权限控制 - **多端同步**：PC客户端 + 微信小程序  ### 技术特点 - 搭载腾讯混元 + DeepSeek 大模型 - 支持模糊搜索和语义检索 - 微信生态原生整合（公"}, {"title": "InfiniteTalk", "url": "InfiniteTalk.html", "category": "AI产品", "tags": ["多模态", "工具评测"], "text": " # InfiniteTalk  ## 核心定义 > **一句话定位**：美团视觉团队开源的音频驱动视频生成框架，一张照片 + 一段音频 = 无限时长、唇形精准同步的说话视频。  ## 核心功能 InfiniteTalk 解决的是'数字人视频生产'的终极问题：**让任何人都能用最低成本（一张照片）产出高质量的说话视频**。  当前同类工具要么时长受限、要么唇形同步不准、要么闭源收费。InfiniteTalk 用稀疏帧黑科技同时解决了这三个问题。  ### 技术亮点：稀疏帧配音 这是 InfiniteTalk 与其他方案的根本区别： ``` 传统方案：音频 → 逐帧生成视频 → 量大了撑不住 I"}, {"title": "Obsidian+AI工作台", "url": "Obsidian+AI工作台.html", "category": "AI产品", "tags": ["向量检索", "方法论", "研究公共AI"], "text": " # Obsidian+AI工作台  ## 核心定义 > **一句话定位**：以 Obsidian 作为本地 Markdown 知识库，接入 AI Agent（Codex / Claude Code / WorkBuddy 等）实现自动化知识管理的本地工作台范式。  ## 核心功能 ### 目标 解决两个核心问题： 1. **知识沉淀**：将碎片化的AI研究资料持续编译为结构化的 Wiki 知识库 2. **隐私可控**：所有数据在本地，不依赖云端平台  ### 核心模式 ``` [原始资料] → [AI Agent 处理] → [Obsidian Markdown 文件] → [知识图谱/索"}, {"title": "OpenClaw", "url": "OpenClaw.html", "category": "AI产品", "tags": ["工具评测", "智能体", "研究公共AI"], "text": " # OpenClaw  ## 核心定义 > **一句话定位**：OpenClaw 是一个开源(MIT)、自托管的「个人 AI 助手」框架——它本身不是大模型，而是模型无关的编排壳，通过 Markdown 配置文件定义行为，支持 40+ 消息渠道接入，内置技能系统、心跳调度和 MCP 集成。  ## 核心功能 ### 核心组件（五件套） | 组件 | 作用 | 关键文件/机制 | |---|---|---| | Gateway（网关） | 常驻进程，统一控制平面 | JSON-RPC/WebSocket，所有渠道/会话/配置统一通信 | | Brain（推理引擎） | 底层大模型路由 | 模型"}, {"title": "Paperclip", "url": "Paperclip.html", "category": "AI产品", "tags": ["工具评测", "智能体", "趋势研判"], "text": " # Paperclip  ## 核心定义 > **一句话定位**：Paperclip 是 2026 年 3 月上线的开源（MIT）「AI Agent 公司管理系统」——把 Agent 当员工管理。GitHub 7.2 万星、一行命令开箱即用。**「如果 OpenClaw 是一个员工，Paperclip 就是整个公司」**。  ## 核心功能 ### 核心理念 > 2025 年是 AI Agent 的个体能力爆发年——Claude Code 能写生产级代码、Codex 能独立交付模块、OpenClaw 能连续运行数小时。**真正的瓶颈不是能力，是规模化的协调**。  痛点场景： - 同时开 2"}, {"title": "patent-disclosure-skill", "url": "patent-disclosure-skill.html", "category": "AI产品", "tags": ["工具评测", "提示词", "智能体"], "text": " # patent-disclosure-skill（中国专利 .skill）  ## 核心定义 > **一句话定位**：patent-disclosure-skill 是 handsomestWei 开源的 Agent Skill，GitHub Star 已破 3000，**把研发写专利交底书的时间从 3 天压缩到 30 分钟**——从代码/文档自动出稿到代理人可直接改的 Word。  ## 核心功能 ### 项目基本信息 | 字段 | 值 | |------|-----| | 项目名 | patent-disclosure-skill | | 仓库 | github.com/handsom"}, {"title": "rtk", "url": "rtk.html", "category": "AI产品", "tags": ["工具评测", "智能体"], "text": " # rtk  ## 核心定义 > **一句话定位**：高性能 CLI 代理，在命令输出到达 LLM 之前过滤压缩，降低 60-90% Token 消耗。  ## 核心功能 ### 是什么 rtk 是一个**单文件 Rust 二进制程序**，零外部依赖。它作为 CLI 代理运行在 Shell 和 AI Agent 之间：拦截常见开发命令的输出，在传给 LLM 之前进行智能过滤、分组、截断和去重，将 Token 消耗降低 60-90%，额外开销 <10ms。  **68.1k Stars**（2026-07），支持 100+ 命令，兼容 Claude Code、Copilot、Cursor、Co"}, {"title": "SailWind", "url": "SailWind.html", "category": "AI产品", "tags": ["大模型", "工具评测", "硬件AI"], "text": " # SailWind  ## 核心定义 > **一句话定位**：**SailWind（派兹互连）是国产 EDA 工具 + AI 全链智能化平台**——三大智能体（建库/布局/设计助手）覆盖 PCB 从元件库到 DFM 检查的完整流程，与熠瓴大模型深度集成，目标是'一句话输出整套硬件项目资料'。  ## 核心功能 ### 项目基本信息 | 字段 | 值 | |------|-----| | 厂商 | 派兹互连（dtop-tech） | | 旗舰产品 | **SailWind 4.0**（2025 发布，100% 源代码自主可控） | | 前身 | 西门子 EDA PADS（2024 推出平替版"}, {"title": "WorkBuddy", "url": "WorkBuddy.html", "category": "AI产品", "tags": ["工具评测", "智能体", "研究公共AI"], "text": " # WorkBuddy  ## 核心定义 > **一句话定位**：WorkBuddy 是腾讯推出的桌面 AI Agent 平台，将底层 Agent 能力封装为「专家」和「专家团」，让用户无需了解提示词工程即可使用专业 AI 能力。  ## 核心功能 ### 专家（Single Expert） - 封装好的单个 Agent，内置角色定义、工作流程、交付模板 - 用户选择专家即可开始工作，无需编写提示词 - 示例：用户体验架构师、长文档手稿专家  ### 专家团（Expert Squad） - 封装好的多 Agent 协作流程 - 采用「调度-执行」模式（编排者模式） - 主理人负责拆需求、配成"}, {"title": "嘉立创EDA_AI操控", "url": "嘉立创EDA_AI操控.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": " # 嘉立创 EDA AI 操控  ## 核心定义 > **一句话定位**：嘉立创 EDA 专业版已可通过**官方扩展 / 第三方 Skill / Agent Connector** 三种路径实现'AI 直接操控编辑器画原理图与 PCB'，目前**已证明路径可行但效果一般**——复杂场景仍需工程师介入。  ## 核心功能 ### 三套方案对比 - **方案一：社区 Skill（easyeda-api / easyeda-agent）⭐⭐⭐⭐**   - **架构**：Skill 描述工作流 → Go CLI/Daemon (端口 49620-49629) → WebSocket → .eext"}, {"title": "微信小微", "url": "微信小微.html", "category": "AI产品", "tags": ["工具评测", "市场AI", "智能体"], "text": " # 微信小微  ## 核心定义 > **一句话定位**：微信原生 AI 助手，2026 年 6 月 20 日开启灰度测试。14.32 亿月活用户的超级 App 首次内置 Agent。  ## 核心功能 ### 是什么 「小微」是微信官方推出的原生 AI Agent，以绿色眼睛图标出现在微信主界面左上角。用户通过语音或文字直接操控微信功能、调用小程序服务、分析聊天内容、甚至一句话生成小程序。  采用自研 WeLM + DeepSeek 混合模型架构，由微信事业群技术架构负责人周颢带队。计划 2026 Q3 正式开放。  ### 为什么重要 1. **用户基数**：14.32 亿月活。朋友圈渗透"}, {"title": "Garry Tan", "url": "Garry-Tan.html", "category": "AI人物", "tags": ["大模型", "行业观点"], "text": " # Garry Tan  ## 核心定义 > **一句话定位**：Y Combinator 现任总裁兼 CEO，前创业者与投资人，推动 YC 内部向「AI 原生组织」转型，并提出「一人公司」「氛围编程（Vibe Coding）」等 AI 时代创业论断。  ## 主要贡献 - 美籍华裔（中文名陈嘉兴），父母为新加坡移民，出身普通家庭，14 岁自学编程。 - 斯坦福大学计算机系统工程学士。毕业后曾任微软工程师，后加入 Palantir 成为早期员工（约第 10 号），设计了沿用至今的公司 Logo。 - 2008 年（YC S08）创立轻博客平台 Posterous，2012 年被 Twitte"}, {"title": "Howie Liu", "url": "Howie-Liu.html", "category": "AI人物", "tags": ["智能体", "行业观点"], "text": " # Howie Liu  ## 核心定义 > **一句话定位**：Airtable 联合创始人兼 CEO，HyperAgent 创建者；以「Builder 心态 + 判断力规模化」与「把 Agent 当员工来雇」的论断，成为 AI 原生工作方式的代表性产品思考者。  ## 主要贡献 - Airtable 联合创始人兼 CEO（2013 年创立），估值约 117 亿美元；个人净资产估算 10–12 亿美元（主要源于 Airtable 股权）。 - 13 岁自学 C++；杜克大学机械工程与公共政策专业（2005–2009），在校结识日后共同创立 Airtable 的 Andrew Ofstad "}, {"title": "Pete Koomen", "url": "Pete-Koomen.html", "category": "AI人物", "tags": ["智能体", "行业观点"], "text": " # Pete Koomen  ## 核心定义 > **一句话定位**：Y Combinator 合伙人，A/B 测试平台 Optimizely 联合创始人，YC 内部 AI 原生转型的「总架构师」——主导搭建了 Agent harness、工具注册表与技能自进化系统。  ## 主要贡献 - YC 现任 General Partner（Group Partner）。 - 联合创立 Optimizely（YC W10），帮助企业网站与 App 做 A/B 实验，从零做到 1 亿美元+ ARR，2020 年被收购；合著《A/B Testing: The Most Powerful Way to T"}, {"title": "Agent提示词设计模式", "url": "Agent提示词设计模式.html", "category": "AI技术", "tags": ["提示词", "方法论", "智能体"], "text": " # Agent提示词设计模式  ## 核心定义 > **一句话定位**：将专业领域的专家行为模式固化为 Agent 提示词的通用结构模板，使 Agent 从'自由发挥'变为'可预期的专业交付'。  ## 为什么重要 普通 Agent 缺乏领域约束时容易自由发挥、输出不稳定。通过结构化的提示词设计，可以让 Agent 像真正的专家一样按照固定方法论工作，产出质量和风格更加可控。  ## 关键机制 ### 机制概述 **八层结构**（从 WorkBuddy 专家的提示词设计中提炼出的通用结构）： 1. **角色覆盖和身份锚定**：使用 Role Override 机制清空之前上下文中的角色；定义"}, {"title": "CST_Runtime_CLI", "url": "CST_Runtime_CLI.html", "category": "AI技术", "tags": ["实践案例", "智能体", "硬件AI"], "text": " # CST Runtime CLI（CST MCP + CST Simulation Workflow Skill）  ## 核心定义 > **一句话定位**：CST Runtime CLI 是 CST Studio Suite 的 MCP Server——让 AI Agent（Codex、Claude Code 等）通过 [[MCP]] 协议直接控制 CST 完成电磁仿真任务，从自然语言需求到 S 参数 / 远场 / Touchstone 文件全自动导出。  ## 为什么重要 纯靠人工驱动电磁仿真软件，建模→求解→导出→对比链路长、迭代慢。AI Agent 接入后把'自然语言任务'直接变成"}, {"title": "Harness(智能体执行壳)", "url": "Harness(智能体执行壳).html", "category": "AI技术", "tags": ["方法论", "智能体", "研究公共AI"], "text": " # Harness(智能体执行壳)  ## 核心定义 > **一句话定位**：Harness 是包裹在大模型外面、让它成为一个可用智能体的完整基础设施。模型提供智能，Harness 提供手、眼、记忆和安全边界。  > 原文定义：'An Agent Harness is the complete infrastructure that wraps around an LLM to make it a functional agent. The model provides intelligence; the harness provides hands, eyes, memory, and s"}, {"title": "MCP", "url": "MCP.html", "category": "AI技术", "tags": ["工具调用", "方法论"], "text": " # MCP  ## 核心定义 > **一句话定位**：MCP（Model Context Protocol，模型上下文协议）是由 Anthropic 于 2024-11-25 提出的**开放标准协议**，为大型语言模型（LLM）与外部数据源、工具之间提供统一的通信接口，常被类比为「AI 应用的 USB-C 接口」。  > 原文定位（Anthropic）：'Think of MCP like a USB-C port for AI applications.' MCP 让 Claude、ChatGPT 等 AI 应用能连接数据源（本地文件、数据库）与工具（搜索引擎、计算器）及工作流（专用提示词"}, {"title": "RAG（检索增强生成）", "url": "RAG（检索增强生成）.html", "category": "AI技术", "tags": ["RAG", "方法论"], "text": " # RAG（检索增强生成）  ## 核心定义 > **一句话定位**：RAG（Retrieval-Augmented Generation，检索增强生成）是一种'检索式知识库'范式——查询时从原始文档检索相关片段 → LLM 理解 → 综合生成回答，让模型在生成时'带着资料作答'，而非仅依赖参数内记忆。  ## 为什么重要 RAG 是当前 LLM + 外部知识的标准方案之一：它让模型能回答训练数据之外、或需要最新/私有资料的问题，覆盖面广、上手快、无需预先综合。对团队而言，RAG 是 [[LLM Wiki]]（编译式知识库）的互补对照物——理解两者差异，才能在'检索'与'编译'之间做出正确的"}, {"title": "多Agent协作模式", "url": "多Agent协作模式.html", "category": "AI技术", "tags": ["多智能体", "方法论", "研究公共AI"], "text": " # 多Agent协作模式  ## 核心定义 > **一句话定位**：多个 AI Agent 通过明确的协作规则和通信机制共同完成复杂任务的设计范式。  ## 为什么重要 单个 Agent 受限于能力边界和上下文窗口，复杂任务往往需要多个专业 Agent 协同。理解不同的协作模式，是设计和评估 Agent 系统的关键。  > 对我们团队的启示：这个模式可以直接指导我们设计 AI 知识库的编译流程。WorkBuddy 作为'主理人'调度处理脚本、格式转换、Wiki 编译等'子Agent'，通过 AGENTS.md 固化的就是协作规则。  ## 关键机制 ### 机制概述 **1. 调度-执行（编"}, {"title": "微信视频接入知识库", "url": "微信视频接入知识库.html", "category": "AI技术", "tags": ["向量检索", "实践案例", "方法论"], "text": " # 微信视频接入知识库  ## 核心定义 > **一句话定位**：微信群 / 视频号里看到值得留存的视频，只需「在微信里点开看一眼」，视频即自动落盘到知识库、自动 ASR 转录、自动生成素材笔记，省去手动下载 + 上传。  ## 为什么重要 视频是高质量 AI 资讯的重要载体（技术拆解、产品发布、访谈复盘），但微信的视频散落在群聊 / 视频号，传统方式需手动下载再上传到知识库，链路长、易遗漏。本方法把'查看即捕获'做成端到端管道，让视频内容像文章一样自动进入知识库摄入流水线。  ## 关键机制 ### 机制概述 **端到端管道** ``` 你在微信群 / 视频号里【查看或播放】想留存的视频 "}, {"title": "AI辅助硬件研发工作流", "url": "AI辅助硬件研发工作流.html", "category": "AI流程", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# AI 辅助硬件研发工作流  ## 核心定义 > **一句话定位**：Claude（Code）已可深度介入软硬件研发全流程——从嘉立创 EDA 自动画原理图、到嵌入式 MCU 远程调试（AI 调试器 AixProbe），再延伸到平衡车/自动驾驶等具体产品形态，AI 正在成为'看得见硬件、动得了硬件'的研发副驾。  ## 目标 让 AI 深度介入软硬件研发全流程：从 EDA 自动画原理图/PCB，到嵌入式 MCU 远程调试（读寄存器、烧录、单步），再到具体产品形态落地；缩短设计周期、保证一致性、沉淀可复用的设计经验。  ## 适用场景 - 原理图/PCB 自动生成（嘉立创 EDA + Clau"}, {"title": "KiCad+AI工作流", "url": "KiCad+AI工作流.html", "category": "AI流程", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# KiCad + AI 工作流  ## 核心定义 > **一句话定位**：'新手小白只靠和 AI 聊天就画出 PCB 原理图并导出 KiCad 工程文件'已完全可行——核心路径是 KiCad + AI Agent Skill/MCP/插件，2026 已进入'自然语言 → 真实电路'成熟期。  ## 目标 让无深度 EDA 经验的工程师/新手，仅凭自然语言对话即可完成从需求分析、原理图/PCB 设计、验证到下单生产的完整 PCB 流程；缩短设计周期，降低 EDA 工具使用门槛，并实现一键 DFM 与下单。  ## 适用场景 - 新手首次画 PCB、快速原型、测试治具、转接板等'先跑通再优化'的"}, {"title": "AI使用哲学", "url": "AI使用哲学.html", "category": "AI理念", "tags": ["大模型", "行业观点"], "text": " # AI使用哲学  ## 核心定义 > **一句话定位**：AI 时代拉开差距的不是工具使用能力，而是**Builder 心态**（主动折腾、驱动工具）和**判断力规模化**（把好判断施加到更多线程）——执行层交 Agent，判断层永远是人。  ## 概述 覆盖什么范围？为什么值得单独成页？  AI 使用哲学描述 Agent 时代人类竞争力的结构翻转：核心竞争力从执行能力转为判断力，稀缺资源从技术人才转为问题定义能力。本页围绕 Builder 心态、判断力飞轮、Problem Hunting、奢侈雇员等概念展开，是理解本团队 Agent 化工作流的思想底座（来源：[[素材笔记/AI理念/顶尖"}, {"title": "Builder 心态", "url": "Builder-心态.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # Builder 心态  ## 核心定义 > **一句话定位**：Builder 心态不是指'会写代码'，而是指**愿意下场动手、主动驱动工具**，而不是等着工具告诉你它还能做什么——AI 时代拉开差距的核心心态之一。  ## 概述 Builder 心态是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 在《Silicon Valley Girl》播客中提出。它回答的问题是：在 Agent 时代，普通用户与顶尖 1% 用户的差距从何而来？答案不是工具本身，而是使用者是否具备'折腾、驱动工具'的主动心态。  **核心特征**： - **Tinker"}, {"title": "LLM Wiki", "url": "LLM-Wiki.html", "category": "AI理念", "tags": ["RAG", "方法论", "知识库"], "text": " # LLM Wiki  ## 核心定义 > **一句话定位**：LLM Wiki 是一种「编译式知识库」范式：让 LLM 在用户和原始文档之间扮演**知识编译器**，把原始资料提前编译成结构化、相互链接、持续维护的 Markdown Wiki，而不是每次提问都临时从原文检索。  综合判断：本团队知识库（AGENTS.md 设计的 `原始资料/` → `知识库/` → `AGENTS.md/方案.md` 三层结构）正是 LLM Wiki 范式的直接实践。详见文末「本知识库即 LLM Wiki 实践」。  ## 概述 覆盖什么范围？为什么值得单独成页？  LLM Wiki 把知识库从「检索式」翻"}, {"title": "Problem Hunting", "url": "Problem-Hunting.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # Problem Hunting  ## 核心定义 > **一句话定位**：Problem Hunting（问题狩猎）主张'找到问题占了整个事情的 80%'——Agent 让构建方案变简单后，真正的稀缺能力反转为**问题定义能力**。  ## 概述 Problem Hunting 是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 提出。它刻画了 Agent 时代的价值反转：过去找问题容易、构建方案难（要写代码、雇人、花钱）；现在反转了——Agent 让构建方案变简单，**真正的难度全在前端**：你到底想解决什么问题？  **实操建议**： 1."}, {"title": "判断力飞轮", "url": "判断力飞轮.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # 判断力飞轮  ## 核心定义 > **一句话定位**：Agent 让你可以同时跑 10–50 个并行任务，但每个任务的质量天花板取决于你的**判断力**；Agent 跑得越多，判断力积累越快，从而形成正反馈飞轮——**Agent 越强，判断力的价值越大**。  ## 概述 判断力飞轮是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 提出。它刻画了 Agent 时代人类竞争力的结构翻转：核心竞争力从执行能力转为判断力，而判断力会随 Agent 的规模化使用而自我强化。  **飞轮机制**：  ``` Agent 跑更多实验 → 判断力积累更快 "}, {"title": "奢侈雇员（Luxury Hires）", "url": "奢侈雇员（Luxury-Hires）.html", "category": "AI理念", "tags": ["智能体", "行业观点"], "text": " # 奢侈雇员（Luxury Hires）  ## 核心定义 > **一句话定位**：奢侈雇员指过去太多'不值得专门雇人做'的事（旅行规划、行情追踪、营销实验……），Agent 让这些'奢侈岗位'变得可行——设定偏好和规则，24 小时跑，不需要工资。  ## 概述 奢侈雇员是 [[AI使用哲学]] 的四大支柱概念之一，由 Airtable CEO Howie Liu 提出。它是 [[多Agent协作模式]] 的通俗表述：用多个 Agent 并行处理不同任务。  **商业意义**：同时跑更多实验 → 更多击球机会 → 更多正确方向。以前因成本太高而放弃的岗位，现在可以用 Agent 低成本填补，"}, {"title": "AI原生组织", "url": "AI原生组织.html", "category": "AI组织", "tags": ["大模型", "智能体", "趋势研判"], "text": " # AI原生组织  ## 核心定义 > **一句话定位**：把 AI 作为整个组织运转的**建设层**（而非'把 AI 当 Copilot 用'的旧模式）——数据集中、工具注册、技能自进化，让组织每天都在变聪明；等价定义：**AI 进来之后，组织里的等待有没有变少**。  ## 组织范式  （概述该 AI 组织范式的核心主张 —— 如何通过架构与岗位把 AI 嵌入组织运转）  AI 原生组织不是'买工具'而是'让等待消失'。其本质是用三层基础设施 + 角色重构 + 多 Agent 协调，把 AI 嵌进组织的运行规则，影响任务分配、信息使用、责任定义与协作方式。  ### Copilot vs"}, {"title": "_说明", "url": "_说明.html", "category": "", "tags": [], "text": "# 待入库暂存区  > 本文件夹是 8 分类之外的**暂存区**，对应 AGENTS.md §5.5。存放 LLM 从材料分解出、但**拿不准是否建正式 Wiki 页**的候选条目。  ## 规则  1. **来源**：单材料建页决策（§5.5）第 4 步中，判为'拿不准建/不建、或归类/方向存疑'的候选，写入本目录，不静默建、也不静默砍。 2. **lint 放宽**：本目录内文件**不参与**孤立页 / 悬挂链接 / 元数据质量 / 标签 检查，也不计入 Wiki 页面总数。允许 frontmatter 不完整。 3. **兜底**：每个待入库条目都应有对应素材笔记（原材料真相源永不丢，§"}, {"title": "AI操控嘉立创EDA画PCB", "url": "AI操控嘉立创EDA画PCB.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# 2 步教会你用 AI 操控嘉立创 EDA 画 PCB  > 来源：微信视频号「AI 操控嘉立创 EDA 画 PCB」本地视频（68MB） > 时间：2026-07-11 入库 > 视频信息密度较低，主要演示价值；本素材笔记综合嘉立创 EDA 官方 + easyeda-agent/easyeda-api Skill + Run API Gateway 三套社区方案整理  ---  ## 一句话总结  嘉立创 EDA 专业版已可通过**官方扩展 / 第三方 Skill / Agent Connector** 三种路径实现'AI 直接操控编辑器画原理图与 PCB'，目前**已证明路径可行但效果一"}, {"title": "Dify平台Agent开发入门指南", "url": "Dify平台Agent开发入门指南.html", "category": "AI产品", "tags": ["智能体", "科普教程"], "text": "# Dify平台Agent开发入门指南  来源：IMA「杨添的知识库」→ Word（16KB）  ## 核心内容  该文档是 Dify 平台的 Agent 开发入门教程，以'会议纪要小助手'为案例，系统介绍了从环境准备到部署优化的全流程。  ### 1. Dify 平台定位 - 名称含义：'define' + 'modify' = 持续定义和改进 AI 应用 - 核心理念：LLMOps（大语言模型运维），将模型管理抽象为低代码操作 - 部署选项：Cloud（SaaS）、社区版、企业版 - 模型兼容：OpenAI GPT、Claude、国内主流大模型均支持  ### 2. Agent 四大核心能"}, {"title": "ima知识库使用指南", "url": "ima知识库使用指南.html", "category": "AI产品", "tags": ["向量检索", "知识库", "科普教程"], "text": "# ima知识库使用指南  来源：杨添的知识库 → Word文档  ## 核心内容  ima知识库是腾讯推出的专属知识空间，包括个人知识库与共享知识库，支持增添、管理、检索知识资源。基于知识库问问ima，可以聚焦知识库得到更个性化的回答。  支持 PC端（ima.copilot客户端）和微信小程序。  ## PC端功能  ### 1. 收藏知识 - 上传PDF、DOC、JPEG、PNG等格式的内容至知识库 - 浏览网页、进行问答、记笔记时都能随时收藏  ### 2. 管理知识 - 为知识打上标签，便捷管理 - 在知识库搜索框输入关键词，回溯找寻知识灵感  ### 3. 应用知识 - 提出问题，"}, {"title": "InfiniteTalk开源", "url": "InfiniteTalk开源.html", "category": "AI产品", "tags": ["多模态", "工具评测"], "text": "# InfiniteTalk — 开源音频驱动无限时长视频生成框架  **来源**: 微信视频号（原始为视频），通过 CSDN/头条等多源文字拆解还原 **开发团队**: MeiGen AI（美团基础研发平台视觉智能团队） **开源协议**: Apache 2.0  ## 一句话总结  InfiniteTalk 是美团视觉团队开源的一款 AI 数字人视频生成工具，只需一张照片 + 一段音频，就能生成无限时长、唇形精准同步、表情自然的说话视频。  ## 核心亮点  | 特性 | 说明 | |------|------| | 一张照片就能用 | 静态图像 → 无限时长说话视频 | | 稀疏帧黑科技"}, {"title": "Paperclip_AI_Agent_公司编排平台", "url": "Paperclip_AI_Agent_公司编排平台.html", "category": "AI产品", "tags": ["实践案例", "智能体", "趋势研判"], "text": " # Paperclip：72K Star 的 AI Agent 公司编排平台（'一人公司'基础设施）  > 来源：微信视频号「Codex 打造一人公司，72K Star 神器，一个人 + Codex = 一人公司 — Paperclip」本地视频（21MB） > 综合来源：ZupHP 深度介绍、Tenten.co 报道、josenobile.co 指南、fast.io 评测、opentechhub.io 企业分析  ---  ## 一句话总结  **Paperclip 是一个开源（MIT）的'AI Agent 公司管理系统'**——把 Agent 当员工管理。GitHub 7.2 万星、一行"}, {"title": "rtk-CLI代理降低LLM令牌消耗", "url": "rtk-CLI代理降低LLM令牌消耗.html", "category": "AI产品", "tags": ["工具评测", "智能体"], "text": "# rtk — 高性能 CLI 代理，降低 LLM Token 消耗 60-90%  > 来源：GitHub 仓库 rtk-ai/rtk | 68.1k Stars | 4.2k Forks | Rust 93.1% > 版本：v0.43.0 | 许可证：Apache-2.0  ---  ## 一句话总结  rtk 是一个**单文件 Rust 二进制 CLI 代理**，在命令输出到达 LLM 上下文之前进行过滤和压缩，使常见开发命令的 Token 消耗降低 60-90%，开销 <10ms。支持 100+ 命令，兼容 14 种 AI 编程工具。  ---  ## 核心机制  ``` 没有 rtk"}, {"title": "SailWind_派兹互连国产EDA_AI平台", "url": "SailWind_派兹互连国产EDA_AI平台.html", "category": "AI产品", "tags": ["大模型", "工具评测", "硬件AI"], "text": "# SailWind：派兹互连国产 EDA 的 AI 全链智能化平台  > 来源：微信视频号「SailWind 在线 AI 平台，一键输出整套硬件项目资料」本地视频（13MB） > 综合来源：派兹互连 KGS PDF 资料、CSDN 问答、x-techcon 行业分析、网易 EDA365 报道、dtop-tech 介绍  ---  ## 一句话总结  SailWind（派兹互连）是国产 EDA 工具 + AI 全链智能化系统，**三大智能体（建库/布局/设计助手）覆盖 PCB 从元件库到 DFM 检查的完整流程**，与熠瓴大模型深度集成，目标'一句话输出整套硬件项目资料'。  ---  ## "}, {"title": "中国专利skill_自动生成专利交底书", "url": "中国专利skill_自动生成专利交底书.html", "category": "AI产品", "tags": ["工具评测", "提示词", "智能体"], "text": " # 中国专利 .skill：AI 自动生成专利交底书（GitHub 3000+ Star）  > 来源：微信视频号「GitHub 爆款中国专利.skill，从草稿到交底书 AI 自动生成」本地视频（4.4MB） > 综合来源：今日头条深度介绍、SkillHub 官方页、墨天轮（modb.pro）实测分析  ---  ## 一句话总结  **patent-disclosure-skill** 是 handsomestWei 开源的 Agent Skill，GitHub Star 已破 3000，把研发写专利交底书的时间从 3 天压缩到 30 分钟——从代码/文档自动出稿到代理人可直接改的 Wo"}, {"title": "中国专利Skill从草稿到交底书", "url": "中国专利Skill从草稿到交底书.html", "category": "AI产品", "tags": ["研究公共AI"], "text": "# GitHub 爆款「中国专利 .skill」：从草稿到交底书 AI 自动生成  > 来源：微信视频号「GitHub 爆款'中国专利.skill'，从草稿到交底书AI自动生成，效率提升10倍」 > 综合参考：GitHub fuyuxiang/patent-disclosure-skill + Sven-LI-sankyuu/patent-disclosure-skill + 今日头条深度拆解 + jun.ee 上手指南  ---  ## 一句话总结  **patent-disclosure-skill** 是面向 Claude Code / Cursor 的 AI Agent Skill，通"}, {"title": "交互式BOM表", "url": "交互式BOM表.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# 交互式 BOM 表（AI 硬件辅助工具）  > 来源：微信视频号「交互式BOM表」本地视频 > 综合参考：Altium Designer InteractiveHtmlBomForAD 脚本 + OpenBOM AI Agent MCP + 芯团AI BOM 分析  ---  ## 一句话总结  **交互式 BOM 表**是 PCB 装配调试的实用辅助工具——在网页中可视化展示元件位置、高亮选中零件、支持按类别筛选，配合 AI（如 OpenBOM MCP Agent、芯团AI）可实现 BOM 智能分析、国产替代推荐和成本透视。  ---  ## 核心内容  ### 传统交互式 BOM（In"}, {"title": "微信Agent小微灰度上线", "url": "微信Agent小微灰度上线.html", "category": "AI产品", "tags": ["实践案例", "市场AI", "智能体"], "text": ""}, {"title": "微信视频号视频下载工具", "url": "微信视频号视频下载工具.html", "category": "AI产品", "tags": ["知识库"], "text": "# 微信视频号视频下载工具  > 原始材料：`原始资料/2026-07-03_微信视频号视频下载工具.md`  ## 核心内容  B站视频（2026-06-04）介绍了一款用于下载**微信视频号视频**的通用工具。这类工具属于「微信视频流量嗅探 / 代理拦截」方案族，与知识库接入管道中主推的 `wx_video_download` 同属一类（另见 res-downloader 等嗅探工具，见 [[微信视频接入知识库]] 第七节）。  ## 归类说明（分类：AI产品 · 标签：知识库）  - 本知识库已建立 [[微信视频接入知识库]] 工作流：将微信视频号视频自动落盘 → ASR 转录 → 生成"}, {"title": "新手小白用AI画PCB", "url": "新手小白用AI画PCB.html", "category": "AI产品", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# 新手小白用 AI 画 PCB：KiCad + Claude Code 全流程实战  > 来源：微信视频号「挑战成功！新手小白只靠和 AI 聊天就画出了 PCB 原理图」本地视频（95MB） > 综合来源：madlive.cn 四大方案、hhai.net Flux vs KiCad 对比、csdn KiCad 对话式生成、tommickey.cn Claude Code PCB 实战评估  ---  ## 一句话总结  **'新手小白只靠和 AI 聊天就画出 PCB 原理图并导出 KiCad 工程文件'已完全可行**——核心路径是 **KiCad + AI Agent Skill/MCP/插"}, {"title": "谷歌宣布开放ColabCli", "url": "谷歌宣布开放ColabCli.html", "category": "AI产品", "tags": ["大模型", "工具评测", "研究公共AI"], "text": ""}, {"title": "Claude_Code设计哲学渐进式披露", "url": "Claude_Code设计哲学渐进式披露.html", "category": "AI技术", "tags": ["提示词", "方法论", "智能体"], "text": " # Claude Code 设计哲学：渐进式披露（Progressive Disclosure）  > 来源：微信视频号「Claude Code 的设计哲学：渐进式披露」本地视频（190MB） > 综合参考：CSDN 深度文章 + Anthropic 官方「Equipping agents for the real world with Agent Skills」+ 掘金架构演进分析  ---  ## 一句话总结  渐进式披露（Progressive Disclosure）是 Claude Code 的核心设计哲学——**不一次性把所有信息塞给模型，而是给模型工具让它自己层层深入**，借鉴自"}, {"title": "Claude辅助设计软硬件", "url": "Claude辅助设计软硬件.html", "category": "AI技术", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# Claude 辅助设计软硬件（嘉立创 EDA / 嵌入式 / 平衡车 / 自动驾驶）  > 来源：微信视频号「Claude 辅助设计软硬件」本地视频（43MB） > 视频信息密度较低（演示型），本素材笔记综合嘉立创 EDA AI 化与 Claude Code 嵌入式调试两条相关线索整理  ---  ## 一句话总结  Claude（Code）已可深度介入**软硬件研发全流程**——从嘉立创 EDA 自动画原理图、到嵌入式 MCU 远程调试（AI 调试器 AixProbe），再延伸到平衡车/自动驾驶等具体产品形态，AI 正在成为'看得见硬件、动得了硬件'的研发副驾。  ---  ## 三大应"}, {"title": "CST_MCP_77GHz毫米波雷达仿真", "url": "CST_MCP_77GHz毫米波雷达仿真.html", "category": "AI技术", "tags": ["实践案例", "智能体", "硬件AI"], "text": "# CST MCP + CST Simulation Workflow Skill：Codex 自动控制 77GHz 毫米波雷达电磁仿真  > 来源：微信视频号「Codex 通过 CST MCP + CST Simulation Workflow Skill 自动控制 CST Studio Suite 完成 77GHz 毫米波雷达电磁仿真」本地视频 > 综合来源：bbl21/cst-runtime-cli MCP Server、think-s CST 77GHz 案例、model-key 茂鎧 CST 毫米波教程、Zhou Ming CST 仿真文章  ---  ## 一句话总结  **Cod"}, {"title": "DeepSeek从入门到精通", "url": "DeepSeek从入门到精通.html", "category": "AI技术", "tags": ["大模型", "科普教程"], "text": "# DeepSeek从入门到精通(完整版)  来源：IMA「杨添的知识库」→ PPT（6.8MB，大量图文内容）  ## 核心内容  该 PPT 是一份面向普通用户的 DeepSeek 综合性教程，内容涵盖：  ### 1. DeepSeek 产品认知 - DeepSeek 是专注 AGI 的中国科技公司，主攻大模型研发 - DeepSeek-R1 是开源推理模型，性能对齐 OpenAI o1，可免费商用 - 支持文本生成、语义理解、代码生成、联网搜索等  ### 2. 推理模型 vs 通用模型的提示策略差异（核心知识点）  这是一个重要的概念区分：  | 维度 | 推理模型（R1） | 通用"}, {"title": "OpenClaw-Harness智能工作管理架构方案", "url": "OpenClaw-Harness智能工作管理架构方案.html", "category": "AI技术", "tags": ["方法论", "智能体", "研究公共AI"], "text": ""}, {"title": "WorkBuddy专家团提示词分析", "url": "WorkBuddy专家团提示词分析.html", "category": "AI技术", "tags": ["提示词", "方法论"], "text": "# WorkBuddy专家团提示词全曝光：多Agent协作原来是这样产品化的  来源：杨添的知识库 → 微信公众号文章  ## 核心结论  WorkBuddy的**专家** = 封装好的单个Agent WorkBuddy的**专家团** = 封装好的多Agent协作流程  ## 专家的提示词结构（通用模板）  从「用户体验架构师」和「长文档手稿专家」两个专家中提炼出通用结构：  1. **角色覆盖和身份锚定**（Role Override）：让模型不被之前上下文影响，重置为专家身份 2. **核心使命**：定义专家的职责范围 3. **关键规则和默认行为**：约束Agent不要自由发挥（如 F"}, {"title": "Codex+Obsidian搭建本地AI项目工作台", "url": "Codex+Obsidian搭建本地AI项目工作台.html", "category": "AI流程", "tags": ["向量检索", "知识库", "研究公共AI"], "text": ""}, {"title": "Workbuddy配置公司中转站操作手册", "url": "Workbuddy配置公司中转站操作手册.html", "category": "AI流程", "tags": ["大模型", "知识库", "研究公共AI"], "text": ""}, {"title": "一个人亲手做企业AI服务的3个思考", "url": "一个人亲手做企业AI服务的3个思考.html", "category": "AI理念", "tags": ["大模型", "行业观点", "销售AI"], "text": "# 一个人亲手做企业AI服务的3个思考  来源：微信视频号 → 本地视频文件（879MB，9分29秒）→ B站/抖音多平台分发  > ✅ 已用 faster-whisper 对原视频做 ASR 转录（3993字），本笔记内容基于转录全文提炼，AI 已核。转录稿见文末「转录文稿」章节，关键同音误识别（如 SaaS、Claude、护城河）已修正。  ## 视频元数据  | 字段 | 内容 | |------|------| | **标题** | 一个人亲手做企业AI服务的3个思考 | | **作者** | 第四种黑猩猩CHIMP | | **发布时间** | 2026-06-29（B站）/ 202"}, {"title": "顶尖1%的人用AI的方式", "url": "顶尖1%的人用AI的方式.html", "category": "AI理念", "tags": ["大模型", "行业观点"], "text": "# 顶尖1%的人用AI的方式，跟你完全不一样  **来源**: 微信公众号「是大鱼呀」，2026-06-27 发布 **主题**: Airtable CEO Howie Liu 在《Silicon Valley Girl》播客中的访谈解读 **核心人物**: Howie Liu（Airtable CEO，Hyper Agent 创建者）  ## 一句话总结  AI 时代真正拉开差距的不是工具使用能力，而是**发现并定义问题的能力**和**把好判断力规模化输出的能力**——即 Builder 心态 + 判断力飞轮。  ## 关键观点  ### 1. Builder 心态（Tinker） - 't"}, {"title": "AI原生组织不是买工具而是让等待消失", "url": "AI原生组织不是买工具而是让等待消失.html", "category": "AI组织", "tags": ["大模型", "行业观点"], "text": "# 素材笔记：AI 原生组织不是买工具，而是让等待消失  > 来源：原始资料/2026-07-03_真正的AI Native...mp4（微信视频号） > 文字版本确认：掘金 @冬奇Lab（2026-06-28）— 标题完全匹配，确认为同一内容 ✅ > 分类：AI 理念 / AI 应用（交叉）  ---  ## 元信息  - **来源形式**: 微信视频号 mp4（38MB）→ 通过搜索找到精确文字版 - **文字版 URL**: https://juejin.cn/post/7655977856870694952 - **发布日期**: 2026-06-28 - **作者**: 冬奇Lab "}, {"title": "YC内部AI实操", "url": "YC内部AI实操.html", "category": "AI组织", "tags": ["大模型", "实践案例", "研究公共AI"], "text": ""}, {"title": "给律所做FDE的销售复盘10坑", "url": "给律所做FDE的销售复盘10坑.html", "category": "AI组织", "tags": ["大模型", "实践案例", "销售AI"], "text": "# 给律所做FDE的销售复盘10坑  > 来源：微信视频号视频音频 ASR 转录（faster-whisper/small） | 原始文件：`2026-07-07_最近在美国给律所做FDE业务销售新人复盘10坑_微信视频号.mp4` > ⚠️ 本稿由语音识别自动生成，属单一来源、自动内容，存在同音误识别（如'话术'被识为'画术'、'播客'→'波壳'、'护城河'→'护唇盒'、Naval→'纳瓦尔'、Forward Deployed Engineer→'Full World Deploying Engineer'）；关键结论请以原视频核对。  ## AI 词汇修正（ASR 误识别还原）  > **"}];
+    function doSearch(q) {
+        var grid = document.querySelector('.home-cats');
+        var side = document.querySelector('.home-side');
+        var graph = document.querySelector('.graph-box');
+        var content = document.querySelector('.mw-content');
+        var results = document.getElementById('searchResults');
+        if (!results) { results = document.createElement('div'); results.id='searchResults'; content.prepend(results); }
+        if (!q || q.trim() === '') { results.style.display='none'; if(grid)grid.style.display=''; if(side)side.style.display=''; if(graph)graph.style.display=''; return; }
+        q = q.toLowerCase();
+        var hits = searchData.filter(function(p) {
+            var txt = (p.title + ' ' + p.category + ' ' + p.tags.join(' ') + ' ' + p.text).toLowerCase();
+            return txt.includes(q);
+        });
+        if(grid)grid.style.display='none'; if(side)side.style.display='none'; if(graph)graph.style.display='none';
+        results.style.display='';
+        if (hits.length === 0) { results.innerHTML = '<p style="color:#54595d;font-family:var(--ui-font);font-size:0.9rem;">没有找到匹配的结果</p>'; return; }
+        var h = '<p style="font-family:var(--ui-font);font-weight:600;margin-bottom:0.6rem;">找到 ' + hits.length + ' 个结果</p>';
+        hits.forEach(function(p) {
+            h += '<a href="pages/' + p.url + '" style="display:block;font-family:var(--ui-font);padding:0.6rem 0.8rem;border-bottom:1px solid #f0f0f0;color:#202122;text-decoration:none;"><span style="font-weight:600;">' + p.title + '</span><span style="float:right;font-size:0.75rem;color:#54595d;">' + p.category + '</span><br><span style="font-size:0.8rem;color:#54595d;">' + (p.text||'').slice(0,80) + '</span></a>';
+        });
+        results.innerHTML = h;
+    }
+    // 从 URL hash 的 #q= 自动执行搜索（详情页跳转过来时）
+    (function(){
+        var m = location.hash.match(/q=([^&]+)/);
+        if(m){ var q = decodeURIComponent(m[1]); var inp = document.getElementById('searchInput'); if(inp) inp.value = q; doSearch(q); }
+    })();
+    </script>
 </body>
 </html>

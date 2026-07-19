@@ -5,73 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>判断力飞轮 - AI 研究团队知识库</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
-.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
-.main { min-width:0; }
-.sidebar { }
+:root{
+  --link:#3366cc; --link-visited:#795cb2; --text:#202122; --bg:#fff;
+  --grey-bg:#f8f9fa; --border:#a2a9b1; --border-light:#c8ccd1; --grey-text:#54595d;
+  --ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif-font:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--serif-font);color:var(--text);background:var(--grey-bg);line-height:1.6;font-size:15px;}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:visited{color:var(--link-visited);}
 
-.header { margin-bottom:1.5rem; }
-.header a { color:#888; text-decoration:none; font-size:0.85rem; }
-.header a:hover { color:#378ADD; }
-.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
-.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+/* 页眉 */
+.mw-header{background:var(--bg);border-bottom:1px solid var(--border-light);box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.mw-header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;}
+.mw-site{font-family:var(--ui-font);font-size:1.05rem;font-weight:600;color:var(--text);}
+.mw-site:hover{text-decoration:none;}
+.mw-search{position:relative;}
+.mw-search input{font-family:var(--ui-font);width:220px;padding:0.35rem 0.7rem;font-size:0.82rem;border:1px solid var(--border-light);border-radius:2px;outline:none;}
+.mw-search input:focus{border-color:#36c;box-shadow:0 0 0 2px rgba(51,102,204,.15);}
 
-.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
-.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
-.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
-.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
-.content p { font-size:0.88rem; margin-bottom:0.6rem; }
-.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
-.content li { margin-bottom:0.25rem; }
-.content blockquote { border-left:3px solid #BA7517; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
-.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
-.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
-.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
-.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
-.content a { color:#378ADD; text-decoration:none; }
-.content a:hover { text-decoration:underline; }
+/* 布局：左栏导航 + 主内容 */
+.mw-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;}
+.mw-nav{width:150px;flex-shrink:0;padding:1rem 0.4rem;border-right:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;min-height:calc(100vh - 56px);}
+.mw-nav .nav-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);padding:0.5rem 0.5rem 0.2rem;font-weight:600;}
+.mw-nav a{display:block;padding:0.22rem 0.5rem;color:var(--link);border-radius:2px;}
+.mw-nav a:hover{background:var(--grey-bg);text-decoration:none;}
+.mw-nav .nav-sep{border-top:1px solid var(--border-light);margin:0.4rem 0.3rem;}
 
-.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+.mw-main{flex:1;min-width:0;background:var(--bg);border:1px solid var(--border-light);border-top:none;padding:1.1rem 1.6rem 2.2rem;margin:0 0 2rem;}
 
-.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
-.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+/* 标题 */
+.mw-title h1{font-family:var(--ui-font);font-size:1.7rem;font-weight:400;line-height:1.25;border-bottom:1px solid var(--border-light);padding-bottom:0.3rem;margin-bottom:0.2rem;}
+.mw-title .sub{font-family:var(--ui-font);font-size:0.8rem;color:var(--grey-text);margin-bottom:0.6rem;}
 
-.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
-.meta-row:last-child { border-bottom:none; }
-.meta-label { color:#888; }
-.meta-value { color:#333; font-weight:500; }
+/* 正文排版 */
+.mw-content h1{font-family:var(--ui-font);font-size:1.45rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.4rem 0 0.5rem;}
+.mw-content h2{font-family:var(--ui-font);font-size:1.25rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.3rem 0 0.5rem;}
+.mw-content h3{font-family:var(--ui-font);font-size:1.02rem;font-weight:600;margin:1rem 0 0.35rem;}
+.mw-content h4{font-family:var(--ui-font);font-size:0.92rem;font-weight:600;margin:0.8rem 0 0.3rem;}
+.mw-content p{margin-bottom:0.7rem;}
+.mw-content ul,.mw-content ol{margin:0.5rem 0 0.6rem 1.7rem;}
+.mw-content li{margin-bottom:0.25rem;}
+.mw-content blockquote{border-left:3px solid var(--border);padding:0.3rem 1rem;background:var(--grey-bg);margin:0.7rem 0;color:var(--grey-text);font-size:0.92rem;}
+.mw-content table{border-collapse:collapse;margin:0.7rem 0;font-size:0.9rem;width:auto;}
+.mw-content td,.mw-content th{border:1px solid var(--border-light);padding:0.4rem 0.65rem;text-align:left;}
+.mw-content th{background:var(--grey-bg);font-family:var(--ui-font);font-weight:600;}
+.mw-content code{font-family:"SF Mono",Consolas,monospace;background:var(--grey-bg);padding:0.1rem 0.32rem;border-radius:2px;font-size:0.85em;}
+.mw-content pre{background:var(--grey-bg);padding:0.7rem 0.9rem;border:1px solid var(--border-light);border-radius:3px;overflow-x:auto;font-size:0.82rem;margin:0.7rem 0;}
+.mw-content .dangling{color:#d85a30;border-bottom:1px dashed #d85a30;cursor:help;}
 
-.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
-.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
-.badge-high { background:#e6f4ea; color:#1e8e3e; }
-.badge-medium { background:#fef7e0; color:#f9ab00; }
-.badge-low { background:#fce8e6; color:#d93025; }
+/* 信息框 infobox（右浮动） */
+.infobox{float:right;width:290px;margin:0.4rem 0 1rem 1.6rem;background:var(--grey-bg);border:1px solid var(--border);border-radius:3px;font-family:var(--ui-font);font-size:0.84rem;clear:right;}
+.infobox .ib-title{background:#eaf3ff;border-bottom:1px solid var(--border);text-align:center;font-weight:600;padding:0.45rem 0.5rem;font-size:0.95rem;color:#202122;}
+.infobox .ib-sub{text-align:center;font-size:0.78rem;color:var(--grey-text);padding:0.25rem;}
+.infobox .ib-row{display:flex;border-bottom:1px solid var(--border-light);}
+.infobox .ib-row:last-child{border-bottom:none;}
+.infobox .ib-label{flex:0 0 38%;padding:0.35rem 0.55rem;background:#f3f6fa;color:var(--grey-text);font-weight:500;border-right:1px solid var(--border-light);}
+.infobox .ib-value{flex:1;padding:0.35rem 0.55rem;word-break:break-word;}
+.infobox .ib-value a{color:var(--link);}
 
-.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
-.meta-link:hover { text-decoration:underline; }
+/* 自动目录 TOC */
+.toc{display:inline-block;background:var(--grey-bg);border:1px solid var(--border-light);padding:0.6rem 1rem 0.7rem;margin:0.3rem 0 1.1rem;font-family:var(--ui-font);font-size:0.84rem;border-radius:2px;min-width:240px;}
+.toc .toc-title{font-weight:600;margin-bottom:0.35rem;color:#202122;}
+.toc ul{list-style:none;margin:0;padding-left:1.1rem;}
+.toc>ul{padding-left:0;}
+.toc li{margin:0.15rem 0;line-height:1.4;}
+.toc a{color:var(--link);}
+.toc .toc-n{color:var(--grey-text);margin-right:0.3rem;}
 
-.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
-.backlink-item:hover { color:#378ADD; }
+/* 底部分类栏 */
+.mw-catlinks{margin-top:2rem;padding:0.55rem 0.8rem;background:var(--grey-bg);border:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;color:var(--grey-text);}
+.mw-catlinks .cl-prefix{font-weight:600;margin-right:0.4rem;}
+.mw-catlinks a{color:var(--link);}
 
-.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
-.link-btn:hover { background:#e0e0e0; }
+/* 维基式标签/徽章 */
+.tagpill{display:inline-block;font-family:var(--ui-font);font-size:0.74rem;background:var(--grey-bg);border:1px solid var(--border-light);padding:1px 7px;border-radius:3px;margin:1px;}
+.tagpill a{color:var(--link);}
+.badge{display:inline-block;font-family:var(--ui-font);font-size:0.72rem;padding:1px 7px;border-radius:3px;color:#fff;}
+.badge-high{background:#1e8e3e;} .badge-medium{background:#f9ab00;color:#202122;} .badge-low{background:#d93025;}
 
-.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+/* 分类页 / 标签页 列表 */
+.catpage-section{margin-bottom:1.6rem;}
+.catpage-section h2{font-family:var(--ui-font);font-size:1.15rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin-bottom:0.6rem;}
+.catpage-list{list-style:none;margin:0;padding:0;}
+.catpage-list li{padding:0.34rem 0.2rem;border-bottom:1px solid #f0f0f0;font-family:var(--ui-font);font-size:0.9rem;display:flex;align-items:baseline;}
+.catpage-list li:last-child{border-bottom:none;}
+.catpage-list .pl-title{font-weight:500;}
+.catpage-list .pl-meta{color:var(--grey-text);font-size:0.78rem;margin-left:0.6rem;}
+.catpage-list .pl-meta .tagpill{font-size:0.7rem;}
+
+/* 首页：分类/最近更新 区块 */
+.home-intro{font-family:var(--ui-font);font-size:0.92rem;color:#333;margin-bottom:1.2rem;line-height:1.6;}
+.home-grid{display:grid;grid-template-columns:1fr 320px;gap:1.6rem;align-items:start;}
+.home-cats{font-family:var(--ui-font);}
+.home-cat-row{display:flex;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid #f0f0f0;}
+.home-cat-row .hc-name{font-size:1rem;font-weight:600;min-width:120px;}
+.home-cat-row .hc-name a{color:var(--link);}
+.home-cat-row .hc-count{color:var(--grey-text);font-size:0.8rem;margin-left:0.6rem;min-width:54px;}
+.home-cat-row .hc-desc{color:var(--grey-text);font-size:0.82rem;margin-left:0.6rem;flex:1;}
+.home-side .box{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.8rem 1rem;margin-bottom:1rem;font-family:var(--ui-font);}
+.home-side .box h3{font-size:0.9rem;font-weight:600;margin-bottom:0.5rem;color:#202122;}
+.home-side .upd{font-size:0.82rem;padding:0.25rem 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;}
+.home-side .upd a{color:var(--link);}
+.home-side .upd .ud{color:#aaa;font-size:0.72rem;white-space:nowrap;margin-left:0.5rem;}
+.graph-box svg{width:100%;height:300px;}
+
+/* 层级导航（标签父/子，对标维基 category 页） */
+.hierarchy{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.6rem 0.9rem;margin:0.2rem 0 1.2rem;font-family:var(--ui-font);font-size:0.84rem;}
+.hier-row{margin:0.3rem 0;}
+.hier-label{color:var(--grey-text);font-weight:600;margin-right:0.4rem;}
+.hier-link{color:var(--link);}
+.hier-none{color:#aaa;}
+.hier-note{color:var(--grey-text);}
+
+/* 标签总览树 */
+.tagtree{list-style:none;padding-left:0;font-family:var(--ui-font);}
+.tagtree ul{list-style:none;padding-left:1.3rem;border-left:1px solid var(--border-light);margin-left:0.4rem;}
+.tagtree li{padding:3px 0;font-size:0.9rem;}
+.tagtree .tn{color:var(--link);}
+.tagtree .tc{font-size:0.72rem;color:var(--grey-text);margin-left:0.3rem;}
+
+/* 详情页引用的反向链接/来源列表 */
+.metalist{font-family:var(--ui-font);font-size:0.84rem;}
+.metalist a{color:var(--link);display:block;padding:0.22rem 0;border-bottom:1px solid #f5f5f5;}
+.footer-note{text-align:center;color:#aaa;font-family:var(--ui-font);font-size:0.74rem;margin-top:1.5rem;}
+
+@media (max-width:900px){
+  .mw-body{flex-direction:column;}
+  .mw-nav{width:100%;min-height:0;border-right:none;border-bottom:1px solid var(--border-light);display:flex;flex-wrap:wrap;gap:0.2rem;padding:0.5rem;}
+  .mw-nav .nav-title,.mw-nav .nav-sep{display:none;}
+  .infobox{float:none;width:auto;margin:1rem 0;}
+  .home-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="main">
-        <div class="header">
-            <a href="../index.html">← 返回首页</a>
-            <h1>判断力飞轮</h1>
-            <div class="sub">AI理念 · 活跃</div>
-        </div>
-        <div class="content"><h1>判断力飞轮</h1>
-<h2>核心定义</h2>
+<header class="mw-header">
+    <div class="mw-header-inner">
+        <a class="mw-site" href="../index.html">AI 研究团队知识库</a>
+        <form class="mw-search" onsubmit="return false;">
+            <input type="text" id="searchInput" placeholder="搜索..." oninput="doSearch(this.value)">
+        </form>
+    </div>
+</header>
+<div class="mw-body">
+    <nav class="mw-nav">
+        <div class="nav-title">导航</div>
+        <a href="../index.html">首页</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">分类</div>
+        <a href="../category-AI人物.html">AI人物</a><a href="../category-AI产品.html">AI产品</a><a href="../category-AI技术.html">AI技术</a><a href="../category-AI组织.html">AI组织</a><a href="../category-AI理念.html">AI理念</a><a href="../category-AI流程.html">AI流程</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">标签</div>
+        <a href="../tags.html">标签索引</a>
+    </nav>
+    <main class="mw-main">
+        <div class="mw-title"><h1>判断力飞轮</h1><div class="sub">AI理念 · 活跃</div></div>
+        
+        <div class="mw-content"><div class="infobox"><div class="ib-title">判断力飞轮</div><div class="ib-row"><div class="ib-label">分类</div><div class="ib-value"><a href="../category-AI理念.html" style="color:#3366cc">AI理念</a></div></div><div class="ib-row"><div class="ib-label">官网</div><div class="ib-value"><a href="判断力飞轮.html" style="color:#3366cc">判断力飞轮.html</a></div></div><div class="ib-row"><div class="ib-label">状态</div><div class="ib-value">活跃</div></div><div class="ib-row"><div class="ib-label">可信度</div><div class="ib-value"><span class="badge badge-中">中</span></div></div><div class="ib-row"><div class="ib-label">创建</div><div class="ib-value">2026-07-19</div></div><div class="ib-row"><div class="ib-label">更新</div><div class="ib-value">2026-07-19</div></div><div class="ib-row"><div class="ib-label">标签</div><div class="ib-value"><a href="../tag-智能体.html" class="tagpill">智能体</a> <a href="../tag-行业观点.html" class="tagpill">行业观点</a></div></div></div><div class="toc"><div class="toc-title">目录</div><ul><li><span class="toc-n">1</span><a href="#sec-2-1">核心定义</a></li></ul><ul><li><span class="toc-n">2</span><a href="#sec-2-2">概述</a></li></ul><ul><li><span class="toc-n">3</span><a href="#sec-2-3">发展脉络</a></li><li><span class="toc-n">3.1</span><a href="#sec-3-1">早期阶段</a></li><li><span class="toc-n">3.2</span><a href="#sec-3-2">当前阶段</a></li></ul><ul><li><span class="toc-n">4</span><a href="#sec-2-4">核心概念地图</a></li></ul><ul><li><span class="toc-n">5</span><a href="#sec-2-5">主流观点 / 方法对比</a></li></ul><ul><li><span class="toc-n">6</span><a href="#sec-2-6">典型应用与对立概念</a></li></ul><ul><li><span class="toc-n">7</span><a href="#sec-2-7">开放问题</a></li></ul><ul><li><span class="toc-n">8</span><a href="#sec-2-8">争议与待验证</a></li></ul><ul><li><span class="toc-n">9</span><a href="#sec-2-9">相关页面</a></li></ul></div><h1 id="sec-1-1">判断力飞轮</h1>
+<h2 id="sec-2-1">核心定义</h2>
 <blockquote>**一句话定位**：Agent 让你可以同时跑 10–50 个并行任务，但每个任务的质量天花板取决于你的**判断力**；Agent 跑得越多，判断力积累越快，从而形成正反馈飞轮——**Agent 越强，判断力的价值越大**。</blockquote>
-<h2>概述</h2>
+<h2 id="sec-2-2">概述</h2>
 <p>判断力飞轮是 <a href="AI使用哲学.html">AI使用哲学</a> 的四大支柱概念之一，由 Airtable CEO Howie Liu 提出。它刻画了 Agent 时代人类竞争力的结构翻转：核心竞争力从执行能力转为判断力，而判断力会随 Agent 的规模化使用而自我强化。</p>
 <p><strong>飞轮机制</strong>：</p>
 <pre><code>
@@ -85,21 +181,21 @@ Agent 跑更多实验 → 判断力积累更快 → 设计更好实验方向 →
 <li>- 失败成本趋零，但积累速度是 10 倍。</li>
 <li>- **Agent 越强，判断力的价值越大**——不是替代你，而是放大你。</li>
 </ul>
-<h2>发展脉络</h2>
-<h3>早期阶段</h3>
+<h2 id="sec-2-3">发展脉络</h2>
+<h3 id="sec-3-1">早期阶段</h3>
 <ul>
 <li>- Howie Liu 在《Silicon Valley Girl》播客提出"判断力规模化"（来源：<span class="dangling" title="页面尚未创建">素材笔记/AI理念/顶尖1%的人用AI的方式</span>）。</li>
 </ul>
-<h3>当前阶段</h3>
+<h3 id="sec-3-2">当前阶段</h3>
 <ul>
 <li>- 团队 Agent 化工作流（如 <a href="多Agent协作模式.html">多Agent协作模式</a>）把并行实验能力落地，判断力成为质量瓶颈与放大器。</li>
 </ul>
-<h2>核心概念地图</h2>
+<h2 id="sec-2-4">核心概念地图</h2>
 <ul>
 <li>- <a href="Builder-心态.html">Builder 心态</a> → <a href="判断力飞轮.html">判断力飞轮</a> → <a href="Problem-Hunting.html">Problem Hunting</a> → <a href="奢侈雇员（Luxury-Hires）.html">奢侈雇员（Luxury Hires）</a></li>
 <li>- <a href="判断力飞轮.html">判断力飞轮</a> ↔ <a href="多Agent协作模式.html">多Agent协作模式</a>（并行实验的执行载体）</li>
 </ul>
-<h2>主流观点 / 方法对比</h2>
+<h2 id="sec-2-5">主流观点 / 方法对比</h2>
 <table>
 <tr>
 <td>维度</td>
@@ -122,21 +218,21 @@ Agent 跑更多实验 → 判断力积累更快 → 设计更好实验方向 →
 <td>飞轮式、失败成本趋零、10 倍加速</td>
 </tr>
 </table>
-<h2>典型应用与对立概念</h2>
+<h2 id="sec-2-6">典型应用与对立概念</h2>
 <ul>
 <li>- 典型应用：<a href="多Agent协作模式.html">多Agent协作模式</a>（并行跑实验的执行载体）、<a href="Agent提示词设计模式.html">Agent提示词设计模式</a>（用好的提示词结构放大判断力）。</li>
 <li>- 对立概念：执行力驱动（未单独成页；以个人执行为核心竞争力，与判断力驱动相对）。</li>
 </ul>
-<h2>开放问题</h2>
+<h2 id="sec-2-7">开放问题</h2>
 <ul>
 <li>- Agent 越强，判断力的瓶颈如何突破？</li>
 <li>- 判断力飞轮是否存在边际递减，即判断质量的天花板？</li>
 </ul>
-<h2>争议与待验证</h2>
+<h2 id="sec-2-8">争议与待验证</h2>
 <ul>
 <li>- （暂无；本页事实源自 <a href="AI使用哲学.html">AI使用哲学</a> 的同一可信来源，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
 </ul>
-<h2>相关页面</h2>
+<h2 id="sec-2-9">相关页面</h2>
 <ul>
 <li>- <a href="AI使用哲学.html">AI使用哲学</a> — 本概念的父页（四大支柱之一）</li>
 <li>- <a href="Builder-心态.html">Builder 心态</a> — 飞轮的启动心态</li>
@@ -145,45 +241,19 @@ Agent 跑更多实验 → 判断力积累更快 → 设计更好实验方向 →
 <li>- <a href="Howie-Liu.html">Howie Liu</a> — 本概念的提出者，Airtable CEO</li>
 </ul>
 <p>---</p>
-<p><em>创建: 2026-07-19 | 更新: 2026-07-19</em></p></div>
-        <div class="link-buttons" style="margin-top:1rem;">
-            <a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Builder-心态.html" class="link-btn">Builder 心态</a><a href="判断力飞轮.html" class="link-btn">判断力飞轮</a><a href="Problem-Hunting.html" class="link-btn">Problem Hunting</a><a href="奢侈雇员（Luxury-Hires）.html" class="link-btn">奢侈雇员（Luxury Hires）</a><a href="判断力飞轮.html" class="link-btn">判断力飞轮</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="Builder-心态.html" class="link-btn">Builder 心态</a><a href="Problem-Hunting.html" class="link-btn">Problem Hunting</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="Howie-Liu.html" class="link-btn">Howie Liu</a>
-        </div>
-    </div>
-
-    <aside class="sidebar">
-        <div class="sidebar-card">
-            <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#BA7517">AI理念</span></div>
-            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">判断力飞轮.html</span></div>
-            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-中">中</span></span></div>
-            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-19</span></div>
-            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-19</span></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>标签</h3>
-            <div><a href="tag-智能体.html" class="tag">智能体</a> <a href="tag-行业观点.html" class="tag">行业观点</a></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>反向链接 (5)</h3>
-            <div><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="Builder-心态.html" class="backlink-item">Builder 心态</a><a href="Problem-Hunting.html" class="backlink-item">Problem Hunting</a><a href="判断力飞轮.html" class="backlink-item">判断力飞轮</a><a href="奢侈雇员（Luxury-Hires）.html" class="backlink-item">奢侈雇员（Luxury Hires）</a></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>参考来源</h3>
-            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>被引用 (5)</h3>
-            <div><a href="AI使用哲学.html" class="backlink-item">AI使用哲学</a><a href="Builder-心态.html" class="backlink-item">Builder 心态</a><a href="Problem-Hunting.html" class="backlink-item">Problem Hunting</a><a href="判断力飞轮.html" class="backlink-item">判断力飞轮</a><a href="奢侈雇员（Luxury-Hires）.html" class="backlink-item">奢侈雇员（Luxury Hires）</a></div>
-        </div>
-    </aside>
-
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+<p><em>创建: 2026-07-19 | 更新: 2026-07-19</em></p><h2>相关页面</h2><div class="metalist"><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="多Agent协作模式.html">多Agent协作模式</a></div><div class="metalist"><a href="Builder-心态.html">Builder 心态</a></div><div class="metalist"><a href="判断力飞轮.html">判断力飞轮</a></div><div class="metalist"><a href="Problem-Hunting.html">Problem Hunting</a></div><div class="metalist"><a href="奢侈雇员（Luxury-Hires）.html">奢侈雇员（Luxury Hires）</a></div><div class="metalist"><a href="判断力飞轮.html">判断力飞轮</a></div><div class="metalist"><a href="多Agent协作模式.html">多Agent协作模式</a></div><div class="metalist"><a href="多Agent协作模式.html">多Agent协作模式</a></div><div class="metalist"><a href="Agent提示词设计模式.html">Agent提示词设计模式</a></div><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="Builder-心态.html">Builder 心态</a></div><div class="metalist"><a href="Problem-Hunting.html">Problem Hunting</a></div><div class="metalist"><a href="多Agent协作模式.html">多Agent协作模式</a></div><div class="metalist"><a href="Howie-Liu.html">Howie Liu</a></div></div><h2>被引用（5）</h2><div class="metalist"><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="Builder-心态.html">Builder 心态</a></div><div class="metalist"><a href="Problem-Hunting.html">Problem Hunting</a></div><div class="metalist"><a href="判断力飞轮.html">判断力飞轮</a></div><div class="metalist"><a href="奢侈雇员（Luxury-Hires）.html">奢侈雇员（Luxury Hires）</a></div></div></div>
+        <footer class="mw-catlinks"><span class="cl-prefix">分类：</span><a href="../category-AI理念.html">AI理念</a> · <a href="../tag-智能体.html">智能体</a> <a href="../tag-行业观点.html">行业观点</a></footer>
+        <div class="footer-note">AI 研究团队知识库 · 自动生成于 2026-07-19 21:05</div>
+    </main>
 </div>
+<script>
+function doSearch(q){
+    q=(q||'').toLowerCase().trim();
+    if(!q){ return; }
+    // 详情页（子目录）自身无搜索数据，跳首页并带查询参数，由首页统一处理
+    location.href='../index.html#q='+encodeURIComponent(q);
+}
+</script>
+
 </body>
 </html>

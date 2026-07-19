@@ -3,134 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI技术 - AI 研究团队知识库</title>
+<title>分类:AI技术 - AI 研究团队知识库</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.6; }
-.container { max-width:800px; margin:0 auto; padding:2rem 1.5rem; }
+:root{
+  --link:#3366cc; --link-visited:#795cb2; --text:#202122; --bg:#fff;
+  --grey-bg:#f8f9fa; --border:#a2a9b1; --border-light:#c8ccd1; --grey-text:#54595d;
+  --ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif-font:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--serif-font);color:var(--text);background:var(--grey-bg);line-height:1.6;font-size:15px;}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:visited{color:var(--link-visited);}
 
-.header { margin-bottom:2rem; }
-.header a { color:#888; text-decoration:none; font-size:0.85rem; }
-.header a:hover { color:#378ADD; }
-.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
-.header p { font-size:0.85rem; color:#666; margin-top:0.25rem; }
+/* 页眉 */
+.mw-header{background:var(--bg);border-bottom:1px solid var(--border-light);box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.mw-header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;}
+.mw-site{font-family:var(--ui-font);font-size:1.05rem;font-weight:600;color:var(--text);}
+.mw-site:hover{text-decoration:none;}
+.mw-search{position:relative;}
+.mw-search input{font-family:var(--ui-font);width:220px;padding:0.35rem 0.7rem;font-size:0.82rem;border:1px solid var(--border-light);border-radius:2px;outline:none;}
+.mw-search input:focus{border-color:#36c;box-shadow:0 0 0 2px rgba(51,102,204,.15);}
 
-.section { margin-bottom:2rem; }
-.section-title { font-size:1rem; font-weight:600; margin-bottom:0.75rem; padding-bottom:0.5rem; border-bottom:2px solid #639922; display:inline-block; }
+/* 布局：左栏导航 + 主内容 */
+.mw-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;}
+.mw-nav{width:150px;flex-shrink:0;padding:1rem 0.4rem;border-right:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;min-height:calc(100vh - 56px);}
+.mw-nav .nav-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);padding:0.5rem 0.5rem 0.2rem;font-weight:600;}
+.mw-nav a{display:block;padding:0.22rem 0.5rem;color:var(--link);border-radius:2px;}
+.mw-nav a:hover{background:var(--grey-bg);text-decoration:none;}
+.mw-nav .nav-sep{border-top:1px solid var(--border-light);margin:0.4rem 0.3rem;}
 
-.page-item { background:#fff; border-radius:8px; border:1px solid #eee; padding:0.75rem 1rem; margin-bottom:8px; display:flex; align-items:center; text-decoration:none; color:#1a1a2e; transition:border-color 0.15s; }
-.page-item:hover { border-color:#ccc; }
-.page-title { font-weight:600; flex:1; font-size:0.9rem; }
-.page-type { font-size:0.7rem; color:#999; background:#f0f0f0; padding:2px 6px; border-radius:4px; margin:0 8px; }
-.page-meta { font-size:0.75rem; color:#999; margin:0 8px; display:flex; gap:4px; align-items:center; }
-.page-refs { font-size:0.75rem; color:#aaa; white-space:nowrap; }
-.tag { font-size:0.65rem; background:#e8f0fe; color:#378ADD; padding:1px 5px; border-radius:3px; }
-.conf { font-size:0.65rem; padding:1px 5px; border-radius:3px; }
-.conf-high { background:#e6f4ea; color:#1e8e3e; }
-.conf-medium { background:#fef7e0; color:#f9ab00; }
-.conf-low { background:#fce8e6; color:#d93025; }
-.source-item { border-left:3px solid #639922; }
+.mw-main{flex:1;min-width:0;background:var(--bg);border:1px solid var(--border-light);border-top:none;padding:1.1rem 1.6rem 2.2rem;margin:0 0 2rem;}
+
+/* 标题 */
+.mw-title h1{font-family:var(--ui-font);font-size:1.7rem;font-weight:400;line-height:1.25;border-bottom:1px solid var(--border-light);padding-bottom:0.3rem;margin-bottom:0.2rem;}
+.mw-title .sub{font-family:var(--ui-font);font-size:0.8rem;color:var(--grey-text);margin-bottom:0.6rem;}
+
+/* 正文排版 */
+.mw-content h1{font-family:var(--ui-font);font-size:1.45rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.4rem 0 0.5rem;}
+.mw-content h2{font-family:var(--ui-font);font-size:1.25rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.3rem 0 0.5rem;}
+.mw-content h3{font-family:var(--ui-font);font-size:1.02rem;font-weight:600;margin:1rem 0 0.35rem;}
+.mw-content h4{font-family:var(--ui-font);font-size:0.92rem;font-weight:600;margin:0.8rem 0 0.3rem;}
+.mw-content p{margin-bottom:0.7rem;}
+.mw-content ul,.mw-content ol{margin:0.5rem 0 0.6rem 1.7rem;}
+.mw-content li{margin-bottom:0.25rem;}
+.mw-content blockquote{border-left:3px solid var(--border);padding:0.3rem 1rem;background:var(--grey-bg);margin:0.7rem 0;color:var(--grey-text);font-size:0.92rem;}
+.mw-content table{border-collapse:collapse;margin:0.7rem 0;font-size:0.9rem;width:auto;}
+.mw-content td,.mw-content th{border:1px solid var(--border-light);padding:0.4rem 0.65rem;text-align:left;}
+.mw-content th{background:var(--grey-bg);font-family:var(--ui-font);font-weight:600;}
+.mw-content code{font-family:"SF Mono",Consolas,monospace;background:var(--grey-bg);padding:0.1rem 0.32rem;border-radius:2px;font-size:0.85em;}
+.mw-content pre{background:var(--grey-bg);padding:0.7rem 0.9rem;border:1px solid var(--border-light);border-radius:3px;overflow-x:auto;font-size:0.82rem;margin:0.7rem 0;}
+.mw-content .dangling{color:#d85a30;border-bottom:1px dashed #d85a30;cursor:help;}
+
+/* 信息框 infobox（右浮动） */
+.infobox{float:right;width:290px;margin:0.4rem 0 1rem 1.6rem;background:var(--grey-bg);border:1px solid var(--border);border-radius:3px;font-family:var(--ui-font);font-size:0.84rem;clear:right;}
+.infobox .ib-title{background:#eaf3ff;border-bottom:1px solid var(--border);text-align:center;font-weight:600;padding:0.45rem 0.5rem;font-size:0.95rem;color:#202122;}
+.infobox .ib-sub{text-align:center;font-size:0.78rem;color:var(--grey-text);padding:0.25rem;}
+.infobox .ib-row{display:flex;border-bottom:1px solid var(--border-light);}
+.infobox .ib-row:last-child{border-bottom:none;}
+.infobox .ib-label{flex:0 0 38%;padding:0.35rem 0.55rem;background:#f3f6fa;color:var(--grey-text);font-weight:500;border-right:1px solid var(--border-light);}
+.infobox .ib-value{flex:1;padding:0.35rem 0.55rem;word-break:break-word;}
+.infobox .ib-value a{color:var(--link);}
+
+/* 自动目录 TOC */
+.toc{display:inline-block;background:var(--grey-bg);border:1px solid var(--border-light);padding:0.6rem 1rem 0.7rem;margin:0.3rem 0 1.1rem;font-family:var(--ui-font);font-size:0.84rem;border-radius:2px;min-width:240px;}
+.toc .toc-title{font-weight:600;margin-bottom:0.35rem;color:#202122;}
+.toc ul{list-style:none;margin:0;padding-left:1.1rem;}
+.toc>ul{padding-left:0;}
+.toc li{margin:0.15rem 0;line-height:1.4;}
+.toc a{color:var(--link);}
+.toc .toc-n{color:var(--grey-text);margin-right:0.3rem;}
+
+/* 底部分类栏 */
+.mw-catlinks{margin-top:2rem;padding:0.55rem 0.8rem;background:var(--grey-bg);border:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;color:var(--grey-text);}
+.mw-catlinks .cl-prefix{font-weight:600;margin-right:0.4rem;}
+.mw-catlinks a{color:var(--link);}
+
+/* 维基式标签/徽章 */
+.tagpill{display:inline-block;font-family:var(--ui-font);font-size:0.74rem;background:var(--grey-bg);border:1px solid var(--border-light);padding:1px 7px;border-radius:3px;margin:1px;}
+.tagpill a{color:var(--link);}
+.badge{display:inline-block;font-family:var(--ui-font);font-size:0.72rem;padding:1px 7px;border-radius:3px;color:#fff;}
+.badge-high{background:#1e8e3e;} .badge-medium{background:#f9ab00;color:#202122;} .badge-low{background:#d93025;}
+
+/* 分类页 / 标签页 列表 */
+.catpage-section{margin-bottom:1.6rem;}
+.catpage-section h2{font-family:var(--ui-font);font-size:1.15rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin-bottom:0.6rem;}
+.catpage-list{list-style:none;margin:0;padding:0;}
+.catpage-list li{padding:0.34rem 0.2rem;border-bottom:1px solid #f0f0f0;font-family:var(--ui-font);font-size:0.9rem;display:flex;align-items:baseline;}
+.catpage-list li:last-child{border-bottom:none;}
+.catpage-list .pl-title{font-weight:500;}
+.catpage-list .pl-meta{color:var(--grey-text);font-size:0.78rem;margin-left:0.6rem;}
+.catpage-list .pl-meta .tagpill{font-size:0.7rem;}
+
+/* 首页：分类/最近更新 区块 */
+.home-intro{font-family:var(--ui-font);font-size:0.92rem;color:#333;margin-bottom:1.2rem;line-height:1.6;}
+.home-grid{display:grid;grid-template-columns:1fr 320px;gap:1.6rem;align-items:start;}
+.home-cats{font-family:var(--ui-font);}
+.home-cat-row{display:flex;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid #f0f0f0;}
+.home-cat-row .hc-name{font-size:1rem;font-weight:600;min-width:120px;}
+.home-cat-row .hc-name a{color:var(--link);}
+.home-cat-row .hc-count{color:var(--grey-text);font-size:0.8rem;margin-left:0.6rem;min-width:54px;}
+.home-cat-row .hc-desc{color:var(--grey-text);font-size:0.82rem;margin-left:0.6rem;flex:1;}
+.home-side .box{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.8rem 1rem;margin-bottom:1rem;font-family:var(--ui-font);}
+.home-side .box h3{font-size:0.9rem;font-weight:600;margin-bottom:0.5rem;color:#202122;}
+.home-side .upd{font-size:0.82rem;padding:0.25rem 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;}
+.home-side .upd a{color:var(--link);}
+.home-side .upd .ud{color:#aaa;font-size:0.72rem;white-space:nowrap;margin-left:0.5rem;}
+.graph-box svg{width:100%;height:300px;}
+
+/* 层级导航（标签父/子，对标维基 category 页） */
+.hierarchy{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.6rem 0.9rem;margin:0.2rem 0 1.2rem;font-family:var(--ui-font);font-size:0.84rem;}
+.hier-row{margin:0.3rem 0;}
+.hier-label{color:var(--grey-text);font-weight:600;margin-right:0.4rem;}
+.hier-link{color:var(--link);}
+.hier-none{color:#aaa;}
+.hier-note{color:var(--grey-text);}
+
+/* 标签总览树 */
+.tagtree{list-style:none;padding-left:0;font-family:var(--ui-font);}
+.tagtree ul{list-style:none;padding-left:1.3rem;border-left:1px solid var(--border-light);margin-left:0.4rem;}
+.tagtree li{padding:3px 0;font-size:0.9rem;}
+.tagtree .tn{color:var(--link);}
+.tagtree .tc{font-size:0.72rem;color:var(--grey-text);margin-left:0.3rem;}
+
+/* 详情页引用的反向链接/来源列表 */
+.metalist{font-family:var(--ui-font);font-size:0.84rem;}
+.metalist a{color:var(--link);display:block;padding:0.22rem 0;border-bottom:1px solid #f5f5f5;}
+.footer-note{text-align:center;color:#aaa;font-family:var(--ui-font);font-size:0.74rem;margin-top:1.5rem;}
+
+@media (max-width:900px){
+  .mw-body{flex-direction:column;}
+  .mw-nav{width:100%;min-height:0;border-right:none;border-bottom:1px solid var(--border-light);display:flex;flex-wrap:wrap;gap:0.2rem;padding:0.5rem;}
+  .mw-nav .nav-title,.mw-nav .nav-sep{display:none;}
+  .infobox{float:none;width:auto;margin:1rem 0;}
+  .home-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <a href="index.html">← 返回首页</a>
-        <h1>AI技术</h1>
-        <p>13 个 Wiki 页面 · 0 篇素材笔记</p>
+<header class="mw-header">
+    <div class="mw-header-inner">
+        <a class="mw-site" href="index.html">AI 研究团队知识库</a>
+        <form class="mw-search" onsubmit="return false;">
+            <input type="text" id="searchInput" placeholder="搜索..." oninput="doSearch(this.value)">
+        </form>
     </div>
-
-    <div class="section">
-        <span class="section-title">Wiki 页面</span>
-        <div class="page-list">
-            
-        <a href="pages/Agent提示词设计模式.html" class="page-item">
-            <span class="page-title">Agent提示词设计模式</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">提示词</span> <span class="tag">方法论</span> <span class="tag">智能体</span> <span class="conf conf-高">高</span></span>
-            <span class="page-refs">19 引用</span>
-        </a>
-        <a href="pages/CST_Runtime_CLI.html" class="page-item">
-            <span class="page-title">CST_Runtime_CLI</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">硬件AI</span> <span class="tag">智能体</span> <span class="tag">实践案例</span> <span class="conf conf-高">高</span></span>
-            <span class="page-refs">2 引用</span>
-        </a>
-        <a href="pages/Harness(智能体执行壳).html" class="page-item">
-            <span class="page-title">Harness(智能体执行壳)</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">研究公共AI</span> <span class="tag">智能体</span> <span class="tag">方法论</span> <span class="conf conf-中">中</span></span>
-            <span class="page-refs">7 引用</span>
-        </a>
-        <a href="pages/MCP.html" class="page-item">
-            <span class="page-title">MCP</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">工具调用</span> <span class="tag">方法论</span> <span class="conf conf-高">高</span></span>
-            <span class="page-refs">19 引用</span>
-        </a>
-        <a href="pages/RAG（检索增强生成）.html" class="page-item">
-            <span class="page-title">RAG（检索增强生成）</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">RAG</span> <span class="tag">方法论</span> <span class="conf conf-中">中</span></span>
-            <span class="page-refs">1 引用</span>
-        </a>
-        <a href="pages/多Agent协作模式.html" class="page-item">
-            <span class="page-title">多Agent协作模式</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">研究公共AI</span> <span class="tag">多智能体</span> <span class="tag">方法论</span> <span class="conf conf-高">高</span></span>
-            <span class="page-refs">18 引用</span>
-        </a>
-        <a href="pages/微信视频接入知识库.html" class="page-item">
-            <span class="page-title">微信视频接入知识库</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">向量检索</span> <span class="tag">方法论</span> <span class="tag">实践案例</span> <span class="conf conf-高">高</span></span>
-            <span class="page-refs">1 引用</span>
-        </a>
-        <a href="pages/Claude_Code设计哲学渐进式披露.html" class="page-item">
-            <span class="page-title">Claude_Code设计哲学渐进式披露</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">智能体</span> <span class="tag">方法论</span> <span class="tag">提示词</span> </span>
-            <span class="page-refs">0 引用</span>
-        </a>
-        <a href="pages/Claude辅助设计软硬件.html" class="page-item">
-            <span class="page-title">Claude辅助设计软硬件</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">硬件AI</span> <span class="tag">智能体</span> <span class="tag">实践案例</span> </span>
-            <span class="page-refs">0 引用</span>
-        </a>
-        <a href="pages/CST_MCP_77GHz毫米波雷达仿真.html" class="page-item">
-            <span class="page-title">CST_MCP_77GHz毫米波雷达仿真</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">硬件AI</span> <span class="tag">智能体</span> <span class="tag">实践案例</span> </span>
-            <span class="page-refs">0 引用</span>
-        </a>
-        <a href="pages/DeepSeek从入门到精通.html" class="page-item">
-            <span class="page-title">DeepSeek从入门到精通</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">大模型</span> <span class="tag">科普教程</span> </span>
-            <span class="page-refs">0 引用</span>
-        </a>
-        <a href="pages/OpenClaw-Harness智能工作管理架构方案.html" class="page-item">
-            <span class="page-title">OpenClaw-Harness智能工作管理架构方案</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">研究公共AI</span> <span class="tag">智能体</span> <span class="tag">方法论</span> </span>
-            <span class="page-refs">0 引用</span>
-        </a>
-        <a href="pages/WorkBuddy专家团提示词分析.html" class="page-item">
-            <span class="page-title">WorkBuddy专家团提示词分析</span>
-            <span class="page-type">AI技术</span>
-            <span class="page-meta"><span class="tag">提示词</span> <span class="tag">方法论</span> </span>
-            <span class="page-refs">0 引用</span>
-        </a>
-        </div>
+</header>
+<div class="mw-body">
+    <nav class="mw-nav">
+        <div class="nav-title">导航</div>
+        <a href="index.html">首页</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">分类</div>
+        <a href="category-AI人物.html">AI人物</a><a href="category-AI产品.html">AI产品</a><a href="category-AI技术.html">AI技术</a><a href="category-AI组织.html">AI组织</a><a href="category-AI理念.html">AI理念</a><a href="category-AI流程.html">AI流程</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">标签</div>
+        <a href="tags.html">标签索引</a>
+    </nav>
+    <main class="mw-main">
+        <div class="mw-title"><h1>分类:AI技术</h1></div>
+        
+        <div class="mw-content">
+    <div class="catpage-section"><h2>Wiki 页面（13）</h2><ul class="catpage-list"><li><span class="pl-title"><a href="pages/Agent提示词设计模式.html">Agent提示词设计模式</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-提示词.html">提示词</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span> <span class="tagpill"><a href="tag-智能体.html">智能体</a></span> <span class="badge badge-高">高</span> · 19 引用</span></li><li><span class="pl-title"><a href="pages/CST_Runtime_CLI.html">CST_Runtime_CLI</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-硬件AI.html">硬件AI</a></span> <span class="tagpill"><a href="tag-智能体.html">智能体</a></span> <span class="tagpill"><a href="tag-实践案例.html">实践案例</a></span> <span class="badge badge-高">高</span> · 2 引用</span></li><li><span class="pl-title"><a href="pages/Harness(智能体执行壳).html">Harness(智能体执行壳)</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-研究公共AI.html">研究公共AI</a></span> <span class="tagpill"><a href="tag-智能体.html">智能体</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span> <span class="badge badge-中">中</span> · 7 引用</span></li><li><span class="pl-title"><a href="pages/MCP.html">MCP</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-工具调用.html">工具调用</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span> <span class="badge badge-高">高</span> · 19 引用</span></li><li><span class="pl-title"><a href="pages/RAG（检索增强生成）.html">RAG（检索增强生成）</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-RAG.html">RAG</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span> <span class="badge badge-中">中</span> · 1 引用</span></li><li><span class="pl-title"><a href="pages/多Agent协作模式.html">多Agent协作模式</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-研究公共AI.html">研究公共AI</a></span> <span class="tagpill"><a href="tag-多智能体.html">多智能体</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span> <span class="badge badge-高">高</span> · 18 引用</span></li><li><span class="pl-title"><a href="pages/微信视频接入知识库.html">微信视频接入知识库</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-向量检索.html">向量检索</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span> <span class="tagpill"><a href="tag-实践案例.html">实践案例</a></span> <span class="badge badge-高">高</span> · 1 引用</span></li><li><span class="pl-title"><a href="pages/Claude_Code设计哲学渐进式披露.html">Claude_Code设计哲学渐进式披露</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-智能体.html">智能体</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span> <span class="tagpill"><a href="tag-提示词.html">提示词</a></span>  · 0 引用</span></li><li><span class="pl-title"><a href="pages/Claude辅助设计软硬件.html">Claude辅助设计软硬件</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-硬件AI.html">硬件AI</a></span> <span class="tagpill"><a href="tag-智能体.html">智能体</a></span> <span class="tagpill"><a href="tag-实践案例.html">实践案例</a></span>  · 0 引用</span></li><li><span class="pl-title"><a href="pages/CST_MCP_77GHz毫米波雷达仿真.html">CST_MCP_77GHz毫米波雷达仿真</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-硬件AI.html">硬件AI</a></span> <span class="tagpill"><a href="tag-智能体.html">智能体</a></span> <span class="tagpill"><a href="tag-实践案例.html">实践案例</a></span>  · 0 引用</span></li><li><span class="pl-title"><a href="pages/DeepSeek从入门到精通.html">DeepSeek从入门到精通</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-大模型.html">大模型</a></span> <span class="tagpill"><a href="tag-科普教程.html">科普教程</a></span>  · 0 引用</span></li><li><span class="pl-title"><a href="pages/OpenClaw-Harness智能工作管理架构方案.html">OpenClaw-Harness智能工作管理架构方案</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-研究公共AI.html">研究公共AI</a></span> <span class="tagpill"><a href="tag-智能体.html">智能体</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span>  · 0 引用</span></li><li><span class="pl-title"><a href="pages/WorkBuddy专家团提示词分析.html">WorkBuddy专家团提示词分析</a></span><span class="pl-meta"><span class="tagpill"><a href="tag-提示词.html">提示词</a></span> <span class="tagpill"><a href="tag-方法论.html">方法论</a></span>  · 0 引用</span></li></ul></div>
+    <div class="catpage-section"><h2>素材笔记（0）</h2><ul class="catpage-list"><li style="color:#54595d;font-size:0.85rem;">暂无素材笔记</li></ul></div>
     </div>
-
-    <div class="section">
-        <span class="section-title">素材笔记</span>
-        <div class="page-list">
-            <p style="color:#999;font-size:0.85rem;">暂无素材笔记</p>
-        </div>
-    </div>
+        <footer class="mw-catlinks"><span class="cl-prefix">分类：</span><a href="category-AI人物.html">AI人物</a> <a href="category-AI产品.html">AI产品</a> <a href="category-AI技术.html">AI技术</a> <a href="category-AI组织.html">AI组织</a> <a href="category-AI理念.html">AI理念</a> <a href="category-AI流程.html">AI流程</a> · <a href="tags.html">按标签浏览</a></footer>
+        <div class="footer-note">AI 研究团队知识库 · 自动生成于 2026-07-19 20:39</div>
+    </main>
 </div>
+<script>
+function doSearch(q){
+    q=(q||'').toLowerCase().trim();
+    if(!q){ return; }
+    // 详情页（子目录）自身无搜索数据，跳首页并带查询参数，由首页统一处理
+    location.href='index.html#q='+encodeURIComponent(q);
+}
+</script>
+
 </body>
 </html>

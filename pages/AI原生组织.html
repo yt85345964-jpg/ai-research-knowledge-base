@@ -5,76 +5,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI原生组织 - AI 研究团队知识库</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f8f9fa; color:#1a1a2e; line-height:1.7; }
-.container { max-width:860px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 220px; gap:2rem; }
-.main { min-width:0; }
-.sidebar { }
+:root{
+  --link:#3366cc; --link-visited:#795cb2; --text:#202122; --bg:#fff;
+  --grey-bg:#f8f9fa; --border:#a2a9b1; --border-light:#c8ccd1; --grey-text:#54595d;
+  --ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif-font:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--serif-font);color:var(--text);background:var(--grey-bg);line-height:1.6;font-size:15px;}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:visited{color:var(--link-visited);}
 
-.header { margin-bottom:1.5rem; }
-.header a { color:#888; text-decoration:none; font-size:0.85rem; }
-.header a:hover { color:#378ADD; }
-.header h1 { font-size:1.5rem; font-weight:600; margin-top:0.5rem; }
-.header .sub { font-size:0.8rem; color:#888; margin-top:0.25rem; }
+/* 页眉 */
+.mw-header{background:var(--bg);border-bottom:1px solid var(--border-light);box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.mw-header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0.55rem 1rem;}
+.mw-site{font-family:var(--ui-font);font-size:1.05rem;font-weight:600;color:var(--text);}
+.mw-site:hover{text-decoration:none;}
+.mw-search{position:relative;}
+.mw-search input{font-family:var(--ui-font);width:220px;padding:0.35rem 0.7rem;font-size:0.82rem;border:1px solid var(--border-light);border-radius:2px;outline:none;}
+.mw-search input:focus{border-color:#36c;box-shadow:0 0 0 2px rgba(51,102,204,.15);}
 
-.content { background:#fff; border-radius:10px; border:1px solid #eee; padding:1.5rem; }
-.content h1 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 0.5rem; }
-.content h2 { font-size:1.05rem; font-weight:600; margin:1.2rem 0 0.4rem; }
-.content h3 { font-size:0.95rem; font-weight:600; margin:1rem 0 0.3rem; }
-.content p { font-size:0.88rem; margin-bottom:0.6rem; }
-.content ul, .content ol { margin:0.5rem 0 0.5rem 1.5rem; font-size:0.88rem; }
-.content li { margin-bottom:0.25rem; }
-.content blockquote { border-left:3px solid #993C1D; padding:0.5rem 1rem; margin:0.75rem 0; background:#fafafa; font-size:0.85rem; color:#555; }
-.content table { border-collapse:collapse; width:100%; margin:0.75rem 0; font-size:0.85rem; }
-.content td { border:1px solid #eee; padding:0.4rem 0.6rem; }
-.content pre { background:#f5f5f5; padding:0.75rem 1rem; border-radius:6px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
-.content code { font-family:"SF Mono",Consolas,monospace; font-size:0.8rem; }
-.content a { color:#378ADD; text-decoration:none; }
-.content a:hover { text-decoration:underline; }
+/* 布局：左栏导航 + 主内容 */
+.mw-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;}
+.mw-nav{width:150px;flex-shrink:0;padding:1rem 0.4rem;border-right:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;min-height:calc(100vh - 56px);}
+.mw-nav .nav-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);padding:0.5rem 0.5rem 0.2rem;font-weight:600;}
+.mw-nav a{display:block;padding:0.22rem 0.5rem;color:var(--link);border-radius:2px;}
+.mw-nav a:hover{background:var(--grey-bg);text-decoration:none;}
+.mw-nav .nav-sep{border-top:1px solid var(--border-light);margin:0.4rem 0.3rem;}
 
-.dangling { color:#d85a30; border-bottom:1px dashed #d85a30; cursor:help; }
+.mw-main{flex:1;min-width:0;background:var(--bg);border:1px solid var(--border-light);border-top:none;padding:1.1rem 1.6rem 2.2rem;margin:0 0 2rem;}
 
-.sidebar-card { background:#fff; border-radius:10px; border:1px solid #eee; padding:1rem; margin-bottom:1rem; }
-.sidebar-card h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#333; }
+/* 标题 */
+.mw-title h1{font-family:var(--ui-font);font-size:1.7rem;font-weight:400;line-height:1.25;border-bottom:1px solid var(--border-light);padding-bottom:0.3rem;margin-bottom:0.2rem;}
+.mw-title .sub{font-family:var(--ui-font);font-size:0.8rem;color:var(--grey-text);margin-bottom:0.6rem;}
 
-.meta-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.8rem; border-bottom:1px solid #f5f5f5; }
-.meta-row:last-child { border-bottom:none; }
-.meta-label { color:#888; }
-.meta-value { color:#333; font-weight:500; }
+/* 正文排版 */
+.mw-content h1{font-family:var(--ui-font);font-size:1.45rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.4rem 0 0.5rem;}
+.mw-content h2{font-family:var(--ui-font);font-size:1.25rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin:1.3rem 0 0.5rem;}
+.mw-content h3{font-family:var(--ui-font);font-size:1.02rem;font-weight:600;margin:1rem 0 0.35rem;}
+.mw-content h4{font-family:var(--ui-font);font-size:0.92rem;font-weight:600;margin:0.8rem 0 0.3rem;}
+.mw-content p{margin-bottom:0.7rem;}
+.mw-content ul,.mw-content ol{margin:0.5rem 0 0.6rem 1.7rem;}
+.mw-content li{margin-bottom:0.25rem;}
+.mw-content blockquote{border-left:3px solid var(--border);padding:0.3rem 1rem;background:var(--grey-bg);margin:0.7rem 0;color:var(--grey-text);font-size:0.92rem;}
+.mw-content table{border-collapse:collapse;margin:0.7rem 0;font-size:0.9rem;width:auto;}
+.mw-content td,.mw-content th{border:1px solid var(--border-light);padding:0.4rem 0.65rem;text-align:left;}
+.mw-content th{background:var(--grey-bg);font-family:var(--ui-font);font-weight:600;}
+.mw-content code{font-family:"SF Mono",Consolas,monospace;background:var(--grey-bg);padding:0.1rem 0.32rem;border-radius:2px;font-size:0.85em;}
+.mw-content pre{background:var(--grey-bg);padding:0.7rem 0.9rem;border:1px solid var(--border-light);border-radius:3px;overflow-x:auto;font-size:0.82rem;margin:0.7rem 0;}
+.mw-content .dangling{color:#d85a30;border-bottom:1px dashed #d85a30;cursor:help;}
 
-.tag { font-size:0.7rem; background:#e8f0fe; color:#378ADD; padding:2px 7px; border-radius:4px; display:inline-block; margin:2px; }
-.badge { font-size:0.7rem; padding:2px 7px; border-radius:4px; }
-.badge-high { background:#e6f4ea; color:#1e8e3e; }
-.badge-medium { background:#fef7e0; color:#f9ab00; }
-.badge-low { background:#fce8e6; color:#d93025; }
+/* 信息框 infobox（右浮动） */
+.infobox{float:right;width:290px;margin:0.4rem 0 1rem 1.6rem;background:var(--grey-bg);border:1px solid var(--border);border-radius:3px;font-family:var(--ui-font);font-size:0.84rem;clear:right;}
+.infobox .ib-title{background:#eaf3ff;border-bottom:1px solid var(--border);text-align:center;font-weight:600;padding:0.45rem 0.5rem;font-size:0.95rem;color:#202122;}
+.infobox .ib-sub{text-align:center;font-size:0.78rem;color:var(--grey-text);padding:0.25rem;}
+.infobox .ib-row{display:flex;border-bottom:1px solid var(--border-light);}
+.infobox .ib-row:last-child{border-bottom:none;}
+.infobox .ib-label{flex:0 0 38%;padding:0.35rem 0.55rem;background:#f3f6fa;color:var(--grey-text);font-weight:500;border-right:1px solid var(--border-light);}
+.infobox .ib-value{flex:1;padding:0.35rem 0.55rem;word-break:break-word;}
+.infobox .ib-value a{color:var(--link);}
 
-.meta-link { display:block; font-size:0.8rem; color:#378ADD; text-decoration:none; padding:0.2rem 0; }
-.meta-link:hover { text-decoration:underline; }
+/* 自动目录 TOC */
+.toc{display:inline-block;background:var(--grey-bg);border:1px solid var(--border-light);padding:0.6rem 1rem 0.7rem;margin:0.3rem 0 1.1rem;font-family:var(--ui-font);font-size:0.84rem;border-radius:2px;min-width:240px;}
+.toc .toc-title{font-weight:600;margin-bottom:0.35rem;color:#202122;}
+.toc ul{list-style:none;margin:0;padding-left:1.1rem;}
+.toc>ul{padding-left:0;}
+.toc li{margin:0.15rem 0;line-height:1.4;}
+.toc a{color:var(--link);}
+.toc .toc-n{color:var(--grey-text);margin-right:0.3rem;}
 
-.backlink-item { display:block; font-size:0.8rem; color:#1a1a2e; text-decoration:none; padding:0.25rem 0; border-bottom:1px solid #f5f5f5; }
-.backlink-item:hover { color:#378ADD; }
+/* 底部分类栏 */
+.mw-catlinks{margin-top:2rem;padding:0.55rem 0.8rem;background:var(--grey-bg);border:1px solid var(--border-light);font-family:var(--ui-font);font-size:0.82rem;color:var(--grey-text);}
+.mw-catlinks .cl-prefix{font-weight:600;margin-right:0.4rem;}
+.mw-catlinks a{color:var(--link);}
 
-.link-btn { display:inline-block; font-size:0.78rem; padding:4px 10px; margin:2px 4px 2px 0; border-radius:6px; background:#f0f0f0; color:#333; text-decoration:none; }
-.link-btn:hover { background:#e0e0e0; }
+/* 维基式标签/徽章 */
+.tagpill{display:inline-block;font-family:var(--ui-font);font-size:0.74rem;background:var(--grey-bg);border:1px solid var(--border-light);padding:1px 7px;border-radius:3px;margin:1px;}
+.tagpill a{color:var(--link);}
+.badge{display:inline-block;font-family:var(--ui-font);font-size:0.72rem;padding:1px 7px;border-radius:3px;color:#fff;}
+.badge-high{background:#1e8e3e;} .badge-medium{background:#f9ab00;color:#202122;} .badge-low{background:#d93025;}
 
-.footer { text-align:center; color:#aaa; font-size:0.75rem; margin-top:2rem; grid-column:1/-1; }
+/* 分类页 / 标签页 列表 */
+.catpage-section{margin-bottom:1.6rem;}
+.catpage-section h2{font-family:var(--ui-font);font-size:1.15rem;font-weight:400;border-bottom:1px solid var(--border-light);padding-bottom:0.2rem;margin-bottom:0.6rem;}
+.catpage-list{list-style:none;margin:0;padding:0;}
+.catpage-list li{padding:0.34rem 0.2rem;border-bottom:1px solid #f0f0f0;font-family:var(--ui-font);font-size:0.9rem;display:flex;align-items:baseline;}
+.catpage-list li:last-child{border-bottom:none;}
+.catpage-list .pl-title{font-weight:500;}
+.catpage-list .pl-meta{color:var(--grey-text);font-size:0.78rem;margin-left:0.6rem;}
+.catpage-list .pl-meta .tagpill{font-size:0.7rem;}
+
+/* 首页：分类/最近更新 区块 */
+.home-intro{font-family:var(--ui-font);font-size:0.92rem;color:#333;margin-bottom:1.2rem;line-height:1.6;}
+.home-grid{display:grid;grid-template-columns:1fr 320px;gap:1.6rem;align-items:start;}
+.home-cats{font-family:var(--ui-font);}
+.home-cat-row{display:flex;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid #f0f0f0;}
+.home-cat-row .hc-name{font-size:1rem;font-weight:600;min-width:120px;}
+.home-cat-row .hc-name a{color:var(--link);}
+.home-cat-row .hc-count{color:var(--grey-text);font-size:0.8rem;margin-left:0.6rem;min-width:54px;}
+.home-cat-row .hc-desc{color:var(--grey-text);font-size:0.82rem;margin-left:0.6rem;flex:1;}
+.home-side .box{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.8rem 1rem;margin-bottom:1rem;font-family:var(--ui-font);}
+.home-side .box h3{font-size:0.9rem;font-weight:600;margin-bottom:0.5rem;color:#202122;}
+.home-side .upd{font-size:0.82rem;padding:0.25rem 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;}
+.home-side .upd a{color:var(--link);}
+.home-side .upd .ud{color:#aaa;font-size:0.72rem;white-space:nowrap;margin-left:0.5rem;}
+.graph-box svg{width:100%;height:300px;}
+
+/* 层级导航（标签父/子，对标维基 category 页） */
+.hierarchy{background:var(--grey-bg);border:1px solid var(--border-light);border-radius:3px;padding:0.6rem 0.9rem;margin:0.2rem 0 1.2rem;font-family:var(--ui-font);font-size:0.84rem;}
+.hier-row{margin:0.3rem 0;}
+.hier-label{color:var(--grey-text);font-weight:600;margin-right:0.4rem;}
+.hier-link{color:var(--link);}
+.hier-none{color:#aaa;}
+.hier-note{color:var(--grey-text);}
+
+/* 标签总览树 */
+.tagtree{list-style:none;padding-left:0;font-family:var(--ui-font);}
+.tagtree ul{list-style:none;padding-left:1.3rem;border-left:1px solid var(--border-light);margin-left:0.4rem;}
+.tagtree li{padding:3px 0;font-size:0.9rem;}
+.tagtree .tn{color:var(--link);}
+.tagtree .tc{font-size:0.72rem;color:var(--grey-text);margin-left:0.3rem;}
+
+/* 详情页引用的反向链接/来源列表 */
+.metalist{font-family:var(--ui-font);font-size:0.84rem;}
+.metalist a{color:var(--link);display:block;padding:0.22rem 0;border-bottom:1px solid #f5f5f5;}
+.footer-note{text-align:center;color:#aaa;font-family:var(--ui-font);font-size:0.74rem;margin-top:1.5rem;}
+
+@media (max-width:900px){
+  .mw-body{flex-direction:column;}
+  .mw-nav{width:100%;min-height:0;border-right:none;border-bottom:1px solid var(--border-light);display:flex;flex-wrap:wrap;gap:0.2rem;padding:0.5rem;}
+  .mw-nav .nav-title,.mw-nav .nav-sep{display:none;}
+  .infobox{float:none;width:auto;margin:1rem 0;}
+  .home-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="main">
-        <div class="header">
-            <a href="../index.html">← 返回首页</a>
-            <h1>AI原生组织</h1>
-            <div class="sub">AI组织 · 活跃</div>
-        </div>
-        <div class="content"><h1>AI原生组织</h1>
-<h2>核心定义</h2>
+<header class="mw-header">
+    <div class="mw-header-inner">
+        <a class="mw-site" href="../index.html">AI 研究团队知识库</a>
+        <form class="mw-search" onsubmit="return false;">
+            <input type="text" id="searchInput" placeholder="搜索..." oninput="doSearch(this.value)">
+        </form>
+    </div>
+</header>
+<div class="mw-body">
+    <nav class="mw-nav">
+        <div class="nav-title">导航</div>
+        <a href="../index.html">首页</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">分类</div>
+        <a href="../category-AI人物.html">AI人物</a><a href="../category-AI产品.html">AI产品</a><a href="../category-AI技术.html">AI技术</a><a href="../category-AI组织.html">AI组织</a><a href="../category-AI理念.html">AI理念</a><a href="../category-AI流程.html">AI流程</a>
+        <div class="nav-sep"></div>
+        <div class="nav-title">标签</div>
+        <a href="../tags.html">标签索引</a>
+    </nav>
+    <main class="mw-main">
+        <div class="mw-title"><h1>AI原生组织</h1><div class="sub">AI组织 · 活跃</div></div>
+        
+        <div class="mw-content"><div class="infobox"><div class="ib-title">AI原生组织</div><div class="ib-row"><div class="ib-label">分类</div><div class="ib-value"><a href="../category-AI组织.html" style="color:#3366cc">AI组织</a></div></div><div class="ib-row"><div class="ib-label">官网</div><div class="ib-value"><a href="AI原生组织.html" style="color:#3366cc">AI原生组织.html</a></div></div><div class="ib-row"><div class="ib-label">状态</div><div class="ib-value">活跃</div></div><div class="ib-row"><div class="ib-label">可信度</div><div class="ib-value"><span class="badge badge-高">高</span></div></div><div class="ib-row"><div class="ib-label">创建</div><div class="ib-value">2026-07-03</div></div><div class="ib-row"><div class="ib-label">更新</div><div class="ib-value">2026-07-13</div></div><div class="ib-row"><div class="ib-label">标签</div><div class="ib-value"><a href="../tag-大模型.html" class="tagpill">大模型</a> <a href="../tag-趋势研判.html" class="tagpill">趋势研判</a> <a href="../tag-智能体.html" class="tagpill">智能体</a></div></div></div><div class="toc"><div class="toc-title">目录</div><ul><li><span class="toc-n">1</span><a href="#sec-2-1">核心定义</a></li></ul><ul><li><span class="toc-n">2</span><a href="#sec-2-2">组织范式</a></li><li><span class="toc-n">2.1</span><a href="#sec-3-1">Copilot vs. AI-Native 核心范式</a></li><li><span class="toc-n">2.2</span><a href="#sec-3-2">YC 三层基础设施</a></li><li><span class="toc-n">2.3</span><a href="#sec-3-3">路径不可逆</a></li><li><span class="toc-n">2.4</span><a href="#sec-3-4">两个文化前提</a></li><li><span class="toc-n">2.5</span><a href="#sec-3-5">"无马马车"隐喻</a></li><li><span class="toc-n">2.6</span><a href="#sec-3-6">冬奇四阶段演进（组织变革方法论）</a></li><li><span class="toc-n">2.7</span><a href="#sec-3-7">Paperclip Co-Org 模型（多 Agent 协调）</a></li><li><span class="toc-n">2.8</span><a href="#sec-3-8">两个视角对照</a></li><li><span class="toc-n">2.9</span><a href="#sec-3-9">窗口期</a></li></ul><ul><li><span class="toc-n">3</span><a href="#sec-2-3">角色与岗位</a></li></ul><ul><li><span class="toc-n">4</span><a href="#sec-2-4">治理与汇报</a></li></ul><ul><li><span class="toc-n">5</span><a href="#sec-2-5">与传统组织对比</a></li></ul><ul><li><span class="toc-n">6</span><a href="#sec-2-6">适用前提与落地建议</a></li></ul><ul><li><span class="toc-n">7</span><a href="#sec-2-7">争议与待验证</a></li></ul><ul><li><span class="toc-n">8</span><a href="#sec-2-8">相关页面</a></li></ul></div><h1 id="sec-1-1">AI原生组织</h1>
+<h2 id="sec-2-1">核心定义</h2>
 <blockquote>**一句话定位**：把 AI 作为整个组织运转的**建设层**（而非"把 AI 当 Copilot 用"的旧模式）——数据集中、工具注册、技能自进化，让组织每天都在变聪明；等价定义：**AI 进来之后，组织里的等待有没有变少**。</blockquote>
-<h2>组织范式</h2>
+<h2 id="sec-2-2">组织范式</h2>
 <p>（概述该 AI 组织范式的核心主张 —— 如何通过架构与岗位把 AI 嵌入组织运转）</p>
 <p>AI 原生组织不是"买工具"而是"让等待消失"。其本质是用三层基础设施 + 角色重构 + 多 Agent 协调，把 AI 嵌进组织的运行规则，影响任务分配、信息使用、责任定义与协作方式。</p>
-<h3>Copilot vs. AI-Native 核心范式</h3>
+<h3 id="sec-3-1">Copilot vs. AI-Native 核心范式</h3>
 <table>
 <tr>
 <td>维度</td>
@@ -109,7 +205,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </table>
 <blockquote>单一来源观点：<span class="dangling" title="页面尚未创建">素材笔记/AI组织/YC内部AI实操</span> 基于 YC 合伙人 Pete Koomen 的访谈。</blockquote>
 <blockquote>综合判断：AI-Native 模式与 <a href="AI使用哲学.html">AI使用哲学</a> 的"Builder 心态"高度同构——Builder 驱动工具而非被工具驱动，AI-Native 把控制权交给用户而非锁定在开发者手中。</blockquote>
-<h3>YC 三层基础设施</h3>
+<h3 id="sec-3-2">YC 三层基础设施</h3>
 <blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI组织/YC内部AI实操</span></blockquote>
 <p><strong>Layer 1：数据集中（Context Layer）</strong></p>
 <ul>
@@ -138,7 +234,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>Agent 读 artifacts 自动改进 → **超越任何单个人的能力**</li>
 </ol>
 <blockquote>综合判断：技能自进化与 <a href="Agent提示词设计模式.html">Agent提示词设计模式</a> 的"专家行为模式固化"构成闭环——先探索发现有效模式（Builder 心态），再固化成技能（提示词设计），再通过 Dream Cycle 持续优化。探索 → 固化 → 优化的飞轮。</blockquote>
-<h3>路径不可逆</h3>
+<h3 id="sec-3-3">路径不可逆</h3>
 <pre><code>
 数据集中 ──→ 工具注册表 ──→ 技能自进化
   (地基)       (骨架)        (飞轮)
@@ -149,18 +245,18 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 没有沉淀对话 → 自我改进没有原材料</li>
 </ul>
 <blockquote>综合判断：这条路径对个人同样适用——笔记集中 → 重复操作模板化 → 让 AI 越来越懂你怎么做事。即 <a href="AI使用哲学.html">AI使用哲学</a> 的"从用户变训练师"。</blockquote>
-<h3>两个文化前提</h3>
+<h3 id="sec-3-4">两个文化前提</h3>
 <blockquote>单一来源观点：Garry Tan 认为这是"千倍超级智能组织必须具备的两个特质"。</blockquote>
 <ol>
 <li>**平等主义（Egalitarian）**：AI 能力向每个人开放，不只是领导层</li>
 <li>**默认信任（Trust by Default）**：信息不按权限层级锁定，上下文广泛开放</li>
 </ol>
 <blockquote>综合判断：这两个前提与大多数企业的 command-and-control 文化根本矛盾。创业公司更容易实现，因为小团队、目标一致、高度信任。大型组织需要结构性改造才能达到。</blockquote>
-<h3>"无马马车"隐喻</h3>
+<h3 id="sec-3-5">"无马马车"隐喻</h3>
 <p>早期汽车在外形上模仿马车（只是把马换成发动机），而没有根据新技术的特性重新设计。今天大量 AI 产品也是"在确定性软件里嵌一小块 AI"（如 Gmail AI 写邮件），真正的 prompt context 和工作逻辑被锁死在后台。</p>
 <p>正确方向：<strong>Agent 包裹确定性工具</strong>——把控制权从开发者转移给用户。</p>
 <blockquote>综合判断：<a href="WorkBuddy.html">WorkBuddy</a> 的专家系统设计正在走这条路——用户可以通过自定义专家来修改和扩展 Agent 能力，而不是被锁定在预设的框里。</blockquote>
-<h3>冬奇四阶段演进（组织变革方法论）</h3>
+<h3 id="sec-3-6">冬奇四阶段演进（组织变革方法论）</h3>
 <blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI理念/AI原生组织不是买工具而是让等待消失</span>（掘金 @冬奇Lab，2026-06-28）</blockquote>
 <blockquote>**真正的 AI 原生不是看你用了多少模型，而是 AI 进来之后，组织里的等待有没有变少。**</blockquote>
 <p>引用 YC 合伙人 Diana：<strong>AI 不应该只是公司使用的工具，而应该成为公司运行的操作系统。</strong> 但"操作系统"不是指搭 AI 中台，而是 <strong>AI 进入组织的运行规则</strong>——影响任务分配、信息使用、责任定义和协作方式。</p>
@@ -197,7 +293,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </tr>
 </table>
 <blockquote>综合判断：阶段 3 是转折点。大多数企业卡在阶段 1-2 就以为完成了 AI 转型。YC 的三层架构（数据→工具→技能）本质上是帮助企业跨越阶段 3-4 的技术基础设施。</blockquote>
-<h3>Paperclip Co-Org 模型（多 Agent 协调）</h3>
+<h3 id="sec-3-7">Paperclip Co-Org 模型（多 Agent 协调）</h3>
 <blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI组织/Paperclip_AI_Agent_公司编排平台</span>（2026-07-13）</blockquote>
 <p>如果说 YC 模型回答"数据/工具/技能"三层基础设施，冬奇模型回答"组织怎么变轻"，<strong>Paperclip 模型回答的是"当 Agent 数量从几个到几十个时怎么管"</strong>——把 Agent 当员工管理。</p>
 <p><strong>三个时代的演进</strong></p>
@@ -237,7 +333,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 让"AI 操作系统"的概念有了可部署的开源实现</li>
 </ul>
 <blockquote>综合判断：Paperclip 不是要替代 YC 模型的"数据集中+工具注册+技能进化"哲学，而是为它补上了"**多 Agent 协调层**"的最后一公里。详见 <a href="Paperclip.html">Paperclip</a>。</blockquote>
-<h3>两个视角对照</h3>
+<h3 id="sec-3-8">两个视角对照</h3>
 <table>
 <tr>
 <td>维度</td>
@@ -275,10 +371,10 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>**先有实践，后固化系统**</td>
 </tr>
 </table>
-<h3>窗口期</h3>
+<h3 id="sec-3-9">窗口期</h3>
 <p>现在花 $10-100K/年做的事，两年后可能只要几百块。但差距不在成本，在于<strong>你有没有提前把数据、工具、判断力沉淀成一套会自我进化的系统</strong>。</p>
 <p>类比：1990年代给员工买电脑——贵、不稳定，但先买的公司获得了对手无法比拟的优势。</p>
-<h2>角色与岗位</h2>
+<h2 id="sec-2-3">角色与岗位</h2>
 <table>
 <tr>
 <td>角色</td>
@@ -298,7 +394,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 </table>
 <blockquote>AI Builder 推进到"可判断"，Human Decider 决定"往哪做"。这与 <a href="AI使用哲学.html">AI使用哲学</a> 的 Builder 心态完全同构——Builder 不只是用工具的人，而是能驱动工具进化的人。</blockquote>
 <blockquote>来源：<span class="dangling" title="页面尚未创建">素材笔记/AI理念/AI原生组织不是买工具而是让等待消失</span>（冬奇双角色模型）</blockquote>
-<h2>治理与汇报</h2>
+<h2 id="sec-2-4">治理与汇报</h2>
 <ul>
 <li>- **指挥链**：冬奇五步实施路径的第 1 步是组建**变革推进组**，由 CEO 直接授权；先改习惯（激励非强制），再沉淀方法，最后 IT 系统固化。</li>
 <li>- **决策权归属**：Human Decider（人）掌握最终判断与战略方向；AI Builder 推进到"可判断"层面，AI 规模化执行。</li>
@@ -307,7 +403,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- **文化冲突**：这两个前提与大多数企业的 command-and-control 文化根本矛盾；创业公司因小团队、目标一致、高度信任更易实现，大型组织需结构性改造。</li>
 </ul>
 <blockquote>单一来源观点：Garry Tan 认为平等主义 + 默认信任是"千倍超级智能组织必须具备的两个特质"。</blockquote>
-<h2>与传统组织对比</h2>
+<h2 id="sec-2-5">与传统组织对比</h2>
 <table>
 <tr>
 <td>维度</td>
@@ -345,7 +441,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <td>默认公开、全员可见</td>
 </tr>
 </table>
-<h2>适用前提与落地建议</h2>
+<h2 id="sec-2-6">适用前提与落地建议</h2>
 <ul>
 <li>- **适用阶段**：冬奇四阶段 —— 1.个人提效 → 2.节点自动化 → 3.节点消失（转折点）→ 4.组织重构；对应三个时代：Copilot（2023-2024）→ Co-Worker（2025）→ Co-Org（2026-，Paperclip）。</li>
 <li>- **落地建议**：</li>
@@ -357,11 +453,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- 卡在阶段 1-2（个人提效 / 节点自动化）就以为完成了 AI 转型，没跨过阶段 3（节点消失）转折点。</li>
 <li>- "无马马车"式模仿——只在确定性软件里嵌一小块 AI，把控制权锁死在开发者而非用户手中。</li>
 </ul>
-<h2>争议与待验证</h2>
+<h2 id="sec-2-7">争议与待验证</h2>
 <ul>
 <li>- （暂无；本次来源均为可信材料，未发现冲突或待验证论断。后续摄入如撞上矛盾或更弱证据，按 AGENTS.md §8.1 在此追加。）</li>
 </ul>
-<h2>相关页面</h2>
+<h2 id="sec-2-8">相关页面</h2>
 <ul>
 <li>- <a href="AI使用哲学.html">AI使用哲学</a> — Builder 心态 + 判断力规模化，与 AI-Native 的"从用户变训练师"同构；冬奇双角色模型的源头</li>
 <li>- <a href="WorkBuddy.html">WorkBuddy</a> — 专家系统 = 技能注册表 + 工具封装的产品形态</li>
@@ -374,45 +470,19 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; backg
 <li>- <a href="Pete-Koomen.html">Pete Koomen</a> — YC 内部 AI 原生改造「总架构师」，本页 YC 模型的主要来源人物（归入 AI人物 分类）</li>
 <li>- <a href="Garry-Tan.html">Garry Tan</a> — YC CEO，AI 原生转型对话主持人</li>
 <li>- <span class="dangling" title="页面尚未创建">素材笔记/AI理念/一个人亲手做企业AI服务的3个思考</span> — 个体视角的企业AI服务落地观察（内容待ASR补充）</li>
-</ul></div>
-        <div class="link-buttons" style="margin-top:1rem;">
-            <a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="LLM-Wiki.html" class="link-btn">LLM Wiki</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Paperclip.html" class="link-btn">Paperclip</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="AI使用哲学.html" class="link-btn">AI使用哲学</a><a href="WorkBuddy.html" class="link-btn">WorkBuddy</a><a href="Agent提示词设计模式.html" class="link-btn">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="link-btn">多Agent协作模式</a><a href="AI-API网关.html" class="link-btn">AI API网关</a><a href="ima-知识库.html" class="link-btn">ima 知识库</a><a href="LLM-Wiki.html" class="link-btn">LLM Wiki</a><a href="Paperclip.html" class="link-btn">Paperclip</a><a href="Pete-Koomen.html" class="link-btn">Pete Koomen</a><a href="Garry-Tan.html" class="link-btn">Garry Tan</a>
-        </div>
-    </div>
-
-    <aside class="sidebar">
-        <div class="sidebar-card">
-            <h3>页面信息</h3>
-            <div class="meta-row"><span class="meta-label">分类</span><span class="meta-value" style="color:#993C1D">AI组织</span></div>
-            <div class="meta-row"><span class="meta-label">官网</span><span class="meta-value">AI原生组织.html</span></div>
-            <div class="meta-row"><span class="meta-label">状态</span><span class="meta-value">活跃</span></div>
-            <div class="meta-row"><span class="meta-label">可信度</span><span class="meta-value"><span class="badge badge-高">高</span></span></div>
-            <div class="meta-row"><span class="meta-label">创建</span><span class="meta-value">2026-07-03</span></div>
-            <div class="meta-row"><span class="meta-label">更新</span><span class="meta-value">2026-07-13</span></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>标签</h3>
-            <div><a href="tag-大模型.html" class="tag">大模型</a> <a href="tag-趋势研判.html" class="tag">趋势研判</a> <a href="tag-智能体.html" class="tag">智能体</a></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>反向链接 (14)</h3>
-            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="InfiniteTalk.html" class="backlink-item">InfiniteTalk</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a><a href="InfiniteTalk开源.html" class="backlink-item">InfiniteTalk开源</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>参考来源</h3>
-            <div><p style="color:#999;font-size:0.8rem;">暂无</p></div>
-        </div>
-
-        <div class="sidebar-card">
-            <h3>被引用 (14)</h3>
-            <div><a href="Colab-CLI.html" class="backlink-item">Colab CLI</a><a href="InfiniteTalk.html" class="backlink-item">InfiniteTalk</a><a href="OpenClaw.html" class="backlink-item">OpenClaw</a><a href="Paperclip.html" class="backlink-item">Paperclip</a><a href="WorkBuddy.html" class="backlink-item">WorkBuddy</a><a href="微信小微.html" class="backlink-item">微信小微</a><a href="Garry-Tan.html" class="backlink-item">Garry Tan</a><a href="Pete-Koomen.html" class="backlink-item">Pete Koomen</a><a href="Agent提示词设计模式.html" class="backlink-item">Agent提示词设计模式</a><a href="多Agent协作模式.html" class="backlink-item">多Agent协作模式</a><a href="LLM-Wiki.html" class="backlink-item">LLM Wiki</a><a href="InfiniteTalk开源.html" class="backlink-item">InfiniteTalk开源</a><a href="Paperclip_AI_Agent_公司编排平台.html" class="backlink-item">Paperclip_AI_Agent_公司编排平台</a><a href="一个人亲手做企业AI服务的3个思考.html" class="backlink-item">一个人亲手做企业AI服务的3个思考</a></div>
-        </div>
-    </aside>
-
-    <div class="footer">AI 研究团队知识库 · 自动生成于 2026-07-19 15:26</div>
+</ul><h2>相关页面</h2><div class="metalist"><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="LLM-Wiki.html">LLM Wiki</a></div><div class="metalist"><a href="ima-知识库.html">ima 知识库</a></div><div class="metalist"><a href="AI-API网关.html">AI API网关</a></div><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="Agent提示词设计模式.html">Agent提示词设计模式</a></div><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="Paperclip.html">Paperclip</a></div><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="AI使用哲学.html">AI使用哲学</a></div><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="Agent提示词设计模式.html">Agent提示词设计模式</a></div><div class="metalist"><a href="多Agent协作模式.html">多Agent协作模式</a></div><div class="metalist"><a href="AI-API网关.html">AI API网关</a></div><div class="metalist"><a href="ima-知识库.html">ima 知识库</a></div><div class="metalist"><a href="LLM-Wiki.html">LLM Wiki</a></div><div class="metalist"><a href="Paperclip.html">Paperclip</a></div><div class="metalist"><a href="Pete-Koomen.html">Pete Koomen</a></div><div class="metalist"><a href="Garry-Tan.html">Garry Tan</a></div></div><h2>被引用（14）</h2><div class="metalist"><div class="metalist"><a href="Colab-CLI.html">Colab CLI</a></div><div class="metalist"><a href="InfiniteTalk.html">InfiniteTalk</a></div><div class="metalist"><a href="OpenClaw.html">OpenClaw</a></div><div class="metalist"><a href="Paperclip.html">Paperclip</a></div><div class="metalist"><a href="WorkBuddy.html">WorkBuddy</a></div><div class="metalist"><a href="微信小微.html">微信小微</a></div><div class="metalist"><a href="Garry-Tan.html">Garry Tan</a></div><div class="metalist"><a href="Pete-Koomen.html">Pete Koomen</a></div><div class="metalist"><a href="Agent提示词设计模式.html">Agent提示词设计模式</a></div><div class="metalist"><a href="多Agent协作模式.html">多Agent协作模式</a></div><div class="metalist"><a href="LLM-Wiki.html">LLM Wiki</a></div><div class="metalist"><a href="InfiniteTalk开源.html">InfiniteTalk开源</a></div><div class="metalist"><a href="Paperclip_AI_Agent_公司编排平台.html">Paperclip_AI_Agent_公司编排平台</a></div><div class="metalist"><a href="一个人亲手做企业AI服务的3个思考.html">一个人亲手做企业AI服务的3个思考</a></div></div></div>
+        <footer class="mw-catlinks"><span class="cl-prefix">分类：</span><a href="../category-AI组织.html">AI组织</a> · <a href="../tag-大模型.html">大模型</a> <a href="../tag-趋势研判.html">趋势研判</a> <a href="../tag-智能体.html">智能体</a></footer>
+        <div class="footer-note">AI 研究团队知识库 · 自动生成于 2026-07-19 20:39</div>
+    </main>
 </div>
+<script>
+function doSearch(q){
+    q=(q||'').toLowerCase().trim();
+    if(!q){ return; }
+    // 详情页（子目录）自身无搜索数据，跳首页并带查询参数，由首页统一处理
+    location.href='../index.html#q='+encodeURIComponent(q);
+}
+</script>
+
 </body>
 </html>
